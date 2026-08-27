@@ -1,0 +1,1424 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Performance Lili's Brand</title>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;max-width:100%;overflow-x:hidden}
+:root{
+  color-scheme:light;
+  --paper:#F2F2EE; --raise:#FBFBF7; --sunk:#E7E7E0;
+  --ink:#171A14; --ink2:#52564A; --ink3:#7A7E70;
+  --rule:#DBDBD1; --rule2:#EAEAE2;
+  --s1:#04693D; --s2:#B38309;
+  --s1w:rgba(4,105,61,.10); --s2w:rgba(179,131,9,.12);
+  --r1:#6DB88B; --r2:#4A9E6F; --r3:#288555; --r4:#05693D;
+  --shadow:0 1px 2px rgba(23,26,20,.05),0 8px 24px rgba(23,26,20,.05);
+  --disp:Didot,"Bodoni 72","Playfair Display",Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,"IBM Plex Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --paper:#161816; --raise:#1E211D; --sunk:#111310;
+  --ink:#EDEEE6; --ink2:#AFB2A5; --ink3:#8A8E80;
+  --rule:#2E322C; --rule2:#23261F;
+  --s1:#1F8A5A; --s2:#B58E2C;
+  --s1w:rgba(31,138,90,.16); --s2w:rgba(181,142,44,.16);
+  --r1:#117647; --r2:#278A58; --r3:#3A9F69; --r4:#5AB27F;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#161816; --raise:#1E211D; --sunk:#111310;
+  --ink:#EDEEE6; --ink2:#AFB2A5; --ink3:#8A8E80;
+  --rule:#2E322C; --rule2:#23261F;
+  --s1:#1F8A5A; --s2:#B58E2C;
+  --s1w:rgba(31,138,90,.16); --s2w:rgba(181,142,44,.16);
+  --r1:#117647; --r2:#278A58; --r3:#3A9F69; --r4:#5AB27F;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3);
+}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+/* ---------- topo ---------- */
+.rail{position:fixed;top:0;left:0;right:0;height:2px;background:var(--rule2);z-index:60}
+.rail i{display:block;height:100%;width:0;background:var(--s1);transition:width .25s ease}
+.bar{position:fixed;top:0;left:0;right:0;height:clamp(46px,7vh,54px);display:flex;align-items:center;
+  gap:12px;padding:0 clamp(14px,4vw,56px);z-index:50;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--rule2)}
+.bar .mark{font-family:var(--disp);font-size:clamp(14px,3.6vw,17px);letter-spacing:.03em;white-space:nowrap}
+.bar .mid{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.bar .right{display:flex;align-items:center;gap:clamp(8px,2vw,14px);margin-left:auto;flex:none}
+.bar .sig{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.count{font-family:var(--mono);font-size:10.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.tbtn{border:1px solid var(--rule);background:transparent;color:var(--ink2);border-radius:2px;
+  width:28px;height:28px;min-width:28px;cursor:pointer;font-size:13px;line-height:1;display:grid;place-items:center}
+.tbtn:hover{border-color:var(--s1);color:var(--s1)}
+.nav{position:fixed;right:clamp(12px,3vw,32px);bottom:clamp(14px,3vh,22px);z-index:50;display:flex;gap:6px}
+.nav button{width:36px;height:36px;border:1px solid var(--rule);background:var(--raise);color:var(--ink2);
+  border-radius:2px;cursor:pointer;font-size:14px;line-height:1;box-shadow:var(--shadow)}
+.nav button:hover{border-color:var(--s1);color:var(--s1)}
+:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
+/* ---------- páginas ---------- */
+.deck{scroll-snap-type:y proximity;overflow-y:scroll;overflow-x:hidden;height:100svh;scroll-behavior:smooth}
+.slide{scroll-snap-align:start;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(64px,10vh,110px) clamp(16px,5vw,88px) clamp(56px,8vh,88px);position:relative}
+.wrap{width:100%;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;
+  gap:clamp(14px,2.6vh,26px);min-width:0}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.eyebrow b{color:var(--s1);font-weight:400}
+h1{font-family:var(--disp);font-weight:400;font-size:clamp(29px,6.8vw,74px);line-height:1.05;margin:0;
+  letter-spacing:-.015em;text-wrap:balance;overflow-wrap:break-word}
+h2{font-family:var(--disp);font-weight:400;font-size:clamp(22px,4.4vw,45px);line-height:1.12;margin:0;
+  letter-spacing:-.01em;text-wrap:balance;max-width:21ch;overflow-wrap:break-word}
+h2.wide{max-width:30ch}
+h3{font-family:var(--sans);font-weight:600;font-size:clamp(12.5px,2.7vw,14px);margin:0;color:var(--ink)}
+p{margin:0;max-width:68ch;color:var(--ink2);font-size:clamp(13.5px,2.9vw,15.5px)}
+p.lead{color:var(--ink);font-size:clamp(14.5px,3.1vw,17px);max-width:63ch}
+em{font-style:normal;color:var(--ink);font-weight:600}
+.kbd{font-family:var(--mono);font-size:.9em;background:var(--sunk);padding:1px 5px;border-radius:2px;color:var(--ink)}
+.slide .wrap>*{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.slide.in .wrap>*{opacity:1;transform:none}
+.slide.in .wrap>*:nth-child(2){transition-delay:.05s}
+.slide.in .wrap>*:nth-child(3){transition-delay:.1s}
+.slide.in .wrap>*:nth-child(4){transition-delay:.15s}
+.slide.in .wrap>*:nth-child(5){transition-delay:.2s}
+@media (prefers-reduced-motion:reduce){.slide .wrap>*{opacity:1;transform:none;transition:none}.deck{scroll-behavior:auto}}
+.eyebrow .parte{margin-left:auto;color:var(--ink3);opacity:.8;white-space:nowrap}
+.roteiro{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));
+  gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.roteiro div{background:var(--paper);padding:clamp(13px,2vw,18px);min-width:0}
+.roteiro .p{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--s1)}
+.roteiro h4{font-family:var(--sans);font-size:clamp(13px,2.8vw,14.5px);font-weight:600;margin:7px 0 5px;color:var(--ink)}
+.roteiro p{font-size:clamp(12px,2.5vw,13px);color:var(--ink2);line-height:1.5}
+.subsecao{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink3);display:flex;align-items:center;gap:12px;margin-top:.3em}
+.subsecao::after{content:"";flex:1;height:1px;background:var(--rule)}
+.ext{display:flex;flex-direction:column;gap:clamp(12px,2vw,18px);margin-top:14px}
+.ext .aviso{border-left:2px solid var(--s2);padding:2px 0 2px 14px;font-size:clamp(12.5px,2.6vw,13.5px);color:var(--ink2)}
+.ext h5{font-family:var(--sans);font-size:clamp(12.5px,2.7vw,13.5px);font-weight:600;margin:0;color:var(--ink)}
+.ext p{font-size:clamp(12.5px,2.6vw,13.5px)}
+.propostas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px}
+.propostas div{border:1px solid var(--rule);padding:13px 15px;min-width:0;background:var(--paper)}
+.propostas .t{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--s1)}
+.fontes{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--ink3);line-height:1.7;
+  border-top:1px solid var(--rule2);padding-top:10px}
+/* ---------- blocos ---------- */
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,196px),1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule)}
+.hero .cell{background:var(--paper);padding:clamp(12px,2.2vw,22px);min-width:0}
+.hero .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink3);line-height:1.45}
+.hero .val{font-family:var(--disp);font-size:clamp(22px,3.9vw,34px);line-height:1.05;margin-top:8px;
+  font-variant-numeric:tabular-nums;letter-spacing:-.015em;white-space:nowrap}
+.hero .val.pos{color:var(--s1)}
+.hero .sub{font-size:clamp(11px,2.4vw,12.5px);color:var(--ink3);margin-top:7px;line-height:1.45}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,238px),1fr));gap:clamp(12px,2.2vw,26px)}
+.card{background:var(--raise);border:1px solid var(--rule);padding:clamp(14px,2vw,22px);
+  display:flex;flex-direction:column;gap:8px;min-width:0}
+.card .n{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--s1)}
+.card p{font-size:clamp(13px,2.7vw,14px)}
+.note{border-left:2px solid var(--s1);padding:2px 0 2px 14px;color:var(--ink2);
+  font-size:clamp(13px,2.8vw,14.5px);max-width:74ch}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:clamp(10.5px,2.3vw,11.5px);color:var(--ink2);
+  font-family:var(--mono);letter-spacing:.05em;text-transform:uppercase}
+.legend i{width:10px;height:10px;display:inline-block;border-radius:2px;margin-right:6px;vertical-align:-1px}
+figure{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+figcaption{font-size:clamp(11.5px,2.5vw,12.5px);color:var(--ink3);max-width:78ch}
+.chart{width:100%;min-width:0}
+.chart svg{display:block;width:100%;height:auto}
+svg text{font-family:var(--mono);fill:var(--ink3);letter-spacing:.03em}
+svg text.v{font-family:var(--sans);fill:var(--ink2);font-variant-numeric:tabular-nums}
+svg text.k{font-family:var(--sans);fill:var(--ink);font-weight:600}
+svg .grid{stroke:var(--rule2);stroke-width:1}
+svg .axis{stroke:var(--rule);stroke-width:1}
+svg .ref{stroke:var(--ink3);stroke-width:1;stroke-dasharray:3 3}
+.tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.tbl{width:100%;border-collapse:collapse;font-size:clamp(12px,2.6vw,13.5px);min-width:430px}
+.tbl th{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);
+  text-align:right;padding:0 0 8px 10px;border-bottom:1px solid var(--rule);font-weight:400;white-space:nowrap}
+.tbl th:first-child{text-align:left;padding-left:0}
+.tbl td{padding:8px 0 8px 10px;border-bottom:1px solid var(--rule2);text-align:right;
+  font-variant-numeric:tabular-nums;color:var(--ink2);white-space:nowrap}
+.tbl td:first-child{text-align:left;color:var(--ink);padding-left:0;white-space:normal}
+.tbl td.pos{color:var(--s1);font-weight:600}
+details{border-top:1px solid var(--rule2);padding-top:9px}
+summary{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);
+  cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+ ";color:var(--s1)}
+details[open] summary::before{content:"− "}
+details .tblwrap,details .glos{margin-top:12px}
+.glos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px 26px}
+.glos dt{font-weight:600;color:var(--ink);font-size:13.5px}
+.glos dd{margin:3px 0 0;color:var(--ink2);font-size:13px;line-height:1.5}
+.tip{position:fixed;pointer-events:none;z-index:70;background:var(--raise);border:1px solid var(--rule);
+  padding:8px 11px;font-size:12px;color:var(--ink);box-shadow:var(--shadow);opacity:0;transition:opacity .12s;
+  font-variant-numeric:tabular-nums;max-width:220px;line-height:1.45}
+.tip.on{opacity:1}
+.tip b{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink3);font-weight:400;margin-bottom:4px}
+.barcell{position:relative}
+.barcell i{position:absolute;left:0;top:50%;transform:translateY(-50%);height:62%;background:var(--s1w);display:block}
+.barcell span{position:relative}
+/* ---------- simulador ---------- */
+.sim{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(14px,2.4vw,26px);
+  background:var(--raise);border:1px solid var(--rule);padding:clamp(14px,2.4vw,26px)}
+@media (min-width:880px){.sim{grid-template-columns:minmax(0,330px) minmax(0,1fr)}}
+.simctl{display:flex;flex-direction:column;gap:13px;min-width:0}
+.simctl label{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink3)}
+.simin{display:flex;align-items:center;gap:8px;border:1px solid var(--rule);background:var(--paper);padding:9px 12px;margin-top:6px}
+.simin span{font-family:var(--mono);font-size:13px;color:var(--ink3)}
+.simin input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);
+  font-family:var(--disp);font-size:clamp(23px,5vw,31px);font-variant-numeric:tabular-nums;padding:0}
+.simin input:focus{outline:none}
+.simin input::-webkit-outer-spin-button,.simin input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input[type=range]{width:100%;accent-color:var(--s1);height:26px}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.presets button{flex:1 1 auto;background:transparent;border:1px solid var(--rule);color:var(--ink2);
+  font-family:var(--mono);font-size:11px;padding:8px 6px;cursor:pointer;border-radius:2px;white-space:nowrap}
+.presets button:hover,.presets button[aria-pressed=true]{border-color:var(--s1);color:var(--s1);background:var(--s1w)}
+.simout{display:flex;flex-direction:column;gap:12px;min-width:0}
+.simgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule)}
+@media (min-width:620px){.simgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.simgrid div{background:var(--raise);padding:11px 12px;min-width:0}
+.simgrid .l{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);line-height:1.4;min-height:2.8em}
+.simgrid .v{font-family:var(--disp);font-size:clamp(16px,3vw,21px);margin-top:4px;
+  font-variant-numeric:tabular-nums;line-height:1.1;white-space:nowrap}
+.simgrid .v.pos{color:var(--s1)}
+.scen{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule)}
+.scen div{background:var(--paper);padding:10px 12px;min-width:0}
+.scen .l{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
+.scen .v{font-size:clamp(14px,3.1vw,17px);font-weight:600;margin-top:4px;font-variant-numeric:tabular-nums;
+  overflow-wrap:break-word}
+.scen .x{font-size:11px;color:var(--ink3);margin-top:2px}
+/* ---------- assistente ---------- */
+.ask{display:flex;flex-direction:column;gap:12px;min-width:0}
+.askbox{display:flex;gap:8px;flex-wrap:wrap}
+.askbox input{flex:1 1 220px;min-width:0;background:var(--raise);border:1px solid var(--rule);color:var(--ink);
+  font-family:var(--sans);font-size:clamp(14px,3vw,15px);padding:12px 14px;border-radius:2px}
+.askbox input::placeholder{color:var(--ink3)}
+.askbox input:focus{border-color:var(--s1);outline:none}
+.askbox button{flex:0 0 auto;background:var(--s1);color:#fff;border:1px solid var(--s1);font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:12px 20px;border-radius:2px;cursor:pointer}
+.askbox button:hover{filter:brightness(1.12)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:transparent;border:1px solid var(--rule);color:var(--ink2);font-family:var(--sans);
+  font-size:clamp(11.5px,2.5vw,12.5px);padding:6px 10px;border-radius:2px;cursor:pointer;text-align:left}
+.chip:hover{border-color:var(--s1);color:var(--s1)}
+.answer{background:var(--raise);border:1px solid var(--rule);padding:clamp(14px,2.2vw,24px);
+  display:flex;flex-direction:column;gap:12px;min-height:140px;min-width:0}
+.answer .qt{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink3);
+  overflow-wrap:break-word}
+.answer h4{font-family:var(--disp);font-weight:400;font-size:clamp(18px,3.8vw,27px);margin:0;line-height:1.2}
+.answer p{font-size:clamp(13px,2.8vw,14.5px)}
+.mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,138px),1fr));gap:1px;background:var(--rule)}
+.mini div{background:var(--raise);padding:10px 12px;min-width:0}
+.mini .l{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
+.mini .v{font-size:clamp(16px,3.2vw,20px);font-family:var(--disp);margin-top:4px;
+  font-variant-numeric:tabular-nums;overflow-wrap:break-word}
+.src{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);
+  border-top:1px solid var(--rule2);padding-top:9px}
+/* ---------- régua dos 100 reais ---------- */
+.regua{display:flex;width:100%;height:clamp(52px,9vw,72px);border:1px solid var(--rule);overflow:hidden}
+.regua i{display:flex;align-items:center;justify-content:center;font-family:var(--mono);
+  font-size:clamp(10px,2.2vw,12px);letter-spacing:.06em;white-space:nowrap;padding:0 6px}
+.regua .ad{background:var(--s2);color:#fff;flex:0 0 8.7%;min-width:44px}
+.regua .rest{background:var(--s1w);color:var(--ink);flex:1 1 auto;border-left:2px solid var(--paper)}
+.reguacap{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);
+  font-size:clamp(9.5px,2.1vw,10.5px);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);flex-wrap:wrap}
+/* ---------- cartão-resumo ---------- */
+.resumo{background:var(--raise);border:1px solid var(--rule);padding:clamp(18px,3vw,34px);
+  display:flex;flex-direction:column;gap:clamp(14px,2.4vw,22px);max-width:780px;width:100%;
+  margin:0 auto;box-shadow:var(--shadow)}
+.resumo .rtop{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:12px}
+.resumo .rmark{font-family:var(--disp);font-size:clamp(19px,3.6vw,25px);letter-spacing:.01em;color:var(--ink)}
+.resumo .rper{font-family:var(--mono);font-size:clamp(9px,2vw,10px);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink3)}
+.resumo .rnums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,2.4vw,20px)}
+.resumo .rn{min-width:0}
+@media (min-width:820px){.resumo .rnums{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.resumo .rn .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink3);line-height:1.4}
+.resumo .rn .v{font-family:var(--disp);font-size:clamp(20px,3.4vw,27px);line-height:1.08;margin-top:5px;
+  font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.resumo .rn .v.pos{color:var(--s1)}
+.resumo ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+.resumo li{display:flex;gap:10px;font-size:clamp(13px,2.8vw,14.5px);color:var(--ink2);line-height:1.5}
+.resumo li b{color:var(--s1);font-family:var(--mono);font-size:11px;flex:none;padding-top:2px}
+.resumo .rfoot{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;
+  border-top:1px solid var(--rule);padding-top:12px}
+.resumo .rsig{font-family:var(--disp);font-size:clamp(18px,3.4vw,24px);color:var(--ink)}
+.resumo .rnote{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.simgrid .s{font-size:11.5px;color:var(--ink3);margin-top:3px;line-height:1.3}
+/* ---------- capa ---------- */
+.cover{justify-content:flex-end}
+.cover .wrap{gap:clamp(18px,3.4vh,38px)}
+.coverline{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:baseline;border-top:1px solid var(--rule);
+  padding-top:16px;font-family:var(--mono);font-size:clamp(10px,2.3vw,11px);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink3)}
+.coverline b{color:var(--ink);font-weight:400}
+.sigblock{font-family:var(--disp);font-size:clamp(28px,7vw,58px);line-height:1;letter-spacing:-.02em}
+@media (max-width:700px){.bar .mid{display:none} h2{max-width:none}}
+</style>
+</head>
+<body>
+
+<div class="rail"><i id="rail"></i></div>
+<header class="bar">
+  <span class="mark">Lili&rsquo;s Brand</span>
+  <span class="mid">Resultado dos anúncios &middot; jul/2024 a ago/2026</span>
+  <span class="right">
+    <span class="sig">DCoimbra</span>
+    <button class="tbtn" id="theme" title="Alternar tema claro e escuro" aria-label="Alternar tema">◐</button>
+    <span class="count"><span id="cur">01</span>/<span id="tot">14</span></span>
+  </span>
+</header>
+<nav class="nav">
+  <button id="prev" title="Voltar" aria-label="Página anterior">↑</button>
+  <button id="next" title="Avançar" aria-label="Próxima página">↓</button>
+</nav>
+<div class="tip" id="tip"></div>
+
+<main class="deck" id="deck">
+
+<!-- 01 CAPA -->
+<section class="slide cover">
+  <div class="wrap">
+    <div class="eyebrow"><b>01</b> Resultado dos anúncios</div>
+    <h1>R$&nbsp;691 mil em vendas,<br>com R$&nbsp;63 mil<br>investidos em anúncios.</h1>
+    <p class="lead">A Lili&rsquo;s Brand e a gestão de anúncios caminham juntas há bem mais tempo do que
+    este relatório mostra — a plataforma libera os últimos 25 meses, e é sobre eles que os números aqui
+    se apoiam. O documento foi escrito para ser lido sozinho, sem apresentação: cada tela traz uma
+    conclusão no título e a explicação logo abaixo.</p>
+    <div class="coverline">
+      <span>Cliente <b>Lili&rsquo;s Brand</b></span>
+      <span>Período <b>24 jul 2024 a 23 ago 2026</b></span>
+      <span>Retorno <b>R$ 10,92 por real</b></span>
+      <span>Por <b>DCoimbra</b></span>
+    </div>
+    <p style="font-size:12.5px;color:var(--ink3)">Para avançar, role a página ou use
+    <span class="kbd">↓</span> <span class="kbd">↑</span>. São 18 telas, divididas em quatro partes —
+    a próxima mostra o roteiro. No fim há uma calculadora de investimento e um assistente que responde
+    perguntas sobre estes números.</p>
+  </div>
+</section>
+
+<!-- 02 COMO LER -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>02</b> Como ler este relatório</div>
+    <h2 class="wide">O documento responde quatro perguntas, nesta ordem.</h2>
+    <div class="roteiro">
+      <div><span class="p">Parte 1 &middot; telas 3 a 7</span><h4>O que aconteceu</h4>
+        <p>Quanto foi investido, quanto isso gerou de venda e por que dá para confiar nesses números.</p></div>
+      <div><span class="p">Parte 2 &middot; telas 8 a 12</span><h4>Por que aconteceu</h4>
+        <p>Onde os anúncios aparecem, quem está comprando e em quais estados a venda realmente acontece.</p></div>
+      <div><span class="p">Parte 3 &middot; telas 13 a 15</span><h4>O que fazer agora</h4>
+        <p>Quanto a marca vende investindo mais, o plano de alocação da verba e até onde dá para crescer.</p></div>
+      <div><span class="p">Parte 4 &middot; telas 16 a 18</span><h4>Para consultar</h4>
+        <p>Um assistente que responde perguntas sobre estes dados e um resumo de uma tela só.</p></div>
+    </div>
+    <h2 class="wide" style="margin-top:.4em">Antes disso, três palavras que aparecem o tempo todo.</h2>
+    <div class="cols">
+      <div class="card"><span class="n">A MAIS IMPORTANTE</span><h3>Retorno</h3>
+        <p>Quanto voltou em vendas para cada R$&nbsp;1 gasto em anúncio.
+        <em>Retorno de 10&times; quer dizer: investiu R$&nbsp;1, vendeu R$&nbsp;10.</em>
+        No comércio de moda pela internet, algo entre 3&times; e 5&times; já é considerado bom.</p></div>
+      <div class="card"><span class="n">QUANTO CUSTA UMA VENDA</span><h3>Custo por pedido</h3>
+        <p>Quanto foi preciso gastar em anúncio para gerar <em>uma venda</em>. Se o custo por pedido é
+        R$&nbsp;51 e o pedido médio é R$&nbsp;672, sobra bastante para produto, frete e lucro.</p></div>
+      <div class="card"><span class="n">INTERESSE DAS PESSOAS</span><h3>Taxa de cliques</h3>
+        <p>De cada 100 pessoas que veem o anúncio, quantas clicam para conhecer a loja.
+        <em>Quanto maior, mais o anúncio está agradando.</em></p></div>
+    </div>
+    <details>
+      <summary>Ver todos os termos usados, explicados</summary>
+      <dl class="glos">
+        <div><dt>Retorno</dt><dd>Quanto voltou em vendas para cada R$ 1 investido em anúncio.</dd></div>
+        <div><dt>Custo por pedido</dt><dd>Quanto se gastou em anúncio, em média, para gerar uma venda.</dd></div>
+        <div><dt>Pedido médio</dt><dd>Valor médio de cada compra feita na loja.</dd></div>
+        <div><dt>Taxa de cliques</dt><dd>De cada 100 pessoas que veem o anúncio, quantas clicam.</dd></div>
+        <div><dt>Custo por clique</dt><dd>Quanto custa, em média, cada pessoa que clica no anúncio.</dd></div>
+        <div><dt>Exibições</dt><dd>Quantas vezes o anúncio apareceu na tela de alguém.</dd></div>
+        <div><dt>Pessoas alcançadas</dt><dd>Quantas pessoas diferentes viram os anúncios.</dd></div>
+        <div><dt>Repetição</dt><dd>Quantas vezes, em média, a mesma pessoa viu o anúncio.</dd></div>
+        <div><dt>Stories</dt><dd>Anúncios em tela cheia, entre os stories do Instagram. É onde vão os vídeos.</dd></div>
+        <div><dt>Feed</dt><dd>Anúncios no meio das publicações, ao rolar o Instagram. É onde vão as fotos.</dd></div>
+        <div><dt>Anúncio de reforço</dt><dd>Anúncio mostrado só para quem já visitou a loja ou deixou algo no carrinho.</dd></div>
+        <div><dt>Verba</dt><dd>O valor investido em anúncios num período.</dd></div>
+      </dl>
+    </details>
+  </div>
+</section>
+
+<!-- 03 PANORAMA -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>03</b> O que foi construído <span class="parte">Parte 1 de 4</span></div>
+    <h2>Cada R$&nbsp;1 investido virou R$&nbsp;10,92 em vendas.</h2>
+    <div class="hero">
+      <div class="cell"><div class="lab">Investido em anúncios</div><div class="val">R$&nbsp;63.286</div>
+        <div class="sub">Nos 25 meses que a plataforma disponibiliza</div></div>
+      <div class="cell"><div class="lab">Vendas geradas</div><div class="val pos">R$&nbsp;691.135</div>
+        <div class="sub">Compras feitas na loja online</div></div>
+      <div class="cell"><div class="lab">Retorno</div><div class="val pos">10,92&times;</div>
+        <div class="sub">R$&nbsp;10,92 de venda para cada R$&nbsp;1</div></div>
+      <div class="cell"><div class="lab">Pedidos</div><div class="val">1.237</div>
+        <div class="sub">Custo de R$ 51,16 por pedido</div></div>
+      <div class="cell"><div class="lab">Pedido médio</div><div class="val">R$&nbsp;559</div>
+        <div class="sub">Valor médio de cada compra</div></div>
+    </div>
+    <div class="cols">
+      <div class="card"><span class="n">QUANTAS PESSOAS</span><h3>427 mil pessoas viram a marca</h3>
+        <p>Os anúncios apareceram 1,32 milhão de vezes. Além de vender, isso construiu
+        conhecimento da marca — gente que passou a saber que a Lili&rsquo;s Brand existe.</p></div>
+      <div class="card"><span class="n">INTERESSE</span><h3>3 de cada 100 pessoas clicaram</h3>
+        <p>É um índice alto para o setor. Na prática: <em>os anúncios estão sendo mostrados
+        para as pessoas certas, e elas estão gostando do que veem.</em></p></div>
+      <div class="card"><span class="n">CUSTO</span><h3>R$&nbsp;1,59 por visita à loja</h3>
+        <p>Cada pessoa levada até o site custou R$ 1,59. Esse custo se manteve controlado nos
+        25 meses, mesmo com os anúncios ficando mais caros no mercado em geral.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- REGUA -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>04</b> A régua que importa <span class="parte">Parte 1 de 4</span></div>
+    <h2 class="wide">De cada R$&nbsp;100 que a loja fatura, R$&nbsp;5,71 vão para anúncio.</h2>
+    <p class="lead">Esta é a forma mais direta de enxergar o custo da mídia. Nos últimos 13 meses a loja
+    faturou <em>R$&nbsp;772 mil</em> e foram investidos <em>R$&nbsp;44 mil</em> em anúncios —
+    <em>5,71% do faturamento</em>. Todo o resto ficou com a marca.</p>
+    <figure>
+      <div class="regua">
+        <i class="ad">R$&nbsp;5,71</i>
+        <i class="rest">R$&nbsp;94,29 ficam com a marca</i>
+      </div>
+      <div class="reguacap">
+        <span>Custo de anúncio</span>
+        <span>Produto, operação, impostos e lucro</span>
+      </div>
+    </figure>
+    <div class="cols">
+      <div class="card"><span class="n">COMPARE COM O QUE VOCÊ JÁ CONHECE</span><h3>É uma das linhas mais enxutas do negócio</h3>
+        <p>Na mesma régua de aluguel, comissão de vendedor ou taxa de maquininha, 5,71% é um custo
+        <em>baixo</em> — e ele traz cliente novo todo mês, coisa que as outras linhas não fazem.</p></div>
+      <div class="card"><span class="n">A GRANDE DIFERENÇA</span><h3>Só cresce quando a venda cresce</h3>
+        <p>Diferente de um custo fixo, o anúncio acompanha o resultado: <em>se vende mais, custa mais;
+        se vende menos, custa menos</em>. O risco é sempre proporcional.</p></div>
+      <div class="card"><span class="n">PARA EFEITO DE COMPARAÇÃO</span><h3>O frete custa 2% do faturamento</h3>
+        <p>São R$&nbsp;13,58 por pedido. Somando anúncio e frete, as duas linhas ficam em torno de
+        <em>8% do que a loja fatura</em> — sobra bastante para produto, equipe, impostos e lucro.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRIANGULACAO -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>05</b> Conferindo com o caixa <span class="parte">Parte 1 de 4</span></div>
+    <h2 class="wide">Três sistemas diferentes contam a mesma história.</h2>
+    <p class="lead">Números de anúncio são sempre uma estimativa da plataforma. Por isso vale conferir
+    com quem não tem interesse na resposta: o <em>sistema da loja</em>, que registra a venda de verdade,
+    e o <em>Google Analytics</em>, que conta as visitas. Quando os três batem, a leitura para de ser
+    promessa e vira fato.</p>
+    <div class="hero">
+      <div class="cell"><div class="lab">Valor médio do pedido &middot; anúncios</div><div class="val">R$&nbsp;684</div>
+        <div class="sub">Segundo a plataforma de anúncios</div></div>
+      <div class="cell"><div class="lab">Valor médio do pedido &middot; loja</div><div class="val pos">R$&nbsp;672</div>
+        <div class="sub">Segundo o sistema da loja &mdash; 1,8% de diferença</div></div>
+      <div class="cell"><div class="lab">Visitas vindas de anúncio</div><div class="val">53%</div>
+        <div class="sub">Média dos últimos 5 meses, pelo Google Analytics</div></div>
+      <div class="cell"><div class="lab">Faturamento ligado a anúncio</div><div class="val pos">68%</div>
+        <div class="sub">Da receita total da loja em 13 meses</div></div>
+    </div>
+    <div class="cols">
+      <div class="card"><span class="n">POR QUE ISSO IMPORTA</span><h3>A projeção está calibrada em venda real</h3>
+        <p>A calculadora deste relatório usa um pedido médio de R$&nbsp;680. O sistema da loja registrou
+        <em>R$&nbsp;672</em> no período — 1,8% de diferença entre uma estimativa e o caixa.
+        Na prática: <em>as projeções das próximas telas se apoiam em dado confirmado</em>.</p></div>
+      <div class="card"><span class="n">O TAMANHO REAL DA MÍDIA</span><h3>Cerca de 2 em cada 3 reais</h3>
+        <p>A loja faturou R$&nbsp;772 mil em 13 meses e os anúncios são creditados por R$&nbsp;523 mil.
+        O Google Analytics conta a mesma coisa por outro caminho: <em>53% das visitas ao site vêm de
+        anúncio</em>. <em>Por que importa:</em> mostra que a mídia é o motor principal, sem fingir
+        que é a única fonte de venda.</p></div>
+      <div class="card"><span class="n">DE ONDE VEM O CRESCIMENTO</span><h3>8 em cada 10 clientes são novos</h3>
+        <p>Foram <em>648 clientes novos</em> contra 161 recorrentes. <em>Por que importa:</em> a marca
+        cresce conquistando quem ainda não conhecia a loja — exatamente o trabalho que a mídia paga faz.</p></div>
+      <div class="card"><span class="n">E QUEM VOLTA, VOLTA FORTE</span><h3>16% das clientes, 35% do faturamento</h3>
+        <p>No relatório de vendas do site, <em>16,4% das clientes compraram mais de uma vez em apenas
+        três meses</em> — e responderam por <em>34,6% de todo o faturamento</em> do período.
+        <em>Por que importa:</em> cada cliente conquistada vale mais do que a primeira compra sugere,
+        o que sustenta pagar mais caro para trazer gente nova.</p></div>
+    </div>
+    <div class="note">Uma observação honesta sobre o retorno: se olharmos só o que a plataforma consegue
+    provar, o retorno é de <em>10,92&times;</em>. Se olharmos todo o faturamento da loja contra todo o
+    investimento em mídia, chega a <em>17,51&times;</em>. <em>O número real está entre os dois</em> —
+    e mesmo o mais conservador é excelente para o setor.</div>
+  </div>
+</section>
+
+<!-- 04 CONSISTENCIA -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>06</b> Constância <span class="parte">Parte 1 de 4</span></div>
+    <h2 class="wide">Não foi um mês de sorte. São 25 meses seguidos — e a série vem de antes.</h2>
+    <div class="legend">
+      <span><i style="background:var(--s2)"></i>Investido em anúncios</span>
+      <span><i style="background:var(--s1)"></i>Vendas geradas</span>
+    </div>
+    <figure>
+      <div class="chart" id="c-evo"></div>
+      <figcaption>Acima, quanto foi investido em cada mês. Abaixo, quanto isso gerou de vendas.
+      Toque ou passe o mouse nas barras para ver os valores.</figcaption>
+    </figure>
+    <div class="note">Repare no desenho das duas barras: <em>quando a verba sobe, a venda sobe junto</em>.
+    Isso é o mais importante deste documento, porque significa que o resultado é previsível —
+    e o que é previsível pode ser planejado.</div>
+  </div>
+</section>
+
+<!-- 05 ESCALA -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>07</b> Aumentar verba já foi testado <span class="parte">Parte 1 de 4</span></div>
+    <h2 class="wide">A verba quase triplicou e o retorno continuou alto.</h2>
+    <p class="lead">Comparando os sete primeiros meses de 2026 com os mesmos meses de 2025:
+    investimos bem mais e as vendas acompanharam. Esse é o teste que mostra se uma operação
+    aguenta crescer — e esta aguentou.</p>
+    <div class="hero">
+      <div class="cell"><div class="lab">Investimento a mais</div><div class="val" id="k-dg">—</div>
+        <div class="sub">Jan a jul de 2026, comparado a 2025</div></div>
+      <div class="cell"><div class="lab">Vendas a mais</div><div class="val pos" id="k-dr">—</div>
+        <div class="sub">Geradas por esse aumento de verba</div></div>
+      <div class="cell"><div class="lab">Retorno do dinheiro novo</div><div class="val pos" id="k-mr">—</div>
+        <div class="sub">Quanto rendeu cada real a mais investido</div></div>
+      <div class="cell"><div class="lab">Pedidos a mais</div><div class="val" id="k-dc">—</div>
+        <div class="sub">Compras adicionais no período</div></div>
+    </div>
+    <figure>
+      <div class="chart" id="c-roas"></div>
+      <figcaption>Retorno de cada mês. A linha pontilhada mostra a média do período.
+      Alguns meses rendem mais, outros menos — o normal em qualquer negócio —, mas a média se sustenta alta.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 06 FRENTES -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>08</b> Onde os anúncios aparecem <span class="parte">Parte 2 de 4</span></div>
+    <h2 class="wide">O Feed rende mais que o Stories — e recebe um quarto da verba.</h2>
+    <p class="lead">Os anúncios aparecem em dois lugares: no <em>Stories</em> (tela cheia, entre os
+    stories do Instagram, onde vão os vídeos) e no <em>Feed</em> (no meio das publicações, onde vão as
+    fotos). Os dois dão retorno de dois dígitos, mas em proporções desiguais — e é daí que sai a
+    oportunidade mais simples deste documento: <em>equilibrar melhor a divisão entre eles</em>.</p>
+    <figure>
+      <div class="chart" id="c-form"></div>
+      <figcaption>Vendas geradas por cada frente, com o retorno ao lado.</figcaption>
+    </figure>
+    <div class="cols">
+      <div class="card"><span class="n">O MOTOR &middot; 75% DA VERBA</span><h3>Stories</h3>
+        <p>R$&nbsp;483 mil em vendas e 699 pedidos, com retorno de 10,70&times;. É o que sustenta o
+        resultado, alcança muita gente e já provou que aguenta receber mais dinheiro.</p></div>
+      <div class="card"><span class="n">O MAIS RENTÁVEL &middot; 25% DA VERBA</span><h3>Feed</h3>
+        <p>R$&nbsp;208 mil em vendas com retorno de <em>13,87&times;</em> — bem acima do Stories — e
+        custo por pedido de R$&nbsp;47, contra R$&nbsp;65 no Stories.</p></div>
+      <div class="card"><span class="n">A OPORTUNIDADE</span><h3>Equilibrar os dois</h3>
+        <p>O Feed rende mais e recebe só um quarto da verba. <em>Aumentar a fatia dele tende a
+        melhorar o resultado do conjunto</em> — é o ajuste mais simples e de maior efeito disponível hoje.</p></div>
+    </div>
+    <details>
+      <summary>Ver todas as campanhas e como foram classificadas</summary>
+      <div class="tblwrap"><table class="tbl" id="t-conj"></table></div>
+    </details>
+  </div>
+</section>
+
+<!-- 07 PUBLICO -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>09</b> Quem compra <span class="parte">Parte 2 de 4</span></div>
+    <h2 class="wide">A marca encontrou o público dela — e ele compra bem.</h2>
+    <figure>
+      <div class="chart" id="c-idade"></div>
+      <figcaption>Vendas geradas por faixa de idade, da mais jovem para a mais madura. O retorno de
+      cada faixa aparece ao lado da barra.</figcaption>
+    </figure>
+    <div class="cols">
+      <div class="card"><span class="n">O CORAÇÃO DO NEGÓCIO</span><h3>45 a 54 anos</h3>
+        <p>R$&nbsp;388 mil em vendas e 554 pedidos, com retorno de 13,62&times;. É uma cliente
+        fiel, que compra peças de valor mais alto. Este público já está mapeado e funcionando bem.</p></div>
+      <div class="card"><span class="n">A MAIOR OPORTUNIDADE</span><h3>55 a 64 anos</h3>
+        <p>Rende 11,75&times; recebendo pouca verba. É onde há mais espaço para crescer
+        sem sair do terreno seguro — mesma cliente, só que menos atendida até aqui.</p></div>
+      <div class="card"><span class="n">VOLUME</span><h3>35 a 44 anos</h3>
+        <p>196 pedidos com pedido médio de R$&nbsp;692. Responde muito bem a anúncios que
+        mostram a peça montada, em composição de look.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 COMBINACOES -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>10</b> As combinações que mais vendem <span class="parte">Parte 2 de 4</span></div>
+    <h2 class="wide">O melhor negócio da conta é Feed com mulheres de 45 a 54 anos.</h2>
+    <p class="lead">Juntando as duas telas anteriores — onde o anúncio aparece e quem o recebe —
+    chega-se ao mapa que orienta onde colocar cada real. Uma combinação dá <em>eficiência</em>,
+    a outra dá <em>volume</em>, e as duas apontam para a mesma cliente.</p>
+    <figure>
+      <div class="chart" id="c-cross"></div>
+      <figcaption>As dez combinações de frente e faixa de idade que mais geraram vendas,
+      com o retorno ao lado.</figcaption>
+    </figure>
+    <div class="note">O padrão é claro: <em>Feed com mulheres de 45 a 64 anos</em> é a combinação mais
+    rentável da marca — chega a 16,47&times; de retorno. O <em>Stories com o mesmo público</em> é o que
+    traz mais volume, com R$&nbsp;290 mil em vendas. Um dá eficiência, o outro dá escala, e os dois
+    apontam para a mesma cliente.</div>
+    <details>
+      <summary>Ver a tabela completa</summary>
+      <div class="tblwrap"><table class="tbl" id="t-cross"></table></div>
+    </details>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>11</b> Onde a marca aparece no Brasil <span class="parte">Parte 2 de 4</span></div>
+    <h2 class="wide">A cada R$&nbsp;100 investidos, R$&nbsp;86 ficam em São Paulo e Rio.</h2>
+    <p class="lead">São Paulo sozinho leva <em>67,7%</em> de toda a verba. Somando o Rio, chega a
+    <em>85,6%</em>, e os outros 25 estados dividem o que sobra. Isso levanta uma pergunta legítima,
+    que a próxima tela responde: <em>valeria a pena espalhar mais o investimento pelo país?</em></p>
+    <figure>
+      <div class="chart" id="c-reg"></div>
+      <figcaption>Verba investida por estado nos 25 meses. Passe o mouse ou toque para ver
+      alcance, repetição e custo de cada um.</figcaption>
+    </figure>
+    <div class="cols">
+      <div class="card"><span class="n">O EIXO</span><h3>São Paulo e Rio &middot; 85,6% da verba</h3>
+        <p>Concentram R$&nbsp;54,2 mil dos R$&nbsp;63,3 mil investidos. É onde a marca nasceu
+        comercialmente e onde a conta aprendeu a vender.</p></div>
+      <div class="card"><span class="n">O RESTO DO PAÍS</span><h3>25 estados &middot; 14,4% da verba</h3>
+        <p>Juntos receberam R$&nbsp;9,1 mil em 25 meses. Dezesseis deles ficaram com
+        <em>menos de R$&nbsp;40 cada</em> no período inteiro — praticamente não foram testados.</p></div>
+      <div class="card"><span class="n">E ESTÁ AUMENTANDO</span><h3>De 56% para 91%</h3>
+        <p>No começo da série o eixo levava 56% da verba; no último mês, <em>91,3%</em>.
+        <em>Por que isso acontece:</em> a plataforma reinveste sozinha onde já viu venda acontecer.
+        A concentração não foi uma escolha manual — foi um resultado.</p></div>
+    </div>
+    <div class="note">Olhando só o custo, espalhar parecia boa ideia: fora do eixo o espaço é
+    <em>27% mais barato</em> e a mesma pessoa vê o anúncio 2 vezes em vez de 3,4. Mas custo baixo não
+    é o mesmo que venda — e foi preciso o relatório de vendas do site para saber a diferença.</div>
+  </div>
+</section>
+
+<!-- VENDA REAL POR ESTADO -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>12</b> Onde a venda realmente acontece <span class="parte">Parte 2 de 4</span></div>
+    <h2 class="wide">São Paulo devolve mais do que recebe. O resto do país, menos da metade.</h2>
+    <p class="lead">A resposta é não, pelo menos por enquanto. Comparando o que cada estado
+    <em>recebeu de verba</em> com o que <em>gerou de faturamento</em>, São Paulo devolve mais do que
+    consome e o resto do país devolve bem menos. Espalhar a verba hoje significaria tirar dinheiro
+    de onde ele rende para colocar onde ainda não rendeu.</p>
+    <figure>
+      <div class="chart" id="c-uf"></div>
+      <figcaption>Participação de cada estado no faturamento, comparada com sua fatia da verba.
+      Toque ou passe o mouse para ver pedidos e valor.</figcaption>
+    </figure>
+    <div class="cols">
+      <div class="card"><span class="n">O EIXO</span><h3>73% da verba, 89% das vendas</h3>
+        <p>São Paulo sozinho recebeu 58% do investimento e gerou <em>75% do faturamento</em> — devolve
+        bem mais do que consome. O Rio fica equilibrado, 15% da verba para 14% das vendas.</p></div>
+      <div class="card"><span class="n">FORA DO EIXO</span><h3>26% da verba, 10% das vendas</h3>
+        <p>Os demais estados receberam um quarto do investimento e trouxeram um décimo do faturamento.
+        <em>Por que isso importa:</em> a expansão geográfica, que parecia oportunidade pelo custo de
+        exibição, não se confirma quando se olha a venda.</p></div>
+      <div class="card"><span class="n">O CASO DO PARANÁ</span><h3>4% da verba, nenhum pedido</h3>
+        <p>Era o estado com melhor sinal de interesse — e no período com dados de venda não gerou
+        nenhum pedido. <em>Por que isso importa:</em> mostra que clique barato não vira venda
+        automaticamente, e que a decisão precisa esperar o histórico completo.</p></div>
+    </div>
+    <div class="note">Sobre a base desta leitura: são <em>259 pedidos reais</em>, com endereço de
+    entrega, de agosto a novembro de 2024. São Paulo responde por 186 deles, o que torna a conclusão
+    sobre o eixo bem sustentada. Para os estados menores o volume é pequeno, então a leitura correta
+    é: <em>não há sinal de que espalhar a verba hoje traga retorno melhor do que concentrar</em>.</div>
+  </div>
+</section>
+
+<!-- 09 SIMULADOR -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>13</b> Calculadora de investimento <span class="parte">Parte 3 de 4</span></div>
+    <h2 class="wide">Quanto a marca vende se investir mais?</h2>
+    <p>Escolha abaixo quanto pretende investir por mês em anúncios. A calculadora estima quanto
+    isso deve gerar de vendas, usando o comportamento real desta conta nos últimos 25 meses.</p>
+    <div class="sim">
+      <div class="simctl">
+        <div>
+          <label for="sg">Quanto quero investir por mês</label>
+          <div class="simin"><span>R$</span><input id="sg" type="text" inputmode="numeric" autocomplete="off" value="10.000" aria-label="Investimento mensal em reais"></div>
+        </div>
+        <input id="sr" type="range" min="1000" max="40000" step="500" value="10000" aria-label="Ajustar o investimento">
+        <div class="presets" id="presets"></div>
+        <p style="font-size:12px;color:var(--ink3);max-width:none">Os números grandes mostram a
+        estimativa mais provável. Logo abaixo aparecem três cenários — do mais cauteloso ao mais
+        animador —, porque toda previsão é uma faixa, não um número exato.</p>
+      </div>
+      <div class="simout">
+        <div class="simgrid">
+          <div><div class="l">Vendas / mês</div><div class="v pos" id="o-rec">—</div></div>
+          <div><div class="l">Retorno</div><div class="v" id="o-roas">—</div></div>
+          <div><div class="l">Pedidos / mês</div><div class="v" id="o-ped">—</div><div class="s" id="o-dia">—</div></div>
+          <div><div class="l">Vendas no ano</div><div class="v" id="o-ano">—</div></div>
+        </div>
+        <div class="scen">
+          <div><div class="l">Cenário cauteloso</div><div class="v" id="o-c">—</div><div class="x" id="o-cx">—</div></div>
+          <div><div class="l">Cenário provável</div><div class="v" id="o-b">—</div><div class="x" id="o-bx">—</div></div>
+          <div><div class="l">Cenário animador</div><div class="v" id="o-o">—</div><div class="x" id="o-ox">—</div></div>
+        </div>
+        <div class="chart" id="c-curve"></div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--ink3)">Como a conta é feita: cada bolinha amarela no gráfico é
+    um mês real de campanha. A linha verde é o caminho que esses meses desenham quando a verba aumenta.
+    A previsão considera que, quanto mais se investe, um pouco menos rende cada real novo — porque é
+    preciso ir buscando pessoas cada vez mais distantes do público principal. Isso acontece em qualquer
+    negócio e já está embutido no cálculo.</p>
+  </div>
+</section>
+
+<!-- 10 ALOCACAO -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>14</b> O plano <span class="parte">Parte 3 de 4</span></div>
+    <h2 class="wide">Quatro fatias de verba e três cuidados para o plano funcionar.</h2>
+    <p class="lead">Entrando verba nova, esta é a divisão que os dados sugerem: reforçar onde o
+    resultado está comprovado, abrir espaço controlado para crescer e guardar uma parte para testar
+    o que vem depois.</p>
+    <div class="subsecao">Onde colocar cada real</div>
+    <div class="cols">
+      <div class="card"><span class="n">45% &middot; O MOTOR</span><h3>Stories, para mulheres de 45 a 64 anos</h3>
+        <p>Segue com a maior fatia <em>porque é o que traz volume</em>: 699 pedidos e o maior alcance de
+        gente nova. Mas deixa de concentrar três quartos da verba, <em>porque sozinho rende menos que o
+        Feed</em> — 10,70&times; contra 13,87&times;.</p></div>
+      <div class="card"><span class="n">30% &middot; O MAIS RENTÁVEL</span><h3>Feed, para o mesmo público</h3>
+        <p>Sobe de 25% para 30% <em>porque é onde cada real rende mais</em>: 13,87&times; de retorno e
+        custo por pedido de R$&nbsp;47, contra R$&nbsp;65 no Stories. Melhora o resultado
+        <em>sem verba adicional</em>, só realocação.</p></div>
+      <div class="card"><span class="n">15% &middot; QUEM JÁ CONHECE</span><h3>Anúncios de reforço</h3>
+        <p>Mostrados só para quem já visitou a loja, deixou algo no carrinho ou já comprou.
+        <em>Por que reservar essa fatia:</em> é gente que já demonstrou interesse, e converter alguém
+        assim custa bem menos do que conquistar do zero.</p></div>
+      <div class="card"><span class="n">10% &middot; TESTAR</span><h3>Novos públicos, com foco em 55 a 64 anos</h3>
+        <p>Essa faixa rende 11,75&times; recebendo só 18% do investimento — a maior distância entre
+        resultado e atenção na conta. <em>Por que separar essa reserva:</em> sem alimentar o próximo
+        público, a marca cresce por seis meses e estaciona.</p></div>
+    </div>
+    <div class="subsecao">Três cuidados que não são sobre dinheiro</div>
+    <div class="cols">
+      <div class="card"><span class="n">CRIATIVO</span><h3>Três a quatro anúncios novos por mês</h3>
+        <p>Variando modelo, peça e cenário. <em>Por quê:</em> em São Paulo a mesma pessoa já vê o
+        anúncio 3,3 vezes. Sem renovar, a verba extra só aumenta a repetição — as pessoas param de
+        reagir e o custo sobe.</p></div>
+      <div class="card"><span class="n">GEOGRAFIA</span><h3>Adiar a expansão para outros estados</h3>
+        <p>Parecia boa ideia pelo custo de exibição, mas a venda mostra o contrário: fora de São Paulo
+        e Rio, <em>26% da verba gerou só 10% do faturamento</em>. <em>Por quê:</em> cada real rende mais
+        aprofundando o eixo do que abrindo praça nova. A expansão volta à mesa quando o eixo der sinal
+        de saturação — hoje ele ainda devolve mais do que recebe.</p></div>
+      <div class="card"><span class="n">OPERAÇÃO</span><h3>Preparar a entrega antes de acelerar</h3>
+        <p>Hoje a loja despacha cerca de <em>1,5 pedido por dia</em>. Com R$&nbsp;10 mil por mês seriam
+        <em>5 por dia</em>; com R$&nbsp;30 mil, <em>12 por dia</em>. <em>Por quê:</em> anúncio gera
+        pedido, não entrega. Sem estoque e expedição no ritmo, o investimento vira atraso.</p></div>
+    </div>
+    <details>
+      <summary>Formatos que o mercado vem usando — referências externas</summary>
+      <div class="ext">
+        <div class="aviso">Tudo abaixo vem de <em>estudos de mercado</em>, não dos dados da Lili&rsquo;s Brand.
+        Serve como referência do que funciona em moda no Brasil e no mundo — e, sempre que possível,
+        comparei com o que a conta já mostra.</div>
+
+        <h5>Como cada formato costuma se comportar</h5>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>Formato</th><th>Taxa de cliques</th><th>Retorno médio</th><th>Onde encaixa aqui</th></tr></thead>
+          <tbody>
+            <tr><td>Coleção (vitrine)</td><td>2,47%</td><td class="pos">4,2&times;</td><td>Feed — o mais forte da lista</td></tr>
+            <tr><td>Catálogo automático</td><td>1,5 a 2,3%</td><td class="pos">4,1 a 4,7&times;</td><td>Anúncios de reforço</td></tr>
+            <tr><td>Carrossel</td><td>1,4 a 2,1%</td><td>3,7&times;</td><td>Feed — montar look</td></tr>
+            <tr><td>Vídeo de 15s</td><td>1,6 a 2,3%</td><td>3,6 a 3,8&times;</td><td>Stories</td></tr>
+            <tr><td>Foto única</td><td>1,2 a 1,7%</td><td>3,3&times;</td><td>Base, já em uso</td></tr>
+          </tbody>
+        </table></div>
+        <p style="font-size:12px;color:var(--ink3)">Médias de mercado para comércio eletrônico, em dólar.
+        Servem para comparar formatos entre si, não para prever o resultado da marca — que hoje roda
+        bem acima dessas médias.</p>
+
+        <h5>Quatro propostas, ligadas ao que a conta já mostra</h5>
+        <div class="propostas">
+          <div><span class="t">Feed · prioridade</span>
+            <p><strong>Anúncio de coleção</strong> — uma foto ou vídeo de capa com uma vitrine de peças
+            logo abaixo, e a compra acontece dentro do próprio Instagram.
+            <em>Por que aqui:</em> é o formato de melhor retorno do mercado, vive no Feed (que já é o
+            mais rentável da conta) e mostra várias peças de uma vez — combina com o pedido médio de
+            2,4 itens.</p></div>
+          <div><span class="t">Feed · montar look</span>
+            <p><strong>Carrossel de composição</strong> — calça no primeiro cartão, blusa no segundo,
+            look completo no terceiro. <em>Por que aqui:</em> calça e blusa somam 63% do faturamento,
+            e o público de 35 a 44 responde bem a peça montada. Cada cartão leva para o produto dele.</p></div>
+          <div><span class="t">Stories · vídeo</span>
+            <p><strong>Vídeo curto de caimento</strong>, de 10 a 15 segundos, mostrando a peça no corpo,
+            em movimento. <em>Por que aqui:</em> vídeo de 15 segundos é o formato de melhor desempenho
+            no Stories, e caimento é a dúvida que mais trava a compra de roupa pela internet.</p></div>
+          <div><span class="t">Reforço · automático</span>
+            <p><strong>Catálogo dinâmico</strong> — mostra automaticamente a peça que a pessoa viu e não
+            comprou. <em>Por que aqui:</em> é o formato de maior retorno em reforço e o de clique mais
+            barato. Encaixa direto na fatia de 15% do plano.</p></div>
+        </div>
+
+        <h5>Sobre campanhas automáticas (Advantage+)</h5>
+        <p>É a modalidade em que a plataforma decide sozinha públicos e peças. O mercado registra
+        retorno cerca de <em>22% melhor</em> que campanhas manuais — mas com uma condição importante:
+        ela só supera o manual em contas com <em>mais de 50 vendas por semana</em>. Abaixo disso, o
+        manual venceu em 6 de cada 10 casos.</p>
+        <p><em>O que isso significa aqui:</em> a loja faz hoje cerca de <em>10 vendas por semana</em> —
+        ainda cedo. No patamar de R$&nbsp;30 mil por mês seriam perto de <em>84 por semana</em>, e aí
+        passa a valer. <em>Sugestão: deixar para o terceiro degrau do plano.</em></p>
+
+        <h5>Com que frequência trocar os anúncios</h5>
+        <p>O mercado considera que o cansaço começa quando a mesma pessoa vê a peça <em>entre 2,5 e 3,5
+        vezes</em>. Em São Paulo a conta já está em <em>3,28</em> e no Rio em <em>3,65</em> — ou seja,
+        dentro da faixa de atenção nos dois estados que concentram 86% da verba. Para contas do porte
+        desta, a referência é de <em>2 a 4 peças novas por mês</em>, o que confirma o ritmo de 3 a 4
+        sugerido no plano.</p>
+
+        <div class="fontes">Fontes: AdAmigo — Meta Ads Benchmarks by Creative Format (2026) e Fashion
+        eCommerce ROAS Benchmarks (2026) &middot; MHI Growth Engine — Meta Ads Benchmarks for Ecommerce
+        (2026) &middot; Landing Partners — Advantage+ Shopping for Fashion Brands (2026) &middot;
+        Motion — Creative Benchmarks Report (2026) &middot; Adsights e GoodMorning — Creative Fatigue
+        Thresholds (2026).</div>
+      </div>
+    </details>
+    <div class="note">E uma regra de ritmo, venha a verba de onde vier: o aumento deve acontecer
+    <em>em degraus de 20% a 30% por vez</em>, com três a quatro semanas entre um e outro —
+    <em>porque as campanhas precisam desse tempo para reaprender a cada novo patamar</em>.</div>
+  </div>
+</section>
+
+
+<!-- 13 ASSISTENTE -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>15</b> Até onde dá para ir <span class="parte">Parte 3 de 4</span></div>
+    <h2 class="wide">Um caminho de R$&nbsp;4,5 mil para R$&nbsp;30 mil por mês.</h2>
+    <figure>
+      <div class="chart" id="c-esc"></div>
+      <figcaption>Quanto cada patamar de investimento mensal deve gerar de vendas, no cenário provável.</figcaption>
+    </figure>
+    <div class="tblwrap"><table class="tbl" id="t-esc"></table></div>
+    <div class="note">Sendo transparente sobre a previsão: até <em>R$&nbsp;15 mil por mês</em> o cálculo
+    trabalha perto do que a conta já praticou, então a confiança é alta. De R$&nbsp;15 mil a
+    R$&nbsp;30 mil o potencial continua grande, e o caminho seguro é chegar lá em <em>três ou quatro
+    degraus, ao longo de 6 a 9 meses</em> — conferindo a cada patamar se as vendas, o estoque e a
+    entrega estão acompanhando.</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>16</b> Pergunte aos números <span class="parte">Parte 4 de 4</span></div>
+    <h2 class="wide">Um assistente que responde sobre esta conta.</h2>
+    <p>Escreva uma pergunta em português, do jeito que vier à cabeça. O assistente calcula a resposta
+    na hora, com os dados que estão dentro desta própria página — funciona mesmo sem internet.</p>
+    <div class="ask">
+      <div class="askbox">
+        <input id="q" type="text" autocomplete="off" placeholder="Ex.: quanto vou vender investindo 20 mil por mês?" aria-label="Sua pergunta">
+        <button id="send">Perguntar</button>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="answer" id="ans" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUMO -->
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>17</b> Resumo em uma tela <span class="parte">Parte 4 de 4</span></div>
+    <h2 class="wide">Tudo o que importa, em um cartão.</h2>
+    <div class="resumo">
+      <div class="rtop">
+        <span class="rmark">Lili&rsquo;s Brand &middot; anúncios</span>
+        <span class="rper">24 jul 2024 a 23 ago 2026</span>
+      </div>
+      <div class="rnums">
+        <div class="rn"><div class="l">Investido</div><div class="v">R$&nbsp;63 mil</div></div>
+        <div class="rn"><div class="l">Vendas geradas</div><div class="v pos">R$&nbsp;691 mil</div></div>
+        <div class="rn"><div class="l">Retorno</div><div class="v pos">10,92&times;</div></div>
+        <div class="rn"><div class="l">Custo sobre a venda</div><div class="v">5,71%</div></div>
+      </div>
+      <ul>
+        <li><b>01</b><span>Cada R$&nbsp;1 investido virou <strong>R$&nbsp;10,92</strong> em vendas.
+          O sistema da loja confirma: <strong>anúncio custa 5,71%</strong> do que a marca fatura.</span></li>
+        <li><b>02</b><span>A cliente tem <strong>de 45 a 64 anos</strong>, e <strong>8 em cada 10 são
+          novas</strong> — a marca cresce conquistando quem ainda não conhecia a loja.</span></li>
+        <li><b>03</b><span>O <strong>Feed rende 13,87&times;</strong> e recebe só um quarto da verba.
+          Equilibrar a divisão com o Stories melhora o resultado sem gastar mais.</span></li>
+        <li><b>04</b><span>A venda está concentrada em <strong>São Paulo e Rio</strong>, que geram 89%
+          do faturamento. Expandir para outros estados fica para depois.</span></li>
+        <li><b>05</b><span>Investindo <strong>R$&nbsp;10 mil por mês</strong>, a projeção é de
+          R$&nbsp;97 mil em vendas mensais — cerca de 5 pedidos por dia.</span></li>
+        <li><b>06</b><span>O caminho recomendado vai até <strong>R$&nbsp;30 mil por mês</strong>,
+          em três a quatro degraus ao longo de 6 a 9 meses.</span></li>
+      </ul>
+      <div class="rfoot">
+        <span class="rsig">DCoimbra</span>
+        <span class="rnote">Gestão de anúncios &middot; Instagram e Facebook</span>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--ink3);text-align:center">Este cartão foi feito para print de
+    celular — dá para mandar direto no WhatsApp.</p>
+  </div>
+</section>
+
+<!-- 14 FIM -->
+<section class="slide cover">
+  <div class="wrap">
+    <div class="eyebrow"><b>18</b> Para fechar <span class="parte">Parte 4 de 4</span></div>
+    <h2 class="wide">Uma operação pronta para receber mais investimento.</h2>
+    <p class="lead">Recapitulando as quatro partes: a operação entrega retorno alto e constante, e
+    três sistemas independentes confirmam isso. O resultado vem de um público bem definido, de 45 a 64
+    anos, concentrado em São Paulo e Rio. E existe espaço para crescer — equilibrando Stories e Feed,
+    e subindo a verba em degraus até R$&nbsp;30 mil por mês. <em>Os números não pedem mudança de rota;
+    pedem mais combustível no caminho que já funciona.</em></p>
+    <div class="coverline">
+      <span>Próximo passo <b>definir o valor mensal de investimento</b></span>
+      <span>Revisão <b>a cada 30 dias</b></span>
+    </div>
+    <div class="sigblock">DCoimbra</div>
+    <p style="font-size:12px;color:var(--ink3)">Feito a partir dos dados de veiculação da Lili&rsquo;s Brand
+    no Meta Ads (Instagram e Facebook), de 24 de julho de 2024 a 23 de agosto de 2026 — os 25 meses que a
+    plataforma disponibiliza para exportação. A parceria e as campanhas são anteriores a esse período. As vendas
+    consideradas são as registradas pela plataforma como resultado dos anúncios. As previsões são
+    estimativas baseadas no histórico e devem ser lidas como uma faixa provável, não como garantia.</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+const D = {"mes":[{"periodo":"2024-07","gasto":339.15,"receita":0.0,"compras":138,"impressoes":17092,"cliques":207,"alcance":8716},{"periodo":"2024-08","gasto":814.47,"receita":0.0,"compras":83,"impressoes":35875,"cliques":278,"alcance":18362},{"periodo":"2024-09","gasto":1999.83,"receita":0.0,"compras":0,"impressoes":51850,"cliques":1036,"alcance":27258},{"periodo":"2024-10","gasto":1399.19,"receita":6794.71,"compras":12,"impressoes":24366,"cliques":320,"alcance":9628},{"periodo":"2024-11","gasto":1400.81,"receita":8990.0,"compras":11,"impressoes":21112,"cliques":447,"alcance":8023},{"periodo":"2024-12","gasto":1573.87,"receita":11174.19,"compras":18,"impressoes":28751,"cliques":742,"alcance":9330},{"periodo":"2025-01","gasto":1425.62,"receita":4488.13,"compras":10,"impressoes":24277,"cliques":338,"alcance":8477},{"periodo":"2025-02","gasto":1397.58,"receita":6051.32,"compras":10,"impressoes":24510,"cliques":430,"alcance":7055},{"periodo":"2025-03","gasto":1404.03,"receita":9773.05,"compras":14,"impressoes":42309,"cliques":887,"alcance":23585},{"periodo":"2025-04","gasto":1465.76,"receita":29246.99,"compras":33,"impressoes":22846,"cliques":743,"alcance":9565},{"periodo":"2025-05","gasto":1833.28,"receita":37998.43,"compras":44,"impressoes":42002,"cliques":1247,"alcance":15100},{"periodo":"2025-06","gasto":1155.23,"receita":9264.82,"compras":18,"impressoes":22873,"cliques":497,"alcance":8270},{"periodo":"2025-07","gasto":1369.05,"receita":29493.99,"compras":59,"impressoes":34720,"cliques":1248,"alcance":7834},{"periodo":"2025-08","gasto":1668.48,"receita":31006.22,"compras":43,"impressoes":40692,"cliques":1360,"alcance":11664},{"periodo":"2025-09","gasto":3420.66,"receita":48662.87,"compras":65,"impressoes":73211,"cliques":2732,"alcance":24184},{"periodo":"2025-10","gasto":3898.92,"receita":32084.86,"compras":51,"impressoes":85025,"cliques":3017,"alcance":19692},{"periodo":"2025-11","gasto":3982.82,"receita":48800.05,"compras":60,"impressoes":75690,"cliques":2979,"alcance":24310},{"periodo":"2025-12","gasto":2667.0,"receita":38424.7,"compras":49,"impressoes":61337,"cliques":1892,"alcance":14988},{"periodo":"2026-01","gasto":1649.8,"receita":19712.75,"compras":36,"impressoes":41110,"cliques":1149,"alcance":13556},{"periodo":"2026-02","gasto":1473.18,"receita":22938.92,"compras":43,"impressoes":35753,"cliques":1287,"alcance":10858},{"periodo":"2026-03","gasto":3699.64,"receita":42383.03,"compras":66,"impressoes":80120,"cliques":2735,"alcance":20121},{"periodo":"2026-04","gasto":6517.69,"receita":65886.46,"compras":96,"impressoes":101985,"cliques":3090,"alcance":22890},{"periodo":"2026-05","gasto":6230.72,"receita":73177.65,"compras":93,"impressoes":102492,"cliques":3896,"alcance":27567},{"periodo":"2026-06","gasto":3598.73,"receita":43124.46,"compras":46,"impressoes":109114,"cliques":2282,"alcance":45331},{"periodo":"2026-07","gasto":3910.23,"receita":27491.53,"compras":58,"impressoes":63815,"cliques":2466,"alcance":15840},{"periodo":"2026-08","gasto":2989.78,"receita":44165.49,"compras":81,"impressoes":53779,"cliques":2609,"alcance":14888}],"formato":[{"formato":"Feed","gasto":15015.7,"receita":208248.42,"compras":317,"impressoes":318848,"cliques":7819,"alcance":106405},{"formato":"Stories","gasto":45116.33,"receita":482886.2,"compras":699,"impressoes":893036,"cliques":30574,"alcance":266346}],"idade":[{"idade":"18-24","gasto":558.96,"receita":2240.72,"compras":3,"impressoes":37534,"cliques":278,"alcance":16746},{"idade":"25-34","gasto":3169.04,"receita":24138.17,"compras":35,"impressoes":97719,"cliques":1405,"alcance":41887},{"idade":"35-44","gasto":14671.01,"receita":135719.14,"compras":196,"impressoes":287513,"cliques":6881,"alcance":99295},{"idade":"45-54","gasto":28516.57,"receita":388426.46,"compras":554,"impressoes":559038,"cliques":19084,"alcance":143150},{"idade":"55-64","gasto":10986.52,"receita":129058.75,"compras":205,"impressoes":186947,"cliques":8363,"alcance":54418},{"idade":"65+","gasto":2226.48,"receita":11140.95,"compras":22,"impressoes":43094,"cliques":2382,"alcance":17219}],"formato_idade":[{"formato":"Feed","idade":"18-24","gasto":119.93,"receita":342.43,"compras":1,"impressoes":8758,"cliques":52,"alcance":5074},{"formato":"Feed","idade":"25-34","gasto":1155.98,"receita":9436.62,"compras":13,"impressoes":34152,"cliques":417,"alcance":14760},{"formato":"Feed","idade":"35-44","gasto":4938.52,"receita":61717.87,"compras":83,"impressoes":97597,"cliques":1739,"alcance":32431},{"formato":"Feed","idade":"45-54","gasto":5990.78,"receita":98645.65,"compras":152,"impressoes":117765,"cliques":3509,"alcance":31672},{"formato":"Feed","idade":"55-64","gasto":2354.04,"receita":36299.01,"compras":64,"impressoes":45290,"cliques":1548,"alcance":14698},{"formato":"Feed","idade":"65+","gasto":456.44,"receita":1806.84,"compras":4,"impressoes":15284,"cliques":554,"alcance":7768},{"formato":"Stories","idade":"18-24","gasto":439.03,"receita":1898.29,"compras":2,"impressoes":28776,"cliques":226,"alcance":11672},{"formato":"Stories","idade":"25-34","gasto":2013.06,"receita":14701.55,"compras":22,"impressoes":63567,"cliques":988,"alcance":27127},{"formato":"Stories","idade":"35-44","gasto":9732.49,"receita":74001.27,"compras":113,"impressoes":189916,"cliques":5142,"alcance":66864},{"formato":"Stories","idade":"45-54","gasto":22525.75,"receita":289780.81,"compras":402,"impressoes":441270,"cliques":15575,"alcance":111475},{"formato":"Stories","idade":"55-64","gasto":8632.48,"receita":92759.74,"compras":141,"impressoes":141655,"cliques":6815,"alcance":39718},{"formato":"Stories","idade":"65+","gasto":1770.04,"receita":9334.11,"compras":18,"impressoes":27810,"cliques":1828,"alcance":9451}],"conjuntos":[{"conjunto":"Stories","formato":"Stories","gasto":32189.97,"receita":321391.49,"compras":472,"impressoes":626906,"cliques":20392,"alcance":197910},{"conjunto":"Campanhas de Videos","formato":"Stories","gasto":13215.43,"receita":153769.47,"compras":217,"impressoes":292778,"cliques":10791,"alcance":85465},{"conjunto":"Feeds","formato":"Feed","gasto":6875.32,"receita":85050.51,"compras":359,"impressoes":180557,"cliques":4151,"alcance":75686},{"conjunto":"Campnhas de Fotos","formato":"Feed","gasto":4255.3,"receita":79615.18,"compras":118,"impressoes":90229,"cliques":2708,"alcance":23170},{"conjunto":"Feed","formato":"Feed","gasto":2915.23,"receita":28137.46,"compras":37,"impressoes":64775,"cliques":837,"alcance":26148},{"conjunto":"Campanha de Feeds","formato":"Feed","gasto":2158.93,"receita":15445.27,"compras":23,"impressoes":37806,"cliques":571,"alcance":10722},{"conjunto":"Campanhas de Stories","formato":"Stories","gasto":1672.23,"receita":7725.24,"compras":11,"impressoes":23543,"cliques":460,"alcance":7951},{"conjunto":"Campanhas de Fotos SP","formato":"Feed","gasto":3.07,"receita":0.0,"compras":0,"impressoes":107,"cliques":4,"alcance":35}],"modelo":{"g0":4491.13,"r0":49371.44,"aov":680.25,"marginal":10.61,"corr":0.864,"gmax":6517.69,"meses":23,"pontos":[[1399.19,6794.71],[1400.81,8990.0],[1573.87,11174.19],[1425.62,4488.13],[1397.58,6051.32],[1404.03,9773.05],[1465.76,29246.99],[1833.28,37998.43],[1155.23,9264.82],[1369.05,29493.99],[1668.48,31006.22],[3420.66,48662.87],[3898.92,32084.86],[3982.82,48800.05],[2667.0,38424.7],[1649.8,19712.75],[1473.18,22938.92],[3699.64,42383.03],[6517.69,65886.46],[6230.72,73177.65],[3598.73,43124.46],[3910.23,27491.53],[2989.78,44165.49]]}};
+D.regioes=[{"regiao":"São Paulo","gasto":42827.95,"alcance":246459,"impressoes":807249,"cliques":26157},{"regiao":"Rio de Janeiro","gasto":11347.04,"alcance":71756,"impressoes":261917,"cliques":7473},{"regiao":"Minas Gerais","gasto":2568.71,"alcance":25812,"impressoes":61315,"cliques":1682},{"regiao":"Rio Grande do Sul","gasto":1498.63,"alcance":18002,"impressoes":40304,"cliques":1076},{"regiao":"Paraná","gasto":1233.09,"alcance":14556,"impressoes":29128,"cliques":876},{"regiao":"Distrito Federal","gasto":1207.54,"alcance":12370,"impressoes":25942,"cliques":801},{"regiao":"Santa Catarina","gasto":812.93,"alcance":10443,"impressoes":22467,"cliques":603},{"regiao":"Goiás","gasto":505.2,"alcance":6940,"impressoes":15154,"cliques":362},{"regiao":"Bahia","gasto":494.16,"alcance":8218,"impressoes":16161,"cliques":365},{"regiao":"Espírito Santo","gasto":368.98,"alcance":6215,"impressoes":12740,"cliques":206},{"regiao":"Pernambuco","gasto":268.09,"alcance":6176,"impressoes":10229,"cliques":151},{"regiao":"Ceará","gasto":37.19,"alcance":2059,"impressoes":3219,"cliques":38},{"regiao":"Paraíba","gasto":15.56,"alcance":834,"impressoes":1330,"cliques":12},{"regiao":"Rio Grande do Norte","gasto":12.25,"alcance":909,"impressoes":1359,"cliques":19},{"regiao":"Pará","gasto":11.95,"alcance":730,"impressoes":1168,"cliques":6},{"regiao":"Sergipe","gasto":11.37,"alcance":574,"impressoes":893,"cliques":14},{"regiao":"Mato Grosso do Sul","gasto":11.19,"alcance":415,"impressoes":758,"cliques":11},{"regiao":"Alagoas","gasto":10.19,"alcance":714,"impressoes":1087,"cliques":18},{"regiao":"Mato Grosso","gasto":9.72,"alcance":448,"impressoes":665,"cliques":8},{"regiao":"Piauí","gasto":9.67,"alcance":687,"impressoes":992,"cliques":17},{"regiao":"Maranhão","gasto":9.18,"alcance":808,"impressoes":1141,"cliques":8},{"regiao":"Amazonas","gasto":5.99,"alcance":372,"impressoes":553,"cliques":6},{"regiao":"Tocantins","gasto":4.66,"alcance":250,"impressoes":334,"cliques":2},{"regiao":"Rondônia","gasto":2.09,"alcance":160,"impressoes":229,"cliques":3},{"regiao":"Amapá","gasto":1.6,"alcance":108,"impressoes":170,"cliques":1},{"regiao":"Roraima","gasto":1.2,"alcance":78,"impressoes":103,"cliques":0},{"regiao":"Acre","gasto":0.98,"alcance":75,"impressoes":116,"cliques":2}];
+D.concentracao=[{"periodo":"2024-07","eixo":56.0},{"periodo":"2024-08","eixo":61.7},{"periodo":"2024-09","eixo":65.7},{"periodo":"2024-10","eixo":81.6},{"periodo":"2024-11","eixo":82.2},{"periodo":"2024-12","eixo":83.5},{"periodo":"2025-01","eixo":87.3},{"periodo":"2025-02","eixo":87.7},{"periodo":"2025-03","eixo":82.4},{"periodo":"2025-04","eixo":88.7},{"periodo":"2025-05","eixo":90.3},{"periodo":"2025-06","eixo":91.7},{"periodo":"2025-07","eixo":91.8},{"periodo":"2025-08","eixo":90.2},{"periodo":"2025-09","eixo":85.0},{"periodo":"2025-10","eixo":86.3},{"periodo":"2025-11","eixo":84.8},{"periodo":"2025-12","eixo":89.3},{"periodo":"2026-01","eixo":87.8},{"periodo":"2026-02","eixo":91.9},{"periodo":"2026-03","eixo":88.3},{"periodo":"2026-04","eixo":85.9},{"periodo":"2026-05","eixo":86.2},{"periodo":"2026-06","eixo":80.2},{"periodo":"2026-07","eixo":89.0},{"periodo":"2026-08","eixo":91.3}];
+D.uf=[{"uf":"SP","nome":"São Paulo","verba":58.1,"receita":75.2,"pedidos":186,"valor":125772.3},{"uf":"RJ","nome":"Rio de Janeiro","verba":15.1,"receita":14.1,"pedidos":45,"valor":23540.8},{"uf":"MG","nome":"Minas Gerais","verba":7.1,"receita":4.6,"pedidos":13,"valor":7715.95},{"uf":"RS","nome":"Rio Grande do Sul","verba":5.7,"receita":2.0,"pedidos":5,"valor":3371.44},{"uf":"DF","nome":"Distrito Federal","verba":3.7,"receita":1.3,"pedidos":2,"valor":2138.3},{"uf":"SC","nome":"Santa Catarina","verba":2.7,"receita":1.2,"pedidos":4,"valor":2062.57},{"uf":"CE","nome":"Ceará","verba":0.1,"receita":0.8,"pedidos":2,"valor":1414.75},{"uf":"GO","nome":"Goiás","verba":0.3,"receita":0.4,"pedidos":1,"valor":744.9},{"uf":"ES","nome":"Espírito Santo","verba":2.5,"receita":0.2,"pedidos":1,"valor":415.63},{"uf":"PR","nome":"Paraná","verba":4.1,"receita":0.0,"pedidos":0,"valor":0}];
+
+/* ---------- formatação ---------- */
+const NB=n=>Math.round(n).toLocaleString('pt-BR');
+const BRL=n=>'R$ '+Math.round(n).toLocaleString('pt-BR');
+const BRLk=n=>n>=1e6?'R$ '+(n/1e6).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+(n<2e6?' milhão':' milhões'):n>=1000?'R$ '+(n/1000).toLocaleString('pt-BR',{maximumFractionDigits:n>=10000?0:1})+' mil':'R$ '+Math.round(n);
+const BRL2=n=>'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const X=n=>n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+'×';
+const PC=n=>n.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
+const sum=(a,k)=>a.reduce((s,r)=>s+(r[k]||0),0);
+const MN=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+const lbl=p=>MN[+p.slice(5,7)-1]+'/'+p.slice(2,4);
+function agg(rows){
+  const g=sum(rows,'gasto'),r=sum(rows,'receita'),c=sum(rows,'compras'),
+        im=sum(rows,'impressoes'),cl=sum(rows,'cliques');
+  return {gasto:g,receita:r,compras:c,impressoes:im,cliques:cl,
+    roas:g?r/g:0,cpa:c?g/c:0,aov:c?r/c:0,ctr:im?cl/im*100:0,cpc:cl?g/cl:0,cpm:im?g/im*1000:0};
+}
+const MESES_R=D.mes.filter(m=>m.periodo>='2024-10'&&m.gasto>0);
+const TOTAL=agg(D.mes);
+const MOD=D.modelo;
+
+/* ---------- previsão ---------- */
+const BETA={cons:0.75,base:0.85,otim:0.95};
+const prever=(g,b)=>MOD.r0*Math.pow(g/MOD.g0,b);
+function cenarios(g){const o={};for(const k in BETA){const r=prever(g,BETA[k]);
+  o[k]={receita:r,roas:r/g,pedidos:r/MOD.aov};}return o;}
+
+/* ---------- desenho ---------- */
+const NS='http://www.w3.org/2000/svg';
+const tip=document.getElementById('tip');
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);
+  if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,cls,anchor,size){const t=el('text',{x,y},p);
+  if(cls)t.setAttribute('class',cls);if(anchor)t.setAttribute('text-anchor',anchor);
+  t.setAttribute('font-size',size||11);t.textContent=s;return t;}
+function hook(node,html){
+  node.addEventListener('pointerenter',()=>{tip.innerHTML=html;tip.classList.add('on');});
+  node.addEventListener('pointermove',e=>{const w=tip.offsetWidth,h=tip.offsetHeight;
+    let x=e.clientX+14,y=e.clientY-h-12;
+    if(x+w>innerWidth-8)x=Math.max(8,e.clientX-w-14);if(y<8)y=e.clientY+18;
+    tip.style.left=x+'px';tip.style.top=y+'px';});
+  node.addEventListener('pointerleave',()=>tip.classList.remove('on'));
+}
+function niceMax(v){if(v<=0)return 1;const p=Math.pow(10,Math.floor(Math.log10(v)));const n=v/p;
+  return (n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10)*p;}
+const CHARTS=[];
+const bp=w=>w<560?'sm':w<860?'md':'lg';
+let VW=1000; /* largura do viewBox: 1:1 em telas pequenas, para o texto não encolher */
+function responsive(mount,draw){
+  const run=()=>{const w=Math.round(mount.clientWidth||700);
+    VW=w<860?Math.max(300,w):1000;mount.innerHTML='';draw(mount,bp(w));};
+  CHARTS.push({mount,draw,run});run();return run;
+}
+function redrawAll(){CHARTS.forEach(c=>c.run());}
+addEventListener('resize',()=>{clearTimeout(window.__rt);window.__rt=setTimeout(redrawAll,180);});
+function newSvg(mount,W,H){const s=el('svg',{viewBox:`0 0 ${W} ${H}`,
+  preserveAspectRatio:'xMidYMid meet',role:'img'});mount.appendChild(s);return s;}
+
+function timeBars(mount,size,rows,key,color,title){
+  const sm=size==='sm';
+  const W=VW,H=sm?150:194,L=sm?50:80,R=8,T=18,B=22,fs=sm?9.5:10.5;
+  const s=newSvg(mount,W,H);s.setAttribute('aria-label',title);
+  const max=niceMax(Math.max(...rows.map(r=>r[key])));
+  const iw=W-L-R,ih=H-T-B,bw=iw/rows.length;
+  for(let i=0;i<=3;i++){const y=T+ih-ih*i/3;
+    el('line',{x1:L,x2:W-R,y1:y,y2:y,class:'grid'},s);
+    txt(s,L-7,y+3.5,BRLk(max*i/3),'','end',fs);}
+  const every=sm?6:3;
+  rows.forEach((r,i)=>{
+    const v=r[key]||0,h=Math.max(1,ih*v/max),x=L+i*bw+1,y=T+ih-h;
+    const g=el('g',{},s);
+    el('rect',{x,y,width:Math.max(1,bw-2),height:h,fill:color,rx:1.5},g);
+    el('rect',{x:L+i*bw,y:T,width:bw,height:ih,fill:'transparent'},g);
+    hook(g,`<b>${lbl(r.periodo)}</b>${title}: ${BRL(v)}`);
+    if(i%every===0||i===rows.length-1)txt(s,x+(bw-2)/2,H-7,lbl(r.periodo),'','middle',fs);});
+  el('line',{x1:L,x2:W-R,y1:T+ih,y2:T+ih,class:'axis'},s);
+}
+function lineChart(mount,size,rows,vals,color,fmt,title,ref,reflab){
+  const sm=size==='sm';
+  const W=VW,H=sm?158:204,L=sm?40:64,R=8,T=20,B=22,fs=sm?9.5:10.5;
+  const s=newSvg(mount,W,H);s.setAttribute('aria-label',title);
+  const max=niceMax(Math.max(...vals));
+  const iw=W-L-R,ih=H-T-B,step=iw/(rows.length-1);
+  for(let i=0;i<=3;i++){const y=T+ih-ih*i/3;
+    el('line',{x1:L,x2:W-R,y1:y,y2:y,class:'grid'},s);
+    txt(s,L-7,y+3.5,fmt(max*i/3),'','end',fs);}
+  if(ref){const y=T+ih-ih*ref/max;el('line',{x1:L,x2:W-R,y1:y,y2:y,class:'ref'},s);
+    txt(s,L+4,y-6,reflab,'','start',fs);}
+  const pts=vals.map((v,i)=>[L+i*step,T+ih-ih*Math.min(v,max)/max]);
+  el('path',{d:'M'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' L'),
+    fill:'none',stroke:color,'stroke-width':2,'stroke-linejoin':'round'},s);
+  const every=sm?6:3;
+  pts.forEach((p,i)=>{const g=el('g',{},s);
+    el('circle',{cx:p[0],cy:p[1],r:sm?3.5:4.5,fill:color,stroke:'var(--paper)','stroke-width':2},g);
+    el('circle',{cx:p[0],cy:p[1],r:15,fill:'transparent'},g);
+    hook(g,`<b>${lbl(rows[i].periodo)}</b>${title}: ${fmt(vals[i])}`);
+    if(i%every===0||i===pts.length-1)txt(s,p[0],H-7,lbl(rows[i].periodo),'','middle',fs);});
+  el('line',{x1:L,x2:W-R,y1:T+ih,y2:T+ih,class:'axis'},s);
+}
+function hBars(mount,size,items,opt){
+  const sm=size==='sm',o=opt||{};
+  const W=VW;
+  const rowH=sm?58:(o.rowH||44), L=sm?2:(o.L||150), R=sm?2:(o.R||215);
+  const H=items.length*rowH+(sm?8:14);
+  const s=newSvg(mount,W,H);
+  const max=Math.max(...items.map(d=>d.v))||1, iw=W-L-R;
+  items.forEach((d,i)=>{
+    const g=el('g',{},s);
+    if(sm){
+      const y=i*rowH+6;
+      txt(s,2,y+12,d.k,'k','start',12.5);
+      const w=Math.max(4,(W-6)*d.v/max*0.46);
+      el('rect',{x:2,y:y+20,width:w,height:14,fill:d.color||'var(--s1)',rx:2},g);
+      txt(s,w+10,y+31,d.rightSm||d.right||BRL(d.v),'v','start',11.5);
+      el('rect',{x:0,y:y-6,width:W,height:rowH,fill:'transparent'},g);
+    }else{
+      const y=i*rowH+9,bh=Math.min(22,rowH-16),w=Math.max(3,iw*d.v/max);
+      el('rect',{x:L,y,width:w,height:bh,fill:d.color||'var(--s1)',rx:2},g);
+      el('rect',{x:0,y:y-7,width:W,height:rowH,fill:'transparent'},g);
+      txt(s,L-10,y+bh/2+4,d.k,'k','end',12);
+      txt(s,L+w+9,y+bh/2+4,d.right||BRL(d.v),'v','start',12);
+    }
+    if(d.tip)hook(g,d.tip);});
+}
+function curva(mount,size,gsel){
+  const sm=size==='sm';
+  const W=VW,H=sm?190:245,L=sm?46:72,R=sm?18:34,T=24,B=28,fs=sm?9.5:10.5;
+  const s=newSvg(mount,W,H);s.setAttribute('aria-label','Estimativa de vendas por investimento');
+  const gmax=40000,rmax=niceMax(prever(gmax,BETA.otim));
+  const iw=W-L-R,ih=H-T-B;
+  const px=g=>L+iw*g/gmax, py=r=>T+ih-ih*Math.min(r,rmax)/rmax;
+  for(let i=0;i<=3;i++){const y=T+ih-ih*i/3;
+    el('line',{x1:L,x2:W-R,y1:y,y2:y,class:'grid'},s);
+    txt(s,L-7,y+3.5,BRLk(rmax*i/3),'','end',fs);}
+  txt(s,L,H-8,'R$ 0','','start',fs);
+  for(let g=(sm?20000:10000);g<=40000;g+=(sm?20000:10000))txt(s,px(g),H-8,BRLk(g),'',g===40000?'end':'middle',fs);
+  const pts=[];for(let g=1000;g<=gmax;g+=500)pts.push(g);
+  const up=pts.map(g=>`${px(g).toFixed(1)},${py(prever(g,BETA.otim)).toFixed(1)}`).join(' L');
+  const dn=pts.slice().reverse().map(g=>`${px(g).toFixed(1)},${py(prever(g,BETA.cons)).toFixed(1)}`).join(' L');
+  el('path',{d:`M${up} L${dn} Z`,fill:'var(--s1w)',stroke:'none'},s);
+  el('path',{d:'M'+pts.map(g=>`${px(g).toFixed(1)},${py(prever(g,BETA.base)).toFixed(1)}`).join(' L'),
+    fill:'none',stroke:'var(--s1)','stroke-width':2},s);
+  MOD.pontos.forEach(([g,r])=>{const c=el('circle',{cx:px(g),cy:py(r),r:sm?3:3.5,
+    fill:'var(--s2)',stroke:'var(--paper)','stroke-width':1.5},s);
+    hook(c,`<b>Mês real</b>Investido: ${BRL(g)}<br>Vendeu: ${BRL(r)}<br>Retorno: ${X(r/g)}`);});
+  const r=prever(gsel,BETA.base);
+  el('line',{x1:px(gsel),x2:px(gsel),y1:T,y2:T+ih,class:'ref'},s);
+  el('circle',{cx:px(gsel),cy:py(r),r:7,fill:'var(--s1)',stroke:'var(--paper)','stroke-width':2.5},s);
+  const right=px(gsel)>W-150;
+  txt(s,right?px(gsel)-12:px(gsel)+12,Math.max(T+14,py(r)-14),BRLk(r),'k',right?'end':'start',sm?12.5:13);
+  el('line',{x1:L,x2:W-R,y1:T+ih,y2:T+ih,class:'axis'},s);
+  txt(s,L,12,sm?'● mês real   ▬ estimativa   ░ faixa':'● cada mês real   ▬ estimativa   ░ faixa entre cauteloso e animador','','start',fs);
+}
+
+/* ---------- páginas ---------- */
+responsive(document.getElementById('c-evo'),(m,sz)=>{
+  timeBars(m,sz,D.mes,'gasto','var(--s2)','Investido');
+  timeBars(m,sz,D.mes,'receita','var(--s1)','Vendas');});
+(function(){
+  const A=agg(D.mes.filter(r=>r.periodo>='2025-01'&&r.periodo<='2025-07'));
+  const B=agg(D.mes.filter(r=>r.periodo>='2026-01'&&r.periodo<='2026-07'));
+  document.getElementById('k-dg').textContent='+'+BRLk(B.gasto-A.gasto);
+  document.getElementById('k-dr').textContent='+'+BRLk(B.receita-A.receita);
+  document.getElementById('k-mr').textContent=X((B.receita-A.receita)/(B.gasto-A.gasto));
+  document.getElementById('k-dc').textContent='+'+NB(B.compras-A.compras);})();
+responsive(document.getElementById('c-roas'),(m,sz)=>{
+  lineChart(m,sz,MESES_R,MESES_R.map(r=>r.receita/r.gasto),'var(--s1)',
+    v=>v.toLocaleString('pt-BR',{maximumFractionDigits:0})+'×','Retorno',
+    agg(MESES_R).roas,'média '+X(agg(MESES_R).roas));});
+responsive(document.getElementById('c-form'),(m,sz)=>{
+  hBars(m,sz,[...D.formato].sort((a,b)=>b.receita-a.receita).map(r=>({
+    k:r.formato,v:r.receita,
+    right:BRLk(r.receita)+'  ·  '+X(r.receita/r.gasto)+' de retorno',
+    rightSm:BRLk(r.receita)+' · '+X(r.receita/r.gasto),
+    tip:`<b>${r.formato}</b>Investido: ${BRL2(r.gasto)}<br>Vendas: ${BRL2(r.receita)}<br>Pedidos: ${NB(r.compras)}<br>Retorno: ${X(r.receita/r.gasto)}<br>Custo por pedido: ${BRL2(r.gasto/r.compras)}`
+  })),{rowH:54,L:110,R:255});});
+document.getElementById('t-conj').innerHTML=
+  '<thead><tr><th>Campanha</th><th>Frente</th><th>Investido</th><th>Pedidos</th><th>Vendas</th><th>Retorno</th></tr></thead><tbody>'+
+  D.conjuntos.filter(c=>c.gasto>1).map(c=>`<tr><td>${c.conjunto}</td><td>${c.formato}</td><td>${BRL2(c.gasto)}</td><td>${NB(c.compras)}</td><td>${BRL2(c.receita)}</td><td class="pos">${X(c.receita/c.gasto)}</td></tr>`).join('')+'</tbody>';
+responsive(document.getElementById('c-idade'),(m,sz)=>{
+  const ordem=['18-24','25-34','35-44','45-54','55-64','65+'];
+  hBars(m,sz,[...D.idade].sort((a,b)=>ordem.indexOf(a.idade)-ordem.indexOf(b.idade)).map(r=>({
+    k:r.idade+' anos',v:r.receita,
+    right:BRLk(r.receita)+'  ·  '+X(r.receita/r.gasto)+' de retorno',
+    rightSm:BRLk(r.receita)+' · '+X(r.receita/r.gasto),
+    tip:`<b>${r.idade} anos</b>Investido: ${BRL2(r.gasto)}<br>Vendas: ${BRL2(r.receita)}<br>Pedidos: ${NB(r.compras)}<br>Retorno: ${X(r.receita/r.gasto)}<br>Pedido médio: ${BRL2(r.receita/r.compras)}`
+  })),{rowH:46,L:96,R:255});});
+responsive(document.getElementById('c-cross'),(m,sz)=>{
+  hBars(m,sz,[...D.formato_idade].sort((a,b)=>b.receita-a.receita).slice(0,10).map(r=>({
+    k:r.formato+' · '+r.idade+' anos',v:r.receita,
+    right:BRLk(r.receita)+'  ·  '+X(r.receita/r.gasto),
+    tip:`<b>${r.formato} · ${r.idade} anos</b>Investido: ${BRL2(r.gasto)}<br>Vendas: ${BRL2(r.receita)}<br>Pedidos: ${NB(r.compras)}<br>Retorno: ${X(r.receita/r.gasto)}`
+  })),{rowH:41,L:172,R:200});});
+document.getElementById('t-cross').innerHTML=
+  '<thead><tr><th>Frente</th><th>Idade</th><th>Investido</th><th>Pedidos</th><th>Vendas</th><th>Retorno</th></tr></thead><tbody>'+
+  [...D.formato_idade].sort((a,b)=>b.receita-a.receita).map(r=>`<tr><td>${r.formato}</td><td>${r.idade}</td><td>${BRL2(r.gasto)}</td><td>${NB(r.compras)}</td><td>${BRL2(r.receita)}</td><td class="${r.receita/r.gasto>=10?'pos':''}">${X(r.receita/r.gasto)}</td></tr>`).join('')+'</tbody>';
+
+/* ---------- mapa por estado ---------- */
+(function(){
+  const R=D.regioes, tot=R.reduce((a,b)=>a+b.gasto,0);
+  const top=R.slice(0,8);
+  const resto=R.slice(8);
+  const itens=top.map(r=>({regiao:r.regiao,gasto:r.gasto,alcance:r.alcance,impressoes:r.impressoes}));
+  itens.push({regiao:'Outros '+resto.length+' estados',
+    gasto:resto.reduce((a,b)=>a+b.gasto,0),alcance:resto.reduce((a,b)=>a+b.alcance,0),
+    impressoes:resto.reduce((a,b)=>a+b.impressoes,0)});
+  responsive(document.getElementById('c-reg'),(m,sz)=>{
+    hBars(m,sz,itens.map((r,i)=>({
+      k:r.regiao,v:r.gasto,color:i<2?'var(--s1)':'var(--r2)',
+      right:BRLk(r.gasto)+'  ·  '+(r.gasto/tot*100).toLocaleString('pt-BR',{maximumFractionDigits:1})+'% da verba',
+      rightSm:(r.gasto/tot*100).toLocaleString('pt-BR',{maximumFractionDigits:1})+'% · '+BRLk(r.gasto),
+      tip:`<b>${r.regiao}</b>Verba: ${BRL2(r.gasto)} (${(r.gasto/tot*100).toFixed(1)}%)<br>Pessoas alcançadas: ${NB(r.alcance)}<br>Repetição: ${(r.impressoes/r.alcance).toFixed(2)}×<br>Custo por mil exibições: ${BRL2(r.gasto/r.impressoes*1000)}`
+    })),{rowH:42,L:168,R:230});
+  });
+})();
+/* ---------- custo de aparecer por estado ---------- */
+(function(){
+  responsive(document.getElementById('c-uf'),(m,sz)=>{
+    hBars(m,sz,D.uf.map(u=>({
+      k:u.nome,v:Math.max(u.receita,0.15),
+      color:u.receita>=u.verba?'var(--s1)':'var(--r1)',
+      right:'recebeu '+u.verba.toLocaleString('pt-BR')+'% da verba  ·  gerou '+u.receita.toLocaleString('pt-BR')+'% das vendas',
+      rightSm:u.verba.toLocaleString('pt-BR')+'% verba → '+u.receita.toLocaleString('pt-BR')+'% vendas',
+      tip:`<b>${u.nome}</b>Fatia da verba: ${u.verba.toLocaleString('pt-BR')}%<br>Fatia das vendas: ${u.receita.toLocaleString('pt-BR')}%<br>Pedidos: ${NB(u.pedidos)}<br>Faturamento: ${BRL2(u.valor)}`
+    })),{rowH:42,L:168,R:300});
+  });
+})();
+/* ---------- calculadora ---------- */
+document.getElementById('presets').innerHTML=
+  [5000,10000,20000,30000].map(p=>`<button data-g="${p}">${BRLk(p)}</button>`).join('');
+const gIn=document.getElementById('sg'),gRange=document.getElementById('sr');
+const redrawCurve=responsive(document.getElementById('c-curve'),(m,sz)=>curva(m,sz,+gIn.value||10000));
+const soNum=v=>+String(v).replace(/\D/g,'')||0;
+function atualiza(g,escrever){
+  g=Math.min(40000,Math.max(1000,Math.round(g/500)*500));
+  if(escrever!==false)gIn.value=g.toLocaleString('pt-BR');
+  gRange.value=g;
+  const c=cenarios(g);
+  document.getElementById('o-rec').textContent=BRL(c.base.receita);
+  document.getElementById('o-roas').textContent=X(c.base.roas);
+  document.getElementById('o-ped').textContent=NB(c.base.pedidos);
+  document.getElementById('o-dia').textContent='cerca de '+(c.base.pedidos/30).toLocaleString('pt-BR',{maximumFractionDigits:1})+' por dia';
+  document.getElementById('o-ano').textContent=BRLk(c.base.receita*12);
+  const set=(id,k)=>{document.getElementById('o-'+id).textContent=BRLk(c[k].receita);
+    document.getElementById('o-'+id+'x').textContent=X(c[k].roas)+' · '+NB(c[k].pedidos)+' pedidos/mês';};
+  set('c','cons');set('b','base');set('o','otim');
+  document.querySelectorAll('#presets button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.g===g)));
+  redrawCurve();
+}
+gIn.addEventListener('input',e=>{const v=soNum(e.target.value);if(v>=1000)atualiza(v,false);});
+gIn.addEventListener('blur',()=>atualiza(soNum(gIn.value)||1000));
+gIn.addEventListener('change',()=>atualiza(soNum(gIn.value)||1000));
+gRange.addEventListener('input',e=>atualiza(+e.target.value));
+document.getElementById('presets').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(b)atualiza(+b.dataset.g);});
+atualiza(10000);
+
+/* ---------- escada ---------- */
+(function(){
+  const passos=[[MOD.g0,'Hoje'],[7500,'1º degrau'],[10000,'2º degrau'],[15000,'3º degrau'],[20000,'4º degrau'],[30000,'Meta']];
+  responsive(document.getElementById('c-esc'),(m,sz)=>{
+    hBars(m,sz,passos.map(([g,nm],i)=>{const r=prever(g,BETA.base);
+      return{k:nm+' · '+BRLk(g)+'/mês',v:r,color:['var(--r1)','var(--r2)','var(--r2)','var(--r3)','var(--r3)','var(--r4)'][i],
+        right:BRLk(r)+'/mês  ·  '+X(r/g)+' de retorno',rightSm:BRLk(r)+'/mês · '+X(r/g),
+        tip:`<b>${nm}</b>Investindo: ${BRL(g)}/mês<br>Vendas prováveis: ${BRL(r)}/mês<br>Retorno: ${X(r/g)}<br>Pedidos: cerca de ${NB(r/MOD.aov)}/mês (${(r/MOD.aov/30).toLocaleString('pt-BR',{maximumFractionDigits:1})}/dia)`};}),
+      {rowH:46,L:186,R:250});});
+  document.getElementById('t-esc').innerHTML=
+    '<thead><tr><th>Patamar</th><th>Investindo/mês</th><th>Cauteloso</th><th>Provável</th><th>Animador</th><th>Pedidos/mês</th><th>Vendas em 12 meses</th></tr></thead><tbody>'+
+    passos.map(([g,nm])=>{const c=cenarios(g);
+      return `<tr><td>${nm}</td><td>${BRL(g)}</td><td>${BRLk(c.cons.receita)}</td><td class="pos">${BRLk(c.base.receita)}</td><td>${BRLk(c.otim.receita)}</td><td>${NB(c.base.pedidos)} <span style="color:var(--ink3)">(${(c.base.pedidos/30).toLocaleString('pt-BR',{maximumFractionDigits:1})}/dia)</span></td><td>${BRLk(c.base.receita*12)}</td></tr>`;}).join('')+'</tbody>';
+})();
+
+/* ---------- assistente ---------- */
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+  .replace(/[^a-z0-9\s+-]/g,' ').replace(/\s+/g,' ').trim();
+const has=(q,...w)=>w.some(x=>q.includes(x));
+const MESN={janeiro:1,jan:1,fevereiro:2,fev:2,marco:3,mar:3,abril:4,abr:4,maio:5,mai:5,junho:6,jun:6,
+  julho:7,jul:7,agosto:8,ago:8,setembro:9,set:9,outubro:10,out:10,novembro:11,nov:11,dezembro:12,dez:12};
+const mini=l=>'<div class="mini">'+l.map(s=>`<div><div class="l">${s[0]}</div><div class="v">${s[1]}</div></div>`).join('')+'</div>';
+function tabela(head,rows){
+  const max=Math.max(...rows.map(r=>r._bar||0))||1;
+  return '<div class="tblwrap"><table class="tbl"><thead><tr>'+head.map(h=>`<th>${h}</th>`).join('')+
+    '</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.c.map((c,i)=>
+      i===0?`<td class="barcell">${r._bar?`<i style="width:${(r._bar/max*100).toFixed(1)}%"></i>`:''}<span>${c}</span></td>`
+           :`<td class="${(r.cls&&r.cls[i])||''}">${c}</td>`).join('')+'</tr>').join('')+'</tbody></table></div>';
+}
+const RS=(t,b,e,s)=>({title:t,body:b,extra:e||'',src:s||'Dados dos anúncios · 24 jul 2024 a 23 ago 2026'});
+
+function responder(raw){
+  const q=norm(raw);
+  if(!q)return RS('Faça uma pergunta','<p>Pode perguntar sobre quanto foi investido, quanto vendeu, o retorno, quem compra mais, onde os anúncios rendem melhor, ou quanto a marca venderia investindo mais.</p>');
+
+  if(has(q,'quem fez','quem assina','autor','dcoimbra','agencia','responsavel'))
+    return RS('Quem assina esta análise',
+      '<p>Gestão dos anúncios e análise por <em>DCoimbra</em>, sobre os dados de veiculação da Lili&rsquo;s Brand no Meta Ads entre 24 de julho de 2024 e 23 de agosto de 2026.</p>');
+
+  if(has(q,'como calcul','calculad','metodolog','confia','modelo','de onde vem','margem de erro','certeza','como funciona','como e feit','como chegou'))
+    return RS('Como a previsão é calculada',
+      `<p>A conta parte do patamar atual da operação — hoje a marca investe cerca de <em>${BRL(MOD.g0)}</em> por mês e isso gera cerca de <em>${BRL(MOD.r0)}</em> em vendas — e projeta o que acontece quando esse valor sobe.</p>
+       <p>A base são <em>${MOD.meses} meses</em> de campanhas reais, e nesses meses a relação entre quanto se investe e quanto se vende é muito forte — é isso que dá segurança à estimativa.</p>
+       <p>O cálculo também considera que cada real novo rende um pouco menos que o anterior — porque é preciso buscar pessoas cada vez mais distantes do público principal. Por isso são mostrados três cenários: a decisão deve olhar a faixa toda, não um número só.</p>
+       <p>Acima de R$ 15 mil por mês a previsão vai além do que a conta já praticou. Por isso a recomendação de subir em degraus e conferir o resultado a cada patamar.</p>`,
+      mini([['Meses analisados',MOD.meses],['Pedido médio',BRL2(MOD.aov)],['Investimento atual',BRLk(MOD.g0)],['Vendas atuais',BRLk(MOD.r0)]]));
+
+  if(has(q,'quanto investir','quanto devo','se eu investir','investindo','simul','projec','previs','quanto vou faturar','quanto vou vender','quanto gera','quanto fatura','10k','20k','30k')){
+    const m=q.match(/(\d{1,3})\s*(mil|k)\b/)||q.match(/(\d{4,6})/);
+    let g=m?(m[2]?+m[1]*1000:+m[1]):10000;
+    g=Math.min(40000,Math.max(1000,g));
+    const c=cenarios(g);
+    return RS(`Investindo ${BRL(g)} por mês`,
+      `<p>Pelo comportamento desta conta nos últimos 25 meses, ${BRL(g)} por mês em anúncios devem gerar cerca de <em>${BRL(c.base.receita)}</em> em vendas por mês — o equivalente a <em>${X(c.base.roas)}</em> de retorno e aproximadamente <em>${NB(c.base.pedidos)} pedidos</em> mensais.</p>
+       <p>Ao longo de um ano, isso representa perto de <em>${BRLk(c.base.receita*12)}</em> em vendas.</p>`,
+      tabela(['Cenário','Vendas/mês','Retorno','Pedidos/mês','Em 12 meses'],
+        [{c:['Cauteloso',BRL(c.cons.receita),X(c.cons.roas),NB(c.cons.pedidos),BRLk(c.cons.receita*12)],_bar:c.cons.receita},
+         {c:['Provável',BRL(c.base.receita),X(c.base.roas),NB(c.base.pedidos),BRLk(c.base.receita*12)],cls:[,'pos'],_bar:c.base.receita},
+         {c:['Animador',BRL(c.otim.receita),X(c.otim.roas),NB(c.otim.pedidos),BRLk(c.otim.receita*12)],_bar:c.otim.receita}])+
+      `<p style="margin-top:12px">Recomendação de ritmo: chegar a esse valor aos poucos, aumentando de 20% a 30% por vez, com três a quatro semanas entre um aumento e outro.</p>`,
+      'Estimativa baseada em 23 meses de campanha real');
+  }
+
+  if((has(q,'porcento','por cento','percentual','porcentagem','quanto do faturamento','peso do anuncio',
+     'quanto custa o anuncio','quanto o anuncio custa','sobre a venda','sobre o faturamento',
+     'vale a pena','caro','barato','5,71','8,70'))
+   &&!has(q,'estado','regia','brasil','nordeste','expandir','sao paulo','rio de janeiro','minas')){
+    const pct=TOTAL.gasto/TOTAL.receita*100;
+    return RS('O anúncio custa 5,71% do que a loja fatura',
+      `<p>Nos últimos 13 meses a loja faturou <em>R$ 772 mil</em> e foram investidos <em>R$ 44 mil</em> em anúncios. Isso dá <em>5,71% do faturamento</em>.</p>
+       <p>Em outras palavras: <em>de cada R$ 100 que a loja vende, R$ 5,71 vão para anúncio</em> e R$ 94,29 ficam para produto, operação, impostos e lucro. Para comparação, o frete custa 2% do faturamento, ou R$ 13,58 por pedido.</p>
+       <p>Na mesma régua de aluguel, comissão de vendedor ou taxa de maquininha, é um custo enxuto — com uma diferença importante: <em>ele só cresce quando a venda cresce</em>, e traz cliente novo todo mês.</p>`,
+      mini([['Faturamento','R$ 772 mil'],['Anúncio','R$ 44 mil'],['Peso','5,71%'],['Frete','2,02%'],['Fica com a marca','94,29%']]),
+      'Sistema da loja + Meta Ads · 13 meses (jul/2025 a jul/2026)');
+  }
+
+  if(has(q,'confia','confiavel','validad','bate','batem','conferi','sistema da loja','analytics','ga4',
+      'atribuido','de verdade','clientes novos','recorrente','recompra','fidel','caixa')){
+    return RS('Os números batem com o caixa da loja',
+      `<p>Três sistemas independentes foram cruzados. O <em>valor médio do pedido</em> segundo a plataforma de anúncios é R$ 684; segundo o sistema da loja, <em>R$ 672</em> — 1,8% de diferença. Isso significa que as projeções deste relatório se apoiam em dado confirmado, não em estimativa.</p>
+       <p>Sobre o tamanho da mídia: a loja faturou <em>R$ 772 mil</em> em 13 meses e os anúncios são creditados por <em>R$ 523 mil</em>, ou 68%. O Google Analytics chega perto por outro caminho: <em>53% das visitas ao site vêm de anúncio</em>.</p>
+       <p>E de onde vem o crescimento: foram <em>648 clientes novos</em> contra 161 recorrentes — 8 em cada 10 compradores não conheciam a loja antes. É exatamente o trabalho que a mídia paga faz.</p>
+       <p>Quem volta, volta forte: no relatório de vendas do site, <em>16,4% das clientes compraram mais de uma vez em três meses e geraram 34,6% do faturamento</em>. Cada cliente conquistada vale mais do que a primeira compra sugere.</p>
+       <p>Sobre o retorno: pelo que a plataforma consegue provar, 10,92×. Olhando todo o faturamento contra todo o investimento, 17,51×. <em>O número real está entre os dois</em>.</p>`,
+      mini([['Ticket · anúncio','R$ 684'],['Ticket · loja','R$ 672'],['Visitas de anúncio','53%'],['Clientes novos','80,1%'],['Recompra em 3 meses','16,4%']]),
+      'Meta Ads + sistema da loja + Google Analytics');
+  }
+
+  if(has(q,'aloca','como dividir','onde investir','distribu','verba nova','loja fisica','fisico',
+      'migrar','divisao','recomend','o que fazer','proximo passo','movimento','sugest','como crescer',
+      'como vender mais','alavancar','plano'))
+    return RS('O plano: quatro fatias de verba e três cuidados',
+      `<p><em>45% no Stories</em>, para mulheres de 45 a 64 anos — porque é o que traz volume de pedidos e alcança gente nova.</p>
+       <p><em>30% no Feed</em>, para o mesmo público — porque rende 13,87× contra 10,70× do Stories, com custo por pedido de R$ 47 contra R$ 65. Melhora o resultado sem exigir verba nova, só realocação.</p>
+       <p><em>15% para quem já conhece a marca</em> — porque converter alguém que já demonstrou interesse custa bem menos do que conquistar do zero.</p>
+       <p><em>10% para testar</em>, com foco na faixa de 55 a 64 anos — porque ela rende 11,75× recebendo só 18% do investimento.</p>
+       <p>E três cuidados que não são sobre dinheiro: <em>renovar de três a quatro anúncios por mês</em> (senão a verba extra só vira repetição), <em>adiar a expansão para outros estados</em> (fora de São Paulo e Rio, 26% da verba gerou só 10% do faturamento) e <em>preparar a entrega</em> antes de acelerar (com R$ 30 mil por mês são 12 pedidos por dia contra 1,5 hoje).</p>
+       <p>Regra de ritmo: subir em degraus de 20% a 30% por vez, com três a quatro semanas entre um e outro, porque as campanhas precisam desse tempo para reaprender.</p>`,
+      mini([['Stories','45%'],['Feed','30%'],['Quem já conhece','15%'],['Testar','10%']]));
+
+  if(has(q,'regia','regiao','estado','estados','sao paulo','rio de janeiro','minas','nordeste','sul',
+      'geografic','onde aparece no brasil','expandir','interior','capital','brasil','parana','curitiba',
+      'brasilia','distrito federal','santa catarina','bahia','ceara','goias','pernambuco','espirito santo',
+      'rio grande','onde vende','onde a marca vende','onde estao os clientes','de onde vem as vendas')){
+    const R=D.regioes,tot=R.reduce((a,b)=>a+b.gasto,0);
+    const fo=D.uf.filter(u=>!['SP','RJ'].includes(u.uf));
+    const sv=a=>a.reduce((x,y)=>x+y.verba,0),sr=a=>a.reduce((x,y)=>x+y.receita,0);
+    return RS('Onde a marca aparece — e onde ela vende',
+      `<p>A verba é muito concentrada: <em>São Paulo leva 67,7%</em> e o Rio, 17,9% — juntos, 85,6%. Dezesseis estados receberam menos de R$ 40 cada em 25 meses.</p>
+       <p>A pergunta importante é se essa concentração faz sentido. O relatório de vendas do site responde: <em>sim</em>. No período com dados, São Paulo recebeu 58% da verba e gerou <em>75% do faturamento</em> — devolve mais do que consome. Fora do eixo, <em>${sv(fo).toFixed(1)}% da verba gerou apenas ${sr(fo).toFixed(1)}% das vendas</em>.</p>
+       <p>O caso do Paraná é o mais ilustrativo: era o estado com melhor sinal de interesse pelo clique, e no período com venda registrada <em>não gerou nenhum pedido</em>. Clique barato não vira venda automaticamente.</p>
+       <p>Por isso a recomendação é <em>adiar a expansão regional e aprofundar o eixo</em>: o dinheiro rende mais onde já rende. A leitura se apoia em 259 pedidos reais com endereço de entrega, dos quais 186 são de São Paulo — base sólida para a conclusão sobre o eixo. A expansão volta à mesa quando São Paulo der sinal de saturação, o que hoje não acontece.</p>`,
+      tabela(['Estado','Fatia da verba','Fatia das vendas','Pedidos'],
+        D.uf.map(u=>({c:[u.nome,u.verba.toLocaleString('pt-BR')+'%',u.receita.toLocaleString('pt-BR')+'%',NB(u.pedidos)],
+          cls:[,,u.receita>=u.verba?'pos':''],_bar:u.receita}))),
+      'Meta Ads + relatório de vendas do site · ago a nov/2024');
+  }
+
+  if(has(q,'formato','posicionamento','stories','feed','video','foto','onde rende','onde aparece')||
+     (has(q,'rende mais','rendem mais','rende melhor')&&!has(q,'publico','idade','faixa','quem compra','cliente'))){
+    const todos=[...new Set((q.match(/stories|feed|video|foto/g)||[]).map(x=>x==='video'?'stories':x==='foto'?'feed':x))];
+    const m=(todos.length===1&&!q.includes(' ou '))?[null,todos[0]]:null;
+    if(m){const nome={stories:'Stories',feed:'Feed'}[m[1]];
+      const r=D.formato.find(x=>x.formato===nome);
+      return RS(nome,
+        `<p><em>${BRL2(r.gasto)}</em> investidos nesta frente geraram <em>${BRL2(r.receita)}</em> em vendas — retorno de <em>${X(r.receita/r.gasto)}</em> em ${NB(r.compras)} pedidos, com custo de ${BRL2(r.gasto/r.compras)} por pedido e pedido médio de ${BRL2(r.receita/r.compras)}.</p>`,
+        mini([['Investido',BRLk(r.gasto)],['Vendas',BRLk(r.receita)],['Retorno',X(r.receita/r.gasto)],['Pedidos',NB(r.compras)],['Custo/pedido',BRL2(r.gasto/r.compras)]]));}
+    return RS('Onde os anúncios rendem mais',
+      `<p>Os anúncios aparecem em dois lugares. O <em>Stories</em> (tela cheia, onde vão os vídeos) leva 75% da verba, traz o maior volume de pedidos e rende 10,70×. O <em>Feed</em> (no meio das publicações, onde vão as fotos) leva só 25% e rende <em>13,87×</em>, com custo por pedido de R$ 47 contra R$ 65 do Stories.</p>
+       <p>Ou seja: <em>o caminho que mais rende é o que menos recebe verba hoje</em>. Equilibrar essa divisão é a oportunidade mais direta da conta.</p>`,
+      tabela(['Frente','Investido','Pedidos','Vendas','Retorno'],
+        [...D.formato].sort((a,b)=>b.receita-a.receita).map(r=>({
+          c:[r.formato,BRL2(r.gasto),NB(r.compras),BRL2(r.receita),X(r.receita/r.gasto)],
+          cls:[,,,,'pos'],_bar:r.receita}))));
+  }
+
+  if(has(q,'idade','faixa','publico','quem compra','cliente','audiencia','45-54','35-44','55-64','25-34','18-24','65+')){
+    const m=q.match(/(18-24|25-34|35-44|45-54|55-64|65\+)/);
+    if(m){const r=D.idade.find(x=>x.idade===m[1]);
+      return RS(`Público de ${r.idade} anos`,
+        `<p><em>${BRL2(r.gasto)}</em> investidos neste público geraram <em>${BRL2(r.receita)}</em> em vendas — retorno de <em>${X(r.receita/r.gasto)}</em>, ${NB(r.compras)} pedidos e pedido médio de ${BRL2(r.receita/r.compras)}.</p>`,
+        mini([['Investido',BRLk(r.gasto)],['Vendas',BRLk(r.receita)],['Retorno',X(r.receita/r.gasto)],['Pedidos',NB(r.compras)],['Pedido médio',BRL2(r.receita/r.compras)]]));}
+    return RS('Quem compra da Lili&rsquo;s Brand',
+      `<p>O coração do negócio está entre <em>45 e 64 anos</em>: retorno de dois dígitos, pedido de valor alto e volume constante. A faixa de 35 a 44 traz bastante volume com retorno saudável. As faixas mais jovens seguem em teste, com verba pequena.</p>`,
+      tabela(['Idade','Investido','Pedidos','Vendas','Retorno'],
+        [...D.idade].sort((a,b)=>b.receita-a.receita).map(r=>({
+          c:[r.idade+' anos',BRL2(r.gasto),NB(r.compras),BRL2(r.receita),X(r.receita/r.gasto)],
+          cls:[,,,,r.receita/r.gasto>=10?'pos':''],_bar:r.receita}))));
+  }
+
+  if(has(q,'combina','cruzamento','escalar primeiro','melhor combina'))
+    return RS('As combinações que mais vendem',
+      `<p>Cruzando onde o anúncio aparece com quem o recebe, as melhores combinações juntam <em>mulheres de 45 a 64 anos</em> com anúncios que mostram bem a peça. É esse o terreno a priorizar na hora de investir mais.</p>`,
+      tabela(['Frente','Idade','Investido','Vendas','Retorno'],
+        [...D.formato_idade].sort((a,b)=>b.receita-a.receita).slice(0,10).map(r=>({
+          c:[r.formato,r.idade+' anos',BRL2(r.gasto),BRL2(r.receita),X(r.receita/r.gasto)],
+          cls:[,,,,'pos'],_bar:r.receita}))));
+
+  if(has(q,'criativo','anuncio','peca','conteudo','renovar','foto nova','video novo'))
+    return RS('Sobre os anúncios em si',
+      `<p>A taxa de cliques média é de <em>${PC(TOTAL.ctr)}</em> — cerca de 3 de cada 100 pessoas que veem o anúncio clicam para conhecer a loja. É um número alto, sinal de que as peças estão agradando.</p>
+       <p>As fotos de produto no Feed são as que mais rendem por real investido, e os vídeos no Stories são os que mais trazem volume. Juntando as duas leituras: <em>nesta marca, mostrar bem a peça vende mais do que falar sobre a marca</em>.</p>
+       <p>Conforme a verba crescer, vale manter um ritmo de <em>três a quatro anúncios novos por mês</em>, variando modelo, peça e cenário — vídeos para o Stories e fotos bem produzidas para o Feed.</p>`,
+      mini([['Taxa de cliques',PC(TOTAL.ctr)],['Custo por visita',BRL2(TOTAL.cpc)],['Mais rentável','Feed'],['Ritmo sugerido','3 a 4 por mês']]));
+
+  const ANO=(q.match(/\b(2024|2025|2026)\b/)||[])[1];
+  let esc=D.mes,nome='jul/2024 a ago/2026';
+  if(ANO){esc=D.mes.filter(r=>r.periodo.startsWith(ANO));nome=ANO;}
+  const mm=Object.keys(MESN).find(k=>new RegExp('\\b'+k+'\\b').test(q));
+  if(mm&&ANO){const p=ANO+'-'+String(MESN[mm]).padStart(2,'0');
+    esc=D.mes.filter(r=>r.periodo===p);nome=lbl(p);}
+  if(!esc.length)return RS('Não tenho dados desse período','<p>Os dados cobrem de 24 de julho de 2024 a 23 de agosto de 2026.</p>');
+  const a=agg(esc);
+  const METR=[
+    {t:['roas','retorno'],lab:'Retorno',v:()=>X(a.roas)},
+    {t:['investimento','gasto','gastei','investi','verba','custo total','quanto custou'],lab:'Investido em anúncios',v:()=>BRL2(a.gasto)},
+    {t:['receita','faturamento','faturou','vendas','vendeu','vendi'],lab:'Vendas geradas',v:()=>BRL2(a.receita)},
+    {t:['compras','pedidos','quantas vendas'],lab:'Pedidos',v:()=>NB(a.compras)},
+    {t:['cpa','custo por compra','custo por venda','custo por pedido'],lab:'Custo por pedido',v:()=>BRL2(a.cpa)},
+    {t:['ticket','pedido medio','valor medio'],lab:'Pedido médio',v:()=>BRL2(a.aov)},
+    {t:['ctr','taxa de clique'],lab:'Taxa de cliques',v:()=>PC(a.ctr)},
+    {t:['cpc','custo por clique','custo por visita'],lab:'Custo por clique',v:()=>BRL2(a.cpc)},
+    {t:['clique'],lab:'Cliques',v:()=>NB(a.cliques)},
+    {t:['impress','alcance','pessoas','quantas pessoas'],lab:'Exibições',v:()=>NB(a.impressoes)}
+  ];
+  const hit=METR.find(x=>has(q,...x.t));
+  if(hit||has(q,'resumo','panorama','geral','como esta','como foi','desempenho','resultado','quanto'))
+    return RS(hit?`${hit.lab} — ${nome}`:`Resumo — ${nome}`,
+      hit?`<p><em>${hit.lab}</em> no período de <em>${nome}</em>: <em>${hit.v()}</em>.</p>`
+        :`<p>Resumo do período de <em>${nome}</em>${esc.length>1?`, com média de ${BRL(a.gasto/esc.length)} investidos por mês`:''}.</p>`,
+      mini([['Investido',BRLk(a.gasto)],['Vendas',BRLk(a.receita)],['Retorno',X(a.roas)],
+        ['Pedidos',NB(a.compras)],['Custo/pedido',BRL2(a.cpa)],['Pedido médio',BRL2(a.aov)]]),
+      'Período: '+nome);
+
+  return RS('Pode reformular a pergunta?',
+    '<p>Consigo responder sobre quanto foi investido, quanto vendeu, o retorno, quem compra mais, onde os anúncios rendem melhor, quanto a marca venderia investindo mais e como dividir a verba nova. Experimente uma destas:</p>',
+    '<div class="chips">'+SUG.map(s=>`<button class="chip" data-q="${s}">${s}</button>`).join('')+'</div>');
+}
+const SUG=['Quanto vou vender investindo 20 mil por mês?','Os números batem com o caixa?','Vale a pena vender em outros estados?','Quanto o anúncio custa sobre a venda?','Quem compra mais da marca?',
+  'Como dividir a verba nova?','Stories ou Feed rende mais?','O que fazer daqui pra frente?',
+  'Como foi 2026?','Como a previsão é calculada?','O que fazer com os anúncios?'];
+const ansEl=document.getElementById('ans');
+function render(p){
+  const r=responder(p);
+  ansEl.innerHTML=`<div class="qt">${p?'Pergunta · '+p.replace(/</g,'&lt;'):'Assistente'}</div>`+
+    `<h4>${r.title}</h4>${r.body}${r.extra}`+(r.src?`<div class="src">Fonte: ${r.src}</div>`:'');
+  ansEl.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{
+    document.getElementById('q').value=b.dataset.q;render(b.dataset.q);});
+}
+document.getElementById('chips').innerHTML=SUG.map(s=>`<button class="chip" data-q="${s}">${s}</button>`).join('');
+document.getElementById('chips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{
+  document.getElementById('q').value=b.dataset.q;render(b.dataset.q);});
+document.getElementById('send').onclick=()=>render(document.getElementById('q').value);
+document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')render(e.target.value);});
+render('');
+
+/* ---------- navegação ---------- */
+const deck=document.getElementById('deck'),slides=[...document.querySelectorAll('.slide')];
+document.getElementById('tot').textContent=String(slides.length).padStart(2,'0');
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),
+  {root:deck,threshold:.15});
+slides.forEach(s=>io.observe(s));
+function current(){let i=0,best=1e9;slides.forEach((s,k)=>{const d=Math.abs(s.getBoundingClientRect().top);
+  if(d<best){best=d;i=k;}});return i;}
+function go(i){i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView({behavior:'smooth'});}
+deck.addEventListener('scroll',()=>{const i=current();
+  document.getElementById('cur').textContent=String(i+1).padStart(2,'0');
+  document.getElementById('rail').style.width=(i/(slides.length-1)*100)+'%';},{passive:true});
+document.getElementById('next').onclick=()=>go(current()+1);
+document.getElementById('prev').onclick=()=>go(current()-1);
+addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  if(['ArrowDown','PageDown'].includes(e.key)){e.preventDefault();go(current()+1);}
+  if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(current()-1);}
+  if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);});
+document.getElementById('theme').onclick=()=>{const r=document.documentElement;
+  const dark=r.getAttribute('data-theme')==='dark'||
+    (!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);
+  r.setAttribute('data-theme',dark?'light':'dark');setTimeout(redrawAll,30);};
+</script>
+</body>
+</html>
