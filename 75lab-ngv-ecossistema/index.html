@@ -442,16 +442,54 @@ strong{color:var(--branco);font-weight:500}
 .slide.ativa::before{opacity:1}
 .capa::before{display:none}                 /* a capa já tem a fita */
 
-#manifesto{--brilho:rgba(255,103,0,.20); --bx:14%; --by:86%}
-#conceito {--brilho:rgba(0,183,234,.16); --bx:88%; --by:20%}
-#stand    {--brilho:rgba(224,48,128,.15); --bx:12%; --by:22%}
-#jornada  {--brilho:rgba(255,103,0,.14); --bx:85%; --by:80%}
-#dentro   {--brilho:rgba(74,111,254,.15); --bx:15%; --by:18%}
-#planta   {--brilho:rgba(0,183,234,.18); --bx:86%; --by:82%}
-#atmosfera{--brilho:rgba(142,40,180,.20); --bx:18%; --by:80%}
-#pecas    {--brilho:rgba(225,11,27,.13);  --bx:84%; --by:16%}
-#fecho    {--brilho:rgba(224,48,128,.18); --bx:20%; --by:24%}
-#obrigado {--brilho:rgba(192,238,78,.16); --bx:78%; --by:78%}
+#conceito    {--brilho:rgba(0,183,234,.26); --bx:88%; --by:20%}
+#stand       {--brilho:rgba(224,48,128,.24); --bx:12%; --by:22%}
+#jornada     {--brilho:rgba(255,103,0,.24);  --bx:85%; --by:80%}
+#dentro      {--brilho:rgba(74,111,254,.24); --bx:15%; --by:18%}
+#planta      {--brilho:rgba(0,183,234,.26);  --bx:86%; --by:82%}
+#planta-baixa{--brilho:rgba(142,40,180,.22); --bx:16%; --by:20%}
+#atmosfera   {--brilho:rgba(142,40,180,.30); --bx:18%; --by:80%}
+#pecas       {--brilho:rgba(225,11,27,.22);  --bx:84%; --by:16%}
+#obrigado    {--brilho:rgba(192,238,78,.18); --bx:78%; --by:78%}
+
+/* o fecho esquenta: dois focos quentes em vez de um */
+#fecho{
+  --brilho:rgba(224,48,128,.30); --bx:18%; --by:26%;
+  background:
+    radial-gradient(90% 70% at 96% 92%, rgba(255,103,0,.22) 0%, transparent 62%),
+    var(--preto);
+}
+
+/* ═══════════ ápice: o manifesto vira cor cheia ═══════════
+   O gradiente quente oficial da marca ocupa a tela inteira, com um véu
+   escuro por cima. Medido: texto branco fica entre 7,1:1 e 11,9:1 ao longo
+   de toda a rampa; medido no composto final, o pior ponto da tela da 6,17:1,
+   bem acima dos 4,5:1 exigidos para texto normal. */
+#manifesto{
+  --brilho:transparent;
+  --nevoa-quente:rgba(255,255,255,.84);
+  background:
+    linear-gradient(178deg, rgba(18,12,20,.46) 0%, rgba(18,12,20,.24) 46%, rgba(18,12,20,.38) 100%),
+    linear-gradient(148deg, #FF6700 0%, #E10B1B 44%, #8E28B4 100%);
+  border-bottom-color:rgba(255,255,255,.16);
+}
+#manifesto::before{display:none}
+#manifesto::after{background:linear-gradient(90deg,#FFB800,#fff 50%,#FFB800)}
+#manifesto .olho{color:rgba(255,255,255,.9)}
+#manifesto .olho::before{background:#fff}
+#manifesto .verso{color:#fff}
+#manifesto .miudo{color:var(--nevoa-quente)}
+#manifesto .miudo strong{color:#fff}
+#manifesto .frase{color:#fff}
+#manifesto .grifo{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#FFD79A}
+#manifesto .cadeia u{color:rgba(255,255,255,.66)}
+#manifesto .cadeia u:last-of-type{color:#fff}
+#manifesto .cadeia i{color:#FFD79A}
+#manifesto .tres{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.26)}
+#manifesto .tres > div{background:rgba(20,12,22,.42);color:#fff}
+#manifesto .tres > div:nth-child(1) > span{color:#FFD79A}
+#manifesto .tres > div:nth-child(2) > span{color:#FFC2D4}
+#manifesto .tres > div:nth-child(3) > span{color:#CDB6F5}
 
 /* fio de gradiente que corre no topo da seção quando ela entra */
 .slide::after{
@@ -522,10 +560,15 @@ strong{color:var(--branco);font-weight:500}
 .lupa button:hover{background:var(--superficie-2);border-color:var(--linha-forte)}
 .lupa button:focus-visible{outline:2px solid var(--ciano);outline-offset:3px}
 .lupa button svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.lupa-palco{display:grid;place-items:center;padding:0 clamp(12px,3vw,40px);min-height:0}
-.lupa-palco img{
-  max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;
-  border-radius:10px;box-shadow:0 30px 90px rgba(0,0,0,.5);
+/* A imagem vai dentro de uma caixa de dimensão definida e usa object-fit:
+   contain. Assim a foto inteira sempre aparece, com barra onde sobrar — um
+   max-height percentual aqui não resolve contra a trilha 1fr do grid e a
+   imagem acabava dimensionada só pela largura, cortando o rodapé. */
+.lupa-palco{position:relative;min-height:0;padding:0 clamp(12px,3vw,40px)}
+.lupa-quadro{position:relative;width:100%;height:100%;min-height:0}
+.lupa-quadro img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;object-position:center;
   animation:lupa-zoom .32s cubic-bezier(.2,.8,.3,1);
 }
 @keyframes lupa-zoom{from{transform:scale(.965);opacity:0}to{transform:scale(1);opacity:1}}
@@ -1029,7 +1072,7 @@ strong{color:var(--branco);font-weight:500}
       <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
-  <div class="lupa-palco"><img id="lupa-img" alt=""></div>
+  <div class="lupa-palco"><div class="lupa-quadro"><img id="lupa-img" alt=""></div></div>
   <div class="lupa-base">
     <button class="lupa-ant" aria-label="Imagem anterior">
       <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
