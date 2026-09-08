@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Giuseppe — Explorações visuais A / B / C (Rodada A)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   GIUSEPPE — Laboratório de exploração visual, Rodada A
+   Tokens: Dossiê v5 / Briefing v1.0 §4.3 e §4.4
+   Este arquivo é material de trabalho, não uma tela do produto.
+   ============================================================ */
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);background:#0B1319;color:var(--ink)}
+button{font:inherit;color:inherit}
+
+:root{
+  /* Cor — Dossiê v5 §4.3 */
+  --ink:#14212B; --paper:#F7F4ED; --white:#FFFFFF;
+  --coral:#E8755F; --coral-action:#B74230;
+  --muted:#53656D; --saffron:#E3AD45; --sage:#9EB9A5; --mist:#DCE6E8;
+  /* Espaçamento — 4/8/12/16/24/32/48/64/96 */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+  /* Raio */
+  --r-ctl:12px; --r-surf:16px;
+  /* Movimento — §4.5 */
+  --t-micro:160ms; --t-panel:260ms; --t-concept:520ms;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  /* Tipografia */
+  --serif:'Fraunces','Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  --sans:'DM Sans',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+}
+@media (prefers-reduced-motion:reduce){
+  :root{--t-micro:0ms; --t-panel:0ms; --t-concept:0ms}
+  *{animation:none!important;transition:none!important}
+}
+
+/* ---------- chrome do laboratório (não é o produto) ---------- */
+.lab{position:sticky;top:0;z-index:50;background:#0B1319;color:#E9EEF0;
+  border-bottom:1px solid #22323C;padding:var(--s4) var(--s5)}
+.lab-in{max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;gap:var(--s5);align-items:center}
+.lab-id{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8FA3AC}
+.lab-id b{color:#E9EEF0;font-weight:500;letter-spacing:.04em;text-transform:none;font-size:14px;display:block}
+.seg{display:flex;gap:2px;background:#16232C;border:1px solid #26363F;border-radius:var(--r-ctl);padding:3px}
+.seg button{background:none;border:0;padding:7px 14px;border-radius:9px;cursor:pointer;
+  color:#9FB2BA;font-size:13px;font-weight:500;transition:background var(--t-micro) var(--ease),color var(--t-micro) var(--ease)}
+.seg button[aria-pressed="true"]{background:#E9EEF0;color:#0B1319}
+.seg button:focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
+.lab-note{font-size:12.5px;color:#8FA3AC;max-width:46ch;line-height:1.5}
+.lab-note code{color:#C6D4DA}
+
+/* ---------- moldura ---------- */
+.stage{padding:var(--s6) var(--s5) var(--s9);background:#0B1319}
+.frame{max-width:1280px;margin:0 auto var(--s7);background:var(--canvas);
+  border-radius:var(--r-surf);overflow:hidden;transition:max-width var(--t-panel) var(--ease)}
+[data-vp="mobile"] .frame{max-width:390px}
+.frame-cap{max-width:1280px;margin:0 auto var(--s3);color:#8FA3AC;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase}
+[data-vp="mobile"] .frame-cap{max-width:390px}
+
+/* ============================================================
+   PRIMITIVAS DO PRODUTO (compartilhadas pelas três explorações)
+   ============================================================ */
+.screen{padding:var(--pad-y) var(--pad-x);color:var(--ink)}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  margin:0 0 var(--s3);font-weight:500}
+h1.h1{font-family:var(--serif);font-weight:600;font-size:var(--h1);line-height:1.06;
+  letter-spacing:-.015em;margin:0 0 var(--s5)}
+h2.h2{font-family:var(--serif);font-weight:600;font-size:var(--h2);line-height:1.15;margin:0 0 var(--s4)}
+.lede{font-size:var(--lede);line-height:1.6;color:var(--ink);margin:0 0 var(--s6);max-width:62ch}
+.body{font-size:16px;line-height:1.6;color:var(--muted);margin:0 0 var(--s4);max-width:66ch}
+
+.btn{display:inline-flex;align-items:center;gap:var(--s2);border-radius:var(--r-ctl);
+  padding:14px 22px;font-size:15px;font-weight:500;border:1px solid transparent;cursor:pointer;
+  transition:background var(--t-micro) var(--ease),border-color var(--t-micro) var(--ease),transform var(--t-micro) var(--ease)}
+.btn:focus-visible{outline:2px solid var(--coral-action);outline-offset:2px}
+.btn-primary{background:var(--ink);color:var(--white)}
+.btn-primary:hover{background:#1E3240}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-ghost:hover{background:rgba(20,33,43,.05)}
+.btn-quiet{background:transparent;color:var(--coral-action);border-color:transparent;
+  padding:10px 0;margin-right:var(--s5);text-decoration:underline;text-underline-offset:4px}
+.btn[disabled]{background:transparent;color:var(--muted);border-color:var(--mist);cursor:not-allowed}
+.btn-row{display:flex;flex-wrap:wrap;gap:var(--s4);align-items:center;margin-bottom:var(--s3)}
+.btn-why{font-size:13.5px;line-height:1.5;color:var(--muted);margin:0 0 var(--s6);max-width:44ch}
+
+/* Assinatura 1 — Trecho vivo */
+.passage{font-family:var(--serif);font-size:var(--study);line-height:1.55;margin:0 0 var(--s5);
+  color:var(--ink);max-width:34em}
+.mark{font:inherit;display:inline;background:none;border:0;padding:0 2px;cursor:pointer;color:inherit;
+  border-bottom:2px solid var(--coral);border-radius:2px;
+  transition:background var(--t-micro) var(--ease)}
+.mark:hover{background:rgba(232,117,95,.22)}
+.mark[aria-pressed="true"],.mark.is-on{background:var(--coral);border-bottom-color:var(--coral-action)}
+.mark:focus-visible{outline:2px solid var(--coral-action);outline-offset:2px}
+
+/* Assinatura 2 — Margem do tutor */
+.annotated{display:grid;grid-template-columns:1fr var(--note-col);gap:var(--s6);align-items:start}
+.notes{display:flex;flex-direction:column;gap:var(--s4);margin:0;padding:0}
+.note{border-left:2px solid var(--mist);padding:var(--s1) 0 var(--s1) var(--s4);
+  transition:border-color var(--t-micro) var(--ease)}
+.note[data-active="true"]{border-left-color:var(--coral)}
+.note-k{display:block;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:var(--s1);font-weight:500}
+.note p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink)}
+.src{font-size:12.5px;color:var(--muted);margin:0 0 var(--s4);line-height:1.5}
+
+/* Rótulos e estados */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;
+  padding:5px 10px;border-radius:999px;border:1px solid var(--mist);color:var(--ink);background:var(--white)}
+.chip-demo{background:var(--saffron);border-color:var(--saffron)}
+.chip-demo::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.rule{border:0;border-top:1px solid var(--mist);margin:var(--s7) 0}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s6)}
+.three h3{font-family:var(--serif);font-size:19px;font-weight:600;margin:0 0 var(--s2)}
+.three p{margin:0;font-size:14.5px;line-height:1.6;color:var(--muted)}
+.three .n{font-size:12px;letter-spacing:.14em;color:var(--coral-action);margin-bottom:var(--s2);font-weight:500}
+
+/* Barra de demonstração (AppShell) */
+.demobar{display:flex;flex-wrap:wrap;gap:var(--s4);align-items:center;justify-content:space-between;
+  padding:var(--s3) var(--pad-x);background:var(--ink);color:var(--paper);font-size:13px}
+.demobar .btn-quiet{color:var(--paper);padding:6px 0;margin:0}
+
+/* Missão */
+.mhead{display:flex;flex-wrap:wrap;gap:var(--s4);justify-content:space-between;align-items:flex-start;margin-bottom:var(--s5)}
+.outcome{font-size:15px;line-height:1.55;color:var(--ink);margin:0;max-width:52ch}
+.outcome b{font-weight:500}
+.steps{display:flex;flex-wrap:wrap;gap:var(--s2);margin:0 0 var(--s6);padding:0;list-style:none}
+.steps li{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:var(--s2)}
+.steps li::after{content:"›";color:var(--mist)}
+.steps li:last-child::after{content:""}
+.steps li[aria-current="step"]{color:var(--ink);font-weight:500}
+.steps li[data-done="true"]{color:var(--muted)}
+.steps li[data-done="true"] span::before{content:"✓ ";color:var(--sage)}
+
+/* Tentativa */
+.attempt{max-width:var(--practice-w)}
+.label{display:block;font-size:14.5px;font-weight:500;margin-bottom:var(--s2)}
+.hint-line{font-size:13.5px;color:var(--muted);margin:0 0 var(--s3);line-height:1.5}
+textarea{width:100%;min-height:132px;padding:var(--s4);border-radius:var(--r-ctl);
+  border:1px solid var(--muted);background:var(--white);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.6;resize:vertical}
+textarea:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+textarea[aria-invalid="true"]{border-color:var(--coral-action);border-width:2px}
+.err{display:flex;gap:var(--s2);align-items:flex-start;margin:var(--s3) 0 0;
+  font-size:14px;line-height:1.5;color:var(--ink)}
+.err::before{content:"!";flex:0 0 auto;width:20px;height:20px;border-radius:50%;
+  background:var(--saffron);color:var(--ink);font-size:13px;font-weight:700;
+  display:grid;place-items:center;margin-top:1px}
+.support{font-size:13px;color:var(--muted);margin:var(--s4) 0 0;line-height:1.5;
+  border-top:1px solid var(--mist);padding-top:var(--s3)}
+.panel{margin-top:var(--s5);padding:var(--s5);border-radius:var(--r-surf);
+  background:var(--white);border:1px solid var(--mist)}
+.panel h4{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 var(--s3)}
+.panel p{margin:0 0 var(--s3);font-size:14.5px;line-height:1.6;color:var(--ink)}
+.panel p:last-child{margin-bottom:0}
+.panel .src{margin-bottom:var(--s3)}
+[hidden]{display:none!important}
+.reveal{animation:rise var(--t-concept) var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ============================================================
+   A — CADERNO EDITORIAL
+   Paper dominante, composição aberta, notas na margem.
+   ============================================================ */
+[data-exp="a"]{--canvas:var(--paper);--surface:var(--white);
+  --pad-x:var(--s8);--pad-y:var(--s8);--h1:68px;--h2:32px;--lede:19px;--study:20px;
+  --note-col:250px;--practice-w:720px}
+[data-exp="a"] .open{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:var(--s9);align-items:start}
+[data-exp="a"] .demo-card{background:var(--white);border:1px solid var(--mist);
+  border-radius:var(--r-surf);padding:var(--s6)}
+[data-exp="a"] .practice-surface{background:var(--white);border:1px solid var(--mist);
+  border-radius:var(--r-surf);padding:var(--s7)}
+[data-exp="a"] .h1 em{font-style:normal;color:var(--coral-action)}
+
+/* ============================================================
+   B — MESA DE TRABALHO
+   Mist como bancada, superfícies brancas, densidade funcional,
+   separação explícita entre contexto e ação.
+   ============================================================ */
+[data-exp="b"]{--canvas:var(--mist);--surface:var(--white);
+  --pad-x:var(--s6);--pad-y:var(--s6);--h1:56px;--h2:28px;--lede:18px;--study:19px;
+  --note-col:230px;--practice-w:680px}
+[data-exp="b"] .open{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:var(--s5);align-items:stretch}
+[data-exp="b"] .open>*{background:var(--white);border-radius:var(--r-surf);padding:var(--s6)}
+[data-exp="b"] .demo-card{border:0;padding:0}
+[data-exp="b"] .three{gap:var(--s4)}
+[data-exp="b"] .three>div{background:var(--white);border-radius:var(--r-surf);padding:var(--s5)}
+[data-exp="b"] .rule{margin:var(--s6) 0}
+[data-exp="b"] .practice-surface{background:var(--white);border-radius:var(--r-surf);padding:var(--s6)}
+[data-exp="b"] .annotated{gap:var(--s5)}
+[data-exp="b"] .note{border-left:0;border-top:2px solid var(--mist);padding:var(--s3) 0 0}
+[data-exp="b"] .note[data-active="true"]{border-top-color:transparent;background-image:linear-gradient(to right,var(--coral) 0 48px,var(--mist) 48px);background-size:100% 2px;background-repeat:no-repeat;background-position:top left}
+[data-exp="b"] .screen{padding-bottom:var(--s7)}
+[data-exp="b"] .h1 em{font-style:normal}
+
+/* ============================================================
+   C — ATELIER TIPOGRÁFICO
+   Abertura dominada por tipografia; exercício quase todo neutro.
+   ============================================================ */
+[data-exp="c"]{--canvas:var(--paper);--surface:var(--paper);
+  --pad-x:var(--s8);--pad-y:var(--s9);--h1:72px;--h2:34px;--lede:19px;--study:20px;
+  --note-col:270px;--practice-w:660px}
+[data-exp="c"] .open{display:block;max-width:1000px}
+[data-exp="c"] .h1{font-size:var(--h1);line-height:1.02;letter-spacing:-.025em;max-width:15ch;margin-bottom:var(--s6)}
+[data-exp="c"] .h1 em{font-style:italic;font-weight:400;color:var(--coral-action)}
+[data-exp="c"] .lede{font-size:21px;max-width:44ch;margin-bottom:var(--s7)}
+[data-exp="c"] .demo-card{margin-top:var(--s8);border-top:1px solid var(--ink);padding-top:var(--s6);
+  max-width:760px}
+[data-exp="c"] .demo-card .passage{font-size:30px;line-height:1.3;max-width:20em}
+[data-exp="c"] .practice-surface{background:var(--paper);padding:0;border:0}
+[data-exp="c"] .screen.practice{padding-top:var(--s7)}
+[data-exp="c"] textarea{background:var(--white);border-color:var(--mist)}
+[data-exp="c"] .panel{background:var(--paper);border-color:var(--ink)}
+[data-exp="c"] .three{gap:var(--s7)}
+[data-exp="c"] .note{border-left-width:1px}
+
+/* ============================================================
+   CELULAR — reordenação real, não compressão
+   ============================================================ */
+[data-vp="mobile"]{--pad-x:22px!important;--pad-y:var(--s6)!important}
+[data-vp="mobile"] .frame{--h1:40px;--h2:26px;--lede:17px;--study:19px;--note-col:0px;--practice-w:100%}
+[data-vp="mobile"] .h1{font-size:40px!important;max-width:none}
+[data-vp="mobile"] .lede{font-size:17px!important;margin-bottom:var(--s5)}
+[data-vp="mobile"] .open{display:flex!important;flex-direction:column;gap:var(--s6)!important;max-width:none}
+[data-vp="mobile"] .annotated{grid-template-columns:1fr!important;gap:var(--s5)!important}
+[data-vp="mobile"] .three{grid-template-columns:1fr!important;gap:var(--s5)!important}
+[data-vp="mobile"] .btn-row{flex-direction:column;align-items:stretch}
+[data-vp="mobile"] .btn{justify-content:center}
+[data-vp="mobile"] .btn-quiet{margin-right:0}
+[data-vp="mobile"] .demo-card .passage{font-size:21px!important}
+[data-vp="mobile"] .screen{padding-bottom:var(--s7)}
+[data-vp="mobile"] .practice-surface{padding:var(--s5)!important}
+[data-vp="mobile"] .note{border-left:2px solid var(--mist)!important;border-top:0!important;
+  padding:var(--s1) 0 var(--s1) var(--s4)!important}
+[data-vp="mobile"] .note[data-active="true"]{border-left-color:var(--coral)!important}
+
+@media (max-width:900px){
+  .open{display:flex!important;flex-direction:column;gap:var(--s6)!important}
+  .annotated{grid-template-columns:1fr!important}
+  .three{grid-template-columns:1fr!important}
+  .stage{padding:var(--s5) var(--s4) var(--s8)}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ CHROME DO LABORATÓRIO ══════════ -->
+<header class="lab">
+  <div class="lab-in">
+    <div class="lab-id">Giuseppe · Rodada A<b>Explorações visuais para comparação</b></div>
+
+    <div class="seg" role="group" aria-label="Exploração visual">
+      <button type="button" data-exp-btn="a" aria-pressed="true">A · Caderno editorial</button>
+      <button type="button" data-exp-btn="b" aria-pressed="false">B · Mesa de trabalho</button>
+      <button type="button" data-exp-btn="c" aria-pressed="false">C · Atelier tipográfico</button>
+    </div>
+
+    <div class="seg" role="group" aria-label="Formato de tela">
+      <button type="button" data-vp-btn="desktop" aria-pressed="true">Desktop</button>
+      <button type="button" data-vp-btn="mobile" aria-pressed="false">Celular</button>
+    </div>
+
+    <p class="lab-note">Mesma marca, mesmos tokens, mesmo conteúdo (G-A01). Muda a composição,
+      a densidade e o peso da tipografia. <span id="fontstate"></span></p>
+  </div>
+</header>
+
+<main class="stage" id="stage" data-exp="a" data-vp="desktop">
+
+  <!-- ══════════ T01 · ABERTURA ══════════ -->
+  <p class="frame-cap">T01 · Abertura</p>
+  <section class="frame">
+    <div class="screen open-screen">
+      <div class="open">
+
+        <div class="open-promise">
+          <p class="eyebrow">Giuseppe · With Giuseppe</p>
+          <h1 class="h1">Aprenda a língua do <em>seu trabalho</em>.</h1>
+          <p class="lede">Transforme uma situação real em prática de inglês para entender melhor
+            e responder com mais autonomia.</p>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary">Testar um exemplo</button>
+            <button type="button" class="btn" disabled aria-describedby="why-ctx">Trazer meu contexto</button>
+          </div>
+          <p class="btn-why" id="why-ctx">Disponível na versão com conta. Nesta demonstração o
+            conteúdo é fictício e não recebemos arquivos.</p>
+        </div>
+
+        <div class="demo-card">
+          <p class="src">Exemplo fictício · caso G-A01 · escrito para esta demonstração</p>
+
+          <p class="passage">“Can you send the revised proposal
+            <span class="mark is-on" role="button" tabindex="0" aria-pressed="true" data-note="o1">by Friday</span>?”</p>
+
+          <div class="notes" style="margin-bottom:var(--s5)">
+            <div class="note" id="o1" data-active="true">
+              <span class="note-k">O pedido</span>
+              <p>O cliente pede sexta-feira.</p>
+            </div>
+            <div class="note" id="o2">
+              <span class="note-k">O que você sabe</span>
+              <p>A entrega só pode ocorrer na segunda-feira. Não há justificativa informada
+                nem autorização de envio parcial.</p>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-ghost" id="revelar">Ver como isso vira uma missão</button>
+
+          <div class="panel" id="missao-out" hidden>
+            <p class="eyebrow" style="margin-bottom:var(--s2)">Sua missão</p>
+            <p style="font-family:var(--serif);font-size:20px;line-height:1.4;margin:0">
+              Propor uma data viável e verificar se atende ao cliente.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="rule">
+
+      <div class="three">
+        <div>
+          <p class="n">01</p>
+          <h3>Entender o contexto</h3>
+          <p>O que foi pedido, quais fatos limitam a resposta e o que ainda não está claro.</p>
+        </div>
+        <div>
+          <p class="n">02</p>
+          <h3>Tentar uma resposta</h3>
+          <p>Você escreve. Dica e exemplo ficam disponíveis, e o apoio usado fica registrado.</p>
+        </div>
+        <div>
+          <p class="n">03</p>
+          <h3>Praticar de novo</h3>
+          <p>A mesma estratégia volta em outra situação, mais tarde. Sem nota de fluência.</p>
+        </div>
+      </div>
+
+      <hr class="rule">
+      <p class="body" style="margin-bottom:0">Você decide o que colar. Nesta demonstração local as
+        tentativas ficam na memória da sessão e a aplicação não as envia a nenhum servidor.
+        <a href="#" style="color:var(--coral-action)">Perguntas frequentes e ajuda</a>.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ T08 · MISSÃO E TENTATIVA ══════════ -->
+  <p class="frame-cap">T08 · Missão e tentativa</p>
+  <section class="frame">
+    <div class="demobar">
+      <span class="chip chip-demo">Demonstração com conteúdo fictício</span>
+      <button type="button" class="btn-quiet" id="reiniciar">Reiniciar demonstração</button>
+    </div>
+
+    <div class="screen practice">
+      <div class="practice-surface">
+
+        <div class="mhead">
+          <div>
+            <p class="eyebrow" style="margin-bottom:var(--s2)">Negociar prazo · G-A01</p>
+            <h2 class="h2">Proposta revisada</h2>
+            <p class="outcome"><b>Resultado pretendido:</b> propor uma data viável e verificar
+              se atende ao cliente.</p>
+          </div>
+          <button type="button" class="btn-quiet" style="margin:0">Ver contexto</button>
+        </div>
+
+        <ul class="steps">
+          <li data-done="true"><span>Contexto</span></li>
+          <li aria-current="step"><span>Exemplo comentado</span></li>
+          <li><span>Tentativa</span></li>
+          <li><span>Feedback</span></li>
+          <li><span>Revisão</span></li>
+        </ul>
+
+        <div class="annotated">
+          <div>
+            <p class="src">Exemplo comentado · conteúdo didático fictício, escrito para este caso.
+              Não é uma mensagem real de cliente.</p>
+            <p class="passage">We can send the revised proposal
+              <span class="mark" role="button" tabindex="0" aria-pressed="false" data-note="p1">on Monday</span>.
+              <span class="mark" role="button" tabindex="0" aria-pressed="false" data-note="p2">Would that work for you?</span></p>
+          </div>
+          <div class="notes">
+            <div class="note" id="p1">
+              <span class="note-k">Data viável</span>
+              <p>É a única data que os fatos sustentam. Sexta-feira não é possível.</p>
+            </div>
+            <div class="note" id="p2">
+              <span class="note-k">Consulta a concordância</span>
+              <p>Propor não é decidir pelo cliente. A pergunta devolve a escolha a ele.</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="rule" style="margin:var(--s6) 0">
+
+        <div class="attempt">
+          <label class="label" for="tentativa">Escreva sua resposta ao cliente</label>
+          <p class="hint-line">Em inglês. Uma ou duas frases bastam.</p>
+          <textarea id="tentativa" aria-describedby="tent-erro"></textarea>
+          <p class="err" id="tent-erro" hidden></p>
+
+          <div class="btn-row" style="margin-top:var(--s4)">
+            <button type="button" class="btn btn-primary" id="enviar">Enviar tentativa</button>
+            <button type="button" class="btn-quiet" id="dica">Ver uma dica</button>
+            <button type="button" class="btn-quiet" id="usar-exemplo">Usar tentativa de exemplo</button>
+          </div>
+
+          <div class="panel" id="dica-out" hidden>
+            <h4>Dica 1</h4>
+            <p>Qual data é possível, considerando os fatos do contexto?</p>
+          </div>
+
+          <div class="panel" id="fb-out" hidden></div>
+
+          <p class="support" id="apoio">Apoio usado nesta tentativa: nenhum.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  var stage = document.getElementById('stage');
+
+  /* ---- troca de exploração e de formato ---- */
+  function seg(attr, apply){
+    var btns = document.querySelectorAll('['+attr+']');
+    btns.forEach(function(b){
+      b.addEventListener('click', function(){
+        btns.forEach(function(o){ o.setAttribute('aria-pressed', String(o===b)); });
+        apply(b.getAttribute(attr));
+      });
+    });
+  }
+  seg('data-exp-btn', function(v){ stage.setAttribute('data-exp', v); });
+  seg('data-vp-btn',  function(v){ stage.setAttribute('data-vp', v); });
+
+  /* ---- Trecho vivo <-> Margem do tutor (sem depender de hover) ---- */
+  document.querySelectorAll('.mark').forEach(function(m){
+    m.addEventListener('keydown', function(e){
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); m.click(); }
+    });
+    m.addEventListener('click', function(){
+      var group = m.closest('.annotated, .demo-card');
+      var on = m.getAttribute('aria-pressed') !== 'true';
+      group.querySelectorAll('.mark').forEach(function(o){
+        o.setAttribute('aria-pressed','false'); o.classList.remove('is-on');
+      });
+      group.querySelectorAll('.note').forEach(function(n){ n.setAttribute('data-active','false'); });
+      if(on){
+        m.setAttribute('aria-pressed','true'); m.classList.add('is-on');
+        var n = document.getElementById(m.getAttribute('data-note'));
+        if(n) n.setAttribute('data-active','true');
+      }
+    });
+  });
+
+  /* ---- transformação conceitual, por ação do usuário ---- */
+  var rev = document.getElementById('revelar'), out = document.getElementById('missao-out');
+  rev.addEventListener('click', function(){
+    out.hidden = false; out.classList.add('reveal');
+    rev.hidden = true;
+  });
+
+  /* ---- registro de apoio ---- */
+  var apoios = { dica:false, exemplo:false };
+  var apoioEl = document.getElementById('apoio');
+  function pintaApoio(){
+    var us = [];
+    if(apoios.dica) us.push('dica');
+    if(apoios.exemplo) us.push('tentativa de exemplo');
+    apoioEl.textContent = us.length
+      ? 'Apoio usado nesta tentativa: ' + us.join(' e ') + '. Uma tentativa com apoio não comprova desempenho independente.'
+      : 'Apoio usado nesta tentativa: nenhum.';
+  }
+
+  var ta   = document.getElementById('tentativa');
+  var erro = document.getElementById('tent-erro');
+  var fb   = document.getElementById('fb-out');
+  var dicaOut = document.getElementById('dica-out');
+
+  document.getElementById('dica').addEventListener('click', function(){
+    dicaOut.hidden = false; apoios.dica = true; pintaApoio();
+  });
+  document.getElementById('usar-exemplo').addEventListener('click', function(){
+    ta.value = 'We can send the revised proposal on Monday.';
+    apoios.exemplo = true; pintaApoio(); ta.focus();
+  });
+
+  function norm(s){
+    return s.toLowerCase().replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' ').trim();
+  }
+
+  document.getElementById('enviar').addEventListener('click', function(){
+    var v = ta.value.trim();
+
+    /* estado: campo vazio — mensagem específica, não só cor */
+    if(!v){
+      ta.setAttribute('aria-invalid','true');
+      erro.hidden = false;
+      erro.textContent = 'Escreva uma resposta antes de enviar. Se quiser começar de algum lugar, use “Ver uma dica”.';
+      ta.focus();
+      return;
+    }
+    ta.removeAttribute('aria-invalid');
+    erro.hidden = true;
+    fb.hidden = false;
+    fb.classList.add('reveal');
+
+    var n = norm(v);
+
+    /* tentativa preparada -> retorno preparado (rotulado como exemplo) */
+    if(n === 'we can send the revised proposal on monday'){
+      fb.innerHTML =
+        '<p class="src">Exemplo de feedback · retorno preparado para esta tentativa. '+
+        'Não é avaliação de IA.</p>'+
+        '<h4>O que já comunica</h4>'+
+        '<p>Você informou uma data viável. Segunda-feira é a única data que os fatos sustentam.</p>'+
+        '<h4>Um ajuste</h4>'+
+        '<p>Falta verificar se ela atende ao cliente. Uma pergunta curta devolve a escolha a ele — '+
+        'por exemplo, <em>Would that work for you?</em></p>'+
+        '<p><button type="button" class="btn btn-primary" style="margin-top:var(--s2)">Revisar minha resposta</button></p>';
+      return;
+    }
+
+    /* qualquer outro texto livre — sem nota, conforme §8.3 */
+    fb.innerHTML =
+      '<p class="src">Sua tentativa foi preservada.</p>'+
+      '<h4>Esta demonstração não avalia automaticamente respostas livres</h4>'+
+      '<p>Compare sua tentativa com o exemplo comentado acima.</p>'+
+      '<p>Critérios deste caso: a data precisa ser possível (segunda-feira) e a resposta '+
+      'precisa verificar se ela atende ao cliente.</p>'+
+      '<p><button type="button" class="btn btn-ghost" style="margin-top:var(--s2)">Revisar minha resposta</button></p>';
+  });
+
+  /* ---- reiniciar demonstração ---- */
+  document.getElementById('reiniciar').addEventListener('click', function(){
+    ta.value=''; ta.removeAttribute('aria-invalid');
+    erro.hidden=true; fb.hidden=true; dicaOut.hidden=true;
+    out.hidden=true; rev.hidden=false;
+    apoios={dica:false,exemplo:false}; pintaApoio();
+    document.querySelectorAll('.mark').forEach(function(o){
+      o.setAttribute('aria-pressed','false'); o.classList.remove('is-on');
+    });
+    document.querySelectorAll('.note').forEach(function(n){ n.setAttribute('data-active','false'); });
+    var o1=document.getElementById('o1');
+    var m1=document.querySelector('.mark[data-note="o1"]');
+    if(o1) o1.setAttribute('data-active','true');
+    if(m1){ m1.setAttribute('aria-pressed','true'); m1.classList.add('is-on'); }
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  /* ---- verificação honesta de fonte: informa substituição, não bloqueia ---- */
+  var el = document.getElementById('fontstate');
+  function check(){
+    if(!document.fonts || !document.fonts.check){ el.textContent=''; return; }
+    var f = document.fonts.check('600 40px Fraunces');
+    var d = document.fonts.check('400 16px "DM Sans"');
+    el.textContent = (f && d)
+      ? 'Fraunces + DM Sans carregadas.'
+      : 'Atenção: ' + (!f?'Fraunces':'') + (!f&&!d?' e ':'') + (!d?'DM Sans':'') +
+        ' não carregou; em uso a pilha de substituição.';
+    el.style.color = (f && d) ? '#8FA3AC' : '#E3AD45';
+  }
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(check); } else { check(); }
+})();
+</script>
+</body>
+</html>
