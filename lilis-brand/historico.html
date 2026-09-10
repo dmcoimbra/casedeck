@@ -269,6 +269,21 @@ input[type=range]{width:100%;accent-color:var(--s1);height:26px}
 .coverline b{color:var(--ink);font-weight:400}
 .sigblock{font-family:var(--disp);font-size:clamp(28px,7vw,58px);line-height:1;letter-spacing:-.02em}
 @media (max-width:700px){.bar .mid{display:none} h2{max-width:none}}
+
+/* ---------- seletor de relatórios ---------- */
+.docs{position:relative;flex:none;display:inline-flex}
+.docs select{appearance:none;-webkit-appearance:none;-moz-appearance:none;background:transparent;
+  border:1px solid var(--rule);color:var(--ink2);font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.1em;text-transform:uppercase;padding:7px 24px 7px 10px;border-radius:2px;
+  cursor:pointer;max-width:clamp(126px,26vw,210px);text-overflow:ellipsis;line-height:1.1}
+.docs select:hover,.docs select:focus{border-color:var(--s1);color:var(--s1);outline:none}
+.docs::after{content:"";position:absolute;right:9px;top:50%;width:0;height:0;pointer-events:none;
+  margin-top:-1px;border-left:3.5px solid transparent;border-right:3.5px solid transparent;
+  border-top:4px solid var(--ink3)}
+.docs select option{font-family:var(--sans);font-size:13px;text-transform:none;letter-spacing:0;
+  background:var(--raise);color:var(--ink)}
+@media (max-width:560px){.bar .sig{display:none}}
+@media (max-width:400px){.count{display:none}}
 </style>
 </head>
 <body>
@@ -278,6 +293,12 @@ input[type=range]{width:100%;accent-color:var(--s1);height:26px}
   <span class="mark">Lili&rsquo;s Brand</span>
   <span class="mid">Relatório de base &middot; jul/2024 a ago/2026 &middot; arquivado</span>
   <span class="right">
+    <span class="docs">
+      <select id="docs" aria-label="Escolher relatório">
+        <option value="index.html">Rodada 1 &middot; set/2026</option>
+        <option value="historico.html" selected>Relatório de base &middot; jul/24 a ago/26</option>
+      </select>
+    </span>
     <span class="sig">DCoimbra</span>
     <button class="tbtn" id="theme" title="Alternar tema claro e escuro" aria-label="Alternar tema">◐</button>
     <span class="count"><span id="cur">01</span>/<span id="tot">14</span></span>
@@ -1419,6 +1440,11 @@ document.getElementById('theme').onclick=()=>{const r=document.documentElement;
   const dark=r.getAttribute('data-theme')==='dark'||
     (!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);
   r.setAttribute('data-theme',dark?'light':'dark');setTimeout(redrawAll,30);};
+
+/* ---------- seletor de relatórios ---------- */
+(function(){const d=document.getElementById('docs');if(!d)return;
+  d.addEventListener('change',e=>{const v=e.target.value;
+    if(v&&v!==location.pathname.split('/').pop())location.href=v;});})();
 </script>
 </body>
 </html>
