@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>75 LAB · Comercial — Agosto 2026 (pocket)</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+:root{
+  --lime:#C0EE4E;
+  --bg:#F2F1E9; --card:#FFFDF7; --sunk:#E7E5DA; --plan:#D9D6C6;
+  --fg:#141412; --fg2:#5C5A51; --fg3:#8A877B;
+  --line:#DCD9CA; --line2:#C4C0AE;
+  --ok:#3E9A4C; --warn:#C77A0A; --bad:#C0392B;
+  --acc:#6E8F13; --fill:#C0EE4E; --onfill:#14140F;
+  --ink:#0B0B09; --inkfg:#F2F1E9; --inkfg2:#918E82; --inkcard:#17170F;
+  --d-daniel:#4A4841; --d-vanessa:#AFD637; --d-claudio:#06C6AE; --d-julio:#9B7FE0; --d-cris:#EEA53F; --d-caique:#BFBBAC;
+  --r:16px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0A0A08; --card:#151512; --sunk:#1D1C18; --plan:#34332C;
+    --fg:#F2F1E9; --fg2:#A5A296; --fg3:#75726A;
+    --line:#2A2925; --line2:#3B3934;
+    --ok:#6BCB77; --warn:#F0B347; --bad:#E8705F;
+    --acc:#C0EE4E; --ink:#151512; --inkcard:#1F1E19;
+    --d-daniel:#CFCCBD; --d-caique:#6E6B60;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  font-size:16px; line-height:1.45; -webkit-font-smoothing:antialiased; font-variant-numeric:tabular-nums;
+}
+.col{max-width:480px; margin:0 auto; padding:0 18px}
+.mn{font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+b,strong{font-weight:700}
+
+/* ---------- capa ---------- */
+.top{background:var(--ink); color:var(--inkfg); padding:24px 0 26px}
+.brand{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:22px}
+.logo{font-size:19px; font-weight:800; letter-spacing:-.05em}
+.logo span{color:var(--lime)}
+.per{font-family:ui-monospace,Menlo,monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+     background:var(--lime); color:#0B0B09; padding:5px 10px; border-radius:100px; font-weight:700}
+.top h1{margin:0; font-size:27px; line-height:1.15; letter-spacing:-.035em; font-weight:800}
+.top h1 em{font-style:normal; color:var(--lime)}
+.top .sub{margin:12px 0 0; font-size:13px; color:var(--inkfg2)}
+.top .sub a{color:var(--inkfg); text-decoration:none; border-bottom:1px solid rgba(242,241,233,.35)}
+
+/* ---------- blocos ---------- */
+section{padding:26px 0; border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+h2{margin:0 0 4px; font-size:19px; letter-spacing:-.028em; font-weight:800}
+.eye{font-family:ui-monospace,Menlo,monospace; font-size:9.5px; letter-spacing:.18em; text-transform:uppercase;
+     color:var(--fg3); display:flex; align-items:center; gap:8px; margin:0 0 10px}
+.eye::before{content:""; width:16px; height:2px; background:var(--fill); flex:none}
+.hint{margin:6px 0 0; font-size:11.5px; color:var(--fg3); line-height:1.5}
+
+/* ---------- placar ---------- */
+.ring{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px}
+.rc{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:14px 12px; text-align:center}
+.rc svg{display:block; margin:0 auto 6px}
+.rc .lb{font-family:ui-monospace,Menlo,monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg3)}
+.rc .fr{font-size:12px; color:var(--fg2); margin-top:3px; font-weight:600}
+.s-ok{color:var(--ok)} .s-warn{color:var(--warn)} .s-bad{color:var(--bad)}
+.f-ok{fill:var(--ok)} .f-warn{fill:var(--warn)} .f-bad{fill:var(--bad)}
+.k-ok{stroke:var(--ok)} .k-warn{stroke:var(--warn)} .k-bad{stroke:var(--bad)}
+.b-ok{background:var(--ok)} .b-warn{background:var(--warn)} .b-bad{background:var(--bad)}
+
+/* ---------- funil ---------- */
+.fun{display:flex; align-items:flex-end; gap:5px; margin-top:14px}
+.fs{flex:1; text-align:center}
+.fs .bar{border-radius:6px 6px 0 0; background:rgba(var(--frgb),.82); height:0; transition:height .8s cubic-bezier(.2,.8,.2,1)}
+.in .fs .bar{height:var(--h)}
+.fs.win .bar{background:var(--fill)}
+.fs .n{font-size:21px; font-weight:800; letter-spacing:-.04em; margin-bottom:5px}
+.fs .t{font-family:ui-monospace,Menlo,monospace; font-size:8.5px; letter-spacing:.06em; text-transform:uppercase;
+       color:var(--fg3); margin-top:7px; line-height:1.3}
+.fa{align-self:center; font-family:ui-monospace,Menlo,monospace; font-size:9.5px; font-weight:700; color:var(--acc);
+    padding-bottom:26px; flex:none}
+:root{--frgb:20,20,18}
+@media (prefers-color-scheme: dark){ :root{--frgb:242,241,233} }
+
+/* ---------- performance ---------- */
+.pf{display:flex; flex-direction:column; gap:9px; margin-top:16px}
+.pr{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:13px 14px}
+.pr.top1{border-color:var(--fill); border-width:2px}
+.ph{display:flex; align-items:center; gap:9px; margin-bottom:11px}
+.ph .pos{font-family:ui-monospace,Menlo,monospace; font-size:10px; font-weight:700; color:var(--fg3); width:14px; flex:none}
+.ph .dot{width:9px; height:9px; border-radius:3px; flex:none}
+.ph .nm{font-weight:800; font-size:15px; letter-spacing:-.02em; flex:1; min-width:0}
+.ph .big{font-size:22px; font-weight:800; letter-spacing:-.04em; line-height:1}
+.ph .big small{display:block; font-family:ui-monospace,Menlo,monospace; font-size:8px; letter-spacing:.1em;
+               color:var(--fg3); font-weight:600; margin-top:2px; text-align:right}
+.pl{display:grid; grid-template-columns:62px 1fr 46px; align-items:center; gap:9px; margin-top:6px}
+.pl .k{font-family:ui-monospace,Menlo,monospace; font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:var(--fg3)}
+.pl .tk{height:11px; border-radius:6px; background:var(--sunk); overflow:hidden}
+.pl .tk i{display:block; height:100%; width:0; border-radius:6px; transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.in .pl .tk i{width:var(--w)}
+.pl .v{font-family:ui-monospace,Menlo,monospace; font-size:11px; font-weight:700; text-align:right; color:var(--fg2)}
+.scale{display:flex; justify-content:space-between; font-family:ui-monospace,Menlo,monospace; font-size:8.5px;
+       letter-spacing:.08em; color:var(--fg3); margin-top:10px; padding-top:8px; border-top:1px solid var(--line)}
+
+/* ---------- setembro ---------- */
+.gz{display:flex; align-items:center; gap:16px; background:var(--card); border:1px solid var(--line);
+    border-radius:var(--r); padding:16px; margin-top:16px}
+.gz .txt{flex:1; min-width:0}
+.gz .big{font-size:26px; font-weight:800; letter-spacing:-.04em; line-height:1.05}
+.gz .l{font-size:12px; color:var(--fg2); margin-top:6px; line-height:1.45}
+.mrow{display:grid; grid-template-columns:64px 1fr 40px; align-items:center; gap:9px; padding:7px 0}
+.mrow + .mrow{border-top:1px solid var(--line)}
+.mrow .n{font-size:12.5px; font-weight:700}
+.mrow .tk{height:9px; border-radius:5px; background:var(--sunk); overflow:hidden}
+.mrow .tk i{display:block; height:100%; width:0; border-radius:5px; transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.in .mrow .tk i{width:var(--w)}
+.mrow .v{font-family:ui-monospace,Menlo,monospace; font-size:10.5px; font-weight:700; text-align:right; color:var(--fg2)}
+
+/* ---------- metas ---------- */
+.tot{font-size:32px; font-weight:800; letter-spacing:-.045em; margin-top:14px; line-height:1}
+.chips{display:flex; gap:7px; flex-wrap:wrap; margin-top:12px}
+.cp{font-family:ui-monospace,Menlo,monospace; font-size:10px; letter-spacing:.05em; padding:6px 10px;
+    border-radius:100px; background:var(--sunk); color:var(--fg2); font-weight:700}
+.cp b{color:var(--fg)}
+.mbars{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; align-items:end; height:104px; margin-top:18px}
+.mb{position:relative; background:var(--plan); border-radius:5px 5px 0 0; height:0; transition:height .85s cubic-bezier(.2,.8,.2,1)}
+.in .mb{height:var(--h)}
+.mb i{position:absolute; left:0; right:0; bottom:0; height:var(--f); background:var(--fill); border-radius:5px 5px 0 0}
+.mlab{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; border-top:1px solid var(--line2); padding-top:7px}
+.mlab div{text-align:center; font-family:ui-monospace,Menlo,monospace; font-size:9px; letter-spacing:.08em; color:var(--fg2)}
+.mlab small{display:block; font-size:8.5px; letter-spacing:0; color:var(--fg3); margin-top:2px}
+.leg{display:flex; gap:14px; flex-wrap:wrap; margin-top:11px; font-size:10.5px; color:var(--fg3)}
+.leg span{display:flex; align-items:center; gap:5px}
+.leg i{width:9px; height:9px; border-radius:2px}
+
+.shr{display:flex; height:38px; border-radius:9px; overflow:hidden; margin-top:20px}
+.shr i{height:100%; width:0; display:flex; align-items:center; justify-content:center; font-size:11px;
+       font-weight:800; color:#14140F; transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.in .shr i{width:var(--w)}
+.shr i.inv{color:var(--bg)}
+.sl{display:grid; grid-template-columns:11px 1fr auto 44px; align-items:center; gap:9px; padding:8px 0; font-size:12.5px}
+.sl + .sl{border-top:1px solid var(--line)}
+.sl .d{width:9px; height:9px; border-radius:2px}
+.sl .nm{font-weight:700}
+.sl .vl{font-family:ui-monospace,Menlo,monospace; font-size:11.5px; font-weight:700; color:var(--fg2); white-space:nowrap}
+.sl .pc{font-family:ui-monospace,Menlo,monospace; font-size:11px; color:var(--fg3); text-align:right}
+
+/* ---------- ações ---------- */
+.act{display:flex; align-items:flex-start; gap:10px; padding:11px 0; font-size:13.5px}
+.act + .act{border-top:1px solid var(--line)}
+.act i{width:8px; height:8px; border-radius:2px; flex:none; margin-top:6px}
+.act b{font-weight:800; letter-spacing:-.01em}
+.act span{color:var(--fg2)}
+
+footer{background:var(--ink); color:var(--inkfg2); padding:22px 0; font-size:11px; line-height:1.5}
+footer b{color:var(--inkfg)}
+footer a{color:var(--lime); text-decoration:none}
+
+.rv{opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1; transform:none}
+@media (prefers-reduced-motion: reduce){
+  .rv{opacity:1; transform:none; transition:none}
+  .fs .bar,.pl .tk i,.mrow .tk i,.mb,.sp .sk i{transition:none}
+}
+@media print{
+  :root{--bg:#fff; --card:#fff; --sunk:#f0efe8; --fg:#000; --fg2:#333; --fg3:#666; --line:#ccc}
+  .rv{opacity:1; transform:none}
+  section{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="col">
+    <div class="brand">
+      <div class="logo">75<span>LAB</span></div>
+      <div class="per">Comercial · ago 2026</div>
+    </div>
+    <h1>Abriu <em>21</em> portas.<br>Fechou <em>12</em>.</h1>
+    <p class="sub">Meta da área: 48 novos clientes e 48 projetos. <a href="../75lab-relatorio-comercial-ago26-7d4a/">Ver relatório completo →</a></p>
+  </div>
+</header>
+
+<main>
+  <section class="rv" id="placar">
+    <div class="col">
+      <p class="eye">Placar da área</p>
+      <h2>Agosto em quatro números</h2>
+      <div class="ring" id="rings"></div>
+    </div>
+  </section>
+
+  <section class="rv" id="funil">
+    <div class="col">
+      <p class="eye">Funil</p>
+      <h2>De 52 reuniões a 12 projetos</h2>
+      <div class="fun" id="fun"></div>
+    </div>
+  </section>
+
+  <section class="rv" id="perf">
+    <div class="col">
+      <p class="eye">Performance individual</p>
+      <h2>Quem abriu e quem converteu</h2>
+      <p class="hint">As duas barras estão na mesma escala — meta de 12 novos clientes. A distância entre elas é o que não virou projeto.</p>
+      <div class="pf" id="pf"></div>
+    </div>
+  </section>
+
+  <section class="rv" id="setembro">
+    <div class="col">
+      <p class="eye">Mês em curso · 10/09</p>
+      <h2>Setembro atrás do ritmo</h2>
+      <div class="gz">
+        <div id="gauge"></div>
+        <div class="txt">
+          <div class="big" id="g-big"></div>
+          <div class="l" id="g-txt"></div>
+        </div>
+      </div>
+      <div style="margin-top:14px" id="mrows"></div>
+    </div>
+  </section>
+
+  <section class="rv" id="metas">
+    <div class="col">
+      <p class="eye">Setembro a dezembro</p>
+      <h2>O que falta faturar</h2>
+      <div class="tot" id="m-tot"></div>
+      <div class="chips" id="m-chips"></div>
+      <div class="mbars" id="mbars"></div>
+      <div class="mlab" id="mlab"></div>
+      <div class="leg">
+        <span><i style="background:var(--fill)"></i> Realizado</span>
+        <span><i style="background:var(--plan)"></i> Meta</span>
+      </div>
+      <div style="margin-top:20px" id="sparks"></div>
+      <p class="hint">Quem responde por cada parte dos R$ 2,12 milhões.</p>
+    </div>
+  </section>
+
+  <section class="rv" id="acoes">
+    <div class="col">
+      <p class="eye">Setembro</p>
+      <h2>Uma prioridade por pessoa</h2>
+      <div style="margin-top:12px" id="acts"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="col">
+    <b>75 LAB · Relatório comercial de agosto de 2026</b><br>
+    Versão pocket · dados consolidados em 10/09/2026 · uso interno.<br>
+    <a href="../75lab-relatorio-comercial-ago26-7d4a/">Relatório completo, com base de dados e método →</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* Mesmos dados do relatório completo, reduzidos ao que a versão pocket mostra. */
+var D = {
+  reunioes: { area:52, comNovos:36 },
+  meta: 12,
+  equipe: [
+    { id:"vanessa", nome:"Vanessa",   novos:8, proj:7 },
+    { id:"julio",   nome:"Julio",     novos:4, proj:3 },
+    { id:"claudio", nome:"Claudio",   novos:8, proj:1 },
+    { id:"cris",    nome:"Cristiano", novos:1, proj:1 }
+  ],
+  fin: [
+    { id:"daniel",  nome:"Daniel",  set:260000, out:130000, nov:575000, dez:525000, real:0    },
+    { id:"vanessa", nome:"Vanessa", set:46000,  out:55500,  nov:150500, dez:48000,  real:0.79 },
+    { id:"cris",    nome:"Cris",    set:17000,  out:12000,  nov:12000,  dez:42000,  real:0    },
+    { id:"julio",   nome:"Julio",   set:15000,  out:25000,  nov:50000,  dez:22500,  real:0    },
+    { id:"claudio", nome:"Claudio", set:10000,  out:40000,  nov:40000,  dez:40000,  real:0    },
+    { id:"caique",  nome:"Caique",  set:0,      out:2000,   nov:2000,   dez:2000,   real:0    }
+  ],
+  realArea: 0.21, dia: 10, dias: 30,
+  acoes: [
+    { id:"vanessa", nome:"Vanessa",   txt:"repassar o método que converte" },
+    { id:"claudio", nome:"Claudio",   txt:"destravar as 7 contas paradas" },
+    { id:"julio",   nome:"Julio",     txt:"triplicar volume mantendo a taxa" },
+    { id:"cris",    nome:"Cristiano", txt:"3 novos clientes por semana" },
+    { id:"daniel",  nome:"Daniel",    txt:"abrir R$ 1,49 mi em pipeline" }
+  ]
+};
+
+var $ = function(s){ return document.querySelector(s); };
+function pct(f){ return Math.round(f*100) + "%"; }
+function brl(v){ return "R$ " + v.toLocaleString("pt-BR"); }
+function curto(v){
+  if(!v) return "—";
+  if(v >= 1000000) return "R$ " + (v/1e6).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2}) + " mi";
+  return "R$ " + (v/1000).toLocaleString("pt-BR",{maximumFractionDigits:1}) + " mil";
+}
+function banda(f){ return f >= 0.7 ? "ok" : f >= 0.4 ? "warn" : "bad"; }
+function cor(id){ return "var(--d-" + id + ")"; }
+/* cores neutras (grafite no tema claro, osso no escuro) pedem rótulo invertido */
+var NEUTRO = { daniel:1, caique:1 };
+
+var T = {
+  novos:    D.equipe.reduce(function(a,p){ return a+p.novos; }, 0),
+  proj:     D.equipe.reduce(function(a,p){ return a+p.proj;  }, 0),
+  metaArea: D.meta * D.equipe.length,
+  fin:      D.fin.reduce(function(a,p){ return a+p.set+p.out+p.nov+p.dez; }, 0),
+  set:      D.fin.reduce(function(a,p){ return a+p.set; }, 0)
+};
+
+/* ---------- placar: quatro anéis ---------- */
+(function(){
+  function anel(f, cls){
+    var r = 32, C = 2*Math.PI*r;
+    return '<svg width="84" height="84" viewBox="0 0 84 84" role="img" aria-label="'+pct(f)+'">'+
+      '<circle cx="42" cy="42" r="32" fill="none" stroke="var(--sunk)" stroke-width="8"/>'+
+      '<circle cx="42" cy="42" r="32" fill="none" class="k-'+cls+'" stroke-width="8" stroke-linecap="round" '+
+        'stroke-dasharray="'+(f*C).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 42 42)"/>'+
+      '<text x="42" y="49" text-anchor="middle" class="f-'+cls+'" '+
+        'style="font-size:21px; font-weight:800; letter-spacing:-.04em">'+pct(f)+'</text></svg>';
+  }
+  var k = [
+    { lb:"Novos clientes", f:T.novos/T.metaArea, fr:T.novos+" de "+T.metaArea },
+    { lb:"Projetos",       f:T.proj/T.metaArea,  fr:T.proj+" de "+T.metaArea },
+    { lb:"Conversão",      f:T.proj/T.novos,     fr:T.proj+" de "+T.novos },
+    { lb:"Setembro",       f:D.realArea,         fr:"de "+curto(T.set) }
+  ];
+  $("#rings").innerHTML = k.map(function(x){
+    var c = banda(x.f);
+    return '<div class="rc">'+anel(x.f,c)+'<div class="lb">'+x.lb+'</div><div class="fr">'+x.fr+'</div></div>';
+  }).join("");
+})();
+
+/* ---------- funil ---------- */
+(function(){
+  var et = [
+    { n:D.reunioes.area,     t:"reuniões" },
+    { n:D.reunioes.comNovos, t:"com<br>novos" },
+    { n:T.novos,             t:"clientes<br>novos" },
+    { n:T.proj,              t:"geraram<br>projeto", win:true }
+  ];
+  var out = "";
+  et.forEach(function(e,i){
+    if(i > 0) out += '<div class="fa">'+pct(et[i].n/et[i-1].n)+'</div>';
+    out += '<div class="fs'+(e.win?" win":"")+'">'+
+      '<div class="n'+(e.win?" s-ok":"")+'">'+e.n+'</div>'+
+      '<div class="bar" style="--h:'+Math.max(14, e.n/et[0].n*76).toFixed(0)+'px"></div>'+
+      '<div class="t">'+e.t+'</div></div>';
+  });
+  $("#fun").innerHTML = out;
+})();
+
+/* ---------- performance individual ---------- */
+(function(){
+  var ord = D.equipe.slice().sort(function(a,b){ return (b.proj-a.proj) || (b.novos-a.novos); });
+  $("#pf").innerHTML = ord.map(function(p,i){
+    var conv = p.proj/p.novos, bn = p.novos/D.meta, bp = p.proj/D.meta;
+    function linha(rot, w, cls, val){
+      return '<div class="pl"><div class="k">'+rot+'</div>'+
+        '<div class="tk"><i class="b-'+cls+'" style="--w:'+Math.min(100,w*100).toFixed(0)+'%"></i></div>'+
+        '<div class="v">'+val+'</div></div>';
+    }
+    return '<div class="pr'+(i===0?" top1":"")+'">'+
+      '<div class="ph"><span class="pos">'+(i+1)+'</span>'+
+        '<span class="dot" style="background:'+cor(p.id)+'"></span>'+
+        '<span class="nm">'+p.nome+'</span>'+
+        '<span class="big s-'+banda(conv)+'">'+pct(conv)+'<small>Conversão</small></span></div>'+
+      linha("Novos",    bn, banda(bn), p.novos+"/"+D.meta) +
+      linha("Projetos", bp, banda(bp), p.proj+"/"+D.meta) +
+      '</div>';
+  }).join("") +
+  '<div class="scale"><span>0</span><span>meta individual: 12 novos clientes</span></div>';
+})();
+
+/* ---------- setembro ---------- */
+(function(){
+  var r = 40, cx = 52, cy = 54, C = Math.PI*r, f = D.realArea, ritmo = D.dia/D.dias;
+  var ang = Math.PI*(1-ritmo);
+  var arco = "M "+(cx-r)+" "+cy+" A "+r+" "+r+" 0 0 1 "+(cx+r)+" "+cy;
+  $("#gauge").innerHTML = '<svg width="104" height="64" viewBox="0 0 104 64" role="img" aria-label="'+pct(f)+' da meta">'+
+    '<path d="'+arco+'" fill="none" stroke="var(--sunk)" stroke-width="11" stroke-linecap="round"/>'+
+    '<path d="'+arco+'" fill="none" class="k-'+banda(f)+'" stroke-width="11" stroke-linecap="round" '+
+      'stroke-dasharray="'+(f*C).toFixed(1)+' '+C.toFixed(1)+'"/>'+
+    '<line x1="'+(cx+(r-8)*Math.cos(ang)).toFixed(1)+'" y1="'+(cy-(r-8)*Math.sin(ang)).toFixed(1)+'" '+
+      'x2="'+(cx+(r+8)*Math.cos(ang)).toFixed(1)+'" y2="'+(cy-(r+8)*Math.sin(ang)).toFixed(1)+'" '+
+      'stroke="var(--fg)" stroke-width="2"/>'+
+    '<text x="'+cx+'" y="50" text-anchor="middle" class="f-'+banda(f)+'" '+
+      'style="font-size:23px; font-weight:800; letter-spacing:-.04em">'+pct(f)+'</text></svg>';
+
+  $("#g-big").innerHTML = '≈ ' + curto(Math.round(T.set*f)) + ' <span style="font-size:14px; color:var(--fg3); font-weight:600">de '+curto(T.set)+'</span>';
+  $("#g-txt").innerHTML = 'O traço marca o ritmo do calendário: <b>'+pct(ritmo)+'</b> do mês decorrido. '+
+    'Faltam <b>≈ '+curto(Math.round(T.set*(ritmo-f)))+'</b> só para empatar com a data.';
+
+  $("#mrows").innerHTML = D.fin.filter(function(p){ return p.set > 0; }).map(function(p){
+    return '<div class="mrow"><div class="n">'+p.nome+'</div>'+
+      '<div class="tk"><i class="b-'+banda(p.real)+'" style="--w:'+(p.real*100).toFixed(0)+'%"></i></div>'+
+      '<div class="v">'+pct(p.real)+'</div></div>';
+  }).join("");
+})();
+
+/* ---------- metas set–dez ---------- */
+(function(){
+  var meses = [["set","SET"],["out","OUT"],["nov","NOV"],["dez","DEZ"]];
+  var porMes = meses.map(function(m){ return D.fin.reduce(function(a,p){ return a+p[m[0]]; }, 0); });
+  var max = Math.max.apply(null, porMes), ALT = 104;
+
+  $("#m-tot").textContent = brl(T.fin);
+
+  var daniel = D.fin[0], tDaniel = daniel.set+daniel.out+daniel.nov+daniel.dez;
+  var fim = porMes[2]+porMes[3];
+  $("#m-chips").innerHTML =
+    '<span class="cp"><b>'+pct(tDaniel/T.fin)+'</b> em Daniel</span>'+
+    '<span class="cp"><b>'+pct(fim/T.fin)+'</b> em nov + dez</span>'+
+    '<span class="cp"><b>'+pct(T.set*D.realArea/T.fin)+'</b> realizado</span>';
+
+  $("#mbars").innerHTML = porMes.map(function(v,i){
+    var f = i === 0 ? D.realArea*100 : 0;
+    return '<div class="mb" style="--h:'+(v/max*ALT).toFixed(0)+'px" title="'+meses[i][1]+': '+brl(v)+'">'+
+      (f ? '<i style="--f:'+f.toFixed(0)+'%"></i>' : '')+'</div>';
+  }).join("");
+  $("#mlab").innerHTML = porMes.map(function(v,i){
+    return '<div>'+meses[i][1]+'<small>'+curto(v)+'</small></div>';
+  }).join("");
+
+  var part = D.fin.map(function(p){
+    p.tot = p.set+p.out+p.nov+p.dez; return p;
+  }).sort(function(a,b){ return b.tot - a.tot; });
+
+  $("#sparks").innerHTML =
+    '<div class="shr">' + part.map(function(p){
+      var f = p.tot/T.fin;
+      return '<i class="'+(NEUTRO[p.id] ? "inv" : "")+'" style="--w:'+(f*100).toFixed(2)+'%; background:'+cor(p.id)+'" title="'+p.nome+': '+brl(p.tot)+'">'+
+             (f > 0.09 ? Math.round(f*100)+'%' : '')+'</i>';
+    }).join("") + '</div>' +
+    part.map(function(p){
+      return '<div class="sl"><span class="d" style="background:'+cor(p.id)+'"></span>'+
+        '<span class="nm">'+p.nome+'</span>'+
+        '<span class="vl">'+curto(p.tot)+'</span>'+
+        '<span class="pc">'+(p.tot/T.fin*100).toLocaleString("pt-BR",{maximumFractionDigits:1})+'%</span></div>';
+    }).join("");
+})();
+
+/* ---------- ações ---------- */
+$("#acts").innerHTML = D.acoes.map(function(a){
+  return '<div class="act"><i style="background:'+cor(a.id)+'"></i>'+
+    '<div><b>'+a.nome+'</b> <span>— '+a.txt+'</span></div></div>';
+}).join("");
+
+/* ---------- revelação ---------- */
+(function(){
+  var secs = [].slice.call(document.querySelectorAll("section"));
+  if(!("IntersectionObserver" in window)){ secs.forEach(function(s){ s.classList.add("in"); }); return; }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin:"0px 0px -8% 0px", threshold:0.05 });
+  secs.forEach(function(s){ io.observe(s); });
+})();
+
+})();
+</script>
+</body>
+</html>
