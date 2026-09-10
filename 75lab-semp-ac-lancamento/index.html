@@ -344,6 +344,43 @@ h3{font-size:clamp(1rem,1.55vw,1.22rem);font-weight:700;letter-spacing:-.02em;li
   .says{grid-template-columns:1fr 1fr !important}
 }
 
+/* ---------- mapa de features ---------- */
+.fmap{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.4vw,18px);margin-top:clamp(16px,2.2vh,24px)}
+@media(max-width:900px){.fmap{grid-template-columns:1fr !important}}
+.fgroup .gh{display:flex;align-items:baseline;gap:9px;margin-bottom:10px}
+.fgroup .gn{font-size:.66rem;font-weight:850;letter-spacing:.18em;text-transform:uppercase}
+.fgroup .gc{font-size:.72rem;font-weight:800;color:var(--ink-mut)}
+.fgroup.pri .gn{color:var(--red)}
+.fgroup.sup .gn{color:var(--blue-deep)}
+.fgroup.out .gn{color:var(--ink-mut)}
+.fchips{display:flex;flex-wrap:wrap;gap:6px}
+.fchip{
+  font-size:clamp(.74rem,1.1vw,.87rem);font-weight:650;line-height:1.15;
+  padding:9px 14px;border-radius:8px;border:1px solid var(--line-2);background:rgba(255,255,255,.6);color:var(--ink-soft);
+}
+.fchip.pri{background:var(--red);border-color:var(--red);color:#fff;font-weight:800}
+.fchip.sup{background:rgba(63,123,182,.10);border-color:rgba(63,123,182,.32);color:var(--blue-deep);font-weight:750}
+.fchip.out{opacity:.62}
+.shifts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.4vw,16px);margin-top:clamp(14px,2vh,22px)}
+@media(max-width:900px){.shifts{grid-template-columns:1fr !important}}
+.shift{
+  background:var(--white-card);border:1px solid var(--line);border-radius:16px;padding:clamp(14px,1.8vw,20px);
+  box-shadow:0 1px 2px rgba(22,39,58,.04),0 14px 30px -24px rgba(22,39,58,.4);
+}
+.shift .t{font-size:clamp(.9rem,1.34vw,1.08rem);font-weight:800;letter-spacing:-.02em;margin-bottom:11px}
+.shift .row{font-size:clamp(.76rem,1.1vw,.87rem);line-height:1.45}
+.shift .row .lb{font-size:.56rem;font-weight:850;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:4px}
+.shift .antes{color:var(--ink-mut)}
+.shift .antes .lb{color:var(--ink-mut)}
+.shift .arrow{height:1px;background:var(--line-2);margin:11px 0;position:relative}
+.shift .arrow::after{
+  content:"↓";position:absolute;top:-9px;left:0;background:var(--paper);padding-right:7px;
+  color:var(--red);font-size:.8rem;font-weight:800;line-height:1;
+}
+.shift .depois{color:var(--ink);font-weight:750;font-size:clamp(.88rem,1.32vw,1.06rem);line-height:1.35}
+.shift .depois .lb{color:var(--red)}
+.shift .rule2{margin-top:11px;font-size:clamp(.68rem,.98vw,.76rem);color:var(--blue-deep);font-weight:750;letter-spacing:-.01em}
+
 </style>
 </head>
 <body>
@@ -512,6 +549,83 @@ h3{font-size:clamp(1rem,1.55vw,1.22rem);font-weight:700;letter-spacing:-.02em;li
   <div class="pagenum">07</div>
 </section>
 
+<!-- CURADORIA DE FEATURES -->
+<section class="slide w-light" data-t="Curadoria">
+  <div class="dimple"></div>
+  <div class="inner wide">
+    <div class="cols c2b" style="align-items:end;gap:clamp(14px,2vw,30px)">
+      <div>
+        <div class="eyebrow">Curadoria de argumento</div>
+        <h2 class="wide" style="font-size:clamp(1.8rem,3.9vw,3.2rem);max-width:19ch">Dezenove recursos. Três na peça.</h2>
+      </div>
+      <p class="lede" style="margin:0;max-width:46ch">O produto tem 19 recursos mapeados na árvore de comunicação. Comunicar todos é comunicar nenhum — então cada um recebeu um destino.</p>
+    </div>
+
+    <div class="fmap">
+      <div class="fgroup pri">
+        <div class="gh"><span class="gn">Na peça de PDV</span><span class="gc">3 de 19</span></div>
+        <div class="fchips">
+          <span class="fchip pri">Fluxo de ar aerodinâmico</span>
+          <span class="fchip pri">AI Eco · até 35%</span>
+          <span class="fchip pri">Filtro 6 em 1</span>
+        </div>
+      </div>
+      <div class="fgroup sup">
+        <div class="gh"><span class="gn">Na régua do vendedor</span><span class="gc">8 de 19</span></div>
+        <div class="fchips">
+          <span class="fchip sup">Garantia 10 anos</span>
+          <span class="fchip sup">Modo Silêncio</span>
+          <span class="fchip sup">Modo Dormir</span>
+          <span class="fchip sup">Auto Limpeza interna</span>
+          <span class="fchip sup">Modo Siga-me</span>
+          <span class="fchip sup">Cobre + hidrofílico</span>
+          <span class="fchip sup">Estável até 53 °C</span>
+          <span class="fchip sup">Instalação simples</span>
+        </div>
+      </div>
+      <div class="fgroup out">
+        <div class="gh"><span class="gn">Ficha técnica e e-commerce</span><span class="gc">8 de 19</span></div>
+        <div class="fchips">
+          <span class="fchip out">Alerta Limpa Filtro</span>
+          <span class="fchip out">Auto Diagnóstico</span>
+          <span class="fchip out">7 velocidades</span>
+          <span class="fchip out">Auto limpeza externa</span>
+          <span class="fchip out">Manutenção interna</span>
+          <span class="fchip out">6 níveis de potência</span>
+          <span class="fchip out">Alimentação pela condensadora</span>
+          <span class="fchip out">Fluido R-32</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shifts">
+      <div class="shift">
+        <div class="t">Fluxo de ar aerodinâmico</div>
+        <div class="row antes"><span class="lb">Como vinha</span>“Design com cavidades inspirado na aerodinâmica das bolas de golfe, direcionando o fluxo de ar para cima.”</div>
+        <div class="arrow"></div>
+        <div class="row depois"><span class="lb">Como passa a ser dito</span>“O ar vai mais longe. Gela o quarto inteiro, não só a cama.”</div>
+        <div class="rule2">De como funciona → para o que muda na sua casa.</div>
+      </div>
+      <div class="shift">
+        <div class="t">AI Eco</div>
+        <div class="row antes"><span class="lb">Como vinha</span>“Modo com inteligência artificial que proporciona economia de energia de até 35% comparado a modelos inverter tradicionais.”</div>
+        <div class="arrow"></div>
+        <div class="row depois"><span class="lb">Como passa a ser dito</span>“Um botão e ele gasta até 35% menos.”</div>
+        <div class="rule2">De nome de tecnologia → para gesto simples + número.</div>
+      </div>
+      <div class="shift">
+        <div class="t">Filtro 6 em 1</div>
+        <div class="row antes"><span class="lb">Como vinha</span>“Íon de prata, carvão ativado, catequina, fotocatalítico, anti-poeira e vitamina C.”</div>
+        <div class="arrow"></div>
+        <div class="row depois"><span class="lb">Como passa a ser dito</span>“Seis filtros num só. Criança ou alergia em casa? É esse.”</div>
+        <div class="rule2">De lista de componentes → para quem precisa disso.</div>
+      </div>
+    </div>
+  </div>
+  <div class="takeaway"><span class="k">Take away</span><span class="t">Selecionar é metade do trabalho. Reescrever é a outra metade.</span></div>
+  <div class="pagenum">08</div>
+</section>
+
 <!-- 08 FALOU VENDEU -->
 <section class="slide w-deep" data-t="Falou, vendeu!">
   <div class="dimple"></div>
@@ -548,7 +662,7 @@ h3{font-size:clamp(1rem,1.55vw,1.22rem);font-weight:700;letter-spacing:-.02em;li
     </div>
   </div>
   <div class="takeaway"><span class="k">Take away</span><span class="t">Não é sobre o que o produto tem. É sobre a frase que o vendedor fala.</span></div>
-  <div class="pagenum">08</div>
+  <div class="pagenum">09</div>
 </section>
 
 <!-- 09 QUAL BTU -->
@@ -582,7 +696,7 @@ h3{font-size:clamp(1rem,1.55vw,1.22rem);font-weight:700;letter-spacing:-.02em;li
     </div>
   </div>
   <div class="takeaway"><span class="k">Take away</span><span class="t">Três perguntas resolvem a escolha — e a peça de PDV pode fazê-las pelo vendedor.</span></div>
-  <div class="pagenum">09</div>
+  <div class="pagenum">10</div>
 </section>
 
 <!-- 10 ENXOVAL -->
@@ -621,7 +735,7 @@ h3{font-size:clamp(1rem,1.55vw,1.22rem);font-weight:700;letter-spacing:-.02em;li
     </div>
   </div>
   <div class="takeaway"><span class="k">Take away</span><span class="t">Mesmo DNA em quatro tamanhos — e a régua do vendedor já no nível de entrada.</span></div>
-  <div class="pagenum">10</div>
+  <div class="pagenum">11</div>
 </section>
 
 <!-- 11 PECAS -->
@@ -642,7 +756,7 @@ h3{font-size:clamp(1rem,1.55vw,1.22rem);font-weight:700;letter-spacing:-.02em;li
     </div>
   </div>
   <div class="takeaway"><span class="k">Take away</span><span class="t">A narrativa já está de pé: as artes entram nos espaços sem mexer no roteiro.</span></div>
-  <div class="pagenum">11</div>
+  <div class="pagenum">12</div>
 </section>
 
 <!-- 12 FECHAMENTO -->
@@ -665,7 +779,7 @@ h3{font-size:clamp(1rem,1.55vw,1.22rem);font-weight:700;letter-spacing:-.02em;li
     <p class="tiny">75 LAB · aceleradora de trade marketing — Setembro de 2026 · Documento de trabalho para TCL SEMP.</p>
   </div>
   <div class="takeaway"><span class="k">Take away</span><span class="t">Aprovando a plataforma até 19/09, o enxoval chega em campo junto com o sell-in.</span></div>
-  <div class="pagenum">12</div>
+  <div class="pagenum">13</div>
 </section>
 </main>
 <script>
