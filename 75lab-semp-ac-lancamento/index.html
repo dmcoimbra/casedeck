@@ -116,25 +116,22 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 
 /* ================= TAKEAWAY ================= */
 .takeaway{
-  position:absolute;left:var(--pad-x);bottom:clamp(30px,4.6vh,52px);z-index:4;
-  display:flex;align-items:stretch;gap:clamp(10px,1.2vw,14px);
-  max-width:min(58ch,64%);
+  position:absolute;left:var(--pad-x);bottom:clamp(30px,4.8vh,54px);z-index:4;
+  display:block;max-width:min(42ch,50%);
+  border-left:2px solid var(--red);padding-left:clamp(14px,1.7vw,22px);
 }
+.w-deep .takeaway{border-color:#FF6B60}
 .takeaway .k{
-  writing-mode:vertical-rl;transform:rotate(180deg);
-  font-size:.5rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--red);
-  display:flex;align-items:center;flex:none;opacity:.9;
+  display:block;font-size:.54rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--red);margin-bottom:clamp(8px,1.1vh,11px);
 }
 .w-deep .takeaway .k{color:#FF9B93}
 .takeaway .t{
-  font-size:clamp(.86rem,1.22vw,1.1rem);font-weight:600;letter-spacing:-.018em;line-height:1.4;color:var(--ink);
-  border-left:2px solid var(--red);padding-left:clamp(13px,1.5vw,18px);
+  display:block;font-size:clamp(.9rem,1.28vw,1.14rem);font-weight:600;letter-spacing:-.018em;
+  line-height:1.42;color:var(--ink);
 }
-.w-deep .takeaway .t{color:#fff;border-color:#FF6B60}
-@media(max-width:900px){
-  .takeaway{max-width:none}
-  .takeaway .k{writing-mode:horizontal-tb;transform:none;align-items:flex-start;padding-top:2px}
-}
+.w-deep .takeaway .t{color:#fff}
+@media(max-width:900px){.takeaway{max-width:none}}
 
 .pagenum{
   position:absolute;top:clamp(18px,2.6vh,30px);right:clamp(22px,4vw,48px);
@@ -234,7 +231,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
   color:#fff;font-size:clamp(.68rem,.9vw,.76rem);line-height:1.4;font-weight:500;
 }
 .phgrid{display:grid;gap:clamp(9px,1.1vw,13px);margin-top:clamp(18px,2.6vh,26px)}
-.phgrid .ph{aspect-ratio:16/10}
+.phgrid .ph{aspect-ratio:16/9.6}
 .ph.fill{height:100%;min-height:clamp(190px,30vh,330px)}
 
 /* ---------- falou vendeu ---------- */
@@ -514,6 +511,9 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 }
 .ph:hover::after{opacity:1}
 
+.slide.dense{padding-top:clamp(44px,6vh,74px);padding-bottom:clamp(72px,9.6vh,94px)}
+.slide.dense .phgrid{margin-top:clamp(14px,2vh,20px)}
+
 </style>
 </head>
 <body>
@@ -569,7 +569,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 <section class="slide w-light" data-t="Como trabalhamos">
   <div class="inner wide">
     <div class="eyebrow">Como trabalhamos</div>
-    <h2 class="wide">Um time fixo, três frentes e o cliente a 24 andares daqui.</h2>
+    <h2 style="max-width:16ch">Um time fixo, três frentes e o cliente a 24 andares daqui.</h2>
     <div class="grid g3">
       <div class="card"><h3>Squad dedicado</h3><p>Estratégia, design e produção sentados juntos, em fee mensal. Sem abrir job a cada peça.</p></div>
       <div class="card"><h3>Entrega que a fábrica cota</h3><p>Render 3D, caderno técnico e montagem em vídeo. O cliente aprova vendo; a fábrica cota sem dúvida.</p></div>
@@ -585,10 +585,10 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 </section>
 
 <!-- 04 RETRATO DE CAMPO -->
-<section class="slide w-deep" data-t="Retrato de campo">
+<section class="slide w-deep dense" data-t="Retrato de campo">
   <div class="inner wide">
     <div class="eyebrow">Retrato de campo</div>
-    <h2 class="wide">É assim que a categoria se apresenta hoje.</h2>
+    <h2 style="max-width:21ch">É assim que a categoria se apresenta hoje.</h2>
     <div class="phgrid" style="grid-template-columns:repeat(3,1fr)">
       <div class="ph p1"><div class="cap">O AC divide o corredor com a TV — e perde. A TV tem palco; o AC tem rack de aço.</div></div>
       <div class="ph p2"><div class="cap">Toda a comunicação cabe em duas etiquetas: preço e garantia.</div></div>
@@ -734,7 +734,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 <section class="slide w-light" data-t="A reescrita">
   <div class="inner wide">
     <div class="eyebrow">A reescrita dos três prioritários</div>
-    <h2 class="wide" style="max-width:19ch">Não mudamos o produto. Mudamos a frase.</h2>
+    <h2 style="max-width:14ch">Não mudamos o produto. Mudamos a frase.</h2>
     <div class="rw">
       <div class="rw-row">
         <div class="rw-name">Fluxo de ar aerodinâmico<span>De como funciona → para o que muda na sua casa.</span></div>
@@ -763,7 +763,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
     <div class="cols" style="grid-template-columns:1.4fr .6fr;align-items:end;gap:clamp(16px,2.4vw,36px)">
       <div>
         <div class="eyebrow">Falou, vendeu!</div>
-        <h2 class="wide" style="font-size:clamp(1.8rem,3.8vw,3.1rem);max-width:20ch">As frases que o vendedor precisa ter na ponta da língua.</h2>
+        <h2 style="font-size:clamp(1.7rem,3.4vw,2.8rem);max-width:15ch">As frases que o vendedor precisa ter na ponta da língua.</h2>
         <div class="says" style="grid-template-columns:repeat(3,1fr);display:grid">
           <div class="say">
             <div class="f">Fluxo aerodinâmico</div>
@@ -801,7 +801,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
     <div class="cols c2b top">
       <div>
         <div class="eyebrow">Falou, vendeu! · a escuta</div>
-        <h2 style="font-size:clamp(1.9rem,4.2vw,3.4rem)">O bom vendedor não fala primeiro. Ele pergunta.</h2>
+        <h2 style="font-size:clamp(1.6rem,3.2vw,2.6rem);max-width:14ch">O bom vendedor não fala primeiro. Ele pergunta.</h2>
         <div class="asks">
           <div class="ask"><i>1</i>“Quantos metros tem o cômodo?”</div>
           <div class="ask"><i>2</i>“Bate sol da manhã ou da tarde?”</div>
