@@ -343,7 +343,7 @@ input[type=range]{width:100%;accent-color:var(--s1);height:26px}
   <span class="mid">Nova estratégia &middot; acompanhamento &middot; rodada 1</span>
   <span class="right">
     <span class="docs">
-      <select id="docs" aria-label="Escolher relatório">
+      <select id="docs" aria-label="Escolher relatório" onchange="if(this.value)window.location.assign(this.value)">
         <option value="index.html" selected>Rodada 1 &middot; set/2026</option>
         <option value="historico.html">Relatório de base &middot; jul/24 a ago/26</option>
       </select>
@@ -953,9 +953,6 @@ document.getElementById('theme').onclick=()=>{const r=document.documentElement;
     (!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);
   r.setAttribute('data-theme',dark?'light':'dark');setTimeout(redrawAll,30);};
 
-/* ---------- seletor de relatórios ---------- */
-(function(){const d=document.getElementById('docs');if(!d)return;
-  d.addEventListener('change',e=>{const v=e.target.value;if(v)location.assign(v);});})();
 </script>
 </body>
 </html>
