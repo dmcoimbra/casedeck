@@ -14,7 +14,7 @@
   --bg:#F2F1E9; --bg-card:#FFFDF7; --bg-sunk:#E7E5DA; --bg-rail:rgba(242,241,233,.86);
   --fg:#141412; --fg-2:#5C5A51; --fg-3:#8A877B;
   --fg-rgb:20,20,18;
-  --line:#DCD9CA; --line-2:#C4C0AE; --grid:#E2DFD1;
+  --line:#DCD9CA; --line-2:#C4C0AE; --grid:#E2DFD1; --plan:#D9D6C6;
   --accent:#6E8F13; --accent-fill:#C0EE4E; --on-accent:#141412;
   --hero-bg:#0B0B09; --hero-fg:#F2F1E9; --hero-fg2:#918E82; --hero-line:#2B2A25; --hero-card:#151512;
 
@@ -31,7 +31,7 @@
     --bg:#0A0A08; --bg-card:#151512; --bg-sunk:#1B1A17; --bg-rail:rgba(10,10,8,.86);
     --fg:#F2F1E9; --fg-2:#A5A296; --fg-3:#75726A;
     --fg-rgb:242,241,233;
-    --line:#2A2925; --line-2:#3B3934; --grid:#232219;
+    --line:#2A2925; --line-2:#3B3934; --grid:#232219; --plan:#34332C;
     --accent:#C0EE4E; --on-accent:#141412;
     --hero-bg:#151512; --hero-card:#1E1D19; --hero-line:#33322C;
     --c-daniel:#D6D3C4; --c-vanessa:#C0EE4E; --c-claudio:#06C6AE;
@@ -250,6 +250,29 @@ section:last-of-type{border-bottom:0}
 .legend div{display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--fg-2)}
 .legend i{width:11px; height:11px; border-radius:3px; flex:none; display:block}
 
+/* ============ HISTOGRAMA MENSAL ============ */
+.hpanel{padding:18px}
+.hhead{display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:16px}
+.hhead .nm{font-weight:800; font-size:15px; letter-spacing:-.02em; display:flex; align-items:center; gap:8px}
+.hhead .nm i{width:10px; height:10px; border-radius:3px; flex:none}
+.hhead .tt{font-family:ui-monospace,Menlo,monospace; font-size:12px; font-weight:700; color:var(--fg-2)}
+.hbars{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; align-items:end; height:132px}
+.hbar{position:relative; height:0; background:var(--plan); border-radius:4px 4px 0 0; transition:height .9s cubic-bezier(.2,.8,.2,1)}
+.in .hbar{height:var(--h)}
+.hbar i{position:absolute; left:0; right:0; bottom:0; height:var(--f); border-radius:4px 4px 0 0; display:block}
+.hlabs{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; border-top:1px solid var(--line-2); padding-top:9px}
+.hlab{text-align:center; font-family:ui-monospace,Menlo,monospace; font-size:10px; letter-spacing:.1em; color:var(--fg-2)}
+.hlab small{display:block; font-size:9.5px; letter-spacing:0; margin-top:3px; color:var(--fg-3)}
+.hlab.em b{color:var(--accent); font-weight:700}
+.hpe{
+  margin-top:14px; padding-top:12px; border-top:1px solid var(--line); font-size:12px; color:var(--fg-3);
+  display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;
+}
+.hpe b{color:var(--fg)}
+.hpe .esc{font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.06em; white-space:nowrap}
+.hpanel.wide{padding:22px}
+.hpanel.wide .hbars, .hpanel.wide .hlabs{grid-template-columns:repeat(4,minmax(0,180px)); justify-content:center; gap:clamp(16px,4vw,34px)}
+
 /* ============ COLUNAS EMPILHADAS ============ */
 .cols{display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(10px,3vw,34px); align-items:end; height:290px; margin-top:26px}
 .col{display:flex; flex-direction:column; justify-content:flex-end; height:100%; position:relative}
@@ -387,12 +410,13 @@ footer b{color:var(--hero-fg)}
     <a href="#acao"><i>02</i>Plano de ação</a>
     <span class="sep" aria-hidden="true"></span>
     <a href="#financeiro"><i>03</i>Metas SET–DEZ</a>
-    <a href="#conversao"><i>04</i>Conversão</a>
-    <a href="#clientes"><i>05</i>Novos clientes</a>
+    <a href="#evolucao"><i>04</i>Evolução</a>
+    <a href="#conversao"><i>05</i>Conversão</a>
+    <a href="#clientes"><i>06</i>Novos clientes</a>
     <span class="sep" aria-hidden="true"></span>
-    <a href="#funil"><i>06</i>Funil</a>
-    <a href="#reunioes"><i>07</i>Reuniões</a>
-    <a href="#base"><i>08</i>Base de dados</a>
+    <a href="#funil"><i>07</i>Funil</a>
+    <a href="#reunioes"><i>08</i>Reuniões</a>
+    <a href="#base"><i>09</i>Base de dados</a>
   </div>
 </nav>
 
@@ -509,7 +533,7 @@ footer b{color:var(--hero-fg)}
       <div class="t">
         <p class="eyebrow">O que muda em setembro</p>
         <h2>Uma prioridade por pessoa</h2>
-        <p class="lede" style="margin-top:14px">Cada executivo sai de agosto com um problema diferente. Tratar todos com a mesma cobrança de volume não resolve nenhum deles. O diagnóstico que sustenta cada prioridade está nas seções <a href="#conversao" style="color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor">04 · Conversão</a> e <a href="#clientes" style="color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor">05 · Novos clientes</a>.</p>
+        <p class="lede" style="margin-top:14px">Cada executivo sai de agosto com um problema diferente. Tratar todos com a mesma cobrança de volume não resolve nenhum deles. O diagnóstico que sustenta cada prioridade está nas seções <a href="#conversao" style="color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor">05 · Conversão</a> e <a href="#clientes" style="color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor">06 · Novos clientes</a>.</p>
       </div>
     </div>
     <div class="grid g2" id="acoes"></div>
@@ -520,7 +544,7 @@ footer b{color:var(--hero-fg)}
   <div class="wrap">
     <span class="k">Desempenho</span>
     <span class="s">os números que sustentam a decisão</span>
-    <span class="n">seções 03–05</span>
+    <span class="n">seções 03–06</span>
   </div>
 </div>
 
@@ -590,11 +614,31 @@ footer b{color:var(--hero-fg)}
   </div>
 </section>
 
-<!-- ==================== 04 · CONVERSÃO ==================== -->
-<section id="conversao" class="rv">
+<!-- ==================== 04 · EVOLUÇÃO MENSAL ==================== -->
+<section id="evolucao" class="rv">
   <div class="wrap">
     <div class="shead">
       <div class="snum">04</div>
+      <div class="t">
+        <p class="eyebrow">Trajetória mensal · setembro a dezembro</p>
+        <h2>Evolução de cada executivo</h2>
+        <p class="lede" style="margin-top:14px">Um painel por pessoa, mês a mês. A barra inteira é a <b>meta</b>; a parte colorida é o que já foi <b>realizado</b>. Cada painel declara o topo da sua escala no rodapé.</p>
+      </div>
+    </div>
+
+    <div class="legend" id="hist-leg" style="margin:0 0 22px"></div>
+    <div id="hist-destaque" style="margin-bottom:14px"></div>
+    <div class="grid g3" id="hist"></div>
+
+    <p class="note" style="margin-top:18px"><span id="hist-nota"></span> Barras de valor muito baixo recebem espessura mínima para não desaparecerem; o valor exato aparece sob cada barra. Setembro está em curso, e a parte colorida é o realizado parcial até 10/09 — só Vanessa tem realização registrada nominalmente. No quadrimestre inteiro, o realizado até aqui é de aproximadamente <b>R$ 73 mil dos R$ 2.121.500</b> previstos.</p>
+  </div>
+</section>
+
+<!-- ==================== 05 · CONVERSÃO ==================== -->
+<section id="conversao" class="rv">
+  <div class="wrap">
+    <div class="shead">
+      <div class="snum">05</div>
       <div class="t">
         <p class="eyebrow">Meta qualitativa · quem virou trabalho</p>
         <h2>Volume não é conversão</h2>
@@ -631,11 +675,11 @@ footer b{color:var(--hero-fg)}
   </div>
 </section>
 
-<!-- ==================== 05 · NOVOS CLIENTES ==================== -->
+<!-- ==================== 06 · NOVOS CLIENTES ==================== -->
 <section id="clientes" class="rv">
   <div class="wrap">
     <div class="shead">
-      <div class="snum">05</div>
+      <div class="snum">06</div>
       <div class="t">
         <p class="eyebrow">Meta quantitativa · 12 novos clientes por executivo</p>
         <h2>Meta contra realizado</h2>
@@ -673,15 +717,15 @@ footer b{color:var(--hero-fg)}
   <div class="wrap">
     <span class="k">Detalhamento</span>
     <span class="s">atividade, listas e base de dados</span>
-    <span class="n">seções 06–08</span>
+    <span class="n">seções 07–09</span>
   </div>
 </div>
 
-<!-- ==================== 06 · FUNIL ==================== -->
+<!-- ==================== 07 · FUNIL ==================== -->
 <section id="funil" class="rv">
   <div class="wrap">
     <div class="shead">
-      <div class="snum">06</div>
+      <div class="snum">07</div>
       <div class="t">
         <p class="eyebrow">Onde o esforço se perde</p>
         <h2>Funil de novos negócios</h2>
@@ -717,11 +761,11 @@ footer b{color:var(--hero-fg)}
   </div>
 </section>
 
-<!-- ==================== 07 · REUNIÕES ==================== -->
+<!-- ==================== 08 · REUNIÕES ==================== -->
 <section id="reunioes" class="rv">
   <div class="wrap">
     <div class="shead">
-      <div class="snum">07</div>
+      <div class="snum">08</div>
       <div class="t">
         <p class="eyebrow">Atividade comercial</p>
         <h2>Reuniões por executivo</h2>
@@ -753,11 +797,11 @@ footer b{color:var(--hero-fg)}
   </div>
 </section>
 
-<!-- ==================== 08 · BASE DE DADOS ==================== -->
+<!-- ==================== 09 · BASE DE DADOS ==================== -->
 <section id="base" class="rv">
   <div class="wrap">
     <div class="shead">
-      <div class="snum">08</div>
+      <div class="snum">09</div>
       <div class="t">
         <p class="eyebrow">Anexo</p>
         <h2>Base de dados</h2>
@@ -1224,6 +1268,66 @@ var TOT = {
   '<tr class="total"><td>Total</td>'+
   totMes.map(function(t){ return '<td class="r n">'+brl(t)+'</td>'; }).join("")+
   '<td class="r n">'+brl(TOT.finTotal)+'</td><td class="r n">100%</td></tr>';
+})();
+
+/* ============================================================
+   04 · EVOLUÇÃO MENSAL POR EXECUTIVO
+   Barra inteira = meta do mês (cinza). Parte preenchida = realizado,
+   na cor do executivo. Quando uma meta destoa muito das demais, ela ganha
+   painel e escala próprios — na escala comum os outros ficariam achatados.
+   ============================================================ */
+(function(){
+  var meses = [["set","SET"],["out","OUT"],["nov","NOV"],["dez","DEZ"]];
+  function pico(p){ return Math.max(p.set, p.out, p.nov, p.dez); }
+  function soma(p){ return p.set + p.out + p.nov + p.dez; }
+
+  var ord   = D.fin.slice().sort(function(a,b){ return soma(b) - soma(a); });
+  var picos = D.fin.map(pico).sort(function(a,b){ return b - a; });
+  var separa = picos.length > 1 && picos[0] > picos[1] * 2.5;
+
+  var fora  = separa ? ord.filter(function(p){ return pico(p) === picos[0]; })[0] : null;
+  var grupo = ord.filter(function(p){ return p !== fora; });
+  var tetoGrupo = Math.max.apply(null, grupo.map(pico));
+
+  function painel(p, teto, alt, largo){
+    var barras = "", rotulos = "";
+    meses.forEach(function(m){
+      var v = p[m[0]], frac = (m[0] === "set") ? (p.realSet || 0) : 0;
+      var h = v > 0 ? Math.max(2, v/teto*alt) : 0;
+      var dica = v > 0 ? ' title="'+esc(p.nome)+' · '+m[1]+': meta '+brl(v)+
+                         (frac > 0 ? ' · realizado '+brl(Math.round(v*frac)) : '')+'"' : '';
+      barras  += '<div class="hbar" style="--h:'+h.toFixed(1)+'px"'+dica+'>'+
+                 (frac > 0 ? '<i style="--f:'+(frac*100).toFixed(0)+'%; background:'+cor(p.id)+'"></i>' : '')+
+                 '</div>';
+      rotulos += '<div class="hlab'+(frac > 0 ? ' em' : '')+'">'+
+                 (frac > 0 ? '<b>'+m[1]+'</b>' : m[1])+'<small>'+curto(v)+'</small></div>';
+    });
+    var real = Math.round(p.set * (p.realSet || 0));
+    return '<div class="card hpanel'+(largo ? ' wide' : '')+'">'+
+      '<div class="hhead"><span class="nm"><i style="background:'+cor(p.id)+'"></i>'+esc(p.nome)+'</span>'+
+        '<span class="tt">'+curto(soma(p))+'</span></div>'+
+      '<div class="hbars" style="height:'+alt+'px">'+barras+'</div>'+
+      '<div class="hlabs">'+rotulos+'</div>'+
+      '<div class="hpe"><span>'+(real > 0
+        ? 'Setembro: <b>'+brl(real)+'</b> de '+brl(p.set)+' ('+pct(p.realSet)+')'
+        : 'Sem realização registrada até 10/09')+'</span>'+
+        '<span class="esc">escala até '+curto(teto)+'</span></div></div>';
+  }
+
+  $("#hist-leg").innerHTML =
+    '<div><i style="background:var(--accent-fill)"></i> Realizado — na cor de cada executivo</div>'+
+    '<div><i style="background:var(--plan)"></i> Meta ainda não realizada</div>';
+
+  $("#hist-destaque").innerHTML = fora ? painel(fora, pico(fora), 168, true) : "";
+  $("#hist").innerHTML = grupo.map(function(p){ return painel(p, tetoGrupo, 132, false); }).join("");
+
+  $("#hist-nota").innerHTML = fora
+    ? '<b>'+esc(fora.nome)+'</b> aparece em painel próprio: sua maior meta mensal ('+brl(pico(fora))+
+      ') é '+(pico(fora)/tetoGrupo).toLocaleString("pt-BR",{maximumFractionDigits:1})+
+      '× a maior das demais, e na mesma escala os outros '+grupo.length+
+      ' painéis ficariam achatados em poucos pixels. Os demais compartilham escala entre si, com topo em <b>'+
+      brl(tetoGrupo)+'</b>.'
+    : 'Todos os painéis compartilham a mesma escala, com topo em <b>'+brl(tetoGrupo)+'</b>.';
 })();
 
 /* ============================================================
