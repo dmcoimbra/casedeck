@@ -109,13 +109,13 @@ body{
   margin-bottom:clamp(18px,2.6vw,28px);
 }
 .eyebrow::before{content:"";width:clamp(18px,2.2vw,28px);height:2px;background:currentColor;flex:none}
-h1{font-size:clamp(2rem,4.4vw,3.9rem);font-weight:700;line-height:1.03;letter-spacing:-.032em}
-h2{font-size:clamp(1.55rem,3.4vw,2.75rem);font-weight:700;line-height:1.1;letter-spacing:-.03em;max-width:17ch}
+h1{font-size:clamp(1.9rem,5.6vmin,3.9rem);font-weight:700;line-height:1.03;letter-spacing:-.032em}
+h2{font-size:clamp(1.45rem,4.3vmin,2.75rem);font-weight:700;line-height:1.1;letter-spacing:-.03em;max-width:17ch}
 h2.wide{max-width:21ch}
 h2 em{font-style:normal;color:var(--red)}
-h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em;line-height:1.25}
+h3{font-size:clamp(.88rem,1.6vmin,1.05rem);font-weight:700;letter-spacing:-.012em;line-height:1.25}
 .lede{
-  font-size:clamp(.88rem,1.14vw,1.02rem);line-height:1.62;max-width:48ch;color:var(--ink-soft);
+  font-size:clamp(.85rem,1.48vmin,1.02rem);line-height:1.62;max-width:48ch;color:var(--ink-soft);
   margin-top:clamp(16px,2.2vw,24px);font-weight:400;
 }
 .lede strong{font-weight:600;color:var(--ink)}
@@ -134,7 +134,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 }
 .w-deep .takeaway .k{color:#FF9B93}
 .takeaway .t{
-  display:block;font-size:clamp(.9rem,1.28vw,1.14rem);font-weight:600;letter-spacing:-.018em;
+  display:block;font-size:clamp(.86rem,1.62vmin,1.14rem);font-weight:600;letter-spacing:-.018em;
   line-height:1.42;color:var(--ink);
 }
 .w-deep .takeaway .t{color:#fff}
@@ -152,7 +152,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 @media(max-width:900px){#dots{display:none}}
 
 /* ================= TELAS GRANDES ================= */
-@media(min-width:1600px){
+@media(min-width:1600px) and (min-height:950px){
   :root{--half:716px}
   .inner.wide{max-width:1432px}
   h1{font-size:clamp(2rem,4.4vw,4.5rem)}
@@ -209,9 +209,9 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
   box-shadow:0 1px 2px rgba(30,42,60,.03),0 14px 32px -24px rgba(30,42,60,.32);
 }
 .w-deep .card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);box-shadow:none}
-.card p{font-size:clamp(.78rem,1.02vw,.87rem);line-height:1.55;color:var(--ink-soft);margin-top:8px;font-weight:400}
+.card p{font-size:clamp(.76rem,1.32vmin,.87rem);line-height:1.55;color:var(--ink-soft);margin-top:8px;font-weight:400}
 .w-deep .card p{color:#BCD0E2}
-.num{font-size:clamp(1.7rem,3vw,2.5rem);font-weight:700;letter-spacing:-.035em;line-height:.95;color:var(--blue-deep)}
+.num{font-size:clamp(1.6rem,3.8vmin,2.5rem);font-weight:700;letter-spacing:-.035em;line-height:.95;color:var(--blue-deep)}
 .w-deep .num{color:#8FC2EA}
 .num.red{color:var(--red)}
 .num-l{font-size:clamp(.74rem,.98vw,.82rem);line-height:1.5;color:var(--ink-soft);margin-top:10px;font-weight:400}
@@ -271,14 +271,14 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 }
 .w-deep .say .f{color:#FF8A80}
 .say .q{
-  font-size:clamp(.95rem,1.6vw,1.28rem);font-weight:600;letter-spacing:-.022em;line-height:1.32;color:var(--ink);
+  font-size:clamp(.9rem,2vmin,1.28rem);font-weight:600;letter-spacing:-.022em;line-height:1.32;color:var(--ink);
 }
 .w-deep .say .q{color:#fff}
 .say .b{font-size:clamp(.76rem,1.08vw,.86rem);color:var(--ink-mut);margin-top:9px;font-weight:600}
 .w-deep .say .b{color:#9FBBD4}
 .saymini{display:grid;gap:9px;margin-top:clamp(14px,2vh,20px)}
 .saymini div{
-  font-size:clamp(.78rem,1.08vw,.88rem);font-weight:500;line-height:1.35;color:var(--ink-soft);
+  font-size:clamp(.75rem,1.36vmin,.88rem);font-weight:500;line-height:1.35;color:var(--ink-soft);
   padding-left:16px;position:relative;
 }
 .w-deep .saymini div{color:#C6D7E6}
@@ -289,7 +289,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 /* ---------- btu ---------- */
 .asks{display:grid;gap:clamp(10px,1.4vw,15px);margin-top:clamp(16px,2.4vh,24px)}
 .ask{
-  display:flex;align-items:center;gap:14px;font-size:clamp(.92rem,1.45vw,1.18rem);
+  display:flex;align-items:center;gap:14px;font-size:clamp(.88rem,1.86vmin,1.18rem);
   font-weight:600;letter-spacing:-.02em;color:var(--ink);
 }
 .w-deep .ask{color:#fff}
@@ -345,7 +345,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 }
 .w-deep .slot{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
 .slot .l{font-size:.58rem;font-weight:850;letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
-.slot .n{font-size:clamp(.78rem,1.04vw,.87rem);font-weight:600;letter-spacing:-.015em}
+.slot .n{font-size:clamp(.75rem,1.3vmin,.87rem);font-weight:600;letter-spacing:-.015em}
 .w-deep .slot .n{color:#fff}
 .slot .f{font-size:.68rem;color:var(--ink-mut);letter-spacing:.04em}
 .w-deep .slot .f{color:#9FBBD4}
@@ -420,7 +420,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 .dest.c .qt{color:var(--ink-mut)}
 .dest .lb{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-top:12px}
 .dest ul{list-style:none;margin-top:clamp(16px,2.2vh,24px);display:grid;gap:clamp(7px,1.1vh,12px)}
-.dest.a li{font-size:clamp(.95rem,1.45vw,1.2rem);font-weight:600;color:var(--ink);letter-spacing:-.018em;line-height:1.25}
+.dest.a li{font-size:clamp(.9rem,1.86vmin,1.2rem);font-weight:600;color:var(--ink);letter-spacing:-.018em;line-height:1.25}
 .dest.b li{font-size:clamp(.8rem,1.06vw,.92rem);font-weight:500;color:var(--ink-soft);line-height:1.3}
 .dest.c li{font-size:clamp(.76rem,.98vw,.85rem);font-weight:400;color:var(--ink-mut);line-height:1.3}
 
@@ -436,7 +436,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 .rw-name span{display:block;font-size:clamp(.66rem,.9vw,.74rem);font-weight:600;color:var(--blue-deep);margin-top:8px;line-height:1.35;letter-spacing:0}
 .rw-old{font-size:clamp(.75rem,.96vw,.84rem);color:var(--ink-mut);line-height:1.55;font-weight:400}
 .rw-new{
-  font-size:clamp(1rem,1.62vw,1.38rem);font-weight:600;letter-spacing:-.024em;line-height:1.3;color:var(--ink);
+  font-size:clamp(.95rem,2.06vmin,1.38rem);font-weight:600;letter-spacing:-.024em;line-height:1.3;color:var(--ink);
   position:relative;padding-left:clamp(20px,2.4vw,34px);
 }
 .rw-new::before{content:"→";position:absolute;left:0;top:0;color:var(--red);font-weight:700;font-size:.9em}
@@ -527,11 +527,11 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 /* ---------- páginas de nível ---------- */
 .lvlpage{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(22px,3.2vw,60px);align-items:start;margin-top:clamp(6px,1vh,12px)}
 @media(max-width:900px){.lvlpage{grid-template-columns:1fr !important;gap:26px}}
-.lvlbadge{font-size:clamp(2.8rem,6.4vw,5rem);font-weight:700;letter-spacing:-.06em;line-height:.82;color:var(--red)}
+.lvlbadge{font-size:clamp(2.4rem,7.4vmin,5rem);font-weight:700;letter-spacing:-.06em;line-height:.82;color:var(--red)}
 .lvlrole{font-size:.58rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-mut);margin-top:14px}
 .w-deep .lvlrole{color:#9FBBD4}
 .lvlname{font-size:clamp(1.15rem,1.9vw,1.55rem);font-weight:700;letter-spacing:-.028em;margin-top:6px;line-height:1.15}
-.lvltxt{font-size:clamp(.84rem,1.1vw,.96rem);line-height:1.62;color:var(--ink-soft);margin-top:clamp(14px,2vh,20px);max-width:44ch}
+.lvltxt{font-size:clamp(.8rem,1.42vmin,.96rem);line-height:1.62;color:var(--ink-soft);margin-top:clamp(14px,2vh,20px);max-width:44ch}
 .w-deep .lvltxt{color:#C6D7E6}
 .lvltxt strong{color:var(--ink);font-weight:600}
 .w-deep .lvltxt strong{color:#fff}
@@ -558,7 +558,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 .plan .row:last-child{border-bottom:1px solid var(--line-2)}
 @media(max-width:700px){.plan .row{grid-template-columns:1fr;gap:4px}}
 .plan .w{font-size:clamp(.62rem,.82vw,.7rem);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
-.plan .t{font-size:clamp(.88rem,1.16vw,1rem);font-weight:700;letter-spacing:-.02em;line-height:1.25}
+.plan .t{font-size:clamp(.85rem,1.5vmin,1rem);font-weight:700;letter-spacing:-.02em;line-height:1.25}
 .plan .d{font-size:clamp(.74rem,.94vw,.82rem);line-height:1.45;color:var(--ink-soft);margin-top:5px;font-weight:400}
 .plan .row.on .t{color:var(--red)}
 .sig{font-size:clamp(.66rem,.86vw,.74rem);line-height:1.6;color:var(--ink-mut);margin-top:clamp(12px,1.8vh,16px);padding-left:2px}
@@ -575,7 +575,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
   .endcard .sig{text-align:left}
 }
 
-@media(min-width:1600px){
+@media(min-width:1600px) and (min-height:950px){
   .lvltxt{font-size:1.04rem}
   .spec .v{font-size:.94rem}
   .slot .n{font-size:1rem}
@@ -596,6 +596,24 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
 @media(max-width:900px){
   .plan{max-width:none !important}
   .slots.lvl3{margin-top:14px}
+}
+
+/* ---------- card de insight ---------- */
+.hicard{
+  background:var(--red);color:#fff;border-radius:16px;
+  padding:clamp(16px,2vw,24px);margin-top:clamp(11px,1.5vh,15px);
+  box-shadow:0 14px 34px -22px rgba(225,37,27,.9);
+}
+.hicard .t{font-size:clamp(.95rem,1.86vmin,1.22rem);font-weight:700;letter-spacing:-.026em;line-height:1.24}
+.hicard p{font-size:clamp(.76rem,1.3vmin,.87rem);line-height:1.5;color:rgba(255,255,255,.9);margin-top:9px;font-weight:400}
+
+/* ---------- KV em telas de celular ---------- */
+@media(max-width:900px){
+  .slide.kvfull{min-height:62svh;padding:clamp(38px,6vh,58px) 0 0;justify-content:center}
+  .slide.kvfull .kvback{display:none}
+  .slide.kvfull .kvimg{position:relative;inset:auto;width:100%;aspect-ratio:16/9;background-size:cover}
+  .slide.kvfull .takeaway{position:static;margin:clamp(20px,3vh,28px) var(--pad-x) clamp(26px,4vh,36px);max-width:none}
+  .slide.kvfull .pagenum{top:clamp(12px,2vh,18px)}
 }
 
 </style>
@@ -702,10 +720,16 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
           <span class="pill">“E se der problema?”</span>
         </div>
       </div>
-      <div class="card">
-        <div class="num red" style="font-size:clamp(2.4rem,4.4vw,3.6rem)">1</div>
-        <h3 style="margin-top:14px;font-size:clamp(1.05rem,1.7vw,1.35rem)">vendedor, 12 marcas na parede</h3>
-        <p>No mesmo turno ele vende TV, geladeira e ar-condicionado. Na dúvida, empurra a marca que sabe explicar — ou o preço mais baixo, que não exige argumento.</p>
+      <div>
+        <div class="card">
+          <div class="num red" style="font-size:clamp(2rem,4.6vmin,3.2rem)">1</div>
+          <h3 style="margin-top:12px;font-size:clamp(1rem,2vmin,1.28rem)">vendedor, 12 marcas na parede</h3>
+          <p>No mesmo turno ele vende TV, geladeira e ar-condicionado — e o AC é o item mais técnico de todos.</p>
+        </div>
+        <div class="hicard">
+          <div class="t">Vendedor inseguro foge. Vendedor seguro corre.</div>
+          <p>Sem argumento na mão, ele desvia o cliente para o produto que domina: ninguém quer se expor diante de uma pergunta que não sabe responder. Com argumento, ele vai atrás da venda — porque a comissão está do outro lado.</p>
+        </div>
       </div>
     </div>
   </div>
