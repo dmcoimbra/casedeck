@@ -1432,7 +1432,7 @@ deck.addEventListener('scroll',()=>{const i=current();
 document.getElementById('next').onclick=()=>go(current()+1);
 document.getElementById('prev').onclick=()=>go(current()-1);
 addEventListener('keydown',e=>{
-  if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;
   if(['ArrowDown','PageDown'].includes(e.key)){e.preventDefault();go(current()+1);}
   if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(current()-1);}
   if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);});
@@ -1443,8 +1443,7 @@ document.getElementById('theme').onclick=()=>{const r=document.documentElement;
 
 /* ---------- seletor de relatórios ---------- */
 (function(){const d=document.getElementById('docs');if(!d)return;
-  d.addEventListener('change',e=>{const v=e.target.value;
-    if(v&&v!==location.pathname.split('/').pop())location.href=v;});})();
+  d.addEventListener('change',e=>{const v=e.target.value;if(v)location.assign(v);});})();
 </script>
 </body>
 </html>
