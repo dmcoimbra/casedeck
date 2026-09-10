@@ -56,34 +56,39 @@ body{
 .w-deep h1,.w-deep h2,.w-deep h3{color:#fff}
 .w-light .eyebrow,.w-kv .eyebrow{color:var(--red)}
 
-/* ============ FUNDO VIVO (lava lamp) ============ */
-.bg{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
-.bg b{position:absolute;display:block;border-radius:46% 54% 52% 48%/48% 46% 54% 52%;filter:blur(52px)}
+/* ============ FUNDO VIVO (luzes em movimento) ============ */
+.bg{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none;contain:paint}
+.bg b{position:absolute;display:block;border-radius:46% 54% 52% 48%/48% 46% 54% 52%;filter:blur(46px);will-change:transform,opacity}
 .w-light .bg b,.w-kv .bg b{mix-blend-mode:multiply}
 .w-deep .bg b{mix-blend-mode:screen}
-.w-kv .bg b:nth-child(1){background:#8FC4EE;opacity:.80;width:54vw;height:50vw;left:-14vw;top:-18vw;animation:dA 19s ease-in-out infinite alternate}
-.w-kv .bg b:nth-child(2){background:#F3969F;opacity:.62;width:50vw;height:46vw;left:-8vw;bottom:-22vw;animation:dB 23s ease-in-out infinite alternate}
-.w-kv .bg b:nth-child(3){background:#7FB0DC;opacity:.70;width:58vw;height:54vw;right:-18vw;bottom:-24vw;animation:dC 27s ease-in-out infinite alternate}
-.w-light .bg b:nth-child(1){background:#B6D6F2;opacity:.62;width:48vw;height:44vw;right:-14vw;top:-16vw;animation:dA 21s ease-in-out infinite alternate}
-.w-light .bg b:nth-child(2){background:#F6CFD3;opacity:.58;width:44vw;height:42vw;left:-16vw;bottom:-18vw;animation:dB 25s ease-in-out infinite alternate}
-.w-light .bg b:nth-child(3){background:#D7E8F7;opacity:.72;width:42vw;height:40vw;right:10vw;bottom:-22vw;animation:dC 29s ease-in-out infinite alternate}
-.w-deep .bg b:nth-child(1){background:#1F5F9C;opacity:.85;width:52vw;height:48vw;left:-16vw;top:-16vw;animation:dA 20s ease-in-out infinite alternate}
-.w-deep .bg b:nth-child(2){background:#7A2530;opacity:.62;width:44vw;height:42vw;right:-14vw;bottom:-18vw;animation:dB 24s ease-in-out infinite alternate}
-.w-deep .bg b:nth-child(3){background:#12406E;opacity:.9;width:54vw;height:50vw;right:4vw;top:-22vw;animation:dC 28s ease-in-out infinite alternate}
+.w-kv .bg b:nth-child(1){background:#7FBCEC;opacity:.80;width:52vw;height:48vw;left:-14vw;top:-18vw;animation:dA 13s ease-in-out infinite alternate}
+.w-kv .bg b:nth-child(2){background:#F28E9A;opacity:.66;width:48vw;height:44vw;left:-6vw;bottom:-20vw;animation:dB 17s ease-in-out infinite alternate}
+.w-kv .bg b:nth-child(3){background:#6FA6D8;opacity:.72;width:54vw;height:50vw;right:-16vw;bottom:-22vw;animation:dC 21s ease-in-out infinite alternate}
+.w-kv .bg b:nth-child(4){background:#BFE0FA;opacity:.7;width:26vw;height:24vw;left:24vw;top:8vh;filter:blur(38px);animation:dL 11s ease-in-out infinite alternate}
+.w-light .bg b:nth-child(1){background:#A9CFF2;opacity:.62;width:46vw;height:42vw;right:-12vw;top:-16vw;animation:dA 14s ease-in-out infinite alternate}
+.w-light .bg b:nth-child(2){background:#F6C6CB;opacity:.58;width:42vw;height:40vw;left:-14vw;bottom:-16vw;animation:dB 18s ease-in-out infinite alternate}
+.w-light .bg b:nth-child(3){background:#CFE6F8;opacity:.72;width:40vw;height:38vw;right:8vw;bottom:-20vw;animation:dC 22s ease-in-out infinite alternate}
+.w-light .bg b:nth-child(4){background:#DCEBF9;opacity:.75;width:24vw;height:22vw;left:18vw;top:6vh;filter:blur(34px);animation:dL 12s ease-in-out infinite alternate}
+.w-deep .bg b:nth-child(1){background:#2A6FB4;opacity:.85;width:50vw;height:46vw;left:-14vw;top:-16vw;animation:dA 13s ease-in-out infinite alternate}
+.w-deep .bg b:nth-child(2){background:#8A2A35;opacity:.6;width:42vw;height:40vw;right:-12vw;bottom:-16vw;animation:dB 17s ease-in-out infinite alternate}
+.w-deep .bg b:nth-child(3){background:#164A7C;opacity:.9;width:52vw;height:48vw;right:2vw;top:-20vw;animation:dC 21s ease-in-out infinite alternate}
+.w-deep .bg b:nth-child(4){background:#3E8FD6;opacity:.42;width:24vw;height:22vw;left:30vw;bottom:6vh;filter:blur(38px);animation:dL 10s ease-in-out infinite alternate}
 @keyframes dA{
-  0%{transform:translate3d(0,0,0) scale(1) rotate(0deg)}
-  50%{transform:translate3d(10vw,6vh,0) scale(1.14) rotate(12deg)}
-  100%{transform:translate3d(18vw,14vh,0) scale(1.26) rotate(-8deg)}
+  0%{transform:translate3d(0,0,0) scale(1)}
+  100%{transform:translate3d(26vw,16vh,0) scale(1.24)}
 }
 @keyframes dB{
-  0%{transform:translate3d(0,0,0) scale(1.12) rotate(0deg)}
-  50%{transform:translate3d(-8vw,-7vh,0) scale(.96) rotate(-14deg)}
-  100%{transform:translate3d(16vw,-13vh,0) scale(1.2) rotate(10deg)}
+  0%{transform:translate3d(0,0,0) scale(1.14)}
+  100%{transform:translate3d(24vw,-18vh,0) scale(.9)}
 }
 @keyframes dC{
-  0%{transform:translate3d(0,0,0) scale(.94) rotate(0deg)}
-  50%{transform:translate3d(-12vw,5vh,0) scale(1.16) rotate(9deg)}
-  100%{transform:translate3d(-18vw,12vh,0) scale(1.3) rotate(-11deg)}
+  0%{transform:translate3d(0,0,0) scale(.92)}
+  100%{transform:translate3d(-26vw,15vh,0) scale(1.28)}
+}
+@keyframes dL{
+  0%{transform:translate3d(-6vw,0,0) scale(.85);opacity:.28}
+  50%{transform:translate3d(18vw,10vh,0) scale(1.15);opacity:.8}
+  100%{transform:translate3d(42vw,-6vh,0) scale(.95);opacity:.35}
 }
 @media (prefers-reduced-motion:reduce){.bg b{animation:none!important}}
 .grain{
@@ -763,7 +768,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
     <div class="cols" style="grid-template-columns:1.4fr .6fr;align-items:end;gap:clamp(16px,2.4vw,36px)">
       <div>
         <div class="eyebrow">Falou, vendeu!</div>
-        <h2 style="font-size:clamp(1.7rem,3.4vw,2.8rem);max-width:15ch">As frases que o vendedor precisa ter na ponta da língua.</h2>
+        <h2 style="font-size:clamp(1.6rem,3vw,2.5rem);max-width:17ch">As frases que o vendedor precisa ter na ponta da língua.</h2>
         <div class="says" style="grid-template-columns:repeat(3,1fr);display:grid">
           <div class="say">
             <div class="f">Fluxo aerodinâmico</div>
@@ -779,9 +784,9 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
           </div>
         </div>
         <div class="saymini" style="grid-template-columns:repeat(2,1fr);display:grid;gap:9px 28px">
-          <div><b>Silêncio:</b> “35 decibéis. Mais baixo que a nossa conversa agora.”</div>
-          <div><b>Dormir:</b> “Ele te cobre de madrugada: ajusta sozinho por 8 horas.”</div>
-          <div><b>Auto limpeza:</b> “Ele se seca por dentro. Sem cheiro de mofo lá na frente.”</div>
+          <div><b>Silêncio:</b> “35 decibéis. Mais baixo que esta conversa.”</div>
+          <div><b>Dormir:</b> “Ele te cobre de madrugada: ajusta sozinho.”</div>
+          <div><b>Auto limpeza:</b> “Ele se seca por dentro. Sem cheiro de mofo.”</div>
           <div><b>Garantia:</b> “Dez anos no compressor. Dez.”</div>
         </div>
       </div>
@@ -940,7 +945,7 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
   var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
   slides.forEach(function(s){
     var bg=document.createElement('div');bg.className='bg';
-    bg.innerHTML='<b></b><b></b><b></b>';
+    bg.innerHTML='<b></b><b></b><b></b><b></b>';
     var gr=document.createElement('div');gr.className='grain';
     s.insertBefore(gr,s.firstChild);s.insertBefore(bg,s.firstChild);
   });
@@ -970,7 +975,20 @@ h3{font-size:clamp(.92rem,1.24vw,1.05rem);font-weight:700;letter-spacing:-.012em
     else if(e.key==='Home'){e.preventDefault();jump(0)}
     else if(e.key==='End'){e.preventDefault();jump(slides.length-1)}
   });
-  window.addEventListener('resize',update);
+  function fitTakeaways(){
+    for(var i=0;i<slides.length;i++){
+      var s=slides[i],t=s.querySelector('.takeaway');
+      if(!t){continue}
+      if(getComputedStyle(t).position!=='absolute'){s.style.paddingBottom='';continue}
+      var bt=parseFloat(getComputedStyle(t).bottom)||0;
+      s.style.paddingBottom=Math.ceil(t.offsetHeight+bt+30)+'px';
+    }
+  }
+  var rt=null;
+  window.addEventListener('resize',function(){update();clearTimeout(rt);rt=setTimeout(fitTakeaways,120)});
+  fitTakeaways();
+  setTimeout(fitTakeaways,400);
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fitTakeaways)}
   update();
 
   /* ---------- lightbox ---------- */
