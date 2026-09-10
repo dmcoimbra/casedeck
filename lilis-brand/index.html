@@ -556,7 +556,7 @@ input[type=range]{width:100%;accent-color:var(--s1);height:26px}
       <div class="linha2">
         <div class="cel"><span class="rot">O que o estudo apontou</span><p>Quem <strong>já conhece a marca</strong> costuma custar bem menos por venda.</p></div>
         <div class="cel"><span class="rot">O que fizemos</span><p>Reservamos <strong>15%</strong> para anúncios de reforço.</p></div>
-        <div class="cel res"><span class="rot">O que aconteceu em 9 dias</span><p><strong>4,98&times;</strong> com 2 pedidos. Público de reforço leva semanas para encher — e agora passa a usar catálogo no Feed, o formato mais indicado.</p>
+        <div class="cel res"><span class="rot">O que aconteceu em 9 dias</span><p><strong>4,98&times;</strong> com 2 pedidos. Público de reforço leva semanas para encher — e agora passa a rodar só no Feed, com o carrossel de imagens.</p>
           <span class="status obs">Em observação</span></div>
       </div>
     </div>
@@ -907,12 +907,13 @@ responsive(document.getElementById('c-blocos'),(m,sz)=>{
 /* anúncios */
 responsive(document.getElementById('c-ads'),(m,sz)=>{
   const it=R.anuncios.filter(a=>a.receita>0);
-  hBars(m,sz,it.map(a=>({k:a.anuncio+' · '+a.bloco.split('·')[0].trim(),v:a.receita,
+  /* rotulo longo (anuncio + bloco): usa sempre o layout empilhado */
+  hBars(m,'sm',it.map(a=>({k:a.anuncio+'  ·  bloco '+a.bloco,v:a.receita,
     color:ROAS(a)>=10?'var(--s1)':'var(--r2)',
-    right:BRLk(a.receita)+'   ·   '+X(ROAS(a))+'   ·   '+a.pedidos+' ped',
-    rightSm:BRLk(a.receita)+' · '+X(ROAS(a)),
-    tip:`<b>${a.anuncio}</b>Frente: ${a.bloco}<br>Investido: ${BRL2(a.gasto)}<br>Pedidos: ${a.pedidos}<br>Vendas: ${BRL2(a.receita)}<br>Retorno: ${X(ROAS(a))}`
-  })),{rowH:44,L:210,R:270});
+    right:BRLk(a.receita)+'   ·   '+X(ROAS(a))+'   ·   '+a.pedidos+' pedido'+(a.pedidos===1?'':'s'),
+    rightSm:BRLk(a.receita)+'   ·   '+X(ROAS(a))+'   ·   '+a.pedidos+' ped',
+    tip:`<b>${a.anuncio}</b>Bloco: ${a.bloco}<br>Investido: ${BRL2(a.gasto)}<br>Pedidos: ${a.pedidos}<br>Vendas: ${BRL2(a.receita)}<br>Retorno: ${X(ROAS(a))}`
+  })));
 });
 
 /* trajetória */
