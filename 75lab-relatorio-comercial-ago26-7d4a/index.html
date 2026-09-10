@@ -1,0 +1,1305 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>75 LAB · Relatório Gerencial Comercial — Agosto 2026 e metas SET–DEZ</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --lime:#C0EE4E;   /* acento da marca — constante nos dois temas */
+
+  --bg:#F2F1E9; --bg-card:#FFFDF7; --bg-sunk:#E7E5DA; --bg-rail:rgba(242,241,233,.86);
+  --fg:#141412; --fg-2:#5C5A51; --fg-3:#8A877B;
+  --fg-rgb:20,20,18;
+  --line:#DCD9CA; --line-2:#C4C0AE; --grid:#E2DFD1;
+  --accent:#6E8F13; --accent-fill:#C0EE4E; --on-accent:#141412;
+  --hero-bg:#0B0B09; --hero-fg:#F2F1E9; --hero-fg2:#918E82; --hero-line:#2B2A25; --hero-card:#151512;
+
+  --c-daniel:#3E3C35;  --c-vanessa:#6E8F13; --c-claudio:#01A290;
+  --c-julio:#7C5FD3;   --c-cris:#D08018;    --c-caique:#A29E90;
+  --f-daniel:#4A4841;  --f-vanessa:#AFD637; --f-claudio:#06C6AE;
+  --f-julio:#9B7FE0;   --f-cris:#EEA53F;    --f-caique:#BFBBAC;
+
+  --ok:#2E8B3D; --warn:#C77A0A; --bad:#C0392B;
+  --r:14px; --maxw:1180px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0A0A08; --bg-card:#151512; --bg-sunk:#1B1A17; --bg-rail:rgba(10,10,8,.86);
+    --fg:#F2F1E9; --fg-2:#A5A296; --fg-3:#75726A;
+    --fg-rgb:242,241,233;
+    --line:#2A2925; --line-2:#3B3934; --grid:#232219;
+    --accent:#C0EE4E; --on-accent:#141412;
+    --hero-bg:#151512; --hero-card:#1E1D19; --hero-line:#33322C;
+    --c-daniel:#D6D3C4; --c-vanessa:#C0EE4E; --c-claudio:#06C6AE;
+    --c-julio:#C7B5F1;  --c-cris:#F5B961;    --c-caique:#7E7A6E;
+    --f-daniel:#CFCCBD; --f-vanessa:#C0EE4E; --f-claudio:#06C6AE;
+    --f-julio:#C7B5F1;  --f-cris:#F5B961;    --f-caique:#6E6B60;
+    --ok:#6BCB77; --warn:#F0B347; --bad:#E8705F;
+  }
+}
+
+/* ============ BASE ============ */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:88px}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+@media(max-width:640px){ .wrap{padding:0 16px} }
+
+.mono{font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+.eyebrow{
+  font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--fg-3); display:flex; align-items:center; gap:10px; margin:0 0 14px;
+}
+.eyebrow::before{content:""; width:22px; height:2px; background:var(--accent-fill); flex:none}
+h1,h2,h3,h4{margin:0; letter-spacing:-.025em; line-height:1.08; font-weight:800}
+h2{font-size:clamp(28px,4.2vw,46px)}
+h3{font-size:clamp(19px,2.2vw,25px); letter-spacing:-.02em}
+h4{font-size:15px; letter-spacing:0; font-weight:700}
+p{margin:0 0 12px}
+.lede{font-size:clamp(16px,1.7vw,19px); color:var(--fg-2); max-width:68ch; line-height:1.6}
+.small{font-size:13px; color:var(--fg-2); line-height:1.6}
+.note{font-size:12.5px; color:var(--fg-3); line-height:1.6; max-width:78ch}
+.num{font-weight:800; letter-spacing:-.045em; font-variant-numeric:tabular-nums}
+b,strong{font-weight:700; color:var(--fg)}
+
+/* ============ HERO ============ */
+.hero{background:var(--hero-bg); color:var(--hero-fg); position:relative; overflow:hidden}
+.hero::after{
+  content:""; position:absolute; right:-140px; top:-140px; width:420px; height:420px;
+  border:1px dashed rgba(192,238,78,.22); border-radius:50%; pointer-events:none;
+}
+.hero::before{
+  content:""; position:absolute; right:-60px; top:-60px; width:260px; height:260px;
+  border:1px dashed rgba(192,238,78,.14); border-radius:50%; pointer-events:none;
+}
+.hero .wrap{position:relative; z-index:1; padding-top:38px; padding-bottom:44px}
+.brand{display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:38px}
+.logo{font-size:23px; font-weight:800; letter-spacing:-.05em; color:var(--hero-fg)}
+.logo span{color:var(--lime)}
+.tag{
+  font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  background:var(--lime); color:#0B0B09; padding:6px 12px; border-radius:100px; font-weight:600;
+}
+.hero h1{font-size:clamp(34px,6.4vw,68px); letter-spacing:-.04em; max-width:16ch}
+.hero .sub{color:var(--hero-fg2); font-size:clamp(14px,1.6vw,17px); margin-top:16px; max-width:60ch}
+.hero .sub b{color:var(--hero-fg)}
+.verdict{
+  margin-top:34px; padding:22px 24px; border-left:3px solid var(--lime);
+  background:var(--hero-card); border-radius:0 var(--r) var(--r) 0;
+}
+.verdict .q{font-size:clamp(17px,2.3vw,24px); font-weight:700; letter-spacing:-.02em; line-height:1.35; color:var(--hero-fg)}
+.verdict .a{color:var(--hero-fg2); font-size:14.5px; margin-top:10px; max-width:74ch}
+.verdict .a b{color:var(--lime); font-weight:700}
+
+/* ============ NAV ============ */
+nav{
+  position:sticky; top:0; z-index:50; background:var(--bg-rail);
+  -webkit-backdrop-filter:saturate(180%) blur(14px); backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--line);
+}
+nav .wrap{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; padding-top:0; padding-bottom:0}
+nav .wrap::-webkit-scrollbar{display:none}
+nav a{
+  flex:none; padding:15px 13px; font-size:12.5px; font-weight:600; color:var(--fg-3);
+  text-decoration:none; white-space:nowrap; border-bottom:2px solid transparent; transition:color .15s,border-color .15s;
+}
+nav a:hover{color:var(--fg)}
+nav a.on{color:var(--fg); border-bottom-color:var(--accent-fill)}
+nav a i{font-style:normal; color:var(--fg-3); margin-right:6px; font-family:ui-monospace,Menlo,monospace; font-size:11px}
+nav a.on i{color:var(--accent)}
+nav .sep{flex:none; width:1px; height:15px; background:var(--line-2); align-self:center; margin:0 10px}
+
+/* ============ FAIXAS DE RELEVÂNCIA ============ */
+.tier{background:var(--bg-sunk); border-top:1px solid var(--line-2); border-bottom:1px solid var(--line)}
+.tier .wrap{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; padding-top:17px; padding-bottom:17px}
+.tier .k{
+  font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase; font-weight:700; color:var(--fg);
+  display:flex; align-items:center; gap:10px;
+}
+.tier .k::before{content:""; width:9px; height:9px; background:var(--accent-fill); border-radius:2px; flex:none}
+.tier .s{font-size:12.5px; color:var(--fg-2)}
+.tier .n{
+  margin-left:auto; font-family:ui-monospace,Menlo,monospace; font-size:10.5px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--fg-3);
+}
+@media(max-width:560px){ .tier .n{margin-left:0} }
+
+/* ============ SECTIONS ============ */
+section{padding:64px 0; border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+.shead{display:flex; gap:20px; align-items:flex-start; margin-bottom:34px}
+.snum{
+  font-size:clamp(40px,6vw,64px); font-weight:800; line-height:.86; letter-spacing:-.05em;
+  color:transparent; -webkit-text-stroke:1.5px var(--line-2); flex:none;
+}
+.shead .t{flex:1; min-width:0}
+
+/* ============ CARDS / GRID ============ */
+.grid{display:grid; gap:14px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){ .g4{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:1fr} }
+@media(max-width:560px){ .g4,.g2{grid-template-columns:1fr} }
+
+.card{background:var(--bg-card); border:1px solid var(--line); border-radius:var(--r); padding:20px}
+.card.sunk{background:var(--bg-sunk)}
+
+.kpi{position:relative; overflow:hidden}
+.kpi .lab{
+  font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--fg-3); margin-bottom:12px;
+}
+.kpi .v{font-size:clamp(38px,5.6vw,54px); font-weight:800; letter-spacing:-.05em; line-height:1}
+.kpi .v.acc{color:var(--accent)}
+.kpi .u{font-size:16px; font-weight:600; color:var(--fg-3); letter-spacing:0; margin-left:4px}
+.kpi .d{font-size:12.5px; color:var(--fg-2); margin-top:10px; line-height:1.5}
+.kpi .meter{height:5px; border-radius:3px; background:var(--bg-sunk); margin-top:14px; overflow:hidden}
+@media(prefers-color-scheme:dark){ .kpi .meter{background:#26251F} }
+.kpi .meter i{display:block; height:100%; width:0; border-radius:3px; background:var(--accent-fill); transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.in .kpi .meter i, .kpi.in .meter i{width:var(--w)}
+
+/* pills / chips */
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px}
+.chip{
+  font-size:11.5px; padding:4px 9px; border-radius:100px; border:1px solid var(--line-2);
+  color:var(--fg-2); background:var(--bg); white-space:nowrap;
+}
+.chip.on{background:var(--accent-fill); border-color:var(--accent-fill); color:var(--on-accent); font-weight:600}
+.chip.off{opacity:.62; text-decoration:line-through; text-decoration-thickness:1px}
+
+.badge{
+  display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; padding:4px 9px; border-radius:100px; font-family:ui-monospace,Menlo,monospace;
+}
+.badge.ok{background:rgba(46,139,61,.13); color:var(--ok)}
+.badge.warn{background:rgba(199,122,10,.14); color:var(--warn)}
+.badge.bad{background:rgba(192,57,43,.13); color:var(--bad)}
+
+/* ============ FUNIL ============ */
+.funnel{margin-top:8px}
+.frow{display:grid; grid-template-columns:1fr 262px; align-items:stretch; gap:20px}
+.fband{
+  display:flex; align-items:center; justify-content:center; gap:12px;
+  height:88px; color:var(--bg); font-weight:800; transition:clip-path .8s cubic-bezier(.2,.8,.2,1);
+}
+.fband .n{font-size:clamp(26px,3.4vw,38px); letter-spacing:-.05em; line-height:1}
+.fband .k{font-size:12px; font-weight:600; letter-spacing:-.01em; opacity:.82}
+.fband.gold{background:var(--accent-fill); color:var(--on-accent)}
+.fmeta{display:flex; flex-direction:column; justify-content:center; padding:6px 0}
+.fmeta .t{font-weight:700; font-size:14.5px; letter-spacing:-.01em}
+.fmeta .s{font-size:12.5px; color:var(--fg-3); line-height:1.45; margin-top:3px}
+.fconv{
+  display:inline-flex; align-items:center; gap:6px; font-family:ui-monospace,Menlo,monospace;
+  font-size:11.5px; font-weight:700; color:var(--accent); margin-top:7px;
+}
+.fconv svg{flex:none}
+@media(max-width:720px){
+  .frow{grid-template-columns:1fr; gap:0}
+  .fband{height:64px}
+  .fmeta{padding:10px 0 20px}
+}
+
+/* ============ BARRAS HTML ============ */
+.bars{display:flex; flex-direction:column; gap:16px}
+.bar{display:grid; grid-template-columns:118px 1fr; gap:14px; align-items:center}
+.bar .who{font-weight:700; font-size:14px; letter-spacing:-.01em}
+.bar .who small{display:block; font-weight:500; font-size:11px; color:var(--fg-3); letter-spacing:0}
+.track{position:relative; height:34px; background:var(--bg-sunk); border-radius:7px; overflow:hidden; display:flex}
+@media(prefers-color-scheme:dark){ .track{background:#211F1B} }
+.seg{
+  height:100%; width:0; display:flex; align-items:center; padding-left:10px;
+  font-size:12.5px; font-weight:700; color:var(--on-accent); overflow:hidden; white-space:nowrap;
+  transition:width .9s cubic-bezier(.2,.8,.2,1);
+}
+.in .seg{width:var(--w)}
+.seg:empty{padding-left:0}
+.bar.tri{grid-template-columns:118px 1fr 86px}
+.bar.tri .tot{font-size:12.5px; font-weight:800; color:var(--fg-2); text-align:right; white-space:nowrap}
+@media(max-width:560px){
+  .bar{grid-template-columns:1fr; gap:6px}
+  .bar.tri{grid-template-columns:1fr 86px; column-gap:10px}
+  .bar.tri .who{grid-column:1 / -1}
+}
+
+/* bullet (meta vs realizado) */
+.bullet .track{height:38px; border-radius:8px}
+.bullet .tick{position:absolute; top:0; height:100%; width:2px; background:var(--fg); opacity:.55}
+.bullet .tick::after{
+  content:"META 12"; position:absolute; top:-19px; left:50%; transform:translateX(-50%);
+  font-family:ui-monospace,Menlo,monospace; font-size:9.5px; letter-spacing:.1em; color:var(--fg-3); white-space:nowrap;
+}
+.bars .pct{
+  position:absolute; right:12px; top:0; height:100%; display:flex; align-items:center;
+  font-size:13px; font-weight:800; color:var(--fg-2); font-family:ui-monospace,Menlo,monospace;
+}
+
+/* legenda */
+.legend{display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:18px}
+.legend div{display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--fg-2)}
+.legend i{width:11px; height:11px; border-radius:3px; flex:none; display:block}
+
+/* ============ COLUNAS EMPILHADAS ============ */
+.cols{display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(10px,3vw,34px); align-items:end; height:290px; margin-top:26px}
+.col{display:flex; flex-direction:column; justify-content:flex-end; height:100%; position:relative}
+.col .cap{text-align:center; font-size:13px; font-weight:800; letter-spacing:-.02em; margin-bottom:8px}
+.col .cap small{display:block; font-weight:500; font-size:11px; color:var(--fg-3); letter-spacing:.04em; font-family:ui-monospace,Menlo,monospace}
+.stack{display:flex; flex-direction:column; justify-content:flex-end; border-radius:8px 8px 0 0; overflow:hidden; height:0; transition:height 1s cubic-bezier(.2,.8,.2,1)}
+.in .stack{height:var(--h)}
+.stack i{display:block; width:100%}
+.col .axis{text-align:center; font-family:ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:.1em; color:var(--fg-3); padding-top:10px; border-top:1px solid var(--line); margin-top:0}
+
+/* share bar */
+.share{display:flex; height:46px; border-radius:9px; overflow:hidden; margin-top:8px}
+.share i{height:100%; width:0; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; color:#0B0B09; transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.in .share i{width:var(--w)}
+
+/* ============ TABELAS ============ */
+.tscroll{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0 -1px}
+table{width:100%; border-collapse:collapse; font-size:13.5px; min-width:560px}
+th{
+  text-align:left; font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--fg-3); font-weight:600; padding:10px 12px;
+  border-bottom:1px solid var(--line-2); white-space:nowrap;
+}
+td{padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+tr.total td{font-weight:800; background:var(--bg-sunk); border-top:2px solid var(--line-2)}
+td.r,th.r{text-align:right}
+td.n{font-variant-numeric:tabular-nums; font-weight:600}
+.minibar{display:block; height:6px; border-radius:3px; background:var(--bg-sunk); overflow:hidden; min-width:70px; margin-top:5px}
+.minibar i{display:block; height:100%; width:0; border-radius:3px; transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.in .minibar i{width:var(--w)}
+
+/* ============ SVG ============ */
+.svgbox{width:100%; overflow-x:auto}
+.svgbox svg{display:block; width:100%; height:auto}
+.svgbox.tight{min-width:0}
+.svgbox .inner{min-width:540px}
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.s-fg{fill:var(--fg)} .s-fg2{fill:var(--fg-2)} .s-fg3{fill:var(--fg-3)}
+.s-line{stroke:var(--line-2)} .s-grid{stroke:var(--grid)}
+.s-acc{fill:var(--accent)}
+.mn{font-family:ui-monospace,Menlo,monospace}
+
+/* quadrante */
+.qzone{fill:var(--fg); opacity:.028}
+@media(prefers-color-scheme:dark){ .qzone{opacity:.05} }
+.qlab{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; fill:var(--fg-3); font-family:ui-monospace,Menlo,monospace}
+
+/* ============ AÇÃO ============ */
+.act{border-left:3px solid var(--stripe,var(--line-2)); background:var(--bg-card); border-radius:0 var(--r) var(--r) 0; padding:18px 20px; border-top:1px solid var(--line); border-right:1px solid var(--line); border-bottom:1px solid var(--line)}
+.act .hd{display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px}
+.act .nm{font-weight:800; font-size:16px; letter-spacing:-.02em}
+.act .verb{font-family:ui-monospace,Menlo,monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--stripe,var(--fg-3)); font-weight:700}
+.act ul{margin:10px 0 0; padding-left:17px; font-size:13.5px; color:var(--fg-2); line-height:1.6}
+.act li{margin-bottom:5px}
+.act li::marker{color:var(--stripe,var(--fg-3))}
+
+.risk{display:grid; grid-template-columns:44px 1fr; gap:14px; align-items:start}
+.risk .ic{
+  width:44px; height:44px; border-radius:11px; display:grid; place-items:center;
+  font-family:ui-monospace,Menlo,monospace; font-size:15px; font-weight:800;
+  background:var(--bg-sunk); color:var(--fg-2);
+}
+.risk.hi .ic{background:rgba(192,57,43,.13); color:var(--bad)}
+.risk.md .ic{background:rgba(199,122,10,.15); color:var(--warn)}
+
+/* glossário */
+details.gl{border:1px solid var(--line); border-radius:var(--r); background:var(--bg-card); padding:0; overflow:hidden}
+details.gl summary{padding:16px 20px; cursor:pointer; font-weight:700; font-size:14.5px; list-style:none; display:flex; align-items:center; justify-content:space-between; gap:12px}
+details.gl summary::-webkit-details-marker{display:none}
+details.gl summary::after{content:"+"; font-family:ui-monospace,Menlo,monospace; color:var(--fg-3); font-size:18px; font-weight:400}
+details.gl[open] summary::after{content:"–"}
+details.gl .body{padding:0 20px 20px; border-top:1px solid var(--line); padding-top:16px}
+dl{margin:0; font-size:13.5px}
+dt{font-weight:700; margin-top:12px}
+dt:first-child{margin-top:0}
+dd{margin:2px 0 0; color:var(--fg-2); line-height:1.6}
+
+/* ============ RODAPÉ ============ */
+footer{background:var(--hero-bg); color:var(--hero-fg2); padding:44px 0; font-size:12.5px}
+footer .wrap{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; align-items:flex-end}
+footer b{color:var(--hero-fg)}
+
+/* ============ MOVIMENTO ============ */
+.rv{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1; transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1; transform:none; transition:none}
+  .seg,.stack,.share i,.minibar i,.kpi .meter i{transition:none}
+}
+
+/* ============ IMPRESSÃO ============ */
+@media print{
+  :root{
+    --bg:#fff; --bg-card:#fff; --bg-sunk:#f4f3ec; --fg:#000; --fg-2:#333; --fg-3:#666;
+    --line:#ccc; --line-2:#999; --grid:#ddd; --accent:#5d7a10; --hero-bg:#0B0B09;
+  }
+  nav{display:none}
+  body{font-size:11pt}
+  section{padding:22px 0; break-inside:avoid}
+  .hero .wrap{padding:22px 24px}
+  .rv{opacity:1; transform:none}
+  .card{break-inside:avoid}
+  .tier{break-inside:avoid; break-before:page; background:#f4f3ec}
+  details.gl{break-inside:avoid}
+  details.gl[open] .body{display:block}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">75<span>LAB</span></div>
+      <div class="tag">Relatório gerencial · uso interno</div>
+    </div>
+    <h1>O mês em que a área abriu portas mas não fechou negócios.</h1>
+    <p class="sub">Resultados de <b>agosto de 2026</b> e metas comerciais de <b>setembro a dezembro</b>. Dados consolidados em <b>10/09/2026</b>.</p>
+
+    <div class="verdict">
+      <div class="q">52 reuniões viraram 21 novos clientes. Desses, só 12 geraram projeto — 25% da meta qualitativa da área.</div>
+      <div class="a">O volume de prospecção está saudável. O problema está no meio do funil: <b>9 dos 21 novos clientes não geraram nada</b>, e <b>7 deles estão com um único executivo</b>. Setembro começa com 21% da meta realizada e 33% do mês decorrido.</div>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== NAV ==================== -->
+<nav>
+  <div class="wrap" id="nav">
+    <a href="#resumo"><i>00</i>Resumo</a>
+    <a href="#setembro"><i>01</i>Setembro</a>
+    <a href="#acao"><i>02</i>Plano de ação</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="#financeiro"><i>03</i>Metas SET–DEZ</a>
+    <a href="#conversao"><i>04</i>Conversão</a>
+    <a href="#clientes"><i>05</i>Novos clientes</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="#funil"><i>06</i>Funil</a>
+    <a href="#reunioes"><i>07</i>Reuniões</a>
+    <a href="#base"><i>08</i>Base de dados</a>
+  </div>
+</nav>
+
+<main>
+
+<div class="tier">
+  <div class="wrap">
+    <span class="k">Prioridade</span>
+    <span class="s">o que exige decisão nesta semana</span>
+    <span class="n">seções 00–02</span>
+  </div>
+</div>
+
+<!-- ==================== 00 · SUMÁRIO EXECUTIVO ==================== -->
+<section id="resumo" class="rv">
+  <div class="wrap">
+    <div class="shead">
+      <div class="snum">00</div>
+      <div class="t">
+        <p class="eyebrow">Sumário executivo · agosto 2026</p>
+        <h2>Os quatro números do mês</h2>
+      </div>
+    </div>
+
+    <div class="grid g4" id="kpis"></div>
+
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card">
+        <div class="risk hi">
+          <div class="ic">01</div>
+          <div>
+            <h4>Gargalo de conversão</h4>
+            <p class="small" style="margin:6px 0 0">43% dos novos clientes de agosto não geraram projeto. Sete das nove contas paradas estão com <b>Claudio</b>, que abriu 8 portas e converteu 1.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="risk hi">
+          <div class="ic">02</div>
+          <div>
+            <h4>Concentração de meta</h4>
+            <p class="small" style="margin:6px 0 0">De R$ 2,12 milhões previstos até dezembro, <b>R$ 1,49 mi (70%) estão sob Daniel</b>. Os outros cinco somam 30%. Qualquer atraso nessa carteira derruba o ano.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="risk md">
+          <div class="ic">03</div>
+          <div>
+            <h4>Faturamento empurrado</h4>
+            <p class="small" style="margin:6px 0 0"><b>71% da meta do quadrimestre está em novembro e dezembro</b> (R$ 1,51 mi). São os dois meses mais curtos do calendário comercial e sem margem para recuperação.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 01 · SETEMBRO EM CURSO ==================== -->
+<section id="setembro" class="rv">
+  <div class="wrap">
+    <div class="shead">
+      <div class="snum">01</div>
+      <div class="t">
+        <p class="eyebrow">Mês em curso · posição em 10/09/2026</p>
+        <h2>Setembro está atrás do ritmo</h2>
+        <p class="lede" style="margin-top:14px">É o único número deste relatório que ainda dá para mudar. Agosto já fechou; setembro está em curso com <b>21% da meta realizada e 33% do mês decorrido</b> — a diferença precisa ser coberta nos 14 dias úteis restantes.</p>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card" style="display:flex; gap:24px; align-items:center; flex-wrap:wrap">
+        <div id="gauge" style="flex:none"></div>
+        <div style="flex:1; min-width:190px">
+          <p class="eyebrow" style="margin-bottom:8px">Meta de setembro</p>
+          <div class="num" style="font-size:clamp(24px,3.2vw,30px)">R$ 348.000</div>
+          <p class="small" style="margin-top:12px">Realizado até 10/09: <b>21%</b>, cerca de <b>R$ 73 mil</b>.<br>Ritmo proporcional ao calendário: <b>33%</b>, cerca de <b>R$ 116 mil</b>.</p>
+          <p class="small" style="margin-top:12px; color:var(--bad); font-weight:600">Defasagem de aproximadamente R$ 43 mil em relação ao ritmo do mês.</p>
+        </div>
+      </div>
+      <div class="card">
+        <p class="eyebrow" style="margin-bottom:16px">Realizado de setembro por executivo</p>
+        <div class="bars" id="bars-setembro"></div>
+        <p class="note" style="margin-top:16px">Vanessa é a única com realização registrada até a data de corte. O percentual consolidado da área (21%) inclui valores ainda não distribuídos nominalmente — <b>dado parcial, a reconciliar</b>.</p>
+      </div>
+    </div>
+
+    <div class="grid g4" style="margin-top:14px">
+      <div class="card sunk"><div class="kpi">
+        <div class="lab">Ritmo comercial</div><div class="v">3<span class="u">/semana</span></div>
+        <div class="d">Novos clientes únicos por executivo, por semana</div>
+      </div></div>
+      <div class="card sunk"><div class="kpi">
+        <div class="lab">Planejamento semanal</div><div class="v acc" style="font-size:clamp(30px,4.4vw,44px)">SEX</div>
+        <div class="d">Envio da programação da semana seguinte para Vanessa</div>
+      </div></div>
+      <div class="card sunk"><div class="kpi">
+        <div class="lab">Gestão de propostas</div><div class="v">100<span class="u">%</span></div>
+        <div class="d">Orçamentos enviados sob controle e acompanhamento</div>
+      </div></div>
+      <div class="card sunk"><div class="kpi">
+        <div class="lab">Dias úteis restantes</div><div class="v">14</div>
+        <div class="d">Entre 11/09 e 30/09 para recuperar os 79% pendentes</div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 02 · PLANO DE AÇÃO ==================== -->
+<section id="acao" class="rv">
+  <div class="wrap">
+    <div class="shead">
+      <div class="snum">02</div>
+      <div class="t">
+        <p class="eyebrow">O que muda em setembro</p>
+        <h2>Uma prioridade por pessoa</h2>
+        <p class="lede" style="margin-top:14px">Cada executivo sai de agosto com um problema diferente. Tratar todos com a mesma cobrança de volume não resolve nenhum deles. O diagnóstico que sustenta cada prioridade está nas seções <a href="#conversao" style="color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor">04 · Conversão</a> e <a href="#clientes" style="color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor">05 · Novos clientes</a>.</p>
+      </div>
+    </div>
+    <div class="grid g2" id="acoes"></div>
+  </div>
+</section>
+
+<div class="tier">
+  <div class="wrap">
+    <span class="k">Desempenho</span>
+    <span class="s">os números que sustentam a decisão</span>
+    <span class="n">seções 03–05</span>
+  </div>
+</div>
+
+<!-- ==================== 03 · METAS SET–DEZ ==================== -->
+<section id="financeiro" class="rv">
+  <div class="wrap">
+    <div class="shead">
+      <div class="snum">03</div>
+      <div class="t">
+        <p class="eyebrow">Setembro a dezembro de 2026</p>
+        <h2>R$ 2.121.500 em quatro meses</h2>
+        <p class="lede" style="margin-top:14px">A meta do quadrimestre não está distribuída — está <b>empilhada</b>. Dois meses concentram 71% do valor e uma pessoa responde por 70% do total.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="eyebrow" style="margin-bottom:4px">Meta por mês · composição por responsável</p>
+      <div class="cols" id="cols-mes"></div>
+      <div class="legend" id="leg-mes"></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card">
+        <p class="eyebrow" style="margin-bottom:14px">Participação na meta total</p>
+        <div class="share" id="share-bar"></div>
+        <div class="legend" id="share-leg"></div>
+        <p class="note" style="margin-top:14px">Daniel responde sozinho por <b>R$ 1.490.000</b>. Se essa carteira escorregar um mês, não há volume nos outros cinco para compensar.</p>
+      </div>
+      <div class="card">
+        <div class="grid g2" style="gap:14px">
+          <div class="kpi">
+            <div class="lab">SET + OUT</div>
+            <div class="v" style="font-size:clamp(26px,3.4vw,34px)">R$ 612,5<span class="u">mil</span></div>
+            <div class="d">29% da meta do quadrimestre</div>
+            <div class="meter" style="--w:29%"><i></i></div>
+          </div>
+          <div class="kpi">
+            <div class="lab">NOV + DEZ</div>
+            <div class="v acc" style="font-size:clamp(26px,3.4vw,34px)">R$ 1,51<span class="u">mi</span></div>
+            <div class="d">71% da meta do quadrimestre</div>
+            <div class="meter" style="--w:71%"><i></i></div>
+          </div>
+        </div>
+        <p class="note" style="margin-top:18px">Novembro sozinho vale <b>R$ 829.500</b> — mais que setembro e outubro somados. Para que esse mês aconteça, as propostas precisam estar na rua até o fim de outubro.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <p class="eyebrow" style="margin-bottom:16px">Metas detalhadas</p>
+      <div class="tscroll">
+        <table id="tab-financeiro">
+          <thead>
+            <tr>
+              <th>Responsável</th>
+              <th class="r">SET</th>
+              <th class="r">OUT</th>
+              <th class="r">NOV</th>
+              <th class="r">DEZ</th>
+              <th class="r">Total</th>
+              <th class="r">% do total</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 04 · CONVERSÃO ==================== -->
+<section id="conversao" class="rv">
+  <div class="wrap">
+    <div class="shead">
+      <div class="snum">04</div>
+      <div class="t">
+        <p class="eyebrow">Meta qualitativa · quem virou trabalho</p>
+        <h2>Volume não é conversão</h2>
+        <p class="lede" style="margin-top:14px">O gráfico abaixo cruza <b>quantos clientes cada um abriu</b> com <b>quantos viraram projeto</b>. É a leitura mais importante do relatório: dois executivos abriram 8 contas cada e terminaram em lugares opostos.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="svgbox"><div class="inner" id="quadrante"></div></div>
+      <p class="note" style="margin-top:14px">Tamanho do círculo = número de projetos gerados. As linhas tracejadas marcam a média da área: 5,3 novos clientes por executivo e 57% de conversão. Cristiano aparece em 100% com base em um único cliente — leitura limitada pelo tamanho da amostra.</p>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <p class="eyebrow" style="margin-bottom:16px">Detalhamento por executivo</p>
+      <div class="tscroll">
+        <table id="tab-conversao">
+          <thead>
+            <tr>
+              <th>Responsável</th>
+              <th class="r">Novos</th>
+              <th class="r">Com projeto</th>
+              <th class="r">Parados</th>
+              <th>Taxa de conversão</th>
+              <th>Atingimento qualitativo</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top:14px"><b>Atingimento qualitativo</b> = clientes novos que geraram projeto ÷ meta de 12 por executivo. No consolidado, 12 projetos diante da meta conjunta de 48 = 25%.</p>
+    </div>
+
+    <div class="grid g4" style="margin-top:14px" id="cards-conversao"></div>
+  </div>
+</section>
+
+<!-- ==================== 05 · NOVOS CLIENTES ==================== -->
+<section id="clientes" class="rv">
+  <div class="wrap">
+    <div class="shead">
+      <div class="snum">05</div>
+      <div class="t">
+        <p class="eyebrow">Meta quantitativa · 12 novos clientes por executivo</p>
+        <h2>Meta contra realizado</h2>
+        <p class="lede" style="margin-top:14px">Clientes únicos, contados uma só vez, independentemente de quantas reuniões tiveram. Feiras e carteira não entram nesta meta.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="bars bullet" id="bars-meta"></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card">
+        <p class="eyebrow" style="margin-bottom:16px">Origem dos 21 novos clientes</p>
+        <div style="display:flex; gap:26px; align-items:center; flex-wrap:wrap">
+          <div id="donut" style="flex:none"></div>
+          <div style="flex:1; min-width:180px" id="donut-leg"></div>
+        </div>
+        <p class="note" style="margin-top:16px">O consolidado original informava 16 clientes de origem “Pessoal”; a listagem nominal soma 15 — a diferença é o registro sem origem informada (Lavioletera/Be More). <b>Ponto a validar no CRM.</b></p>
+      </div>
+      <div class="card">
+        <p class="eyebrow" style="margin-bottom:10px">Leitura</p>
+        <p class="small" style="margin:0 0 10px"><b>Prospecção ativa carrega o mês.</b> 71% dos novos clientes vieram de relacionamento pessoal dos executivos. Feiras entregaram 19% — quatro contas, sendo duas da FEBRATEX (Brother e Epson).</p>
+        <p class="small" style="margin:0"><b>Nenhum executivo bateu a meta de 12.</b> A área fechou em 21 de 48 clientes, 44% do combinado. Vanessa e Claudio chegaram mais perto, com 8 cada.</p>
+        <div style="margin-top:18px; padding-top:16px; border-top:1px solid var(--line)">
+          <p class="eyebrow" style="margin-bottom:10px">Clientes de carteira atendidos · 9</p>
+          <div class="chips" id="chips-carteira"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tier">
+  <div class="wrap">
+    <span class="k">Detalhamento</span>
+    <span class="s">atividade, listas e base de dados</span>
+    <span class="n">seções 06–08</span>
+  </div>
+</div>
+
+<!-- ==================== 06 · FUNIL ==================== -->
+<section id="funil" class="rv">
+  <div class="wrap">
+    <div class="shead">
+      <div class="snum">06</div>
+      <div class="t">
+        <p class="eyebrow">Onde o esforço se perde</p>
+        <h2>Funil de novos negócios</h2>
+        <p class="lede" style="margin-top:14px">Cada etapa mostra quanto sobrou da anterior. A queda mais cara não é na abertura — é na passagem de <b>cliente atendido</b> para <b>projeto gerado</b>.</p>
+      </div>
+    </div>
+
+    <div class="funnel" id="funil-el"></div>
+
+    <div class="grid g3" style="margin-top:34px">
+      <div class="card sunk">
+        <div class="kpi">
+          <div class="lab">Taxa global do funil</div>
+          <div class="v acc">23%</div>
+          <div class="d">12 projetos a cada 52 reuniões realizadas. Na prática, <b>1 projeto a cada 4,3 reuniões</b>.</div>
+        </div>
+      </div>
+      <div class="card sunk">
+        <div class="kpi">
+          <div class="lab">Custo de oportunidade</div>
+          <div class="v">9</div>
+          <div class="d">Novos clientes atendidos que <b>não geraram nenhum trabalho</b>. Reunião feita, relacionamento aberto, retorno zero.</div>
+        </div>
+      </div>
+      <div class="card sunk">
+        <div class="kpi">
+          <div class="lab">Se a conversão fosse 80%</div>
+          <div class="v">17<span class="u">projetos</span></div>
+          <div class="d">Sem prospectar um cliente a mais: <b>+5 projetos</b> e 35% da meta qualitativa, contra os 25% entregues.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 07 · REUNIÕES ==================== -->
+<section id="reunioes" class="rv">
+  <div class="wrap">
+    <div class="shead">
+      <div class="snum">07</div>
+      <div class="t">
+        <p class="eyebrow">Atividade comercial</p>
+        <h2>Reuniões por executivo</h2>
+        <p class="lede" style="margin-top:14px">52 reuniões únicas no mês, sem contar feiras. A divisão entre <b>novos</b> e <b>carteira</b> revela onde cada um colocou o tempo.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="bars" id="bars-reunioes"></div>
+      <div class="legend">
+        <div><i style="background:var(--accent-fill)"></i> Reuniões com clientes novos</div>
+        <div><i style="background:var(--f-claudio)"></i> Reuniões de carteira</div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card">
+        <p class="eyebrow" style="margin-bottom:10px">Leitura</p>
+        <p class="small" style="margin:0"><b>Cristiano é o ponto fora da curva.</b> Das 9 reuniões que fez, 7 foram de carteira — a única pessoa da área com mais tempo em base do que em prospecção. Vanessa, Julio e Claudio dedicaram entre 73% e 83% da agenda a clientes novos.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow" style="margin-bottom:10px">Feiras visitadas · 5</p>
+        <div class="chips" id="chips-feiras"></div>
+        <p class="note" style="margin-top:12px">Feiras não entram na contagem de reuniões, mas originaram 4 dos 21 novos clientes do mês.</p>
+      </div>
+    </div>
+
+    <p class="note" style="margin-top:16px">A soma individual (55 reuniões) supera o total da área (52) porque reuniões com mais de um executivo presente são contadas uma vez no consolidado e uma vez para cada participante.</p>
+  </div>
+</section>
+
+<!-- ==================== 08 · BASE DE DADOS ==================== -->
+<section id="base" class="rv">
+  <div class="wrap">
+    <div class="shead">
+      <div class="snum">08</div>
+      <div class="t">
+        <p class="eyebrow">Anexo</p>
+        <h2>Base de dados</h2>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="eyebrow" style="margin-bottom:16px">Os 21 novos clientes de agosto</p>
+      <div class="tscroll">
+        <table id="tab-base">
+          <thead><tr><th>#</th><th>Cliente</th><th>Dono</th><th>Origem</th><th>Gerou projeto</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <details class="gl" style="margin-top:14px">
+      <summary>Como ler este relatório — definições das métricas</summary>
+      <div class="body">
+        <dl>
+          <dt>Reunião única</dt>
+          <dd>Encontro comercial registrado uma vez, mesmo com mais de um executivo presente. Visitas a feiras não contam como reunião.</dd>
+          <dt>Novo cliente único</dt>
+          <dd>Empresa fora da carteira atendida pela primeira vez no mês. Contada uma só vez, independentemente do número de reuniões ou de quantos executivos participaram.</dd>
+          <dt>Meta quantitativa</dt>
+          <dd>3 novos clientes únicos por semana, 12 por mês, por executivo. Meta conjunta da área: 48 por mês.</dd>
+          <dt>Atingimento qualitativo</dt>
+          <dd>Novos clientes que geraram projeto ou trabalho em andamento ÷ meta de 12 por executivo. É a métrica que mede resultado, não atividade.</dd>
+          <dt>Taxa de conversão</dt>
+          <dd>Novos clientes que geraram projeto ÷ novos clientes atendidos pelo mesmo executivo. Mede eficiência, sem depender do volume.</dd>
+          <dt>Cliente de carteira</dt>
+          <dd>Conta já ativa na base da agência. Não entra na meta de novos clientes.</dd>
+        </dl>
+      </div>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="logo" style="font-size:19px; margin-bottom:8px">75<span>LAB</span></div>
+      <div>Relatório gerencial comercial · agosto 2026<br>Documento interno — não distribuir.</div>
+    </div>
+    <div style="text-align:right">
+      <b>Dados consolidados em 10/09/2026</b><br>
+      Fonte: registro comercial da área · realizado de setembro parcial
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   DADOS — para atualizar o relatório no próximo mês,
+   altere apenas este bloco. Todos os gráficos derivam daqui.
+   ============================================================ */
+var D = {
+  reunioes: { area:52, novos:36, carteira:16, feiras:5 },
+  feiras: ["Brazil Promotion","Pet South América","FEBRATEX","Intersolar","IFPA"],
+  carteira: ["ALLTAK","GO ELECRIC","ABC COM","Pronta","PETZ","POLENGHI","Be more","ERG","Famosa"],
+  metaClientes: 12,
+
+  equipe: [
+    { id:"vanessa", nome:"Vanessa",          cargo:"Diretora Comercial", reunioes:19, rNovo:15, rCart:4, novos:8, carteira:3, feiras:4, projetos:7 },
+    { id:"julio",   nome:"Julio Cesar",      cargo:"Executivo",          reunioes:15, rNovo:11, rCart:4, novos:4, carteira:3, feiras:4, projetos:3 },
+    { id:"claudio", nome:"Claudio Silveira", cargo:"Executivo",          reunioes:12, rNovo:10, rCart:2, novos:8, carteira:2, feiras:1, projetos:1 },
+    { id:"cris",    nome:"Cristiano",        cargo:"Executivo",          reunioes:9,  rNovo:2,  rCart:7, novos:1, carteira:4, feiras:0, projetos:1 }
+  ],
+
+  fin: [
+    { id:"daniel",  nome:"Daniel",  set:260000, out:130000, nov:575000, dez:525000, realSet:0    },
+    { id:"vanessa", nome:"Vanessa", set:46000,  out:55500,  nov:150500, dez:48000,  realSet:0.79 },
+    { id:"cris",    nome:"Cris",    set:17000,  out:12000,  nov:12000,  dez:42000,  realSet:0    },
+    { id:"julio",   nome:"Julio",   set:15000,  out:25000,  nov:50000,  dez:22500,  realSet:0    },
+    { id:"claudio", nome:"Claudio", set:10000,  out:40000,  nov:40000,  dez:40000,  realSet:0    },
+    { id:"caique",  nome:"Caique",  set:0,      out:2000,   nov:2000,   dez:2000,   realSet:0    }
+  ],
+  realSetArea: 0.21,
+  diaCorte: 10, diasMes: 30,
+
+  clientes: [
+    ["COOP","cris","Pessoal",true],
+    ["GETPOWER / POWERSAFE","julio","Feira · Intersolar",true],
+    ["Omron","vanessa","Pessoal",true],
+    ["FortBras","julio","Pessoal",true],
+    ["True Source","julio","Pessoal",false],
+    ["NutriFy","vanessa","Pessoal",true],
+    ["Nestlé Purina","julio","Feira · Pet South América",true],
+    ["Grupo Boticário","claudio","Pessoal",false],
+    ["Camil","claudio","Pessoal",false],
+    ["Vizcaya","claudio","Pessoal",false],
+    ["Razzo","claudio","Pessoal",false],
+    ["Lavioletera / Be More","claudio","Não informado",true],
+    ["Brother","claudio","Feira · FEBRATEX",false],
+    ["Epson","claudio","Feira · FEBRATEX",false],
+    ["Mufatto","claudio","Pessoal",false],
+    ["NGV","vanessa","Pessoal",true],
+    ["Be more","vanessa","Pessoal",false],
+    ["Scala Queijos","vanessa","Pessoal",true],
+    ["Divina Terra","vanessa","Pessoal",true],
+    ["PANCO","vanessa","Pessoal",true],
+    ["Neoband","vanessa","Network",true]
+  ],
+
+  acoes: [
+    { id:"vanessa", nome:"Vanessa", verbo:"Sustentar e transferir",
+      txt:"8 novos clientes, 7 com projeto. Melhor taxa da área (88%) e única com realização em setembro.",
+      itens:["Documentar a abordagem que converte e rodar uma sessão de repasse com Claudio e Cristiano.",
+             "Fechar os 21% restantes da meta de setembro (R$ 46 mil) até 30/09.",
+             "Manter as 3 contas de carteira sem tirar agenda da prospecção."] },
+    { id:"claudio", nome:"Claudio Silveira", verbo:"Converter o que já abriu",
+      txt:"8 novos clientes e apenas 1 projeto. Concentra 7 das 9 contas paradas da área.",
+      itens:["Revisar Boticário, Camil, Vizcaya, Razzo, Brother, Epson e Mufatto com próximo passo e data definidos.",
+             "Meta mínima de 4 conversões em setembro dentro da base já aberta — sem depender de novos nomes.",
+             "Levar duas dessas contas para a reunião semanal com proposta pronta."] },
+    { id:"julio", nome:"Julio Cesar", verbo:"Escalar sem perder a taxa",
+      txt:"4 novos clientes e 3 projetos. Segunda melhor conversão da área (75%), mas volume abaixo de um terço da meta.",
+      itens:["Triplicar a prospecção para chegar aos 12 clientes/mês mantendo a taxa acima de 60%.",
+             "Aproveitar o histórico de feiras: 2 dos 4 novos clientes vieram de Intersolar e Pet South América.",
+             "Destravar True Source, única conta aberta sem desdobramento."] },
+    { id:"cris", nome:"Cristiano", verbo:"Voltar ao ritmo de prospecção",
+      txt:"9 reuniões, 7 delas de carteira. 1 novo cliente no mês — 8% da meta individual.",
+      itens:["Inverter a proporção da agenda: mínimo de 3 novos clientes únicos por semana.",
+             "Blindar tempo de carteira em no máximo 30% das reuniões.",
+             "COOP converteu — usar o case como porta de entrada em outras redes regionais."] },
+    { id:"daniel", nome:"Daniel", verbo:"Destravar a concentração",
+      txt:"R$ 1,49 milhão sob responsabilidade direta — 70% da meta do quadrimestre.",
+      itens:["Abrir a meta em pipeline nominal por conta e por mês até 30/09.",
+             "Definir plano B para novembro (R$ 575 mil): qual carteira cobre um escorregão.",
+             "Redistribuir parte do volume de NOV/DEZ para os executivos com capacidade ociosa."] }
+  ]
+};
+
+/* ============================================================
+   UTILITÁRIOS
+   ============================================================ */
+var $ = function(s){ return document.querySelector(s); };
+var CORES = { daniel:"--f-daniel", vanessa:"--f-vanessa", claudio:"--f-claudio", julio:"--f-julio", cris:"--f-cris", caique:"--f-caique" };
+function cor(id){ return "var(" + (CORES[id] || "--line-2") + ")"; }
+function brl(v){ return "R$ " + v.toLocaleString("pt-BR"); }
+function curto(v){
+  if(v >= 1000000) return "R$ " + (v/1e6).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2}) + " mi";
+  if(v === 0) return "—";
+  return "R$ " + (v/1000).toLocaleString("pt-BR",{maximumFractionDigits:1}) + " mil";
+}
+function pct(v,casas){ return (v*100).toLocaleString("pt-BR",{maximumFractionDigits:casas||0}) + "%"; }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+var TOT = {
+  novos:      D.equipe.reduce(function(a,p){ return a+p.novos; },0),
+  projetos:   D.equipe.reduce(function(a,p){ return a+p.projetos; },0),
+  metaArea:   D.metaClientes * D.equipe.length,
+  finTotal:   D.fin.reduce(function(a,p){ return a+p.set+p.out+p.nov+p.dez; },0),
+  setTotal:   D.fin.reduce(function(a,p){ return a+p.set; },0)
+};
+
+/* ============================================================
+   00 · KPIs
+   ============================================================ */
+(function(){
+  var k = [
+    { lab:"Reuniões realizadas", v:D.reunioes.area, u:"",
+      d:"<b>"+D.reunioes.novos+"</b> com clientes novos · <b>"+D.reunioes.carteira+"</b> de carteira · <b>"+D.reunioes.feiras+"</b> feiras visitadas",
+      w:(D.reunioes.novos/D.reunioes.area) },
+    { lab:"Novos clientes únicos", v:TOT.novos, u:"de "+TOT.metaArea,
+      d:"<b>"+pct(TOT.novos/TOT.metaArea)+"</b> da meta conjunta da área. Nenhum executivo atingiu os 12 individuais.",
+      w:(TOT.novos/TOT.metaArea) },
+    { lab:"Novos que geraram projeto", v:TOT.projetos, u:"de "+TOT.novos, acc:true,
+      d:"Atingimento qualitativo de <b>"+pct(TOT.projetos/TOT.metaArea)+"</b>. Taxa de conversão de <b>"+pct(TOT.projetos/TOT.novos)+"</b>.",
+      w:(TOT.projetos/TOT.metaArea) },
+    { lab:"Meta SET–DEZ 2026", v:curto(TOT.finTotal), u:"", raw:true,
+      d:"Setembro com <b>"+pct(D.realSetArea)+"</b> realizado até 10/09, contra <b>"+pct(D.diaCorte/D.diasMes)+"</b> do mês decorrido.",
+      w:D.realSetArea }
+  ];
+  $("#kpis").innerHTML = k.map(function(x){
+    var valor = x.raw ? '<div class="v'+(x.acc?" acc":"")+'" style="font-size:clamp(28px,3.9vw,40px)">'+x.v+'</div>'
+                      : '<div class="v'+(x.acc?" acc":"")+'">'+x.v+(x.u?' <span class="u">'+x.u+'</span>':'')+'</div>';
+    return '<div class="card kpi"><div class="lab">'+x.lab+'</div>'+valor+
+           '<div class="d">'+x.d+'</div><div class="meter" style="--w:'+(x.w*100).toFixed(1)+'%"><i></i></div></div>';
+  }).join("");
+})();
+
+/* ============================================================
+   01 · FUNIL
+   ============================================================ */
+(function(){
+  var base = D.reunioes.area;
+  var et = [
+    { n:D.reunioes.area,  k:"reuniões",       t:"Reuniões realizadas",        s:"Toda a atividade comercial do mês, feiras não incluídas." },
+    { n:D.reunioes.novos, k:"reuniões",       t:"Com clientes novos",         s:"Agenda efetivamente dedicada à prospecção." },
+    { n:TOT.novos,        k:"clientes",       t:"Novos clientes únicos",      s:"Empresas distintas atendidas pela primeira vez." },
+    { n:TOT.projetos,     k:"clientes",       t:"Geraram projeto",            s:"Contas com trabalho ou proposta em andamento.", gold:true }
+  ];
+  var w = et.map(function(e){ return Math.max(18, e.n/base*100); });
+  var seta = '<svg width="11" height="11" viewBox="0 0 11 11" aria-hidden="true"><path d="M5.5 1v9M2 6.5l3.5 3.5L9 6.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+
+  $("#funil-el").innerHTML = et.map(function(e,i){
+    var wt = w[i], wb = (i < w.length-1) ? w[i+1] : w[i];
+    var cp = "polygon(" + (50-wt/2) + "% 0%, " + (50+wt/2) + "% 0%, " + (50+wb/2) + "% 100%, " + (50-wb/2) + "% 100%)";
+    var conv = i === 0 ? "" :
+      '<div class="fconv">'+seta+' '+pct(et[i].n/et[i-1].n)+' da etapa anterior</div>';
+    return '<div class="frow">'+
+      '<div class="fband'+(e.gold?" gold":"")+'" style="clip-path:'+cp+'; background:'+(e.gold?"var(--accent-fill)":"rgba(var(--fg-rgb),"+(0.88-i*0.14).toFixed(2)+")")+'">'+
+        '<span class="n">'+e.n+'</span><span class="k">'+e.k+'</span></div>'+
+      '<div class="fmeta"><div class="t">'+e.t+'</div><div class="s">'+e.s+'</div>'+conv+'</div></div>';
+  }).join("");
+})();
+
+/* ============================================================
+   02 · REUNIÕES POR EXECUTIVO
+   ============================================================ */
+(function(){
+  var max = Math.max.apply(null, D.equipe.map(function(p){ return p.reunioes; }));
+  $("#bars-reunioes").innerHTML = D.equipe.map(function(p){
+    var a = p.rNovo/max*100, b = p.rCart/max*100;
+    return '<div class="bar tri"><div class="who">'+esc(p.nome)+'<small>'+esc(p.cargo)+'</small></div>'+
+      '<div class="track">'+
+        '<div class="seg" style="--w:'+a.toFixed(1)+'%; background:var(--accent-fill)">'+p.rNovo+' novos</div>'+
+        '<div class="seg" style="--w:'+b.toFixed(1)+'%; background:var(--f-claudio); color:var(--on-accent)">'+p.rCart+'</div>'+
+      '</div>'+
+      '<div class="tot">'+p.reunioes+' reuniões</div></div>';
+  }).join("");
+  $("#chips-feiras").innerHTML  = D.feiras.map(function(f){ return '<span class="chip">'+esc(f)+'</span>'; }).join("");
+  $("#chips-carteira").innerHTML = D.carteira.map(function(f){ return '<span class="chip">'+esc(f)+'</span>'; }).join("");
+})();
+
+/* ============================================================
+   03 · META DE NOVOS CLIENTES + ORIGEM
+   ============================================================ */
+(function(){
+  var linhas = D.equipe.slice().sort(function(a,b){ return b.novos-a.novos; });
+  var html = '<p class="note" style="margin:0 0 4px">Trilho completo = meta mensal de 12 novos clientes únicos.</p>';
+  html += linhas.map(function(p){
+    var w = Math.min(100, p.novos/D.metaClientes*100);
+    return '<div class="bar"><div class="who">'+esc(p.nome)+'<small>'+p.novos+' de '+D.metaClientes+'</small></div>'+
+      '<div class="track"><div class="seg" style="--w:'+w.toFixed(1)+'%; background:'+cor(p.id)+'"></div>'+
+      '<div class="pct">'+pct(p.novos/D.metaClientes)+'</div></div></div>';
+  }).join("");
+  var wa = TOT.novos/TOT.metaArea*100;
+  html += '<div class="bar" style="margin-top:6px; padding-top:16px; border-top:1px solid var(--line)">'+
+    '<div class="who">Total da área<small>'+TOT.novos+' de '+TOT.metaArea+'</small></div>'+
+    '<div class="track"><div class="seg" style="--w:'+wa.toFixed(1)+'%; background:rgba(var(--fg-rgb),.8)"></div>'+
+    '<div class="pct">'+pct(TOT.novos/TOT.metaArea)+'</div></div></div>';
+  $("#bars-meta").innerHTML = html;
+
+  /* donut de origem */
+  var g = {};
+  D.clientes.forEach(function(c){
+    var o = c[2].indexOf("Feira") === 0 ? "Feira" : c[2];
+    g[o] = (g[o]||0) + 1;
+  });
+  var ordem = ["Pessoal","Feira","Network","Não informado"];
+  var cores = ["var(--accent-fill)","var(--f-claudio)","var(--f-julio)","var(--line-2)"];
+  var tot = D.clientes.length, C = 2*Math.PI*54, off = 0, segs = "";
+  ordem.forEach(function(o,i){
+    var v = g[o]||0, len = v/tot*C;
+    segs += '<circle cx="75" cy="75" r="54" fill="none" stroke="'+cores[i]+'" stroke-width="22" '+
+            'stroke-dasharray="'+len.toFixed(2)+' '+(C-len).toFixed(2)+'" stroke-dashoffset="'+(-off).toFixed(2)+'" transform="rotate(-90 75 75)"></circle>';
+    off += len;
+  });
+  $("#donut").innerHTML = '<svg width="150" height="150" viewBox="0 0 150 150" role="img" aria-label="Origem dos novos clientes">'+
+    segs+'<text x="75" y="72" text-anchor="middle" class="s-fg" style="font-size:30px; font-weight:800; letter-spacing:-.04em">'+tot+'</text>'+
+    '<text x="75" y="90" text-anchor="middle" class="s-fg3 mn" style="font-size:9px; letter-spacing:.12em">NOVOS</text></svg>';
+  $("#donut-leg").innerHTML = ordem.map(function(o,i){
+    var v = g[o]||0;
+    return '<div style="display:flex; align-items:center; gap:9px; padding:7px 0; border-bottom:1px solid var(--line)">'+
+      '<i style="width:11px;height:11px;border-radius:3px;background:'+cores[i]+';flex:none"></i>'+
+      '<span style="flex:1; font-size:13.5px">'+esc(o)+'</span>'+
+      '<b style="font-size:13.5px">'+v+'</b>'+
+      '<span class="mn" style="font-size:11.5px; color:var(--fg-3); width:38px; text-align:right">'+pct(v/tot)+'</span></div>';
+  }).join("");
+})();
+
+/* ============================================================
+   04 · QUADRANTE VOLUME × CONVERSÃO
+   ============================================================ */
+(function(){
+  var x0=78, x1=630, y0=50, y1=378, XM=10, YM=110;
+  var sx = function(v){ return x0 + v/XM*(x1-x0); };
+  var sy = function(v){ return y1 - v/YM*(y1-y0); };
+  var mediaX = TOT.novos/D.equipe.length;
+  var mediaY = TOT.projetos/TOT.novos*100;
+  var s = '';
+
+  s += '<rect x="'+sx(mediaX)+'" y="'+y0+'" width="'+(x1-sx(mediaX))+'" height="'+(sy(mediaY)-y0)+'" fill="var(--accent-fill)" opacity=".10"/>';
+  s += '<rect x="'+x0+'" y="'+y0+'" width="'+(x1-x0)+'" height="'+(y1-y0)+'" fill="none" class="s-line" stroke-width="1"/>';
+
+  [0,25,50,75,100].forEach(function(t){
+    s += '<line x1="'+x0+'" y1="'+sy(t)+'" x2="'+x1+'" y2="'+sy(t)+'" class="s-grid" stroke-width="1"/>';
+    s += '<text x="'+(x0-10)+'" y="'+(sy(t)+4)+'" text-anchor="end" class="s-fg3 mn" style="font-size:11px">'+t+'%</text>';
+  });
+  [0,2,4,6,8,10].forEach(function(t){
+    s += '<text x="'+sx(t)+'" y="'+(y1+20)+'" text-anchor="middle" class="s-fg3 mn" style="font-size:11px">'+t+'</text>';
+  });
+
+  s += '<line x1="'+sx(mediaX)+'" y1="'+y0+'" x2="'+sx(mediaX)+'" y2="'+y1+'" class="s-line" stroke-width="1.5" stroke-dasharray="5 4"/>';
+  s += '<line x1="'+x0+'" y1="'+sy(mediaY)+'" x2="'+x1+'" y2="'+sy(mediaY)+'" class="s-line" stroke-width="1.5" stroke-dasharray="5 4"/>';
+  /* Ordem de resolução: as bolhas ocupam seu espaço primeiro; depois os rótulos de
+     quadrante e de média escolhem entre a posição externa e a interna; por último os
+     rótulos das bolhas. Assim o gráfico continua legível quando os dados mudarem. */
+  var LM = 7.4;
+  var pts = D.equipe.map(function(p){
+    var taxa = p.projetos/p.novos*100;
+    return { p:p, taxa:taxa, cx:sx(p.novos), cy:sy(taxa), r:12 + Math.sqrt(p.projetos)*6 };
+  }).sort(function(a,b){ return b.r - a.r; });
+
+  var ocupado = pts.map(function(o){
+    return { x:o.cx-o.r, y:o.cy-o.r, x2:o.cx+o.r, y2:o.cy+o.r };
+  });
+  /* os rótulos dos eixos são fixos e também não podem ser cobertos */
+  [0,25,50,75,100].forEach(function(t){ ocupado.push({ x:x0-42, y:sy(t)-8, x2:x0-8, y2:sy(t)+8 }); });
+  [0,2,4,6,8,10].forEach(function(t){ ocupado.push({ x:sx(t)-9, y:y1+8, x2:sx(t)+9, y2:y1+26 }); });
+
+  function caixa(x, y, w, a){
+    var xr = a === "end" ? x - w : (a === "middle" ? x - w/2 : x);
+    return { x:xr, y:y-13, x2:xr+w, y2:y+6 };
+  }
+  function livre(r){
+    if(r.x < 4 || r.x2 > 656 || r.y < 4 || r.y2 > 436) return false;
+    return !ocupado.some(function(o){
+      return !(r.x2 < o.x || r.x > o.x2 || r.y2 < o.y || r.y > o.y2);
+    });
+  }
+  /* devolve o primeiro candidato livre; se nenhum for, usa o primeiro */
+  function coloca(cands, w){
+    for(var i = 0; i < cands.length; i++){
+      var b = caixa(cands[i].x, cands[i].y, w, cands[i].a);
+      if(livre(b)){ ocupado.push(b); return cands[i]; }
+    }
+    ocupado.push(caixa(cands[0].x, cands[0].y, w, cands[0].a));
+    return cands[0];
+  }
+  function texto(t, pos, cls, extra){
+    return '<text x="'+pos.x.toFixed(1)+'" y="'+pos.y.toFixed(1)+'" text-anchor="'+pos.a+'" '+
+           'class="'+cls+'"'+(extra||'')+'>'+esc(t)+'</text>';
+  }
+
+  var xm = sx(mediaX), ym = sy(mediaY), estMn = ' style="font-size:9.5px; letter-spacing:.08em"';
+  /* cada quadrante tenta o canto externo, depois o lado interno, depois um recuo vertical */
+  [ { t:"Qualidade sem escala",     ex:x0+10, ix:xm-10, ea:"start", ia:"end",   ey:y0+18, iy:ym-14 },
+    { t:"Motor da área",            ex:x1-10, ix:xm+10, ea:"end",   ia:"start", ey:y0+18, iy:ym-14 },
+    { t:"Baixa atividade",          ex:x0+10, ix:xm-10, ea:"start", ia:"end",   ey:y1-14, iy:ym+22 },
+    { t:"Abre porta, não converte", ex:x1-10, ix:xm+10, ea:"end",   ia:"start", ey:y1-14, iy:ym+22 }
+  ].forEach(function(q){
+    s += texto(q.t, coloca([
+      { x:q.ex, y:q.ey, a:q.ea },   /* canto externo do quadrante */
+      { x:q.ix, y:q.ey, a:q.ia },   /* mesma altura, encostado na mediana vertical */
+      { x:q.ex, y:q.iy, a:q.ea },   /* mesma coluna, encostado na mediana horizontal */
+      { x:q.ix, y:q.iy, a:q.ia }    /* canto interno, junto do cruzamento */
+    ], q.t.length*LM), "qlab");
+  });
+
+  var tMx = "MÉDIA " + mediaX.toLocaleString("pt-BR",{maximumFractionDigits:1});
+  s += texto(tMx, coloca([{ x:xm, y:y0-9, a:"middle" }], tMx.length*LM), "s-fg3 mn", estMn);
+  var tMy = "MÉDIA DA ÁREA " + Math.round(mediaY) + "%";
+  s += texto(tMy, coloca([
+      { x:x0+7, y:ym-8,  a:"start" },
+      { x:x1-7, y:ym-8,  a:"end"   },
+      { x:x0+7, y:ym+18, a:"start" }
+    ], tMy.length*LM), "s-fg3 mn", estMn);
+
+  pts.forEach(function(o){
+    s += '<circle cx="'+o.cx.toFixed(1)+'" cy="'+o.cy.toFixed(1)+'" r="'+o.r.toFixed(1)+'" fill="'+cor(o.p.id)+'" opacity=".9"/>';
+    s += '<text x="'+o.cx.toFixed(1)+'" y="'+(o.cy+5).toFixed(1)+'" text-anchor="middle" style="font-size:14px; font-weight:800; fill:var(--on-accent)">'+o.p.projetos+'</text>';
+  });
+
+  pts.forEach(function(o){
+    var nome = o.p.nome.split(" ")[0];
+    var det  = o.p.projetos+'/'+o.p.novos+' · '+pct(o.p.projetos/o.p.novos);
+    var w    = Math.max(nome.length*8.0, det.length*6.6);
+    var pos  = coloca([
+      { x:o.cx+o.r+11, y:o.cy-3,      a:"start"  },
+      { x:o.cx-o.r-11, y:o.cy-3,      a:"end"    },
+      { x:o.cx,        y:o.cy+o.r+20, a:"middle" },
+      { x:o.cx,        y:o.cy-o.r-22, a:"middle" }
+    ], w);
+    s += texto(nome, pos, "s-fg", ' style="font-size:14px; font-weight:700"');
+    s += texto(det, { x:pos.x, y:pos.y+16, a:pos.a }, "s-fg3 mn", ' style="font-size:10.5px"');
+  });
+
+  s += '<text x="'+((x0+x1)/2)+'" y="'+(y1+46)+'" text-anchor="middle" class="s-fg2 mn" style="font-size:10.5px; letter-spacing:.12em">NOVOS CLIENTES ATENDIDOS →</text>';
+  s += '<text transform="translate(24 '+((y0+y1)/2)+') rotate(-90)" text-anchor="middle" class="s-fg2 mn" style="font-size:10.5px; letter-spacing:.12em">↑ TAXA DE CONVERSÃO</text>';
+
+  $("#quadrante").innerHTML = '<svg viewBox="0 0 660 440" role="img" aria-label="Volume de novos clientes contra taxa de conversão por executivo">'+s+'</svg>';
+})();
+
+/* ============================================================
+   04b · TABELA E CARDS DE CONVERSÃO
+   ============================================================ */
+(function(){
+  var tb = $("#tab-conversao").querySelector("tbody");
+  var linhas = D.equipe.slice().sort(function(a,b){ return b.projetos-a.projetos; });
+  tb.innerHTML = linhas.map(function(p){
+    var taxa = p.projetos/p.novos, ating = p.projetos/D.metaClientes;
+    return '<tr><td><b>'+esc(p.nome)+'</b></td>'+
+      '<td class="r n">'+p.novos+'</td>'+
+      '<td class="r n" style="color:var(--accent)">'+p.projetos+'</td>'+
+      '<td class="r n">'+(p.novos-p.projetos)+'</td>'+
+      '<td><b>'+pct(taxa)+'</b><span class="minibar"><i style="--w:'+(taxa*100).toFixed(0)+'%; background:'+cor(p.id)+'"></i></span></td>'+
+      '<td><b>'+pct(ating)+'</b><span class="minibar"><i style="--w:'+(ating*100).toFixed(0)+'%; background:'+cor(p.id)+'"></i></span></td></tr>';
+  }).join("") +
+  '<tr class="total"><td>Total da área</td><td class="r n">'+TOT.novos+'</td><td class="r n">'+TOT.projetos+'</td>'+
+  '<td class="r n">'+(TOT.novos-TOT.projetos)+'</td><td>'+pct(TOT.projetos/TOT.novos)+'</td><td>'+pct(TOT.projetos/TOT.metaArea)+'</td></tr>';
+
+  $("#cards-conversao").innerHTML = D.equipe.slice().sort(function(a,b){ return b.projetos-a.projetos; }).map(function(p){
+    var conv = [], par = [];
+    D.clientes.forEach(function(c){ if(c[1] === p.id){ (c[3] ? conv : par).push(c[0]); } });
+    var taxa = p.projetos/p.novos;
+    var bg = taxa >= 0.7 ? "ok" : (taxa >= 0.4 ? "warn" : "bad");
+    return '<div class="card"><div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:12px">'+
+      '<b style="font-size:15px; letter-spacing:-.02em">'+esc(p.nome.split(" ")[0])+'</b>'+
+      '<span class="badge '+bg+'">'+pct(taxa)+'</span></div>'+
+      '<p class="eyebrow" style="margin:0 0 7px; font-size:10px">Converteram · '+conv.length+'</p>'+
+      '<div class="chips">'+(conv.length ? conv.map(function(n){ return '<span class="chip on">'+esc(n)+'</span>'; }).join("") : '<span class="note">nenhuma</span>')+'</div>'+
+      '<p class="eyebrow" style="margin:14px 0 7px; font-size:10px">Sem desdobramento · '+par.length+'</p>'+
+      '<div class="chips">'+(par.length ? par.map(function(n){ return '<span class="chip off">'+esc(n)+'</span>'; }).join("") : '<span class="note">nenhuma</span>')+'</div></div>';
+  }).join("");
+})();
+
+/* ============================================================
+   05 · FINANCEIRO
+   ============================================================ */
+(function(){
+  var meses = [["set","SET","Setembro"],["out","OUT","Outubro"],["nov","NOV","Novembro"],["dez","DEZ","Dezembro"]];
+  var totMes = meses.map(function(m){ return D.fin.reduce(function(a,p){ return a+p[m[0]]; },0); });
+  var max = Math.max.apply(null, totMes), ALT = 208;
+
+  $("#cols-mes").innerHTML = meses.map(function(m,i){
+    var t = totMes[i], h = t/max*ALT;
+    var segs = D.fin.filter(function(p){ return p[m[0]] > 0; }).map(function(p){
+      return '<i style="height:'+(p[m[0]]/t*100).toFixed(2)+'%; background:'+cor(p.id)+'" title="'+esc(p.nome)+': '+brl(p[m[0]])+'"></i>';
+    }).join("");
+    return '<div class="col"><div class="cap">'+curto(t)+'<small>'+pct(t/TOT.finTotal)+' do total</small></div>'+
+      '<div class="stack" style="--h:'+h.toFixed(1)+'px">'+segs+'</div>'+
+      '<div class="axis">'+m[1]+'</div></div>';
+  }).join("");
+  $("#leg-mes").innerHTML = D.fin.map(function(p){
+    return '<div><i style="background:'+cor(p.id)+'"></i> '+esc(p.nome)+'</div>';
+  }).join("");
+
+  var ord = D.fin.map(function(p){ p.total = p.set+p.out+p.nov+p.dez; return p; })
+                 .sort(function(a,b){ return b.total-a.total; });
+  $("#share-bar").innerHTML = ord.map(function(p){
+    var s = p.total/TOT.finTotal;
+    return '<i style="--w:'+(s*100).toFixed(2)+'%; background:'+cor(p.id)+'" title="'+esc(p.nome)+': '+brl(p.total)+'">'+
+      (s > 0.06 ? pct(s) : "")+'</i>';
+  }).join("");
+  $("#share-leg").innerHTML = ord.map(function(p){
+    return '<div><i style="background:'+cor(p.id)+'"></i> '+esc(p.nome)+' · <b>'+curto(p.total)+'</b></div>';
+  }).join("");
+
+  var tb = $("#tab-financeiro").querySelector("tbody");
+  tb.innerHTML = ord.map(function(p){
+    return '<tr><td><b>'+esc(p.nome)+'</b></td>'+
+      meses.map(function(m){ return '<td class="r n">'+(p[m[0]] ? brl(p[m[0]]) : "—")+'</td>'; }).join("")+
+      '<td class="r n"><b>'+brl(p.total)+'</b></td>'+
+      '<td class="r n" style="color:var(--fg-3)">'+pct(p.total/TOT.finTotal,1)+'</td></tr>';
+  }).join("") +
+  '<tr class="total"><td>Total</td>'+
+  totMes.map(function(t){ return '<td class="r n">'+brl(t)+'</td>'; }).join("")+
+  '<td class="r n">'+brl(TOT.finTotal)+'</td><td class="r n">100%</td></tr>';
+})();
+
+/* ============================================================
+   06 · SETEMBRO
+   ============================================================ */
+(function(){
+  var r = 88, cx = 112, cy = 114, C = Math.PI*r, f = D.realSetArea, ritmo = D.diaCorte/D.diasMes;
+  var ang = Math.PI*(1-ritmo);
+  var mx1 = cx + (r-11)*Math.cos(ang), my1 = cy - (r-11)*Math.sin(ang);
+  var mx2 = cx + (r+11)*Math.cos(ang), my2 = cy - (r+11)*Math.sin(ang);
+  var arco = "M "+(cx-r)+" "+cy+" A "+r+" "+r+" 0 0 1 "+(cx+r)+" "+cy;
+
+  $("#gauge").innerHTML = '<svg width="224" height="140" viewBox="0 0 224 140" role="img" aria-label="Realização da meta de setembro: '+pct(f)+'">'+
+    '<path d="'+arco+'" fill="none" stroke="var(--bg-sunk)" stroke-width="20" stroke-linecap="round"/>'+
+    '<path d="'+arco+'" fill="none" stroke="var(--accent-fill)" stroke-width="20" stroke-linecap="round" '+
+      'stroke-dasharray="'+(f*C).toFixed(1)+' '+C.toFixed(1)+'"/>'+
+    '<line x1="'+mx1.toFixed(1)+'" y1="'+my1.toFixed(1)+'" x2="'+mx2.toFixed(1)+'" y2="'+my2.toFixed(1)+'" stroke="var(--fg)" stroke-width="2.5"/>'+
+    '<text x="'+cx+'" y="102" text-anchor="middle" class="s-fg" style="font-size:44px; font-weight:800; letter-spacing:-.05em">'+pct(f)+'</text>'+
+    '<text x="'+cx+'" y="132" text-anchor="middle" class="s-fg3 mn" style="font-size:10px; letter-spacing:.1em">RITMO ESPERADO '+pct(ritmo)+'</text></svg>';
+
+  $("#bars-setembro").innerHTML = D.fin.filter(function(p){ return p.set > 0; }).map(function(p){
+    return '<div class="bar"><div class="who">'+esc(p.nome)+'<small>'+brl(p.set)+'</small></div>'+
+      '<div class="track" style="height:28px"><div class="seg" style="--w:'+(p.realSet*100).toFixed(0)+'%; background:'+cor(p.id)+'"></div>'+
+      '<div class="pct" style="font-size:12px">'+pct(p.realSet)+'</div></div></div>';
+  }).join("");
+})();
+
+/* ============================================================
+   07 · PLANO DE AÇÃO
+   ============================================================ */
+$("#acoes").innerHTML = D.acoes.map(function(a){
+  return '<div class="act" style="--stripe:'+cor(a.id)+'">'+
+    '<div class="hd"><span class="nm">'+esc(a.nome)+'</span><span class="verb">'+esc(a.verbo)+'</span></div>'+
+    '<p class="small" style="margin:0">'+esc(a.txt)+'</p>'+
+    '<ul>'+a.itens.map(function(i){ return '<li>'+esc(i)+'</li>'; }).join("")+'</ul></div>';
+}).join("");
+
+/* ============================================================
+   08 · BASE
+   ============================================================ */
+(function(){
+  var nome = {}; D.equipe.forEach(function(p){ nome[p.id] = p.nome; });
+  $("#tab-base").querySelector("tbody").innerHTML = D.clientes.map(function(c,i){
+    return '<tr><td class="n" style="color:var(--fg-3)">'+(i+1)+'</td>'+
+      '<td><b>'+esc(c[0])+'</b></td><td>'+esc(nome[c[1]]||c[1])+'</td>'+
+      '<td style="color:var(--fg-2)">'+esc(c[2])+'</td>'+
+      '<td>'+(c[3] ? '<span class="badge ok">Sim</span>' : '<span class="badge bad">Não</span>')+'</td></tr>';
+  }).join("");
+})();
+
+/* ============================================================
+   MOVIMENTO E NAVEGAÇÃO
+   ============================================================ */
+(function(){
+  var secs = [].slice.call(document.querySelectorAll("section"));
+  var links = [].slice.call(document.querySelectorAll("#nav a"));
+
+  if(!("IntersectionObserver" in window)){
+    secs.forEach(function(s){ s.classList.add("in"); });
+    return;
+  }
+  var rev = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); rev.unobserve(e.target); } });
+  }, { rootMargin:"0px 0px -12% 0px", threshold:0.06 });
+  secs.forEach(function(s){ rev.observe(s); });
+
+  var spy = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      links.forEach(function(a){ a.classList.toggle("on", a.getAttribute("href") === "#"+e.target.id); });
+    });
+  }, { rootMargin:"-84px 0px -68% 0px" });
+  secs.forEach(function(s){ spy.observe(s); });
+})();
+
+})();
+</script>
+</body>
+</html>
