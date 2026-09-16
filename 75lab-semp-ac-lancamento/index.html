@@ -769,6 +769,15 @@ h3{font-size:clamp(.88rem,1.6vmin,1.05rem);font-weight:700;letter-spacing:-.012e
   .qrtag .lb{text-align:left;max-width:none}
 }
 
+/* ---------- ecos da narrativa no online ---------- */
+.echoes{list-style:none;display:grid;margin-top:clamp(16px,2.4vh,24px);max-width:36ch}
+.echoes li{
+  font-size:clamp(.76rem,1.28vmin,.86rem);line-height:1.5;color:var(--ink-soft);
+  padding:clamp(9px,1.4vh,13px) 0;border-top:1px solid var(--line-2);
+}
+.echoes li:last-child{border-bottom:1px solid var(--line-2)}
+.echoes b{display:block;color:var(--ink);font-weight:600;font-size:clamp(.84rem,1.42vmin,.96rem);margin-bottom:3px;letter-spacing:-.015em}
+
 </style>
 </head>
 <body>
@@ -1267,6 +1276,35 @@ h3{font-size:clamp(.88rem,1.6vmin,1.05rem);font-weight:700;letter-spacing:-.012e
   <div class="pagenum">18</div>
 </section>
 
+<!-- PDV ONLINE -->
+<section class="slide w-light" data-t="PDV online">
+  <div class="inner wide">
+    <div class="eyebrow">PDV online</div>
+    <div class="cols c2b" style="align-items:start;gap:clamp(22px,3vw,52px)">
+      <div>
+        <div class="arstage" id="onstage">
+          <button class="load" type="button" id="onload" aria-label="Abrir a simulação da página de produto">
+            <span class="cta">Abrir a simulação</span>
+            <span class="hint">Página de produto do Carrefour com o conteúdo rico da SEMP. Carrega aqui dentro do deck e rola por dentro do quadro.</span>
+          </button>
+        </div>
+        <p class="tiny" style="margin-top:10px">Simulação de página de produto · Carrefour · versão 2</p>
+      </div>
+      <div>
+        <h2 style="max-width:16ch;font-size:clamp(1.4rem,2.8vmin,2.3rem)">No e-commerce, a página faz o papel do vendedor.</h2>
+        <p class="lede" style="max-width:34ch">A mesma régua virou conteúdo de produto: as três frases principais, o guia de BTU e as perguntas que o shopper faria no balcão, respondidas na própria página.</p>
+        <ul class="echoes">
+          <li><b>“O ar vai mais longe.”</b>abre o conteúdo rico, no lugar da ficha técnica</li>
+          <li><b>“Escolha o BTU ideal.”</b>o guia de 9.000 × 12.000 dentro da página</li>
+          <li><b>“As perguntas que todo mundo faz.”</b>as dúvidas do balcão viram FAQ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="takeaway"><span class="k">Take away</span><span class="t">Online ninguém pergunta ao vendedor: quem responde é a página.</span></div>
+  <div class="pagenum">19</div>
+</section>
+
 <!-- FECHAMENTO -->
 <section class="slide w-kv dense nosign" data-t="Próximos passos">
   <div class="inner wide">
@@ -1297,7 +1335,7 @@ h3{font-size:clamp(.88rem,1.6vmin,1.05rem);font-weight:700;letter-spacing:-.012e
     <p class="sig">75 LAB · aceleradora de trade marketing · Setembro de 2026</p>
   </div>
   <div class="takeaway"><span class="k">Take away</span><span class="t">Aprovando a plataforma até 19/09, o enxoval chega em campo junto com o sell-in.</span></div>
-  <div class="pagenum">19</div>
+  <div class="pagenum">20</div>
 </section>
 </main>
 <div id="lb" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
@@ -1379,6 +1417,17 @@ h3{font-size:clamp(.88rem,1.6vmin,1.05rem);font-weight:700;letter-spacing:-.012e
   fitAll();
   setTimeout(fitAll,400);
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fitAll)}
+  function lazyFrame(btnId, src, title){
+    var btn=document.getElementById(btnId);
+    if(!btn){return}
+    btn.addEventListener('click',function(){
+      var f=document.createElement('iframe');
+      f.src=src; f.title=title; f.loading='lazy';
+      f.setAttribute('allow','xr-spatial-tracking; camera; fullscreen; accelerometer; gyroscope; magnetometer');
+      btn.parentNode.replaceChild(f,btn);
+    });
+  }
+  lazyFrame('onload', 'https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0855446481.firebasestorage.app/o/attachments%2F1789394552215598%2Fatt_1789505831225_0_81_VERSA%CC%83O%202%20clicklab_simulacao-carrefour-arquivo-unico.html?alt=media&token=3a997b9c-fb57-4220-ac6a-01ec131168ce', 'Simulação da página de produto no Carrefour');
   var arload=document.getElementById('arload');
   if(arload){
     arload.addEventListener('click',function(){
