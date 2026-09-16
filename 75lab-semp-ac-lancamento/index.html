@@ -725,6 +725,50 @@ h3{font-size:clamp(.88rem,1.6vmin,1.05rem);font-weight:700;letter-spacing:-.012e
 
 .nw{white-space:nowrap}
 
+/* ---------- 3D e AR ---------- */
+.arstage{
+  position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line-2);
+  background:#EDF3F8;aspect-ratio:16/10;width:100%;
+}
+.w-deep .arstage{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.06)}
+.arstage iframe{width:100%;height:100%;border:0;display:block}
+.arstage .load{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:linear-gradient(160deg,#F6FAFD 0%,#E3EEF6 100%);cursor:pointer;border:0;width:100%;font:inherit;color:var(--ink);
+  padding:clamp(18px,3vw,36px);
+}
+.arstage .load .cta{
+  display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;
+  border-radius:999px;padding:12px 26px;font-size:clamp(.84rem,1.4vmin,.96rem);font-weight:600;
+}
+.arstage .load .hint{font-size:clamp(.74rem,1.25vmin,.84rem);color:var(--ink-soft);max-width:38ch;text-align:center;line-height:1.55}
+.arstage .load:hover .cta{background:#C41F16}
+.qrpanel{display:flex;gap:clamp(12px,1.6vw,18px);align-items:flex-start;margin-top:clamp(16px,2.4vh,24px)}
+.qrpanel .code{width:clamp(88px,9vw,116px);flex:none;background:#fff;border:1px solid var(--line-2);border-radius:8px;padding:7px}
+.qrpanel .code svg{display:block;width:100%;height:auto}
+.qrpanel .txt{font-size:clamp(.76rem,1.28vmin,.86rem);line-height:1.55;color:var(--ink-soft)}
+.w-deep .qrpanel .txt{color:#C6D7E6}
+.qrpanel .txt b{display:block;color:var(--ink);font-weight:700;margin-bottom:4px;font-size:clamp(.82rem,1.38vmin,.93rem)}
+.w-deep .qrpanel .txt b{color:#fff}
+.qrpanel .txt a{color:inherit;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(30,42,60,.3)}
+.w-deep .qrpanel .txt a{text-decoration-color:rgba(255,255,255,.35)}
+@media(max-width:900px){.arstage{aspect-ratio:4/3}.qrpanel .code{width:104px}}
+
+/* QR pequeno no rodapé das telas de peça */
+.qrtag{
+  position:absolute;right:max(var(--pad-x), calc(50% - var(--half)));bottom:clamp(30px,4.8vh,54px);z-index:5;
+  display:flex;align-items:center;gap:10px;text-decoration:none;
+}
+.qrtag .code{width:clamp(50px,4.6vw,62px);background:#fff;border:1px solid var(--line-2);border-radius:6px;padding:5px;flex:none}
+.qrtag .code svg{display:block;width:100%;height:auto}
+.qrtag .lb{font-size:clamp(.64rem,1.08vmin,.72rem);line-height:1.35;color:var(--ink-mut);font-weight:600;text-align:right;max-width:12ch}
+.w-deep .qrtag .lb{color:#9FBBD4}
+.slide.hasqr::after{content:none}
+@media(max-width:900px){
+  .qrtag{position:static;margin:clamp(18px,2.6vh,24px) 0 0;justify-content:flex-start}
+  .qrtag .lb{text-align:left;max-width:none}
+}
+
 </style>
 </head>
 <body>
@@ -1192,6 +1236,37 @@ h3{font-size:clamp(.88rem,1.6vmin,1.05rem);font-weight:700;letter-spacing:-.012e
   <div class="pagenum">17</div>
 </section>
 
+<!-- 3D E AR -->
+<section class="slide w-light" data-t="3D e AR">
+  <div class="inner wide">
+    <div class="eyebrow">3D e realidade aumentada</div>
+    <div class="cols c2b" style="align-items:start;gap:clamp(22px,3vw,52px)">
+      <div>
+        <div class="arstage" id="arstage">
+          <button class="load" type="button" id="arload" aria-label="Abrir o navegador 3D nesta tela">
+            <span class="cta">Abrir o navegador 3D</span>
+            <span class="hint">Carrega aqui dentro do deck. Arraste para girar a peça e use o QR ao lado para ver em tamanho real na loja.</span>
+          </button>
+        </div>
+      </div>
+      <div>
+        <h2 style="max-width:15ch;font-size:clamp(1.4rem,2.8vmin,2.3rem)">Cada peça em 3D, e em tamanho real na loja.</h2>
+        <p class="lede" style="max-width:34ch">Todo o enxoval está modelado. Dá para girar peça por peça e, pelo celular, projetar o volume real no meio da loja antes de produzir.</p>
+        <div class="qrpanel">
+          <div class="code"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 37" class="segno"><path class="qrline" stroke="#1e2a3c" d="M2 2.5h7m1 0h1m2 0h3m3 0h4m1 0h2m2 0h7m-33 1h1m5 0h1m1 0h2m1 0h1m1 0h1m4 0h1m4 0h2m1 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h3m1 0h1m2 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h2m1 0h1m2 0h3m3 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m2 0h6m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m5 0h1m1 0h1m2 0h1m1 0h2m3 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-25 1h1m2 0h2m4 0h1m2 0h1m2 0h2m-25 1h1m1 0h2m1 0h3m1 0h2m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m2 0h1m2 0h1m1 0h2m-32 1h3m1 0h1m2 0h1m2 0h1m4 0h1m1 0h4m1 0h1m2 0h2m1 0h4m-31 1h2m2 0h1m1 0h1m1 0h1m3 0h1m2 0h1m2 0h4m2 0h4m1 0h2m-32 1h1m1 0h1m3 0h1m1 0h3m1 0h4m1 0h3m2 0h1m2 0h2m1 0h1m2 0h1m-32 1h1m2 0h1m1 0h1m2 0h4m2 0h1m2 0h2m3 0h3m2 0h2m1 0h2m-32 1h3m1 0h1m1 0h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h1m3 0h1m1 0h1m1 0h1m1 0h1m-29 1h1m1 0h3m2 0h1m2 0h6m2 0h1m4 0h5m-31 1h1m4 0h1m3 0h3m1 0h1m2 0h1m1 0h5m2 0h2m1 0h3m-30 1h2m1 0h3m1 0h1m4 0h1m1 0h1m2 0h6m1 0h2m1 0h3m-30 1h5m1 0h3m3 0h1m1 0h1m1 0h1m2 0h2m1 0h2m1 0h1m1 0h2m1 0h2m-32 1h2m1 0h4m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m4 0h2m1 0h1m-31 1h3m1 0h1m2 0h2m1 0h2m1 0h1m1 0h2m5 0h1m1 0h1m1 0h1m1 0h1m-29 1h2m1 0h2m1 0h1m2 0h2m1 0h2m1 0h1m2 0h3m1 0h3m4 0h3m-32 1h1m2 0h1m1 0h1m1 0h3m1 0h1m1 0h3m2 0h1m2 0h1m1 0h1m2 0h2m1 0h2m1 0h1m-31 1h1m1 0h1m1 0h2m1 0h1m1 0h1m1 0h2m1 0h1m4 0h1m1 0h2m1 0h1m4 0h2m-32 1h1m3 0h1m1 0h1m1 0h2m1 0h1m1 0h1m1 0h1m1 0h2m5 0h1m2 0h2m2 0h1m-33 1h1m2 0h1m2 0h5m1 0h2m1 0h1m1 0h1m2 0h1m2 0h6m2 0h2m-25 1h2m1 0h5m1 0h1m1 0h2m2 0h2m3 0h2m1 0h1m-32 1h7m1 0h2m1 0h1m1 0h2m4 0h2m1 0h3m1 0h1m1 0h1m-29 1h1m5 0h1m1 0h1m4 0h4m2 0h3m1 0h2m3 0h4m-32 1h1m1 0h3m1 0h1m7 0h2m1 0h1m2 0h1m2 0h6m1 0h1m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h1m3 0h6m1 0h1m2 0h1m1 0h4m-33 1h1m1 0h3m1 0h1m1 0h1m3 0h3m2 0h1m1 0h1m2 0h1m1 0h4m1 0h2m-31 1h1m5 0h1m2 0h1m4 0h6m3 0h3m1 0h2m3 0h1m-33 1h7m1 0h1m2 0h1m1 0h6m1 0h4m1 0h1m2 0h3"/></svg></div>
+          <div class="txt">
+            <b>Aponte a câmera</b>
+            Abre o catálogo 3D no celular, com o botão “ver em AR”.<br>
+            <a href="https://projetos.75lab.com.br/ar/semp-split-hw/" target="_blank" rel="noopener">projetos.75lab.com.br/ar/semp-split-hw</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="takeaway"><span class="k">Take away</span><span class="t">Aprovar a peça vendo o volume no espaço evita surpresa na montagem.</span></div>
+  <div class="pagenum">18</div>
+</section>
+
 <!-- FECHAMENTO -->
 <section class="slide w-kv dense nosign" data-t="Próximos passos">
   <div class="inner wide">
@@ -1222,7 +1297,7 @@ h3{font-size:clamp(.88rem,1.6vmin,1.05rem);font-weight:700;letter-spacing:-.012e
     <p class="sig">75 LAB · aceleradora de trade marketing · Setembro de 2026</p>
   </div>
   <div class="takeaway"><span class="k">Take away</span><span class="t">Aprovando a plataforma até 19/09, o enxoval chega em campo junto com o sell-in.</span></div>
-  <div class="pagenum">18</div>
+  <div class="pagenum">19</div>
 </section>
 </main>
 <div id="lb" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
@@ -1304,6 +1379,17 @@ h3{font-size:clamp(.88rem,1.6vmin,1.05rem);font-weight:700;letter-spacing:-.012e
   fitAll();
   setTimeout(fitAll,400);
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fitAll)}
+  var arload=document.getElementById('arload');
+  if(arload){
+    arload.addEventListener('click',function(){
+      var f=document.createElement('iframe');
+      f.src='https://projetos.75lab.com.br/ar/semp-split-hw/embed.html?peca=ilha&fundo=transparente';
+      f.title='Peças SEMP Split HW em 3D';
+      f.loading='lazy';
+      f.setAttribute('allow','xr-spatial-tracking; camera; fullscreen; accelerometer; gyroscope; magnetometer');
+      arload.parentNode.replaceChild(f,arload);
+    });
+  }
   window.addEventListener('load',fitAll);
   Array.prototype.forEach.call(document.images,function(im){if(!im.complete){im.addEventListener('load',fitAll)}});
   update();
