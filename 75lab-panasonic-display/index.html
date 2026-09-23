@@ -204,6 +204,8 @@ figure{margin:0}
 .heroi.modo3d img{display:none}
 .heroi.modo3d .lupa{display:none}
 .heroi model-viewer{width:100%;height:100%;background:#E7E6E6;--poster-color:transparent}
+/* fora do modo 3D o visor sai do fluxo, senão empurra a imagem para o lado */
+.heroi:not(.modo3d) model-viewer{display:none}
 .heroi .carregando{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   font-size:clamp(10px,1.02vw,12.5px);font-weight:700;letter-spacing:.13em;color:var(--jyari)}
 .heroi img{max-height:min(58vh,640px);width:auto;max-width:100%;object-fit:contain}
