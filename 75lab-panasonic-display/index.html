@@ -246,6 +246,7 @@ figure{margin:0}
 
 .contador{display:flex;align-items:center;gap:clamp(14px,2.2vw,26px);flex-wrap:wrap}
 .contador b{font-size:clamp(46px,8.4vw,116px);font-weight:800;letter-spacing:-.045em;line-height:.88;color:var(--azul)}
+.contador b.palavra{font-size:clamp(34px,5.6vw,74px)}
 .contador span{font-size:clamp(12.5px,1.28vw,17px);line-height:1.34;max-width:26ch;color:#2A2D33}
 .alerta{border-left:2px solid var(--azul);padding-left:clamp(12px,1.6vw,20px)}
 
@@ -941,9 +942,9 @@ section.codice{background:var(--cx-papel);color:var(--cx-navy)}
     <div class="linha meta-fim"><span class="data" data-en="Nov 1">1º nov</span><span class="o-que" data-en="Display standing and running">Display de pé e funcionando</span><span class="dur"></span><span class="quem" data-en="TARGET">META</span></div>
     <div class="linha paralelo"><span class="data" data-en="Sep 10 – Oct 20">10 set a 20 out</span><span class="o-que"><span class="tag" data-en="RUNNING IN PARALLEL">EM PARALELO</span><b data-en="75 LAB registered as a Panasonic supplier">Cadastro da 75 LAB como fornecedora Panasonic</b></span><span class="dur" data-en="30 TO 40 DAYS">30 A 40 DIAS</span><span class="quem">PANASONIC</span></div>
   </div>
-  <div class="contador" style="margin-top:clamp(12px,2vh,22px)">
-    <b>39</b>
-    <span data-en="days between this meeting and the store. Every stage starts the day the one before it ends.">dias entre esta reunião e a loja. Cada etapa começa no dia em que a anterior termina.</span>
+  <div class="contador" id="contador" style="margin-top:clamp(12px,2vh,22px)">
+    <b id="contaN">38</b>
+    <span id="contaT" data-en="days until the display is standing in the store. Every stage starts the day the one before it ends.">dias até o display de pé na loja. Cada etapa começa no dia em que a anterior termina.</span>
   </div>
 </div>
 </section>
@@ -1331,6 +1332,31 @@ section.codice{background:var(--cx-papel);color:var(--cx-navy)}
       requestAnimationFrame(laco);
     }
   }
+
+  /* ---------- contagem regressiva até a instalação ---------- */
+  /* O número não pode ser fixo: o cliente reabre o link dias depois.
+     Roda ANTES do idioma(), senão o innerHTML PT cacheado lá seria o antigo. */
+  (function conta(){
+    var cx=document.getElementById('contador');
+    var no=document.getElementById('contaN'), tx=document.getElementById('contaT');
+    if(!cx||!no||!tx) return;
+    var hoje=new Date(); hoje.setHours(0,0,0,0);
+    var meta=new Date(2026,10,1);               /* 1º de novembro de 2026 */
+    var d=Math.round((meta-hoje)/86400000);
+    var cauda=[' Cada etapa começa no dia em que a anterior termina.',
+               ' Every stage starts the day the one before it ends.'];
+    if(d<0){ cx.style.display='none'; return; }   /* passou da data: some */
+    if(d===0){
+      no.className='palavra'; no.textContent='hoje'; no.setAttribute('data-en','today');
+      no.setAttribute('data-pt','hoje');
+      tx.innerHTML='é o dia do display de pé na loja.'+cauda[0];
+      tx.setAttribute('data-en','is the day the display goes up in the store.'+cauda[1]);
+      return;
+    }
+    no.textContent=String(d);
+    tx.innerHTML=(d===1?'dia':'dias')+' até o display de pé na loja.'+cauda[0];
+    tx.setAttribute('data-en',(d===1?'day':'days')+' until the display is standing in the store.'+cauda[1]);
+  })();
 
   var salva=null;
   try{salva=localStorage.getItem('panasonic-lingua')}catch(e){}
