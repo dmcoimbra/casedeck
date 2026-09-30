@@ -190,6 +190,15 @@
   .hcat li:last-child{border-bottom:0}
   .hcat li i{font-style:normal;font-family:var(--mono);font-size:12px;color:#06C6AE;white-space:nowrap}
   .hours-note{margin-top:22px;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,241,233,.55)}
+  .hours-picker{margin-top:44px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .hours-picker .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,241,233,.65);margin-right:4px}
+  .hp-btn{font-family:var(--mono);font-size:12px;letter-spacing:.14em;cursor:pointer;background:var(--ink-2);border:1px solid var(--line-d);color:rgba(242,241,233,.75);padding:10px 16px}
+  .hp-btn.on{background:var(--lime);border-color:var(--lime);color:var(--ink);font-weight:700}
+  .hp-btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .hours-eff{margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(242,241,233,.65);line-height:1.8}
+  .hours-eff b{color:var(--lime);font-weight:700}
+  .hcat li > span:first-child{flex:1 1 auto}
+  .hcat li em.qty{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--lime);border:1px solid rgba(192,238,78,.35);padding:2px 8px;white-space:nowrap}
 
   /* ---------- fechamento ---------- */
   .closing h2{font-size:clamp(48px,8.5vw,112px)}
@@ -518,6 +527,14 @@
       <div class="hs"><b>24–40h+</b><span><span class="pt">Projeto especial / espaço / ativação</span><span class="en">Special project / space / activation</span></span></div>
     </div>
 
+    <div class="hours-picker" id="hoursPicker" role="group" aria-label="Franquia">
+      <span class="lbl"><span class="pt">Simule por franquia:</span><span class="en">Simulate by allowance:</span></span>
+      <button type="button" class="hp-btn" data-plan="P" data-h="40" data-price="25000">P · 40h</button>
+      <button type="button" class="hp-btn on" data-plan="M" data-h="80" data-price="48000">M · 80h</button>
+      <button type="button" class="hp-btn" data-plan="G" data-h="160" data-price="67000">G · 160h</button>
+    </div>
+    <p class="hours-eff" id="hoursEff"></p>
+
     <div class="hours-grid">
       <div class="hcat">
         <h4><span class="pt">Conceito e criação</span><span class="en">Concept &amp; creation</span></h4>
@@ -671,7 +688,7 @@
       </div>
     </div>
 
-    <p class="hours-note"><span class="pt">Valores médios de referência — escopos especiais são alinhados no briefing. Horas variáveis conforme número de peças.</span><span class="en">Average reference times — special scopes are aligned at briefing. Hours vary with piece count.</span></p>
+    <p class="hours-note"><span class="pt">Valores médios de referência — escopos especiais são alinhados no briefing. As quantidades "até N/mês" consideram a franquia inteira dedicada a um único tipo de entrega; na prática, o mês combina formatos.</span><span class="en">Average reference times — special scopes are aligned at briefing. "Up to N/mo" figures assume the whole allowance on a single deliverable type; in practice, a month mixes formats.</span></p>
   </div>
 </section>
 
@@ -710,6 +727,52 @@
   var saved = null;
   try{ saved = localStorage.getItem('lab75-lang'); }catch(e){}
   if(saved === 'en') apply('en');
+})();
+
+(function(){
+  var picker = document.getElementById('hoursPicker');
+  var eff = document.getElementById('hoursEff');
+  if(!picker || !eff) return;
+  var items = [];
+  document.querySelectorAll('#horas .hcat li').forEach(function(li){
+    var i = li.querySelector('i');
+    if(!i) return;
+    var m = i.textContent.replace(/,/g,'.').match(/^([\d.]+)(?:–([\d.]+))?h$/);
+    if(!m) return;
+    var em = document.createElement('em');
+    em.className = 'qty';
+    li.appendChild(em);
+    items.push({min: parseFloat(m[1]), max: parseFloat(m[2] || m[1]), em: em});
+  });
+  function brl(v){
+    var s = (Math.round(v*100)/100).toFixed(2).replace('.',',').replace(/,00$/,'');
+    return 'R$ ' + s;
+  }
+  function usd(v){
+    return 'R$ ' + (Math.round(v*100)/100).toFixed(2).replace(/\.00$/,'');
+  }
+  function render(btn){
+    var H = parseFloat(btn.dataset.h), price = parseFloat(btn.dataset.price), plan = btn.dataset.plan;
+    items.forEach(function(it){
+      var qmax = Math.floor(H / it.min), qmin = Math.floor(H / it.max);
+      var pt, en;
+      if(qmin === qmax){ pt = 'até ' + qmax + '/mês'; en = 'up to ' + qmax + '/mo'; }
+      else { pt = qmin + '–' + qmax + '/mês'; en = qmin + '–' + qmax + '/mo'; }
+      it.em.innerHTML = '<span class="pt">' + pt + '</span><span class="en">' + en + '</span>';
+    });
+    var hr = price / H;
+    eff.innerHTML = '<span class="pt">Formato <b>' + plan + '</b> · ' + H + 'h/mês · hora efetiva de <b>' + brl(hr) + '</b> (hora extra: R$ 700) — os marcadores verdes mostram quantas entregas de cada tipo cabem em um mês de franquia.</span>'
+                  + '<span class="en">Tier <b>' + plan + '</b> · ' + H + 'h/mo · effective hour of <b>' + usd(hr) + '</b> (extra hour: R$ 700) — the green tags show how many of each deliverable fit in one month\'s allowance.</span>';
+    picker.querySelectorAll('.hp-btn').forEach(function(b){ b.classList.toggle('on', b === btn); });
+    try{ localStorage.setItem('lab75-fran', plan); }catch(e){}
+  }
+  picker.querySelectorAll('.hp-btn').forEach(function(b){
+    b.addEventListener('click', function(){ render(b); });
+  });
+  var savedPlan = null;
+  try{ savedPlan = localStorage.getItem('lab75-fran'); }catch(e){}
+  var start = picker.querySelector('.hp-btn[data-plan="' + savedPlan + '"]') || picker.querySelector('.hp-btn.on');
+  render(start);
 })();
 </script>
 
