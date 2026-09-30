@@ -199,6 +199,24 @@
   .hours-eff b{color:var(--lime);font-weight:700}
   .hcat li > span:first-child{flex:1 1 auto}
   .hcat li em.qty{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--lime);border:1px solid rgba(192,238,78,.35);padding:2px 8px;white-space:nowrap}
+  .kit{margin-top:64px;border:1.5px solid var(--lime);background:var(--ink-3);padding:clamp(26px,4vw,44px);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,56px);align-items:start}
+  .kit h3{font-weight:900;font-size:clamp(26px,3.4vw,40px);color:var(--paper)}
+  .kit h3 em{font-style:normal;color:var(--lime)}
+  .kit .sub{margin-top:10px;font-size:14.5px;color:rgba(242,241,233,.75)}
+  .kit-list{list-style:none;margin-top:22px}
+  .kit-list li{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:7px 0;border-bottom:1px dashed rgba(242,241,233,.12);font-size:13.5px;color:rgba(242,241,233,.85)}
+  .kit-list li > span:first-child{flex:1 1 auto}
+  .kit-list li i{font-style:normal;font-family:var(--mono);font-size:12px;color:#06C6AE;white-space:nowrap}
+  .kit-list li.sum{border-bottom:0;border-top:1px solid var(--line-d);margin-top:4px;padding-top:12px;font-weight:700;color:var(--paper)}
+  .kit-list li.sum i{color:var(--lime);font-size:14px}
+  .kit-read h5{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
+  .kit-read .kr{border:1px dashed var(--line-d);padding:16px 18px;display:flex;gap:16px;align-items:baseline}
+  .kit-read .kr + .kr{margin-top:10px}
+  .kit-read .kr b{font-family:var(--display);font-weight:900;font-size:30px;color:var(--lime);line-height:1;flex:none;width:1.2em}
+  .kit-read .kr.k2 b{color:var(--lav)}
+  .kit-read .kr.k3 b{color:#06C6AE}
+  .kit-read .kr p{font-size:13.5px;color:rgba(242,241,233,.85)}
+  .kit-read .kr p strong{color:var(--paper)}
 
   /* ---------- fechamento ---------- */
   .closing h2{font-size:clamp(48px,8.5vw,112px)}
@@ -208,7 +226,7 @@
   footer{padding:26px 0 40px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(242,241,233,.45)}
 
   @media (max-width:900px){
-    .fit,.money,.bidding{grid-template-columns:1fr}
+    .fit,.money,.bidding,.kit{grid-template-columns:1fr}
     .stats,.hub{grid-template-columns:repeat(2,1fr)}
     .steps,.triple,.plans,.base-note{grid-template-columns:1fr}
     .gallery,.hours-grid{grid-template-columns:1fr}
@@ -685,6 +703,33 @@
           <li><span><span class="pt">Arquitetura de campanha / jornada de materiais</span><span class="en">Campaign architecture / material journey</span></span><i>12h</i></li>
           <li><span><span class="pt">Enxoval completo de lançamento de produto</span><span class="en">Full product-launch kit</span></span><i>20–40h</i></li>
         </ul>
+      </div>
+    </div>
+
+    <div class="kit" id="kit">
+      <div>
+        <h3><span class="pt">PACOTE EXEMPLO: <em>ENXOVAL DE LANÇAMENTO.</em></span><span class="en">SAMPLE PACKAGE: <em>LAUNCH KIT.</em></span></h3>
+        <p class="sub"><span class="pt">Composição de um lançamento real de linha executado pela 75 LAB: 9 famílias de peça, em 2 variações de cor, do adesivo de produto ao pórtico de corredor.</span><span class="en">Composition of a real product-line launch executed by 75 LAB: 9 piece families, in 2 color variations, from product sticker to aisle portal.</span></p>
+        <ul class="kit-list">
+          <li><span><span class="pt">Conceito criativo / KV do enxoval</span><span class="en">Creative concept / kit KV</span></span><i>4h</i></li>
+          <li><span><span class="pt">Orelha lateral do produto</span><span class="en">Product side flag</span></span><i>1h</i></li>
+          <li><span><span class="pt">Testeira do produto</span><span class="en">Product header</span></span><i>1h</i></li>
+          <li><span><span class="pt">Cubos de blocagem</span><span class="en">Blocking cubes</span></span><i>1h</i></li>
+          <li><span><span class="pt">Cubos-base com produto exposto</span><span class="en">Product-base cubes</span></span><i>1h</i></li>
+          <li><span><span class="pt">Comunicação aérea</span><span class="en">Hanging signage</span></span><i>1,5h</i></li>
+          <li><span><span class="pt">Backdrop / painel de fundo</span><span class="en">Backdrop panel</span></span><i>1,5h</i></li>
+          <li><span><span class="pt">Ilha promocional (estrutura)</span><span class="en">Promo island (structure)</span></span><i>12h</i></li>
+          <li><span><span class="pt">Pórtico de corredor (engenharia)</span><span class="en">Aisle portal (engineering)</span></span><i>16h</i></li>
+          <li><span><span class="pt">Aplicação em mockup no produto</span><span class="en">Product mockup application</span></span><i>1h</i></li>
+          <li><span><span class="pt">2ª variação de cor das 9 peças (desdobramento)</span><span class="en">2nd color variation of the 9 pieces (rollout)</span></span><i>6h</i></li>
+          <li class="sum"><span><span class="pt">Enxoval completo</span><span class="en">Complete kit</span></span><i>46h</i></li>
+        </ul>
+      </div>
+      <div class="kit-read">
+        <h5><span class="pt">Quantos enxovais assim cabem por mês?</span><span class="en">How many kits like this fit per month?</span></h5>
+        <div class="kr k1"><b>P</b><p><span class="pt"><strong>40h — 1 caminho de cor por mês.</strong> O enxoval completo atravessa para o mês seguinte (≈0,9/mês).</span><span class="en"><strong>40h — 1 color path per month.</strong> The complete kit spills into the next month (≈0.9/mo).</span></p></div>
+        <div class="kr k2"><b>M</b><p><span class="pt"><strong>80h — 1 enxoval completo</strong> e ainda sobram 34h no mês para a rotina: adaptações, digital, apresentações (≈1,7/mês).</span><span class="en"><strong>80h — 1 complete kit</strong> with 34h left for routine work: adaptations, digital, decks (≈1.7/mo).</span></p></div>
+        <div class="kr k3"><b>G</b><p><span class="pt"><strong>160h — até 3 enxovais completos por mês</strong> (138h), com 22h de sobra — três lançamentos correndo em paralelo (≈3,4/mês).</span><span class="en"><strong>160h — up to 3 complete kits per month</strong> (138h), with 22h to spare — three launches running in parallel (≈3.4/mo).</span></p></div>
       </div>
     </div>
 
