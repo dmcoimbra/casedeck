@@ -209,6 +209,11 @@
   .kit-list li i{font-style:normal;font-family:var(--mono);font-size:12px;color:#06C6AE;white-space:nowrap}
   .kit-list li.sum{border-bottom:0;border-top:1px solid var(--line-d);margin-top:4px;padding-top:12px;font-weight:700;color:var(--paper)}
   .kit-list li.sum i{color:var(--lime);font-size:14px}
+  .kit-list li.was{border-bottom:0;padding-top:2px}
+  .kit-list li.was > span:first-child{color:rgba(242,241,233,.5)}
+  .kit-list li.was i{color:rgba(242,241,233,.45);text-decoration:line-through}
+  .kit .disc{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--lime);border:1px solid rgba(192,238,78,.35);padding:2px 8px;white-space:nowrap}
+  .kit-foot{margin-top:16px;font-size:12px;color:rgba(242,241,233,.55);line-height:1.7}
   .kit-read h5{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
   .kit-read .kr{border:1px dashed var(--line-d);padding:16px 18px;display:flex;gap:16px;align-items:baseline}
   .kit-read .kr + .kr{margin-top:10px}
@@ -709,27 +714,23 @@
     <div class="kit" id="kit">
       <div>
         <h3><span class="pt">PACOTE EXEMPLO: <em>ENXOVAL DE LANÇAMENTO.</em></span><span class="en">SAMPLE PACKAGE: <em>LAUNCH KIT.</em></span></h3>
-        <p class="sub"><span class="pt">Composição de um lançamento real de linha executado pela 75 LAB: 9 famílias de peça, em 2 variações de cor, do adesivo de produto ao pórtico de corredor.</span><span class="en">Composition of a real product-line launch executed by 75 LAB: 9 piece families, in 2 color variations, from product sticker to aisle portal.</span></p>
+        <p class="sub"><span class="pt">Composição de um lançamento real de linha executado pela 75 LAB: 9 famílias de peça, em 2 variações de cor, do adesivo de produto ao pórtico de corredor. Em bloco, a primeira peça paga o conceito — as demais derivam do mesmo KV, e a 2ª cor é adaptação, não redesenho.</span><span class="en">Composition of a real product-line launch executed by 75 LAB: 9 piece families, in 2 color variations, from product sticker to aisle portal. In a block, the first piece pays for the concept — the rest derive from the same KV, and the 2nd color is an adaptation, not a redesign.</span></p>
         <ul class="kit-list">
           <li><span><span class="pt">Conceito criativo / KV do enxoval</span><span class="en">Creative concept / kit KV</span></span><i>4h</i></li>
-          <li><span><span class="pt">Orelha lateral do produto</span><span class="en">Product side flag</span></span><i>1h</i></li>
-          <li><span><span class="pt">Testeira do produto</span><span class="en">Product header</span></span><i>1h</i></li>
-          <li><span><span class="pt">Cubos de blocagem</span><span class="en">Blocking cubes</span></span><i>1h</i></li>
-          <li><span><span class="pt">Cubos-base com produto exposto</span><span class="en">Product-base cubes</span></span><i>1h</i></li>
-          <li><span><span class="pt">Comunicação aérea</span><span class="en">Hanging signage</span></span><i>1,5h</i></li>
-          <li><span><span class="pt">Backdrop / painel de fundo</span><span class="en">Backdrop panel</span></span><i>1,5h</i></li>
-          <li><span><span class="pt">Ilha promocional (estrutura)</span><span class="en">Promo island (structure)</span></span><i>12h</i></li>
-          <li><span><span class="pt">Pórtico de corredor (engenharia)</span><span class="en">Aisle portal (engineering)</span></span><i>16h</i></li>
-          <li><span><span class="pt">Aplicação em mockup no produto</span><span class="en">Product mockup application</span></span><i>1h</i></li>
-          <li><span><span class="pt">2ª variação de cor das 9 peças (desdobramento)</span><span class="en">2nd color variation of the 9 pieces (rollout)</span></span><i>6h</i></li>
-          <li class="sum"><span><span class="pt">Enxoval completo</span><span class="en">Complete kit</span></span><i>46h</i></li>
+          <li><span><span class="pt">6 famílias derivadas do KV: orelha, testeira, cubos, cubos-base, aérea, backdrop (0,5h cada)</span><span class="en">6 families derived from the KV: side flag, header, cubes, base cubes, hanging, backdrop (0.5h each)</span></span><i>3h</i></li>
+          <li><span><span class="pt">Ilha e pórtico: KV aplicado sobre bases estruturais do repertório</span><span class="en">Island and portal: KV applied to structural bases from our repertoire</span></span><i>1h</i></li>
+          <li><span><span class="pt">Aplicação em mockup no produto</span><span class="en">Product mockup application</span></span><i>0,5h</i></li>
+          <li><span><span class="pt">2ª variação de cor das 9 famílias (adaptação de arte-mãe)</span><span class="en">2nd color variation of the 9 families (master-art adaptation)</span></span><i>1,5h</i></li>
+          <li class="sum"><span><span class="pt">Enxoval completo, em bloco</span><span class="en">Complete kit, as a block</span></span><i>10h</i></li>
+          <li class="was"><span><span class="pt">As mesmas peças, pedidas avulsas</span><span class="en">The same pieces, ordered separately</span></span><em class="disc"><span class="pt">eficiência de bloco −78%</span><span class="en">block efficiency −78%</span></em><i>46h</i></li>
         </ul>
+        <p class="kit-foot"><span class="pt">Vale para o enxoval conceitual (pranchas de apresentação e aprovação). A engenharia executiva das estruturas — caderno técnico para fabricação — usa as horas da tabela, apenas para as peças aprovadas para produção.</span><span class="en">Applies to the concept kit (presentation and approval boards). Executive engineering for structures — the production technical booklet — draws the table's hours, only for pieces approved for production.</span></p>
       </div>
       <div class="kit-read">
         <h5><span class="pt">Quantos enxovais assim cabem por mês?</span><span class="en">How many kits like this fit per month?</span></h5>
-        <div class="kr k1"><b>P</b><p><span class="pt"><strong>40h — 1 caminho de cor por mês.</strong> O enxoval completo atravessa para o mês seguinte (≈0,9/mês).</span><span class="en"><strong>40h — 1 color path per month.</strong> The complete kit spills into the next month (≈0.9/mo).</span></p></div>
-        <div class="kr k2"><b>M</b><p><span class="pt"><strong>80h — 1 enxoval completo</strong> e ainda sobram 34h no mês para a rotina: adaptações, digital, apresentações (≈1,7/mês).</span><span class="en"><strong>80h — 1 complete kit</strong> with 34h left for routine work: adaptations, digital, decks (≈1.7/mo).</span></p></div>
-        <div class="kr k3"><b>G</b><p><span class="pt"><strong>160h — até 3 enxovais completos por mês</strong> (138h), com 22h de sobra — três lançamentos correndo em paralelo (≈3,4/mês).</span><span class="en"><strong>160h — up to 3 complete kits per month</strong> (138h), with 22h to spare — three launches running in parallel (≈3.4/mo).</span></p></div>
+        <div class="kr k1"><b>P</b><p><span class="pt"><strong>40h — 4 enxovais por mês: um lançamento por semana.</strong></span><span class="en"><strong>40h — 4 kits per month: one launch per week.</strong></span></p></div>
+        <div class="kr k2"><b>M</b><p><span class="pt"><strong>80h — 4 enxovais + 40h de rotina</strong> no mesmo mês: adaptações, digital, campanhas e as primeiras engenharias executivas.</span><span class="en"><strong>80h — 4 kits + 40h of routine</strong> in the same month: adaptations, digital, campaigns and the first executive engineering.</span></p></div>
+        <div class="kr k3"><b>G</b><p><span class="pt"><strong>160h — operação contínua de lançamentos:</strong> enxovais, rotina completa e engenharia executiva das estruturas rodando em paralelo.</span><span class="en"><strong>160h — a continuous launch operation:</strong> kits, full routine and structural executive engineering running in parallel.</span></p></div>
       </div>
     </div>
 
