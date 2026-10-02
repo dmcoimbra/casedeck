@@ -345,13 +345,12 @@ input[type=range]{width:100%;accent-color:var(--s1);height:26px}
     <span class="docs">
       <select id="docs" aria-label="Escolher relatório" onchange="if(this.value)window.location.assign(this.value)">
         <option value="index.html" selected>Fechamento de setembro</option>
-        <option value="rodada-1.html">Rodada 1 &middot; 1 a 9 de set</option>
         <option value="historico.html">Relatório de base &middot; jul/24 a ago/26</option>
       </select>
     </span>
     <span class="sig">DCoimbra</span>
     <button class="tbtn" id="theme" title="Alternar tema claro e escuro" aria-label="Alternar tema">◐</button>
-    <span class="count"><span id="cur">01</span>/<span id="tot">12</span></span>
+    <span class="count"><span id="cur">01</span>/<span id="tot">13</span></span>
   </span>
 </header>
 <nav class="nav">
@@ -383,7 +382,7 @@ input[type=range]{width:100%;accent-color:var(--s1);height:26px}
 
 <section class="slide">
   <div class="wrap">
-    <div class="eyebrow"><b>02</b> O mês em números</div>
+    <div class="eyebrow"><b>01</b> O mês em números</div>
     <h2>Setembro vendeu mais e trouxe mais gente que o ano passado.</h2>
     <div class="hero">
       <div class="cell"><div class="lab">Vendas pelos anúncios</div><div class="val pos">R$&nbsp;50.776</div>
@@ -403,7 +402,7 @@ input[type=range]{width:100%;accent-color:var(--s1);height:26px}
 
 <section class="slide">
   <div class="wrap">
-    <div class="eyebrow"><b>03</b> Comparando com bases justas</div>
+    <div class="eyebrow"><b>02</b> Comparando com bases justas</div>
     <h2 class="wide">Mais tráfego, mais pedidos e mais receita por dia — nas duas comparações.</h2>
     <p class="lead">Para ser justo, setembro foi comparado com o mesmo mês do ano anterior e com a
     média dos três meses que o antecederam. Em volume, cresceu nas duas.</p>
@@ -421,7 +420,7 @@ input[type=range]{width:100%;accent-color:var(--s1);height:26px}
 
 <section class="slide">
   <div class="wrap">
-    <div class="eyebrow"><b>04</b> A grande conquista do mês</div>
+    <div class="eyebrow"><b>03</b> A grande conquista do mês</div>
     <h2 class="wide">A estratégia nova traz gente com o dobro de intenção de compra.</h2>
     <p class="lead">Na última semana as duas estratégias rodaram lado a lado, com verba parecida, para
     comparar de verdade. O resultado é o ativo mais valioso que setembro deixou.</p>
@@ -448,7 +447,7 @@ input[type=range]{width:100%;accent-color:var(--s1);height:26px}
 
 <section class="slide">
   <div class="wrap">
-    <div class="eyebrow"><b>05</b> A evolução dentro do mês</div>
+    <div class="eyebrow"><b>04</b> A evolução dentro do mês</div>
     <h2 class="wide">A qualidade do tráfego melhorou semana após semana.</h2>
     <figure>
       <div class="chart" id="c-semanas"></div>
@@ -458,6 +457,26 @@ input[type=range]{width:100%;accent-color:var(--s1);height:26px}
     <div class="note">A última semana fechou com <em>13,8% de carrinho</em> — a melhor do mês — e o
     retorno voltou a 6,32&times;. <em>Por que isso importa:</em> mostra que os ajustes feitos ao longo
     de setembro funcionaram, e que outubro começa de um patamar melhor do que setembro começou.</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="wrap">
+    <div class="eyebrow"><b>05</b> As três rodadas de anúncios</div>
+    <h2 class="wide">Cada troca de anúncios deixou um aprendizado — e a última foi a melhor.</h2>
+    <p class="lead">Ao longo de setembro os anúncios foram trocados três vezes, e na última fase a
+    estratégia anterior entrou em paralelo para comparação. O gráfico mostra as vendas de cada dia,
+    separadas por rodada.</p>
+    <figure>
+      <div class="chart" id="c-hist"></div>
+      <figcaption>Vendas por dia. As cores separam as rodadas de anúncios; as linhas verticais marcam
+      o dia de cada troca. Toque ou passe o mouse em qualquer dia para ver o detalhe.</figcaption>
+    </figure>
+    <div class="tblwrap"><table class="tbl" id="t-rodadas"></table></div>
+    <div class="note">A leitura mais importante está na última coluna: a taxa de carrinho saiu de
+    8,3% na primeira rodada para <em>16,5% na fase comparativa</em> — praticamente o dobro.
+    <em>Por que isso importa:</em> significa que a cada troca o público que chega à loja ficou mais
+    perto de comprar, e é esse o indicador que puxa o resto.</div>
   </div>
 </section>
 
@@ -577,15 +596,11 @@ input[type=range]{width:100%;accent-color:var(--s1);height:26px}
 <section class="slide">
   <div class="wrap">
     <div class="eyebrow"><b>11</b> Histórico</div>
-    <h2 class="wide">Os relatórios anteriores continuam disponíveis.</h2>
-    <p class="lead">Nada foi substituído. Os dois documentos que antecederam este fechamento seguem
-    completos, com todos os gráficos e ferramentas funcionando, e podem ser abertos pelo menu no topo
-    da página ou pelos atalhos abaixo.</p>
+    <h2 class="wide">O estudo que originou esta estratégia continua disponível.</h2>
+    <p class="lead">Nada foi substituído. O estudo que deu origem a toda a estratégia segue completo,
+    com todos os gráficos, a calculadora de investimento e o assistente de perguntas funcionando.
+    Pode ser aberto pelo menu no topo da página ou pelo atalho abaixo.</p>
     <div class="cols">
-      <div class="card"><span class="n">RODADA 1</span><h3>1 a 9 de setembro</h3>
-        <p>A leitura dos primeiros nove dias da estratégia nova, com a curva de aprendizado e o placar
-        de cada hipótese do estudo de base.</p>
-        <a class="botao" href="rodada-1.html">Abrir &rarr;</a></div>
       <div class="card"><span class="n">RELATÓRIO DE BASE</span><h3>jul/2024 a ago/2026</h3>
         <p>Dois anos de dados, a validação com o caixa da loja, a análise por público e por estado,
         a calculadora de investimento e o assistente de perguntas.</p>
@@ -617,6 +632,7 @@ input[type=range]{width:100%;accent-color:var(--s1);height:26px}
 </main>
 
 <script>
+const ROD = {"rodadas":[{"nome":"Rodada 1","ini":"2026-09-01","fim":"2026-09-08","dias":8,"g":2609.39,"cl":1650.0,"ca":137.0,"c":26.0,"r":17925.49},{"nome":"Rodada 2","ini":"2026-09-09","fim":"2026-09-18","dias":10,"g":3331.46,"cl":1343.0,"ca":135.0,"c":25.0,"r":18289.43},{"nome":"Rodada 3","ini":"2026-09-19","fim":"2026-09-23","dias":5,"g":1530.69,"cl":539.0,"ca":46.0,"c":10.0,"r":6881.63},{"nome":"Comparativo","ini":"2026-09-24","fim":"2026-09-30","dias":7,"g":1176.7,"cl":472.0,"ca":78.0,"c":15.0,"r":7679.56}],"diario":[{"dia":"2026-09-01","g":398.55,"cl":312.0,"ca":17.0,"c":2.0,"r":849.63},{"dia":"2026-09-02","g":284.27,"cl":195.0,"ca":10.0,"c":3.0,"r":3252.0},{"dia":"2026-09-03","g":282.74,"cl":178.0,"ca":19.0,"c":0.0,"r":0.0},{"dia":"2026-09-04","g":309.34,"cl":197.0,"ca":11.0,"c":2.0,"r":837.78},{"dia":"2026-09-05","g":404.43,"cl":256.0,"ca":36.0,"c":6.0,"r":4277.09},{"dia":"2026-09-06","g":344.65,"cl":199.0,"ca":19.0,"c":7.0,"r":5060.09},{"dia":"2026-09-07","g":307.99,"cl":156.0,"ca":17.0,"c":2.0,"r":1018.13},{"dia":"2026-09-08","g":277.42,"cl":157.0,"ca":8.0,"c":4.0,"r":2630.77},{"dia":"2026-09-09","g":322.58,"cl":160.0,"ca":13.0,"c":1.0,"r":709.43},{"dia":"2026-09-10","g":355.12,"cl":121.0,"ca":20.0,"c":7.0,"r":3343.07},{"dia":"2026-09-11","g":308.92,"cl":112.0,"ca":8.0,"c":4.0,"r":2728.18},{"dia":"2026-09-12","g":400.5,"cl":188.0,"ca":28.0,"c":7.0,"r":6036.83},{"dia":"2026-09-13","g":383.65,"cl":213.0,"ca":31.0,"c":1.0,"r":357.93},{"dia":"2026-09-14","g":295.65,"cl":111.0,"ca":0.0,"c":0.0,"r":0.0},{"dia":"2026-09-15","g":301.25,"cl":97.0,"ca":12.0,"c":3.0,"r":2846.01},{"dia":"2026-09-16","g":329.86,"cl":117.0,"ca":4.0,"c":1.0,"r":653.98},{"dia":"2026-09-17","g":328.16,"cl":108.0,"ca":15.0,"c":1.0,"r":1614.0},{"dia":"2026-09-18","g":305.77,"cl":116.0,"ca":4.0,"c":0.0,"r":0.0},{"dia":"2026-09-19","g":385.81,"cl":159.0,"ca":12.0,"c":1.0,"r":308.7},{"dia":"2026-09-20","g":279.37,"cl":103.0,"ca":13.0,"c":3.0,"r":1698.39},{"dia":"2026-09-21","g":271.55,"cl":88.0,"ca":8.0,"c":2.0,"r":1363.01},{"dia":"2026-09-22","g":318.54,"cl":80.0,"ca":4.0,"c":2.0,"r":1673.9},{"dia":"2026-09-23","g":275.42,"cl":109.0,"ca":9.0,"c":2.0,"r":1837.63},{"dia":"2026-09-24","g":243.37,"cl":84.0,"ca":15.0,"c":0.0,"r":0.0},{"dia":"2026-09-25","g":157.28,"cl":69.0,"ca":3.0,"c":1.0,"r":508.7},{"dia":"2026-09-26","g":199.25,"cl":89.0,"ca":29.0,"c":5.0,"r":1689.41},{"dia":"2026-09-27","g":184.14,"cl":69.0,"ca":19.0,"c":1.0,"r":508.7},{"dia":"2026-09-28","g":162.1,"cl":61.0,"ca":5.0,"c":4.0,"r":2962.36},{"dia":"2026-09-29","g":140.23,"cl":50.0,"ca":5.0,"c":3.0,"r":1684.69},{"dia":"2026-09-30","g":90.33,"cl":50.0,"ca":2.0,"c":1.0,"r":325.7}]};
 const DADOS = {"mes":{"g":8648.24,"cl":4004.0,"ca":396.0,"c":76.0,"r":50776.11,"im":103394.0},"blocos":[{"nome":"Stories · 45 a 64","novo":true,"g":3897.25,"cl":2278.0,"ca":220.0,"c":34.0,"r":21549.33,"im":48019.0},{"nome":"Feed · 45 a 64","novo":true,"g":2299.29,"cl":715.0,"ca":82.0,"c":20.0,"r":16408.62,"im":26308.0},{"nome":"Quem já conhece","novo":true,"g":1118.27,"cl":401.0,"ca":26.0,"c":7.0,"r":4765.29,"im":12277.0},{"nome":"Novos públicos · 55 a 64","novo":true,"g":756.93,"cl":337.0,"ca":37.0,"c":6.0,"r":4097.07,"im":9672.0},{"nome":"Stories (setup anterior)","novo":false,"g":548.21,"cl":261.0,"ca":30.0,"c":9.0,"r":3955.8,"im":6666.0},{"nome":"Feed (setup anterior)","novo":false,"g":28.29,"cl":12.0,"ca":1.0,"c":0.0,"r":0.0,"im":452.0}],"semanas":[{"nome":"1 a 7","dias":7,"g":2331.97,"cl":1493.0,"ca":129.0,"c":22.0,"r":15294.72,"im":29624.0},{"nome":"8 a 14","dias":7,"g":2343.84,"cl":1062.0,"ca":108.0,"c":24.0,"r":15806.21,"im":28716.0},{"nome":"15 a 21","dias":7,"g":2201.77,"cl":788.0,"ca":68.0,"c":11.0,"r":8484.09,"im":24660.0},{"nome":"22 a 30","dias":9,"g":1770.66,"cl":661.0,"ca":91.0,"c":19.0,"r":11191.09,"im":20394.0}],"teste":{"nova":{"g":600.2,"cl":199.0,"ca":47.0,"c":6.0,"r":3723.76,"im":6558.0},"anterior":{"g":576.5,"cl":273.0,"ca":31.0,"c":9.0,"r":3955.8,"im":7118.0}},"anuncios":[{"ad":"Stories 002 · 01/09/2026","bloco":"Stories · 45 a 64","g":2051.93,"cl":1498.0,"ca":107.0,"c":19.0,"r":12210.08,"im":25176.0},{"ad":"Feed 003 · 09/09/2026","bloco":"Feed · 45 a 64","g":781.39,"cl":194.0,"ca":25.0,"c":9.0,"r":7380.73,"im":9459.0},{"ad":"Feed 002 · 01/09/2026","bloco":"Feed · 45 a 64","g":933.8,"cl":322.0,"ca":35.0,"c":7.0,"r":7298.16,"im":9957.0},{"ad":"Stories 017 · 24/09/2026","bloco":"Stories (setup anterior)","g":491.14,"cl":239.0,"ca":30.0,"c":9.0,"r":3955.8,"im":5926.0},{"ad":"Stories 009 · 19/09/2026","bloco":"Stories · 45 a 64","g":606.11,"cl":245.0,"ca":24.0,"c":4.0,"r":3036.91,"im":6937.0},{"ad":"Feed 004 · 09/09/2026","bloco":"Quem já conhece","g":476.79,"cl":91.0,"ca":7.0,"c":5.0,"r":2717.46,"im":4764.0},{"ad":"Feed 004 · 19/09/2026","bloco":"Novos públicos · 55 a 64","g":164.97,"cl":50.0,"ca":8.0,"c":3.0,"r":2195.4,"im":1773.0},{"ad":"All Formats 001 · 01/09/20","bloco":"Quem já conhece","g":405.52,"cl":243.0,"ca":14.0,"c":2.0,"r":2047.83,"im":5184.0},{"ad":"Feed 004 · 19/09/2026","bloco":"Feed · 45 a 64","g":467.45,"cl":151.0,"ca":14.0,"c":4.0,"r":1729.73,"im":5080.0},{"ad":"Stories 001 · 01/09/2026","bloco":"Stories · 45 a 64","g":282.74,"cl":110.0,"ca":20.0,"c":4.0,"r":1533.53,"im":3905.0}],"bases":{"set25":{"nome":"set/2025","d":30,"g":3420.66,"cl":2732,"ca":412,"c":65,"r":48662.87},"tri":{"nome":"jun a ago/2026","d":78,"g":9752.39,"cl":6763,"ca":1265,"c":169,"r":108238.56},"set26":{"nome":"set/2026","d":30,"g":8648.24,"cl":4004.0,"ca":396.0,"c":76.0,"r":50776.11}}};
 /* ---------- formatação ---------- */
 const NB=n=>Math.round(n).toLocaleString('pt-BR');
@@ -767,6 +783,42 @@ responsive(document.getElementById('c-teste'),(m,sz)=>{
     tip:`<b>${nome}</b>Verba: ${BRL2(t.g)}<br>Visitas: ${NB(t.cl)}<br>Carrinhos: ${NB(t.ca)}<br>Pedidos: ${NB(t.c)}<br>Vendas: ${BRL2(t.r)}<br>Retorno: ${X(t.r/t.g)}`
   })),{rowH:54,L:180,R:330});
 });
+
+/* ---------- histograma das rodadas ---------- */
+const CORES=['var(--r1)','var(--r2)','var(--r3)','var(--s1)'];
+function histRodadas(mount,size){
+  const sm=size==='sm';
+  const W=VW,H=sm?250:300,L=sm?56:78,R=10,T=46,B=36,fs=sm?9:10.5;
+  const s=newSvg(mount,W,H);
+  const d=ROD.diario, max=niceMax(Math.max(...d.map(x=>x.r)));
+  const iw=W-L-R, ih=H-T-B, bw=iw/d.length;
+  const idx=dia=>ROD.rodadas.findIndex(r=>r.ini<=dia&&dia<=r.fim);
+  for(let i=0;i<=3;i++){const y=T+ih-ih*i/3;
+    el('line',{x1:L,x2:W-R,y1:y,y2:y,class:'grid'},s);
+    txt(s,L-6,y+3.5,BRLk(max*i/3),'','end',fs);}
+  d.forEach((x,i)=>{
+    const ri=idx(x.dia), h=Math.max(x.r?1:0,ih*x.r/max), xx=L+i*bw+bw*0.15, y=T+ih-h;
+    const g=el('g',{},s);
+    if(h>0)el('rect',{x:xx,y,width:bw*0.7,height:h,fill:CORES[ri],rx:1.5},g);
+    el('rect',{x:L+i*bw,y:T,width:bw,height:ih,fill:'transparent'},g);
+    hook(g,`<b>${x.dia.slice(8)} de setembro · ${ROD.rodadas[ri].nome}</b>Verba: ${BRL2(x.g)}<br>Visitas: ${NB(x.cl)}<br>Carrinhos: ${NB(x.ca)}<br>Pedidos: ${NB(x.c)}<br>Vendas: ${BRL2(x.r)}`);
+    if(i%(sm?6:3)===0||i===d.length-1)txt(s,xx+bw*0.35,H-10,x.dia.slice(8),'','middle',fs);
+  });
+  ROD.rodadas.forEach((r,ri)=>{
+    const i0=d.findIndex(x=>x.dia===r.ini);
+    if(ri>0){const xl=L+i0*bw;
+      el('line',{x1:xl,x2:xl,y1:T-6,y2:T+ih,stroke:'var(--ink3)','stroke-width':1,'stroke-dasharray':'3 3'},s);}
+    const i1=d.findIndex(x=>x.dia===r.fim);
+    const cx=L+((i0+i1+1)/2)*bw;
+    const t=txt(s,cx,T-14,r.nome,'','middle',sm?9:11);
+    t.setAttribute('fill',CORES[ri]); t.setAttribute('font-weight','600');
+  });
+  el('line',{x1:L,x2:W-R,y1:T+ih,y2:T+ih,class:'axis'},s);
+}
+responsive(document.getElementById('c-hist'),(m,sz)=>histRodadas(m,sz));
+document.getElementById('t-rodadas').innerHTML=
+  '<thead><tr><th>Rodada</th><th>Período</th><th>Verba</th><th>Visitas</th><th>Pedidos</th><th>Vendas</th><th>Retorno</th><th>De 100 visitas, viram carrinho</th></tr></thead><tbody>'+
+  ROD.rodadas.map((r,i)=>`<tr><td>${r.nome}</td><td>${r.ini.slice(8)} a ${r.fim.slice(8)} de set</td><td>${BRL(r.g)}</td><td>${NB(r.cl)}</td><td>${NB(r.c)}</td><td>${BRL(r.r)}</td><td>${X(r.r/r.g)}</td><td class="${i===3?'pos':''}">${(r.ca/r.cl*100).toLocaleString('pt-BR',{maximumFractionDigits:1})}</td></tr>`).join('')+'</tbody>';
 
 /* semanas */
 responsive(document.getElementById('c-semanas'),(m,sz)=>{
