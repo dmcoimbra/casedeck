@@ -18,17 +18,21 @@
 --display:"Big Shoulders Display",Impact,sans-serif;--body:"Space Grotesk",system-ui,sans-serif;
 --mono:"Space Mono",ui-monospace,Menlo,monospace;--gut:clamp(20px,5vw,72px)}
 html,body{height:100%}
-body{font-family:var(--body);background:var(--ink);color:var(--paper);overflow:hidden;line-height:1.5}
+body{font-family:var(--body);background:var(--ink);color:var(--paper);line-height:1.5}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 .en{display:none}
 html.lang-en .pt{display:none}
 html.lang-en .en{display:inline}
-.deck{height:100%;position:relative}
-.slide{position:absolute;inset:0;padding:clamp(48px,7vh,86px) var(--gut) clamp(72px,10vh,96px);overflow-y:auto;
- opacity:0;visibility:hidden;transform:translateX(28px);transition:opacity .34s,transform .34s,visibility .34s}
-.slide.on{opacity:1;visibility:visible;transform:none}
+.deck{position:relative}
+.slide{position:relative;min-height:100vh;padding:clamp(56px,9vh,96px) var(--gut) clamp(88px,12vh,116px);
+ display:flex;align-items:center;scroll-margin-top:0}
+.slide+.slide{border-top:1px solid var(--line-d)}
+.slide.light+.slide.light,.slide.light-2+.slide.light-2,.slide.light+.slide.light-2,
+.slide.light-2+.slide.light{border-top-color:var(--line)}
 .slide.light{background:var(--paper);color:var(--ink)}
 .slide.light-2{background:var(--paper-2);color:var(--ink)}
-.in{max-width:1180px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;justify-content:center}
+.in{max-width:1180px;margin:0 auto;width:100%;display:flex;flex-direction:column;justify-content:center}
 h1{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.9;font-size:clamp(44px,8.5vw,118px)}
 h2{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.92;font-size:clamp(32px,5vw,62px)}
 h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(20px,2.4vw,28px);line-height:1}
@@ -79,7 +83,7 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
 .bl .row:hover{background:rgba(5,5,5,.03)}
 .bx{width:17px;height:17px;border:2px solid var(--ink);flex:none;display:grid;place-items:center;background:var(--white)}
 .bx::after{content:"";width:9px;height:9px;background:var(--teal);transform:scale(0);transition:transform .14s}
-.on>.row .bx::after,.ci.on .bx::after{transform:scale(1)}
+.on>.row .bx::after,.ci.on .bx::after,.ex.on .bx::after,.ck.on .bx::after{transform:scale(1)}
 .bl .nm{font-weight:700;font-size:15.5px;flex:1}
 .bl .lj{font-family:var(--mono);font-size:11px;color:var(--mute);white-space:nowrap}
 .bl .vl{font-family:var(--mono);font-size:14px;font-weight:700;white-space:nowrap;min-width:92px;text-align:right}
@@ -125,6 +129,10 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
 .rl b{font-family:var(--mono);font-weight:700;text-align:right}
 .rl.tot{border-bottom:0;border-top:2px solid var(--lime);margin-top:4px;padding-top:12px;font-size:17px}
 .rl.tot b{color:var(--lime);font-size:20px}
+.rsec{padding:9px 0;border-bottom:1px solid var(--line-d)}
+.rt{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute-d);margin-bottom:5px}
+.ri{display:flex;justify-content:space-between;gap:12px;padding:3px 0;font-size:14px;color:var(--mute-d)}
+.ri b{font-family:var(--mono);font-weight:700;color:var(--paper);white-space:nowrap}
 .ck{display:flex;gap:10px;align-items:flex-start;margin-top:16px;cursor:pointer;font-size:14px;color:var(--mute-d)}
 .ck .bx{border-color:var(--paper);background:transparent;margin-top:2px}
 .ck .bx::after{background:var(--lav)}
@@ -181,6 +189,8 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
  #folha .fq th{text-align:left;font-size:7.5pt;letter-spacing:.09em;text-transform:uppercase;color:#8A929E;
   padding:2.2mm 0;width:52mm;vertical-align:top;font-weight:600;border-bottom:.3pt solid #E3E6EB}
  #folha .fq td{padding:2.2mm 0;font-size:9.5pt;border-bottom:.3pt solid #E3E6EB;vertical-align:top}
+ #folha .fq td .li{display:flex;justify-content:space-between;gap:6mm;padding:.4mm 0}
+ #folha .fq td .li b{font-weight:600;white-space:nowrap}
  #folha .fv th{background:#053025;color:#fff;font-size:8pt;text-align:left;padding:2.6mm 3mm;font-weight:600}
  #folha .fv th.n,#folha .fv td.n{text-align:right}
  #folha .fv td{padding:3mm;border-bottom:.3pt solid #E3E6EB;font-size:10pt;font-weight:600}
@@ -237,8 +247,8 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
 
   <table class="fq">
     <tr><th><span class="pt">Lojas no painel</span><span class="en" lang="en">Stores in the panel</span></th><td id="pLojas">69</td></tr>
-    <tr><th><span class="pt">Regiões e cidades retiradas</span><span class="en" lang="en">Regions and cities removed</span></th><td id="pFora">—</td></tr>
-    <tr><th><span class="pt">Extras incluídos</span><span class="en" lang="en">Add-ons included</span></th><td id="pExtras">—</td></tr>
+    <tr><th><span class="pt">Retiradas do painel · por onda</span><span class="en" lang="en">Removed from the panel · per wave</span></th><td id="pFora">—</td></tr>
+    <tr><th><span class="pt">Extras selecionados</span><span class="en" lang="en">Selected add-ons</span></th><td id="pExtras">—</td></tr>
     <tr><th><span class="pt">Apólice de seguro</span><span class="en" lang="en">Insurance policy</span></th><td id="pSeg">—</td></tr>
     <tr><th><span class="pt">Enviado por</span><span class="en" lang="en">Sent by</span></th><td id="pNome">—</td></tr>
     <tr><th><span class="pt">Observações</span><span class="en" lang="en">Notes</span></th><td id="pObs">—</td></tr>
@@ -262,13 +272,13 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
   <div class="fsig"><div>75 LAB</div><div><span class="pt">Cliente</span><span class="en" lang="en">Client</span></div></div>
   <footer class="ff">75 LAB ESTRATÉGIA, DESIGN E PRODUÇÃO LTDA · CNPJ 55.470.982/0001-77 · daniel.coimbra@75lab.com.br</footer>
 </section>
-<main class="deck"><section class="slide dark" aria-hidden="true">
+<main class="deck"><section class="slide dark" id="s1">
 <div class="in">
   <div class="eyebrow"><span class="pt">Orçamento · ORC-178941 · 05.10.2026</span><span class="en" lang="en">Budget · ORC-178941 · 10.05.2026</span></div>
   <h1><span class="pt">Pesquisa<br>de <span class="acc">PDV</span></span><span class="en" lang="en">In-store<br><span class="acc">audit</span></span></h1>
   <div class="tag"><span class="pt">Onda 1 e Onda 2 · 69 lojas cada</span><span class="en" lang="en">Wave 1 and Wave 2 · 69 stores each</span></div>
   <p class="lede"><span class="pt">A proposta para as duas próximas ondas, com o cronograma que desenhamos juntos, o que está incluído em cada etapa e as alavancas de escopo que a Pokémon pode acionar — para cima ou para baixo — com valor conhecido.</span><span class="en" lang="en">The proposal for the next two waves, with the schedule we designed together, what each stage includes, and the scope levers Pokémon can pull — up or down — at a known value.</span></p>
-</div></section><section class="slide light" aria-hidden="true">
+</div></section><section class="slide light" id="s2">
 <div class="in">
   <div class="eyebrow">01 · <span class="pt">A proposta</span><span class="en" lang="en">The proposal</span></div>
   <h2><span class="pt">Duas ondas,<br>dentro do budget</span><span class="en" lang="en">Two waves,<br>within budget</span></h2>
@@ -288,7 +298,7 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
     <div><b><span class="pt">Preço fechado</span><span class="en" lang="en">Fixed price</span></b><p><span class="pt">A variação de escopo já vem precificada em faixas; nada é reaberto no meio do caminho.</span><span class="en" lang="en">Scope variation is already priced in ranges; nothing is reopened midway.</span></p></div>
     <div><b><span class="pt">Escopo ajustável</span><span class="en" lang="en">Adjustable scope</span></b><p><span class="pt">Cada região tem valor próprio e pode entrar ou sair da onda com número na mão.</span><span class="en" lang="en">Each region carries its own value and can be switched in or out with the figure in hand.</span></p></div>
   </div>
-</div></section><section class="slide dark" aria-hidden="true">
+</div></section><section class="slide dark" id="s3">
 <div class="in">
   <div class="eyebrow">02 · <span class="pt">Por que a Onda 1 custa mais</span><span class="en" lang="en">Why Wave 1 costs more</span></div>
   <h2><span class="pt">O sistema se paga<br>uma vez só</span><span class="en" lang="en">The system is paid<br>for only once</span></h2>
@@ -302,18 +312,18 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
       <p><span class="pt">O dado sai da loja já estruturado e auditado foto a foto. É isso que permite entregar a base completa poucos dias depois da última visita, em vez de semanas.</span><span class="en" lang="en">Data leaves the store already structured and audited photo by photo. That is what allows the full dataset to be delivered days after the last visit instead of weeks.</span></p></div>
   </div>
   <p class="lede"><span class="pt">Na Onda 2, o que sobra é a operação: campo, coordenação, tratamento dos dados e entrega. Por isso ela custa R$ 138.450.</span><span class="en" lang="en">In Wave 2, what remains is the operation: fieldwork, coordination, data processing and delivery. That is why it costs R$ 138,450.</span></p>
-</div></section><section class="slide light-2" aria-hidden="true">
+</div></section><section class="slide light-2" id="s4">
 <div class="in">
   <div class="eyebrow">03 · <span class="pt">Escopo</span><span class="en" lang="en">Scope</span></div>
   <h2><span class="pt">O que está<br>em cada onda</span><span class="en" lang="en">What each wave<br>includes</span></h2>
   <ul class="cols2"><li><span class="pt">As 69 lojas do painel, em 8 redes, 13 UFs e 28 cidades</span><span class="en" lang="en">All 69 panel stores, in 8 chains, 13 states and 28 cities</span></li><li><span class="pt">Os 9 módulos do roteiro, na ordem do percurso da loja</span><span class="en" lang="en">The 9 protocol modules, in store-walking order</span></li><li><span class="pt">Agendamento pela 75 LAB, com até 3 contatos por loja</span><span class="en" lang="en">Scheduling by 75 LAB, with up to 3 contacts per store</span></li><li><span class="pt">Ida presencial quando a loja não responde</span><span class="en" lang="en">In-person visit when a store does not reply</span></li><li><span class="pt">App próprio com código de barras, GPS e foto obrigatória</span><span class="en" lang="en">Our own app with barcode, GPS and mandatory photos</span></li><li><span class="pt">Auditoria foto a foto antes de validar cada visita</span><span class="en" lang="en">Photo-by-photo audit before each visit is validated</span></li><li><span class="pt">Base bruta em Excel e pastas de fotos por loja</span><span class="en" lang="en">Raw Excel data and photo folders per store</span></li><li><span class="pt">Insights e nuvem de palavras da conversa com a loja</span><span class="en" lang="en">Insights and word cloud from the store interview</span></li><li><span class="pt">Ambiente com login individual, sem prazo de expiração</span><span class="en" lang="en">Environment with individual logins and no expiry</span></li><li><span class="pt">Entrega parcial das 44 lojas de dezembro em 15/01</span><span class="en" lang="en">Partial delivery of the 44 December stores on 01/15</span></li><li><span class="pt">Até 450 SKUs na lista de referência</span><span class="en" lang="en">Up to 450 SKUs on the reference list</span></li><li><span class="pt">Um dia de reserva em campo para recusas e remarcações</span><span class="en" lang="en">One reserve field day for refusals and rescheduling</span></li></ul>
-</div></section><section class="slide dark" aria-hidden="true">
+</div></section><section class="slide dark" id="s5">
 <div class="in">
   <div class="eyebrow">04 · <span class="pt">Cronograma da Onda 1</span><span class="en" lang="en">Wave 1 schedule</span></div>
   <h2><span class="pt">Dezembro e janeiro,<br>fora do pico de férias</span><span class="en" lang="en">December and January,<br>around the holiday peak</span></h2>
   <div class="steps"><div class="step"><div class="dot">1</div><div class="d"><span class="pt">Até 27/11</span><span class="en" lang="en">By 11/27</span></div><h4><span class="pt">Preparação</span><span class="en" lang="en">Preparation</span></h4><p><span class="pt">Lista de SKUs congelada, app configurado, cartas por loja e agendamento das 69 lojas.</span><span class="en" lang="en">SKU list frozen, app configured, letters per store and scheduling of all 69 stores.</span></p></div><div class="step"><div class="dot">2</div><div class="d"><span class="pt">01 a 18/12</span><span class="en" lang="en">12/01 to 12/18</span></div><h4><span class="pt">Campo · parte 1</span><span class="en" lang="en">Fieldwork · part 1</span></h4><p><span class="pt">Grande São Paulo, Bauru, Paraná, Santa Catarina e Rio de Janeiro: 44 lojas.</span><span class="en" lang="en">Greater São Paulo, Bauru, Paraná, Santa Catarina and Rio de Janeiro: 44 stores.</span></p></div><div class="step"><div class="dot">3</div><div class="d"><span class="pt">15/01</span><span class="en" lang="en">01/15</span></div><h4><span class="pt">Entrega parcial</span><span class="en" lang="en">Partial delivery</span></h4><p><span class="pt">Base e fotos das 44 lojas de dezembro, já no ambiente de entrega.</span><span class="en" lang="en">Data and photos for the 44 December stores, already in the delivery environment.</span></p></div><div class="step"><div class="dot">4</div><div class="d"><span class="pt">05 a 27/01</span><span class="en" lang="en">01/05 to 01/27</span></div><h4><span class="pt">Campo · parte 2</span><span class="en" lang="en">Fieldwork · part 2</span></h4><p><span class="pt">Fortaleza, São Luís, Norte, Goiás, Rio Grande do Sul, Tubarão e Parauapebas: 25 lojas.</span><span class="en" lang="en">Fortaleza, São Luís, the North, Goiás, Rio Grande do Sul, Tubarão and Parauapebas: 25 stores.</span></p></div><div class="step"><div class="dot">5</div><div class="d"><span class="pt">05/02/2027</span><span class="en" lang="en">02/05/2027</span></div><h4><span class="pt">Consolidado</span><span class="en" lang="en">Consolidated</span></h4><p><span class="pt">Base completa das 69 lojas, fotos, insights e nuvem de palavras.</span><span class="en" lang="en">Full data for the 69 stores, photos, insights and word cloud.</span></p></div></div>
   <p class="lede"><span class="pt">A coleta evita o período de 19/12 a 06/01, que é o pico de preço de passagem e hotel e a semana em que a loja está mais fora do padrão. A Onda 2, do 2º semestre, tem a janela definida com a Pokémon ao longo de 2027.</span><span class="en" lang="en">Fieldwork avoids 12/19 to 01/06, the peak for fares and hotels and the week when stores are furthest from their normal state. Wave 2, in the second half, has its window set with Pokémon during 2027.</span></p>
-</div></section><section class="slide light" aria-hidden="true">
+</div></section><section class="slide light" id="s6">
 <div class="in">
   <div class="eyebrow">05 · <span class="pt">Simulador de escopo</span><span class="en" lang="en">Scope simulator</span></div>
   <h2><span class="pt">Marque o que ficaria<br>de fora</span><span class="en" lang="en">Tick what would<br>stay out</span></h2>
@@ -380,7 +390,7 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
       <p class="nota"><span class="pt">Valores por onda, de referência de 2026. A soma das cidades é menor que o bloco porque cada viagem tem custos de ida e volta que só saem com o bloco inteiro. Retirar Manaus e Porto Velho deixa o painel sem a região Norte.</span><span class="en" lang="en">Values are per wave, referenced to 2026. The sum of the cities is smaller than the block because each trip has round-trip costs that only disappear with the whole block. Dropping Manaus and Porto Velho leaves the panel with no North region.</span></p>
     </div>
   </div>
-</div></section><section class="slide light-2" aria-hidden="true">
+</div></section><section class="slide light-2" id="s7">
 <div class="in">
   <div class="eyebrow">06 · <span class="pt">Extras</span><span class="en" lang="en">Add-ons</span></div>
   <h2><span class="pt">O que pode<br>entrar depois</span><span class="en" lang="en">What can be<br>added later</span></h2>
@@ -424,7 +434,7 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
     <b><span class="pt">Apólice de seguro de responsabilidade civil não está inclusa</span><span class="en" lang="en">Liability insurance policy is not included</span></b>
     <span class="pt">Pelo contrato guarda-chuva, a apólice é exigida por padrão. A 75 LAB só fica dispensada de contratá-la se a SOW especificar, por escrito, que ela não é necessária. Se for exigida, o custo da apólice entra como valor extra, cotado à parte e somado ao orçamento.</span><span class="en" lang="en">Under the master agreement, the policy is required by default. 75 LAB is only exempt from taking it out if the SOW states in writing that it is not necessary. If it is required, the cost of the policy is added as an extra, quoted separately and added to the budget.</span>
   </div>
-</div></section><section class="slide dark" aria-hidden="true">
+</div></section><section class="slide dark" id="s8">
 <div class="in">
   <div class="eyebrow">07 · <span class="pt">Resumo do pedido</span><span class="en" lang="en">Order summary</span></div>
   <h2><span class="pt">O que vocês<br>escolheram</span><span class="en" lang="en">What you<br>selected</span></h2>
@@ -432,11 +442,17 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
   <div class="sim">
     <div class="resumo">
       <div class="rl"><span><span class="pt">Lojas no painel</span><span class="en" lang="en">Stores in the panel</span></span><b id="rLojas">69</b></div>
-      <div class="rl"><span><span class="pt">Regiões e cidades retiradas</span><span class="en" lang="en">Regions and cities removed</span></span><b id="rFora"><span class="pt">nenhuma</span><span class="en" lang="en">none</span></b></div>
-      <div class="rl"><span><span class="pt">Extras incluídos</span><span class="en" lang="en">Add-ons included</span></span><b id="rExtras"><span class="pt">nenhum</span><span class="en" lang="en">none</span></b></div>
+      <div class="rsec" id="rForaSec" hidden>
+        <div class="rt"><span class="pt">Retiradas do painel · por onda</span><span class="en" lang="en">Removed from the panel · per wave</span></div>
+        <div id="rForaList"></div>
+      </div>
       <div class="rl"><span><span class="pt">Onda 1 · 1º semestre</span><span class="en" lang="en">Wave 1 · first half</span></span><b id="rE1">R$ 161.350</b></div>
       <div class="rl"><span><span class="pt">Onda 2 · 2º semestre</span><span class="en" lang="en">Wave 2 · second half</span></span><b id="rE2">R$ 138.450</b></div>
-      <div class="rl"><span><span class="pt">Extras</span><span class="en" lang="en">Add-ons</span></span><b id="rEx">R$ 0</b></div>
+      <div class="rsec" id="rExSec" hidden>
+        <div class="rt"><span class="pt">Extras selecionados</span><span class="en" lang="en">Selected add-ons</span></div>
+        <div id="rExList"></div>
+      </div>
+      <div class="rl"><span><span class="pt">Soma dos extras</span><span class="en" lang="en">Add-ons subtotal</span></span><b id="rEx">R$ 0</b></div>
       <div class="rl tot"><span><span class="pt">Total</span><span class="en" lang="en">Total</span></span><b id="rTotal">R$ 299.800</b></div>
       <div class="ck" id="segRow" role="checkbox" aria-checked="false" tabindex="0">
         <span class="bx"></span>
@@ -457,7 +473,7 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
       <p class="nota" id="fStatus"><span class="pt">As escolhas ficam salvas neste navegador. O envio abre seu programa de e-mail com o resumo pronto, endereçado à 75 LAB e com cópia para vocês. O PDF sai no idioma selecionado, pela janela de impressão: escolha “Salvar como PDF”.</span><span class="en" lang="en">Your choices are saved in this browser. Sending opens your e-mail client with the summary ready, addressed to 75 LAB and copied to you. The PDF comes out in the selected language, through the print dialog: choose “Save as PDF”.</span></p>
     </div>
   </div>
-</div></section><section class="slide dark" aria-hidden="true">
+</div></section><section class="slide dark" id="s9">
 <div class="in">
   <div class="eyebrow">08 · <span class="pt">Condições comerciais</span><span class="en" lang="en">Commercial terms</span></div>
   <h2><span class="pt">Como fica<br>no contrato</span><span class="en" lang="en">How it works<br>in the contract</span></h2>
@@ -470,7 +486,7 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
     <li><span class="pt">A 75 LAB assume 100% da responsabilidade civil e trabalhista da operação de campo.</span><span class="en" lang="en">75 LAB takes full civil and labor responsibility for the field operation.</span></li>
     <li><span class="pt">Não inclui relatório analítico e painel de indicadores, que ficam com outro fornecedor.</span><span class="en" lang="en">Analytical reporting and the KPI dashboard are not included; they stay with another supplier.</span></li>
   </ul>
-</div></section><section class="slide light" aria-hidden="true">
+</div></section><section class="slide light" id="s10">
 <div class="in">
   <div class="eyebrow">09 · <span class="pt">Próximos passos</span><span class="en" lang="en">Next steps</span></div>
   <h2><span class="pt">De agora<br>até o campo</span><span class="en" lang="en">From here<br>to the field</span></h2>
@@ -490,21 +506,43 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
  var S=[].slice.call(document.querySelectorAll('.slide')),i=0,dots=document.getElementById('dots'),
      ct=document.getElementById('ct'),pv=document.getElementById('pv'),nx=document.getElementById('nx');
  S.forEach(function(s,n){var b=document.createElement('button');b.type='button';
-   b.setAttribute('aria-label','Slide '+(n+1));b.addEventListener('click',function(){go(n)});dots.appendChild(b)});
- function go(n){i=Math.max(0,Math.min(S.length-1,n));
-   S.forEach(function(s,k){s.classList.toggle('on',k===i);s.setAttribute('aria-hidden',String(k!==i))});
+   b.setAttribute('aria-label','Slide '+(n+1));
+   b.addEventListener('click',function(){ir(n,true)});dots.appendChild(b)});
+
+ function marca(n){
+   i=Math.max(0,Math.min(S.length-1,n));
    [].forEach.call(dots.children,function(b,k){b.setAttribute('aria-current',String(k===i))});
-   ct.textContent=(i+1)+' / '+S.length;pv.disabled=i===0;nx.disabled=i===S.length-1;
-   history.replaceState(null,'','#s'+(i+1));S[i].scrollTop=0;}
- pv.addEventListener('click',function(){go(i-1)});nx.addEventListener('click',function(){go(i+1)});
+   ct.textContent=(i+1)+' / '+S.length;pv.disabled=i===0;nx.disabled=i===S.length-1;}
+
+ function ir(n,hash){
+   n=Math.max(0,Math.min(S.length-1,n));
+   S[n].scrollIntoView({behavior:(matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'),block:'start'});
+   marca(n);if(hash)history.replaceState(null,'','#s'+(n+1));}
+
+ /* o slide visível manda nos marcadores */
+ function atual(){
+   var meio=innerHeight/2,n=0,melhor=1e9;
+   S.forEach(function(s,k){var r=s.getBoundingClientRect();
+     var d=Math.abs(r.top+r.height/2-meio);
+     if(r.bottom>0&&r.top<innerHeight&&d<melhor){melhor=d;n=k;}});
+   marca(n);}
+ var ult=0,tid=null;
+ addEventListener('scroll',function(){
+   var ag=Date.now();
+   if(ag-ult>90){ult=ag;atual();}
+   else{clearTimeout(tid);tid=setTimeout(function(){ult=Date.now();atual();},110);}},{passive:true});
+ addEventListener('resize',atual,{passive:true});
+
+ pv.addEventListener('click',function(){ir(i-1,true)});
+ nx.addEventListener('click',function(){ir(i+1,true)});
  document.addEventListener('keydown',function(e){
-   if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){go(i+1);e.preventDefault();}
-   if(e.key==='ArrowLeft'||e.key==='PageUp'){go(i-1);e.preventDefault();}
-   if(e.key==='Home'){go(0)}if(e.key==='End'){go(S.length-1)}});
- var x0=null;document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
- document.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;
-   if(Math.abs(d)>70){go(i+(d<0?1:-1))}x0=null},{passive:true});
- var h=parseInt((location.hash||'').replace('#s',''),10);go(h>0?h-1:0);
+   if(e.target.matches('input,textarea'))return;
+   if(e.key==='ArrowRight'||e.key==='PageDown'){ir(i+1,true);e.preventDefault();}
+   if(e.key==='ArrowLeft'||e.key==='PageUp'){ir(i-1,true);e.preventDefault();}
+   if(e.key==='Home'){ir(0,true);e.preventDefault();}
+   if(e.key==='End'){ir(S.length-1,true);e.preventDefault();}});
+ var h=parseInt((location.hash||'').replace('#s',''),10);
+ if(h>0)setTimeout(function(){ir(h-1,false)},60);else marca(0);
 
  /* idioma */
  var K='pkm-deck-lang';
@@ -536,18 +574,21 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
   }catch(e){}}
 
  function conta(){
+   function lojasTxt(n){return n+' '+(en()?(n===1?'store':'stores'):(n===1?'loja':'lojas'));}
    var eco=0,lj=LOJAS,fora=[];
    Object.keys(BL).forEach(function(id){
-     if(st.blocos[id]){eco+=BL[id].v;lj-=BL[id].lojas;fora.push(nome(BL[id])+' ('+BL[id].lojas+(en()?(BL[id].lojas===1?' store':' stores'):(BL[id].lojas===1?' loja':' lojas'))+')');}
+     if(st.blocos[id]){eco+=BL[id].v;lj-=BL[id].lojas;
+       fora.push({n:nome(BL[id])+' · '+lojasTxt(BL[id].lojas),v:BL[id].v});}
      else{Object.keys(CI).forEach(function(k){
        if(k.split(':')[0]===id&&st.cidades[k]){eco+=CI[k].v;lj-=CI[k].lojas;
-         fora.push(nome(CI[k])+' ('+CI[k].lojas+(en()?(CI[k].lojas===1?' store':' stores'):(CI[k].lojas===1?' loja':' lojas'))+')');}});}});
+         fora.push({n:nome(CI[k])+' · '+lojasTxt(CI[k].lojas),v:CI[k].v});}});}});
    var ex=0,exl=[];
    Object.keys(EX).forEach(function(id){
      var q=st.extras[id]||0;if(!q)return;
-     var e=EX[id],m=e.tipo==='onda'?2:(e.tipo==='loja'?q:1);
-     ex+=e.v*m;
-     exl.push(nome(e)+(e.tipo==='loja'?' × '+q:(e.tipo==='onda'?(en()?' (both waves)':' (nas duas ondas)'):'')));});
+     var e=EX[id],m=e.tipo==='onda'?2:(e.tipo==='loja'?q:1),tot=e.v*m;
+     ex+=tot;
+     exl.push({n:nome(e)+(e.tipo==='loja'?' × '+q:(e.tipo==='onda'?(en()?' · both waves':' · nas duas ondas'):'')),
+               v:tot,d:(e.tipo==='loja'?fmt(e.v)+(en()?' each':' cada'):(e.tipo==='onda'?fmt(e.v)+(en()?' per wave':' por onda'):''))});});
    return {eco:eco,lojas:lj,fora:fora,ex:ex,exl:exl,
            e1:E1-eco,e2:E2-eco,total:E1+E2-2*eco+ex};
  }
@@ -560,18 +601,25 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
    if(g('exTotal')){g('exTotal').textContent=fmt(c.total);
      g('exBase').textContent=fmt(E1+E2-2*c.eco);g('exSoma').textContent=c.ex?('+ '+fmt(c.ex)):'R$ 0';
      g('exSeg').textContent=st.seguro?(en()?'required · to be quoted':'exigida · a cotar'):(en()?'not required':'não exigida');}
+   function lista(itens,sinal){
+     if(!itens.length)return en()?'none':'nenhuma';
+     return itens.map(function(x){
+       return '<span class="li"><span>'+x.n+(x.d?' <i>('+x.d+')</i>':'')+'</span><b>'+sinal+fmt(x.v)+'</b></span>';}).join('');}
    if(g('pTotal')){
      g('pLojas').textContent=c.lojas+(en()?' of 69':' de 69');
-     g('pFora').textContent=c.fora.length?c.fora.join(' · '):(en()?'none':'nenhuma');
-     g('pExtras').textContent=c.exl.length?c.exl.join(' · '):(en()?'none':'nenhum');
+     g('pFora').innerHTML=lista(c.fora,'− ');
+     g('pExtras').innerHTML=lista(c.exl,'+ ');
      g('pSeg').textContent=st.seguro?(en()?'the SOW will require it — value to be quoted and added':'a SOW vai exigir — valor a cotar, somado ao orçamento')
                                     :(en()?'not required by the SOW':'não exigida pela SOW');
      g('pNome').textContent=st.nome||'—';g('pObs').textContent=st.obs||'—';
      g('pE1').textContent=fmt(c.e1);g('pE2').textContent=fmt(c.e2);
      g('pEx').textContent=c.ex?fmt(c.ex):'R$ 0';g('pTotal').textContent=fmt(c.total);}
    if(g('rTotal')){g('rLojas').textContent=c.lojas;
-     g('rFora').textContent=c.fora.length?c.fora.join(' · '):(en()?'none':'nenhuma');
-     g('rExtras').textContent=c.exl.length?c.exl.join(' · '):(en()?'none':'nenhum');
+     function linhas(el,itens,sinal){
+       el.innerHTML=itens.map(function(x){
+         return '<div class="ri"><span>'+x.n+(x.d?' · '+x.d:'')+'</span><b>'+sinal+fmt(x.v)+'</b></div>';}).join('');}
+     linhas(g('rForaList'),c.fora,'− ');linhas(g('rExList'),c.exl,'+ ');
+     g('rForaSec').hidden=!c.fora.length;g('rExSec').hidden=!c.exl.length;
      g('rE1').textContent=fmt(c.e1);g('rE2').textContent=fmt(c.e2);
      g('rEx').textContent=c.ex?('+ '+fmt(c.ex)):'R$ 0';g('rTotal').textContent=fmt(c.total);}
    document.querySelectorAll('.bl').forEach(function(b){
@@ -630,12 +678,16 @@ h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size
    l.push((L?'Proposal ':'Proposta ')+ORC+(L?', dated 10/05/2026':', de 05/10/2026'));
    l.push('');
    l.push((L?'Panel: ':'Painel: ')+c.lojas+(L?' stores (out of 69)':' lojas (de 69)'));
-   l.push((L?'Removed: ':'Retirados: ')+(c.fora.length?c.fora.join('; '):(L?'nothing':'nada')));
-   l.push((L?'Add-ons: ':'Extras: ')+(c.exl.length?c.exl.join('; '):(L?'none':'nenhum')));
+   l.push((L?'Removed from the panel (per wave):':'Retiradas do painel (por onda):'));
+   if(c.fora.length)c.fora.forEach(function(x){l.push('  - '+x.n+': − '+fmt(x.v));});
+   else l.push('  - '+(L?'nothing':'nada'));
+   l.push((L?'Selected add-ons:':'Extras selecionados:'));
+   if(c.exl.length)c.exl.forEach(function(x){l.push('  - '+x.n+(x.d?' ('+x.d+')':'')+': + '+fmt(x.v));});
+   else l.push('  - '+(L?'none':'nenhum'));
    l.push('');
    l.push((L?'Wave 1 (first half): ':'Onda 1 (1º semestre): ')+fmt(c.e1));
    l.push((L?'Wave 2 (second half): ':'Onda 2 (2º semestre): ')+fmt(c.e2));
-   l.push((L?'Add-ons: ':'Extras: ')+fmt(c.ex));
+   l.push((L?'Add-ons subtotal: ':'Soma dos extras: ')+fmt(c.ex));
    l.push((L?'TOTAL: ':'TOTAL: ')+fmt(c.total));
    l.push('');
    l.push((L?'Insurance policy: ':'Apólice de seguro: ')+(st.seguro
