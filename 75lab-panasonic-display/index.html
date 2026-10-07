@@ -931,15 +931,15 @@ section.codice{background:var(--cx-papel);color:var(--cx-navy)}
 <section>
 <div class="fit">
   <p class="rotulo" data-en="09 <em>·</em> schedule">09 <em>·</em> cronograma</p>
-  <h2 class="larga" data-en="To be standing on November 1, the route has to be chosen today.">Para estar de pé em 1º de novembro, a rota precisa ser escolhida hoje.</h2>
+  <h2 class="larga" data-en="To be standing on November 10, the purchase order has to be issued now.">Para estar de pé em 10 de novembro, a PO precisa sair agora.</h2>
   <div class="crono" style="margin-top:clamp(12px,2vh,24px)">
     <div class="linha marco"><span class="data" data-en="Sep 23">23 set</span><span class="o-que" data-en="Concept presented and route chosen">Apresentação do conceito e definição da rota</span><span class="dur" data-en="1 DAY">1 DIA</span><span class="quem" data-en="75 LAB + PANASONIC">75 LAB + PANASONIC</span></div>
     <div class="linha"><span class="data" data-en="Sep 24–30">24 a 30 set</span><span class="o-que" data-en="Technical design developed">Desenvolvimento do projeto técnico</span><span class="dur" data-en="5 WORKING DAYS">5 DIAS ÚTEIS</span><span class="quem">75 LAB</span></div>
     <div class="linha"><span class="data" data-en="Oct 1–7">01 a 07 out</span><span class="o-que" data-en="Quotation with the suppliers">Cotação com os fornecedores</span><span class="dur" data-en="5 WORKING DAYS">5 DIAS ÚTEIS</span><span class="quem">75 LAB</span></div>
     <div class="linha marco"><span class="data" data-en="Oct 8–9">08 e 09 out</span><span class="o-que" data-en="Cost approved and purchase order issued">Aprovação do custo e emissão da PO</span><span class="dur" data-en="2 WORKING DAYS">2 DIAS ÚTEIS</span><span class="quem">PANASONIC</span></div>
-    <div class="linha"><span class="data" data-en="Oct 13–26">13 a 26 out</span><span class="o-que" data-en="Production">Produção</span><span class="dur" data-en="10 WORKING DAYS">10 DIAS ÚTEIS</span><span class="quem">75 LAB</span></div>
-    <div class="linha"><span class="data" data-en="Oct 27–31">27 a 31 out</span><span class="o-que" data-en="Delivery scheduled, shipping and installation">Agendamento de entrega, transporte e instalação</span><span class="dur" data-en="4 WORKING DAYS">4 DIAS ÚTEIS</span><span class="quem">75 LAB</span></div>
-    <div class="linha meta-fim"><span class="data" data-en="Nov 1">1º nov</span><span class="o-que" data-en="Display standing and running">Display de pé e funcionando</span><span class="dur"></span><span class="quem" data-en="TARGET">META</span></div>
+    <div class="linha"><span class="data" data-en="Oct 13 – Nov 3">13 out a 03 nov</span><span class="o-que" data-en="Production">Produção</span><span class="dur" data-en="15 WORKING DAYS">15 DIAS ÚTEIS</span><span class="quem">75 LAB</span></div>
+    <div class="linha"><span class="data" data-en="Nov 4–9">04 a 09 nov</span><span class="o-que" data-en="Delivery scheduled, shipping and installation">Agendamento de entrega, transporte e instalação</span><span class="dur" data-en="4 WORKING DAYS">4 DIAS ÚTEIS</span><span class="quem">75 LAB</span></div>
+    <div class="linha meta-fim"><span class="data" data-en="Nov 10">10 nov</span><span class="o-que" data-en="Display standing and running">Display de pé e funcionando</span><span class="dur"></span><span class="quem" data-en="TARGET">META</span></div>
     <div class="linha paralelo"><span class="data" data-en="Sep 10 – Oct 20">10 set a 20 out</span><span class="o-que"><span class="tag" data-en="RUNNING IN PARALLEL">EM PARALELO</span><b data-en="75 LAB registered as a Panasonic supplier">Cadastro da 75 LAB como fornecedora Panasonic</b></span><span class="dur" data-en="30 TO 40 DAYS">30 A 40 DIAS</span><span class="quem">PANASONIC</span></div>
   </div>
   <div class="contador" id="contador" style="margin-top:clamp(12px,2vh,22px)">
@@ -1341,7 +1341,7 @@ section.codice{background:var(--cx-papel);color:var(--cx-navy)}
     var no=document.getElementById('contaN'), tx=document.getElementById('contaT');
     if(!cx||!no||!tx) return;
     var hoje=new Date(); hoje.setHours(0,0,0,0);
-    var meta=new Date(2026,10,1);               /* 1º de novembro de 2026 */
+    var meta=new Date(2026,10,10);              /* 10 de novembro de 2026 */
     var d=Math.round((meta-hoje)/86400000);
     var cauda=[' Cada etapa começa no dia em que a anterior termina.',
                ' Every stage starts the day the one before it ends.'];
