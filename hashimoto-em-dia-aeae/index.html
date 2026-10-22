@@ -6,7 +6,6 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Hashimoto em Dia">
 <meta name="mobile-web-app-capable" content="yes">
@@ -99,6 +98,7 @@
   src: url(vendor/newsreader-400-latin.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
 </style>
 <style>
 /* Hashimoto em Dia — direção erva-doce, tema claro fixo.
@@ -2137,7 +2137,12 @@ function renderPerguntas(){
     return '<div style="display:flex;align-items:flex-start;gap:var(--he-3);padding:var(--he-3) 0;border-bottom:1px solid var(--he-border)">'
       +'<input type="checkbox" data-perg="'+p.id+'"'+(p.feita?' checked':'')
       +' style="width:22px;height:22px;min-height:22px;flex:none;margin-top:3px;accent-color:#567D40">'
-      +'<span style="flex:1;min-width:0;font-size:15px'+(p.feita?';color:#59664F;text-decoration:line-through':'')+'">'+esc(p.texto)+'</span>'
+      +'<span style="flex:1;min-width:0">'
+        +'<span style="display:block;font-size:15px'+(p.feita?';color:#59664F;text-decoration:line-through':'')+'">'+esc(p.texto)+'</span>'
+        +(origemPergunta(p)==='sugerida'
+            ? '<span style="display:block;margin-top:2px;font-size:12.5px;color:#59664F">sugerida pelo app</span>'
+            : '')
+      +'</span>'
       +'<button class="link" data-delperg="'+p.id+'" style="font-size:13px">remover</button></div>';}).join('');
 }
 function renderSugeridas(){
@@ -2192,8 +2197,12 @@ function gerarResumo(){
   if(notas.length){L.push('');L.push('ANOTAÇÕES');
     notas.forEach(function(k){L.push('  '+dataCurta(k)+': '+E.dias[k].nota.trim());});}
   var pend=E.perguntas.filter(function(p){return !p.feita;});
-  if(pend.length){L.push('');L.push('PERGUNTAS DA PACIENTE');
-    pend.forEach(function(p,i){L.push('  '+(i+1)+'. '+p.texto);});}
+  var proprias=pend.filter(function(p){return origemPergunta(p)!=='sugerida';});
+  var doApp=pend.filter(function(p){return origemPergunta(p)==='sugerida';});
+  if(proprias.length){L.push('');L.push('PERGUNTAS QUE A PACIENTE ESCREVEU');
+    proprias.forEach(function(p,i){L.push('  '+(i+1)+'. '+p.texto);});}
+  if(doApp.length){L.push('');L.push('PERGUNTAS SUGERIDAS PELO APP E MARCADAS PELA PACIENTE');
+    doApp.forEach(function(p,i){L.push('  '+(i+1)+'. '+p.texto);});}
   L.push('');
   L.push('Registro pessoal. Não é laudo, diagnóstico nem recomendação.');
   return L.join('\n');
@@ -2958,7 +2967,16 @@ $('#btn-salvar-consulta').addEventListener('click',function(){
   E.consulta={data:d,hora:$('#cons-hora').value,quem:$('#cons-quem').value.trim(),
     onde:$('#cons-onde').value.trim()};
   salvar();renderConsulta();renderResumoConsulta();toast('Consulta salva.');});
-function addPergunta(t){E.perguntas.push({id:'p'+Date.now(),texto:t,feita:false});
+/* A origem da pergunta é informação clínica, não metadado. O resumo vai para a
+   mão de um profissional, e "a paciente perguntou isto" e "o app ofereceu e ela
+   quis levar" dizem coisas diferentes sobre o que ela entende e o que a aflige.
+   Perguntas gravadas antes deste campo existir são deduzidas pelo texto: o
+   caminho da sugestão sempre gravou o enunciado exato da lista. */
+function origemPergunta(p){
+  if(p.origem) return p.origem;
+  return PERGUNTAS_SUGERIDAS.indexOf(p.texto)>=0 ? 'sugerida' : 'propria';
+}
+function addPergunta(t,origem){E.perguntas.push({id:'p'+Date.now(),texto:t,feita:false,origem:origem||'propria'});
   salvar();renderPerguntas();renderSugeridas();}
 $('#btn-add-pergunta').addEventListener('click',function(){
   var i=$('#nova-pergunta'),t=i.value.trim();if(!t){i.focus();return;}
@@ -2968,7 +2986,7 @@ $('#sugeridas').addEventListener('click',function(e){
   var b=e.target.closest('[data-sug]');if(!b)return;
   var q=PERGUNTAS_SUGERIDAS[+b.dataset.sug];
   if(E.perguntas.some(function(p){return p.texto===q;}))return;
-  addPergunta(q);toast('Foi para a sua lista.');});
+  addPergunta(q,'sugerida');toast('Foi para a sua lista.');});
 $('#lista-perguntas').addEventListener('click',function(e){
   var d=e.target.closest('[data-delperg]');if(!d)return;
   E.perguntas=E.perguntas.filter(function(p){return p.id!==d.dataset.delperg;});
