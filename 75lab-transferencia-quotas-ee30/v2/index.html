@@ -168,6 +168,20 @@ html{scroll-padding-top:62px}
 .vbanner a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 .vbanner a:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
+
+/* ---- premissas do movimento: as duas regras que governam todo o desenho ---- */
+.prem{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:30px 0;max-width:94ch}
+.prem>div{background:var(--white);border-top:3px solid var(--lime2);padding:20px 22px}
+.prem .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+ color:var(--mut);margin-bottom:10px}
+.prem h4{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:19px;
+ line-height:1.08;letter-spacing:.005em;margin:0 0 9px;color:var(--ink)}
+.prem p{margin:0;font-size:15px;line-height:1.5;color:var(--ink)}
+.prem p+p{margin-top:9px}
+section.ink .prem>div{background:rgba(251,250,247,.06);border-top-color:var(--lime)}
+section.ink .prem .n{color:var(--lime)}
+section.ink .prem h4,section.ink .prem p{color:rgba(251,250,247,.9)}
+@media (max-width:720px){.prem{grid-template-columns:1fr;gap:14px}}
 </style></head><body>
 
 <div class="topbar"><div class="wrap">
@@ -203,9 +217,28 @@ html{scroll-padding-top:62px}
 <p class="lead">Hoje o Afonso é o único sócio da 75 LAB, no papel. Quem opera a empresa são
 o Daniel e o Caique. A ideia é alinhar o papel com a realidade: a sociedade passa a ser
 <strong>50% Daniel e 50% Caique</strong>.</p>
-<p>O desenho é uma doação dividida: o Afonso doa metade da empresa para cada um, no mesmo
-ato. Ninguém compra quotas de ninguém e nada sai do caixa da 75 LAB — o único desembolso é o
-ITCMD, R$ 14.449,81 por sócio. É a seção 02.</p>
+<p>Duas premissas governam todo o desenho. Elas não são preferência: são a condição para
+a operação acontecer, e tudo que vem depois foi construído para respeitá-las.</p>
+</div>
+<div class="prem">
+  <div><div class="n">Premissa 1</div>
+  <h4>O Afonso não desembolsa nada</h4>
+  <p>Em nenhuma hipótese. Se algum imposto recair sobre ele, o Daniel e o Caique reembolsam,
+  metade cada um.</p>
+  <p>Ele está transferindo a empresa sem receber nada em troca. Não faria sentido ainda
+  pagar por isso.</p></div>
+  <div><div class="n">Premissa 2</div>
+  <h4>Nada de desigualdade entre os sócios</h4>
+  <p>Daniel e Caique entram em condições idênticas: mesmo percentual, mesmo desembolso,
+  mesmo risco. Nenhum dos dois fica devendo ao outro.</p>
+  <p>Se sobrar alguma diferença que não dê para eliminar, quem absorve é a empresa — não um
+  dos sócios na pessoa física.</p></div>
+</div>
+<div class="prose">
+<p>Dessas duas premissas sai o desenho: uma <strong>doação dividida</strong>. O Afonso doa
+metade da empresa para cada um, no mesmo ato. Ninguém compra quotas de ninguém, nada sai do
+caixa da 75 LAB, e o único desembolso é o ITCMD — <strong>R$ 14.449,81 por sócio</strong>.
+É a seção 02.</p>
 <p>Antes das duas, há um passo que precisa vir primeiro: o Afonso tem <strong>R$ 133.000 de
 capital subscrito e nunca integralizado</strong>, e ao mesmo tempo <strong>R$ 655.490 de
 lucros a receber</strong> da empresa. As duas pontas se encontram e se liquidam por
@@ -219,10 +252,10 @@ todo o resto.</p>
     <div class="s">Balanço fechado e assinado pela Corsi</div></div>
   <div class="kpi teal"><div class="k">ITCMD<br>sobre a doação</div>
     <div class="v">R$&nbsp;28,9<small> mil</small></div>
-    <div class="s">4% do valor patrimonial · R$ 14,4 mil para cada sócio</div></div>
-  <div class="kpi neg"><div class="k">Imposto de renda<br>do Afonso</div>
-    <div class="v">R$&nbsp;0 a 78<small> mil</small></div>
-    <div class="s">Depende da decisão da seção 04</div></div>
+    <div class="s">4% do valor patrimonial · R$ 14.449,81 cada</div></div>
+  <div class="kpi neg"><div class="k">Desembolso<br>por sócio</div>
+    <div class="v">R$&nbsp;14 a 54<small> mil</small></div>
+    <div class="s">Igual para os dois · conforme a seção 04</div></div>
   <div class="kpi"><div class="k">Data prevista<br>da operação</div>
     <div class="v">30/10</div>
     <div class="s">Declaração e guia no mesmo dia</div></div>
@@ -277,13 +310,34 @@ não tem. São sócios igualitários: o desenho não pode criar desequilíbrio e
 <p>A doação ao Daniel é de padrasto para enteado: relação natural, ninguém questiona.
 <strong>A doação ao Caique não tem vínculo familiar nenhum.</strong> O Fisco pode
 reinterpretá-la como pagamento por serviço prestado — e aí não é ITCMD de 4%, é imposto de
-renda de até <strong>27,5% na pessoa física dele</strong>.</p>
-<p>O que enfraquece a posição: o Caique emite nota de outro CNPJ contra a 75 LAB todo mês,
-o que dá ao Fisco o argumento de que existe relação de prestação de serviço. Pode valer
-suspender essas emissões antes da operação.</p>
+renda de até <strong>27,5% na pessoa física dele</strong>, mais multa de 75%.</p>
+<p>O que dá margem ao argumento: o Caique emite nota de outro CNPJ contra a 75 LAB todos os
+meses, o que documenta uma relação de prestação de serviço entre ele e a empresa.</p>
 <p>Esta é a terceira pergunta cara do processo, junto com o valor de transferência e a
 data-base. Foi para a Corsi em 23/10 e precisa de <span class="hl">resposta por escrito antes
 de 30/10</span>.</p></div>
+<div class="box ok"><div class="t">A defesa, e ela é verdadeira</div>
+<p>As quotas nunca foram economicamente do Afonso. <strong>O primeiro projeto que deu origem
+à 75 LAB foi vendido pelo Daniel e pelo Caique</strong> e faturado pelo CNPJ de outra empresa
+dele, porque na época os dois ainda não tinham empresa constituída. O capital que entrou veio
+daquele projeto. O Afonso emprestou a estrutura, não comprou um negócio.</p>
+<p>Isso não é retórica: é o que explica por que ele transfere sem receber nada em troca, e é
+uma justificativa que <strong>nada tem a ver com serviço prestado à empresa</strong>. É a
+peça mais forte da defesa e precisa estar escrita no instrumento, com a história do projeto
+original e as datas.</p></div>
+<div class="box"><div class="t">As quatro medidas que blindam a operação</div>
+<p><strong>1. Registrar a origem no instrumento.</strong> A história do projeto fundador, com
+datas, e a razão de as quotas terem ficado em nome do Afonso.</p>
+<p><strong>2. Nada que ligue as quotas ao trabalho.</strong> Sem vesting, sem metas, sem
+cláusula de permanência, sem condição de desempenho. Doação com contrapartida deixa de ser
+doação.</p>
+<p><strong>3. Não mexer na remuneração do Caique em torno da data.</strong> Interromper ou
+reduzir as notas dele às vésperas da operação sugere exatamente o que se quer evitar — que as
+quotas entraram no lugar do pagamento. A mudança para pró-labore e lucros vem
+<strong>depois</strong>, justificada por ele ter virado sócio, e é o assunto da seção 08.</p>
+<p><strong>4. Pacto de risco entre os dois sócios.</strong> Se a doação ao Caique for
+autuada, o custo é dividido meio a meio. Uma linha em acordo entre sócios, que não muda
+imposto nenhum e cumpre a premissa 2 — o risco é da sociedade, não de um deles.</p></div>
 <div class="box"><div class="t">A alternativa, se o risco for alto demais</div>
 <p>O Afonso doa 100% ao Daniel, e o Daniel doa 50% ao Caique. Duas doações em vez de uma, e
 <strong>dois ITCMDs</strong>: R$ 28.900 na primeira e R$ 14.450 na segunda, total de
@@ -428,12 +482,27 @@ do balanço com data-base 30/09/2026 que a Corsi fechou em 23/10. Não é mais p
 <tr><td><strong>ITCMD</strong> — 4% sobre o valor patrimonial</td><td>Daniel e Caique, cada um
 sobre a metade que recebe</td>
 <td class="n">R$ 28.900<br><small>R$ 14.450 cada</small></td><td>Guia DARE paga em 30/10/2026, no mesmo dia da declaração</td></tr>
-<tr><td><strong>Imposto de renda</strong> — ganho de capital, 15%</td><td>Afonso</td>
-<td class="n">R$ 0 ou R$ 78.374</td><td>Depende da seção 04. Se houver, vence no último dia útil do mês seguinte à operação — <strong>30/11/2026</strong></td></tr>
+<tr><td><strong>Imposto de renda</strong> — ganho de capital, 15%</td><td>Afonso, <strong>reembolsado
+por Daniel e Caique</strong></td>
+<td class="n">R$ 0 ou R$ 78.374</td><td>Depende da seção 04. Se houver, vence em <strong>30/11/2026</strong> — e pela premissa 1 os dois devolvem R$ 39.186,79 cada</td></tr>
 <tr><td><strong>Imposto de renda</strong> — entre Daniel e Caique</td><td>ninguém</td>
 <td class="n pos">R$ 0</td><td>Não há venda entre os dois: cada um recebe direto do Afonso</td></tr>
 <tr><td>Taxas de registro e Junta Comercial</td><td>A empresa</td>
 <td class="n">a confirmar</td><td>Na averbação da alteração contratual</td></tr>
+</tbody></table></div>
+<div class="prose">
+<h3>O que cada um desembolsa, de fato</h3>
+<div class="prose"><p>As duas colunas são as duas hipóteses da seção 04. Repare que o Afonso
+fica em zero nas duas — é a premissa 1 —, e que o Daniel e o Caique pagam sempre o mesmo
+valor — é a premissa 2.</p></div>
+<div class="scroll"><table>
+<thead><tr><th>&nbsp;</th><th class="n">Se valer o valor de custo</th><th class="n">Se exigirem o valor patrimonial</th></tr></thead>
+<tbody>
+<tr><td><strong>Afonso</strong></td><td class="n pos">R$ 0</td><td class="n pos">R$ 0<br><small>paga R$ 78.374 e é reembolsado</small></td></tr>
+<tr><td><strong>Daniel</strong> — ITCMD e reembolso</td><td class="n">R$ 14.449,81</td><td class="n">R$ 53.636,60</td></tr>
+<tr><td><strong>Caique</strong> — ITCMD e reembolso</td><td class="n">R$ 14.449,81</td><td class="n">R$ 53.636,60</td></tr>
+<tr><td>A 75 LAB — taxas de Junta e honorários societários</td><td class="n">~R$ 3.000</td><td class="n">~R$ 3.000</td></tr>
+<tr class="tot"><td>Total da operação</td><td class="n">R$ 31.900</td><td class="n">R$ 110.273</td></tr>
 </tbody></table></div>
 <div class="prose">
 <div class="box"><div class="t">Uma observação sobre o valor do imposto</div>
