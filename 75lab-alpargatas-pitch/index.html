@@ -261,11 +261,55 @@ ul.logos img{
   .foot{letter-spacing:.1em}
 }
 
+/* ---------- impressão ----------
+   A lâmina é desenhada para 1440 × 900 e o A4 deitado é 297 × 210 mm — proporção
+   parecida, então o deck imprime uma lâmina por página. As medidas em vw/vh não
+   existem no papel, por isso aqui tudo volta para px fixo. */
 @media print{
-  .deck{height:auto;overflow:visible}
-  .slide{min-height:auto;page-break-after:always;padding:28mm 18mm}
+  @page{size:A4 landscape;margin:0}
+  html,body{background:#fff}
+  .deck{height:auto;overflow:visible;scroll-snap-type:none}
+  .slide{
+    min-height:0;height:208mm;width:auto;overflow:hidden;
+    page-break-after:always;break-after:page;page-break-inside:avoid;break-inside:avoid;
+    padding:11mm 14mm 13mm;
+  }
+  .slide:last-child{page-break-after:auto;break-after:auto}
   #dots,#bar,.skip{display:none}
-  .blob{display:none}
+  .blob,.ring{display:none}
+  .wrap,.wrap.full{max-width:none}
+  /* a escala fluida vira fixa: sem viewport, clamp() colapsa no mínimo */
+  h1{font-size:34pt}
+  h1.sm{font-size:25pt}
+  h1.xs{font-size:20pt}
+  h2{font-size:12pt}
+  .lead{font-size:11pt;max-width:none}
+  p,td,th{font-size:8.6pt}
+  .small,.nota{font-size:7.8pt}
+  .eyebrow{font-size:7pt;margin-bottom:7mm}
+  .kicker,figcaption{font-size:7.2pt}
+  .badge{font-size:6.6pt}
+  .foot{font-size:6.6pt;bottom:7mm}
+  .num{font-size:22pt}
+  .punch{font-size:17pt}
+  td.n{font-size:12pt}
+  /* o bloco de celular usa !important para vencer o style inline das lâminas, e ele
+     também pega na impressão. Aqui as grades voltam ao desenho de tela. */
+  .g2{grid-template-columns:repeat(2,1fr)!important}
+  .g3,.g6{grid-template-columns:repeat(3,1fr)!important}
+  .g4{grid-template-columns:repeat(4,1fr)!important}
+  .vs{grid-template-columns:1fr 1fr!important}
+  .g{gap:7mm;margin-top:6mm}
+  .vs{gap:9mm;margin-top:6mm}
+  table{margin-top:5mm}
+  th,td{padding:2.2mm 4mm 2.2mm 0}
+  .fig{margin-top:5mm}
+  .fig .scroller{overflow:visible}
+  .fig svg,.fig.tall svg,.fig.gantt svg,.fig.bim svg,.fig.eventos svg{max-height:none;min-width:0;width:100%}
+  .fig.scrollx .scroller svg{min-width:0}
+  ul.logos img{max-height:9mm}
+  ul.logos li{min-height:13mm}
+  .reserva{padding:9mm 6mm}
 }
 </style>
 </head>
