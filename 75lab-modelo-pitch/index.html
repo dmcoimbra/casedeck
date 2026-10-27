@@ -148,6 +148,17 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
 
 .kicker{font-family:'SM',monospace;font-size:clamp(10px,1.08vw,12.5px);letter-spacing:.14em;text-transform:uppercase;margin-top:clamp(18px,2.8vh,30px);padding-top:13px;border-top:1px solid currentColor;opacity:.72}
 
+/* ---------- implicação: o "e daí?" ----------
+   Princípio 10. Distinto do kicker (fio fino, apagado) e da nota interna (roxo, só nossa):
+   fio de acento em cima, rótulo mono, frase em corpo de leitura. */
+.imp{margin-top:clamp(16px,2.6vh,28px);padding-top:13px;border-top:2px solid var(--lime);
+  font-size:clamp(13px,1.3vw,16.5px);line-height:1.48;max-width:66ch}
+.paper .imp{border-top-color:var(--teal-ink)}
+.imp b{font-family:'SM',monospace;font-size:clamp(9px,.95vw,10.5px);letter-spacing:.2em;
+  text-transform:uppercase;font-weight:400;display:block;margin-bottom:6px;color:var(--lime)}
+.paper .imp b{color:var(--teal-ink)}
+.imp + .kicker{margin-top:clamp(12px,1.8vh,18px)}
+
 /* ---------- celular e tablet ----------
    Lâminas densas (índice, números, método, tecnologia) ficam mais altas que a tela.
    Elas crescem em vez de cortar — mas com snap obrigatório isso briga com o dedo do
@@ -195,14 +206,15 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
     <div class="eyebrow">Por que o modelo é assim</div>
     <h1 class="sm">O cliente pode nunca assistir<br>à apresentação.</h1>
     <p class="lead">Pode ser que a gente seja comprado só pela leitura individual do material.
-    Isso não é detalhe de formato — é a regra de projeto, e dela saem quatro leis.</p>
+    Isso não é detalhe de formato — é a regra de projeto, e dela saem cinco leis.</p>
     <div class="g g4">
       <div class="col"><span class="k">Lei 1</span><p>O título da lâmina é a afirmação, não o rótulo. Quem lê só os títulos sai sabendo a proposta inteira.</p></div>
       <div class="col"><span class="k">Lei 2</span><p>Uma lâmina, uma ideia. Se precisa de narração para fazer sentido, está quebrada.</p></div>
       <div class="col"><span class="k">Lei 3</span><p>Toda afirmação carrega número ou fonte. Sem número é adjetivo, e adjetivo some na comparação.</p></div>
       <div class="col"><span class="k">Lei 4</span><p>Página 2 é o resumo executivo. Quem parar nela já consegue decidir se vale continuar.</p></div>
     </div>
-    <div class="kicker">Alvo de tamanho: 18 a 22 lâminas no corpo. Anexos à parte.</div>
+    <div class="imp"><b>A quinta lei, que resume as outras quatro</b>Tese no título, evidência no corpo, implicação para o cliente. Faltando uma das três, a lâmina não está pronta — e a terceira é a que mais escapa.</div>
+    <div class="kicker">Teste antes de entregar: ler só os títulos, em ordem, sem o corpo. Se o argumento não se sustenta sozinho, o deck não está pronto.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>02</span></div>
 </section>
@@ -257,9 +269,9 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
   <span class="badge var">Capítulo 01 · semi</span>
   <div class="wrap">
     <div class="eyebrow">O essencial em uma página</div>
-    <h1 class="sm">Seis respostas.<br>Uma linha cada.</h1>
-    <p class="lead">É a lâmina que mais trabalha no deck e a última a ser escrita.
-    Quem parar aqui tem que conseguir decidir se vale continuar.</p>
+    <h1 class="sm">Quem parar na página 2<br>já decide se vale continuar.</h1>
+    <p class="lead">Seis respostas, uma linha cada. É a lâmina que mais trabalha no deck
+    inteiro — e a última a ser escrita.</p>
     <div class="g g3">
       <div class="col"><span class="k">O que entregamos</span><p><span class="slot">&lt;escopo em uma linha&gt;</span></p></div>
       <div class="col"><span class="k">Com que time</span><p><span class="slot">&lt;headcount e FTE&gt;</span></p></div>
@@ -268,6 +280,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <div class="col"><span class="k">Por quanto</span><p><span class="slot">&lt;modelo de remuneração&gt;</span></p></div>
       <div class="col"><span class="k">Por que nós</span><p><span class="slot">&lt;o diferencial, sem adjetivo&gt;</span></p></div>
     </div>
+    <div class="imp"><b>E daí?</b>Portanto, quem só tiver cinco minutos ainda sai sabendo o que está comprando.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>04</span></div>
 </section>
@@ -277,7 +290,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
   <span class="badge var">Capítulo 02 · variável</span>
   <div class="wrap">
     <div class="eyebrow">O que entendemos do desafio</div>
-    <h1 class="sm">Devolver o briefing deles,<br>em números deles.</h1>
+    <h1 class="sm">Provar que lemos pesa mais<br>do que falar de nós.</h1>
     <p class="lead">O capítulo de maior alavancagem e o único que não se reaproveita.
     Metade de cima devolve a volumetria. Metade de baixo nomeia o problema que o briefing não diz com todas as letras.</p>
     <div class="g g2">
@@ -287,6 +300,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
         <p><span class="slot">&lt;o desafio real, em uma frase&gt;</span></p>
         <p class="small" style="margin-top:9px;opacity:.72">Exemplos de forma: “o desafio não é volume, é simultaneidade” · “o desafio não é criar, é não errar em escala”.</p></div>
     </div>
+    <div class="imp"><b>E daí?</b>Portanto, a conversa já começa no problema de vocês, e não na apresentação da agência.</div>
     <div class="nota"><b>Nota interna</b>Prova que lemos o briefing, e é o que mais pontua em compras. Tirar os números do documento do cliente, nunca arredondar para parecer melhor: eles conhecem os próprios números.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>05</span></div>
@@ -307,6 +321,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <div class="col"><span class="k">Conformidade</span><p>A arte certa com a informação legal errada custa mais do que não ter feito.</p></div>
       <div class="col"><span class="k">Rastreabilidade</span><p>Quem não sabe qual versão foi para a gráfica descobre na loja.</p></div>
     </div>
+    <div class="imp"><b>E daí?</b>Portanto, a agência deve ser escolhida pela capacidade de controlar esse intervalo — não pelo portfólio criativo.</div>
     <div class="kicker">Tudo que vem antes desta página é contexto. Tudo que vem depois é prova.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>06</span></div>
@@ -326,6 +341,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <div class="col"><span class="num"><span class="slot">&lt;n&gt;</span></span><span class="k">fornecedores homologados</span></div>
       <div class="col"><span class="num"><span class="slot">&lt;n&gt;</span></span><span class="k">peças entregues em 12 meses</span></div>
     </div>
+    <div class="imp"><b>E daí?</b>Portanto, o volume desta conta não exige que a gente se reinvente para atender.</div>
     <div class="nota"><b>Nota interna</b>Esta grade é o bloco 2 do RFI da Arcor. Deck e planilha têm que trazer exatamente os mesmos números — divergência entre os dois é o que faz o comprador desconfiar de todo o resto.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>07</span></div>
@@ -336,7 +352,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
   <span class="badge var">Capítulo 05 · variável</span>
   <div class="wrap">
     <div class="eyebrow">Cases · um por lâmina</div>
-    <h1 class="sm">Quatro campos, sempre<br>na mesma ordem.</h1>
+    <h1 class="sm">Case que parou na arte-final<br>não prova operação.</h1>
     <table>
       <tr><th style="width:17%">Campo</th><th>O que entra</th></tr>
       <tr><td><strong>Desafio</strong></td><td>Uma frase, do ponto de vista do cliente.</td></tr>
@@ -344,6 +360,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <tr><td><strong>Escala</strong></td><td>Peças, praças, lojas, prazo. O número que prova o porte.</td></tr>
       <tr><td><strong>Resultado</strong></td><td>O que mudou. Sem número do cliente, dizer o que foi entregue e em quanto tempo — sem inflar.</td></tr>
     </table>
+    <div class="imp"><b>E daí?</b>Portanto, os cases que mostramos são os que se parecem com a operação de vocês — não os mais bonitos.</div>
     <div class="nota"><b>Critério de seleção</b>Escolher por aderência ao que está sendo comprado, não pela beleza da peça. Para trade, priorizar volume, multiformato, multiloja, prazo apertado e produção feita por nós. Case que parou na arte-final não prova operação.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>08</span></div>
@@ -355,7 +372,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
   <span class="badge fixo">Capítulo 06 · fixo</span>
   <div class="wrap">
     <div class="eyebrow">Os números da operação</div>
-    <h1 class="sm">O que a gente entrega<br>por ano, medido.</h1>
+    <h1 class="sm"><span class="slot">&lt;n&gt;</span> peças por ano,<br>com <span class="slot">&lt;n&gt;</span>% de SLA cumprido.</h1>
     <div class="g g4">
       <div class="col"><span class="num"><span class="slot">&lt;n&gt;</span></span><span class="k">peças em 12 meses</span></div>
       <div class="col"><span class="num"><span class="slot">&lt;n&gt;</span></span><span class="k">dias · prazo médio baixa</span></div>
@@ -366,6 +383,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <div class="col"><span class="num"><span class="slot">&lt;n&gt;</span></span><span class="k">campanhas simultâneas no pico</span></div>
       <div class="col"><span class="num"><span class="slot">&lt;n&gt;</span></span><span class="k">fornecedores homologados</span></div>
     </div>
+    <div class="imp"><b>E daí?</b>O volume desta conta cabe na estrutura que já existe. Não depende de contratação para começar.</div>
     <div class="nota"><b>Regra dura</b>Número que a gente não mede não entra nesta lâmina. Melhor cinco verdadeiros que oito com dois inventados — o frágil vira pergunta na mesa, e pergunta na mesa a gente não controla.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>09</span></div>
@@ -378,6 +396,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
     <div class="eyebrow">Clientes e permanência</div>
     <h1>Em média, <span class="slot">&lt;n&gt;</span> anos<br>por cliente.</h1>
     <p class="lead">Grade de logos. Embaixo de cada marca, o ano em que a relação começou.</p>
+    <div class="imp"><b>E daí?</b>Portanto, a referência sobre como a gente opera pode ser pedida a qualquer um deles.</div>
     <div class="kicker">Permanência é o que portfólio nenhum substitui — e o dado diz isso sozinho.</div>
     <div class="nota"><b>Nota interna</b>Não escrever “somos parceiros de confiança”: dito por nós vira adjetivo e mata o efeito. Cliente sob NDA entra como “uma rede de <span class="slot">&lt;n&gt;</span> lojas no varejo <span class="slot">&lt;canal&gt;</span>”, sem logo.</div>
   </div>
@@ -398,6 +417,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <tr><td class="n">4</td><td><strong>Produção</strong></td><td>arte-final</td><td>material produzido</td><td>há 3 orçamentos, protótipo testado e QA de lote</td></tr>
       <tr><td class="n">5</td><td><strong>Loja</strong></td><td>material produzido</td><td>material posicionado</td><td>há comprovação de entrega e de execução</td></tr>
     </table>
+    <div class="imp"><b>E daí?</b>Portanto, vocês sabem em que etapa cada peça está e o que falta para ela avançar — sem precisar perguntar.</div>
     <div class="kicker">Nenhuma etapa começa sem que a anterior tenha fechado o critério dela. É isso que separa um método de um hábito.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>11</span></div>
@@ -408,13 +428,14 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
   <span class="badge var">Capítulo 09 · variável</span>
   <div class="wrap">
     <div class="eyebrow">O time dedicado à conta</div>
-    <h1 class="sm">Quem são, nominalmente,<br>e quanto de cada um é de vocês.</h1>
+    <h1 class="sm">Vocês não dividem o time<br>com outras cinco contas.</h1>
     <div class="g g4">
       <div class="col"><span class="k">1 · Núcleo dedicado</span><p>Nome, função, senioridade e <strong>% de FTE</strong>. Com foto.</p></div>
       <div class="col"><span class="k">2 · Camada compartilhada</span><p>Quem é acionado, e em que situação.</p></div>
       <div class="col"><span class="k">3 · Backup declarado</span><p>Quem cobre cada posição em férias e ausência.</p></div>
       <div class="col"><span class="k">4 · Ponto focal único</span><p>Um nome, um telefone, um e-mail.</p></div>
     </div>
+    <div class="imp"><b>E daí?</b>Portanto, férias, saída ou pico de demanda não viram surpresa de vocês.</div>
     <div class="nota"><b>Nota interna</b>O backup nominal é perguntado textualmente no RFI da Arcor e quase nenhuma agência responde. Onde o cliente pedir estrutura separada por frente, a lâmina já nasce nesse recorte — senão a história do deck não bate com a planilha entregue.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>12</span></div>
@@ -433,6 +454,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <tr><td><strong>Revisão de ciclo</strong></td><td>mensal</td><td>indicadores, ocorrências, ajuste de rota</td></tr>
       <tr><td><strong>Revisão estratégica</strong></td><td>trimestral</td><td>calendário seguinte, aprendizado, revisão de escopo</td></tr>
     </table>
+    <div class="imp"><b>E daí?</b>Portanto, o relacionamento tem calendário — e não depende de cobrar por WhatsApp às 23h.</div>
     <div class="kicker">Declarar o escalonamento junto: quem o cliente aciona quando o ponto focal não resolve, e em quanto tempo.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>13</span></div>
@@ -443,13 +465,14 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
   <span class="badge var">Capítulo 10 · semi</span>
   <div class="wrap">
     <div class="eyebrow">Fluxo ponta a ponta</div>
-    <h1 class="sm">Da entrada do pedido à loja,<br>com SLA em cada etapa.</h1>
+    <h1 class="sm">Cada etapa tem SLA.<br>Inclusive a de vocês.</h1>
     <p class="lead">Um diagrama horizontal, em uma lâmina. Precisa mostrar as três coisas que todo mundo esquece.</p>
     <div class="g g3">
       <div class="col"><span class="k">Onde o cliente entra</span><p>Os gates de aprovação, e quanto tempo temos para cada um.</p></div>
       <div class="col"><span class="k">Onde o fornecedor entra</span><p>A concorrência de três, o protótipo, o controle de qualidade.</p></div>
       <div class="col"><span class="k">Onde a conformidade entra</span><p>Checagem legal, nota fiscal, documentação.</p></div>
     </div>
+    <div class="imp"><b>E daí?</b>Portanto, o atraso tem dono e hora, dos dois lados da mesa.</div>
     <div class="nota"><b>Nota interna</b>Marcar também o <strong>caminho rápido</strong>. Cliente que pede arte em 1 ou 2 dias úteis e vê só a via longa desenhada conclui — com razão — que não vamos dar conta das rápidas. Aqui também moram as respostas de versionamento, aprovação online, SLA formalizado e backup de histórico.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>14</span></div>
@@ -472,7 +495,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <tr><td>ativo de ambientação some no caminho</td><td>onde está, e se voltou</td></tr>
       <tr><td>tiragem da próxima campanha é chute</td><td>tiragem calibrada pelo que foi instalado</td></tr>
     </table>
-    <div class="kicker">Cada ponto percentual de material que não é instalado é dinheiro parado no estoque.<br>Rastrear é como se descobre qual é esse número na rede de vocês.</div>
+    <div class="imp"><b>E daí?</b>Cada ponto percentual de material não instalado é dinheiro parado no estoque. Portanto, a tiragem da próxima campanha deixa de ser estimativa e passa a ser cálculo.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>15</span></div>
 </section>
@@ -496,6 +519,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <div class="col"><span class="k">Evento 3</span><p>Instalação<br><span class="small" style="opacity:.6">foi montada, com foto</span></p></div>
       <div class="col"><span class="k">Evento 4</span><p>Auditoria<br><span class="small" style="opacity:.6">continua lá</span></p></div>
     </div>
+    <div class="imp"><b>E daí?</b>Portanto, o custo de rastrear acompanha o valor do que é rastreado — não há gasto onde ele não se paga.</div>
     <div class="kicker">Código único por peça, não um QR de campanha. É o que permite responder loja a loja.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>16</span></div>
@@ -508,7 +532,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
   <div class="wrap">
     <div class="eyebrow">Tecnologia no PDV · o compromisso</div>
     <h1 class="sm">Três indicadores,<br>todo mês, com meta.</h1>
-    <p class="lead">Já operamos rastreio em conta ativa. Os números daquele cliente não entram neste material —
+    <p class="lead">Já operamos rastreio em conta ativa, e os números daquele cliente não entram aqui:
     <span class="lime">não abrimos dado de cliente nenhum. Nem o de vocês.</span></p>
     <div class="g g2">
       <div>
@@ -533,7 +557,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
         <div class="kicker">O fechamento em D+15 traz a tiragem recomendada para a campanha seguinte.</div>
       </div>
     </div>
-    <div class="nota"><b>A réplica, que fica na lâmina e não é improvisada</b>“Então 20% do meu material você não sabe me dizer?” — o que não é escaneado não fica invisível: peça sem leitura no prazo abre ocorrência automática, e a auditoria por amostra fecha o resto.</div>
+    <div class="imp"><b>E daí?</b>Dá para cobrar a meta no dia 30 do primeiro mês, e não no fim do contrato. E o que não é escaneado não fica invisível: peça sem leitura no prazo abre ocorrência automática, e a auditoria por amostra fecha o resto.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>17</span></div>
 </section>
@@ -552,7 +576,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <tr><td>tratamento de imagem</td><td>assinatura técnica de planta</td><td><span class="slot">&lt;política de retenção e descarte&gt;</span></td></tr>
       <tr><td>conferência de texto e decupagem</td><td></td><td><span class="slot">&lt;ferramentas, por função&gt;</span></td></tr>
     </table>
-    <div class="kicker">O ganho de IA aparece em prazo e em preço. Não em risco transferido para o cliente.</div>
+    <div class="imp"><b>E daí?</b>O ganho chega a vocês como prazo e preço. O risco regulatório continua com quem assina a peça.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>18</span></div>
 </section>
@@ -571,6 +595,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <tr><td>Documentação e dados</td><td>LGPD, certidões, política de retenção</td></tr>
       <tr><td><span class="slot">&lt;risco específico do cliente&gt;</span></td><td><span class="slot">&lt;a resposta&gt;</span></td></tr>
     </table>
+    <div class="imp"><b>E daí?</b>Portanto, o que der errado já tem resposta escrita antes de acontecer.</div>
     <div class="kicker">Varia por cliente: conformidade fiscal, gestão de ocorrências na rede, certificações ISO, bloco socioambiental.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>19</span></div>
@@ -600,7 +625,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
   <span class="badge var">Capítulo 15 · semi</span>
   <div class="wrap">
     <div class="eyebrow">O painel de execução</div>
-    <h1 class="sm">Veja a execução da rede<br>de vocês, sem precisar da gente.</h1>
+    <h1 class="sm">A execução fica consultável<br>sem passar pela agência.</h1>
     <p class="lead">Desenhado para leitura solitária: navegação guiada só funciona com apresentador,
     e o pressuposto aqui é que não vai ter apresentador.</p>
     <div class="g g4">
@@ -609,6 +634,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <div class="col"><span class="k">3 · Vídeo de 90s</span><p>Percurso completo, link ao lado.</p></div>
       <div class="col"><span class="k">4 · Duas vozes</span><p>Como o cliente consulta · como a gente opera.</p></div>
     </div>
+    <div class="imp"><b>E daí?</b>Portanto, vocês não dependem de reunião com a gente para saber como está a rede.</div>
     <div class="nota"><b>Nota interna</b>A tela que mais trabalha é o mapa da rede com os pontos coloridos por status de execução. É a imagem que resume o deck inteiro — e a única que o concorrente não tem como responder.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>21</span></div>
@@ -629,6 +655,7 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <tr><td class="n">D+60</td><td>primeira campanha rodando em paralelo com a estrutura antiga</td></tr>
       <tr><td class="n">D+90</td><td>corte</td></tr>
     </table>
+    <div class="imp"><b>E daí?</b>Portanto, a troca de agência não custa o primeiro trimestre de vocês.</div>
     <div class="nota"><b>Nota interna</b>Fazer a conta para trás a partir da primeira data que manda no calendário do cliente e mostrar em que semana a transição precisa estar concluída. Quem apresenta esse cálculo demonstra que leu o calendário; quem não apresenta demonstra o contrário.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>22</span></div>
@@ -639,12 +666,13 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
   <span class="badge var">Capítulo 17 · variável</span>
   <div class="wrap">
     <div class="eyebrow">Proposta de valor e remuneração</div>
-    <h1 class="sm">O que vocês ganham,<br>e por que o número é esse.</h1>
+    <h1 class="sm">O número se defende pelo<br>raciocínio, não pela planilha.</h1>
     <div class="g g3">
       <div class="col"><span class="k">1 · O valor</span><p>Três ganhos concretos, não adjetivos: previsibilidade de prazo, redução de retrabalho, otimização do investimento em produção.</p></div>
       <div class="col"><span class="k">2 · O modelo</span><p>A lógica do número. O número fechado vai na planilha deles; aqui vai o raciocínio, porque é ele que sobrevive à equalização entre agências.</p></div>
       <div class="col"><span class="k">3 · O que não está incluído</span><p>Mídia, licenciamento de imagem, cachê de talento, frete fora do cronograma. Cada um com a regra de como é tratado quando aparecer.</p></div>
     </div>
+    <div class="imp"><b>E daí?</b>Portanto, o que está fora do escopo aparece agora — e não como cobrança no meio do contrato.</div>
     <div class="nota"><b>Duas decisões que valem a lâmina</b>Onde o cliente pedir modelos comparados, <strong>não ser neutro</strong>: apresentar os três e recomendar um, com justificativa. Quem recomenda parece dono do negócio; quem só apresenta devolve a decisão. E prazo de pagamento longo entra no custo, não na esperança.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>23</span></div>
@@ -655,14 +683,14 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
   <span class="badge var">Capítulo 18 · semi</span>
   <div class="wrap">
     <div class="eyebrow">O que pedimos agora</div>
-    <h1 class="sm">O próximo passo,<br>com nome e data.</h1>
+    <h1 class="sm">Pergunta aberta dá motivo para<br>responder em vez de arquivar.</h1>
     <div class="g g4">
       <div class="col"><span class="k">Ponto focal</span><p><span class="slot">&lt;nome, telefone, e-mail&gt;</span></p></div>
       <div class="col"><span class="k">A reunião que propomos</span><p><span class="slot">&lt;para quê, e quando&gt;</span></p></div>
       <div class="col"><span class="k">Prazo que assumimos</span><p><span class="slot">&lt;quando conseguimos começar&gt;</span></p></div>
       <div class="col"><span class="k">Uma pergunta para eles</span><p><span class="slot">&lt;a pergunta aberta&gt;</span></p></div>
     </div>
-    <div class="kicker">A pergunta aberta é o que dá motivo para responder o e-mail em vez de arquivar.</div>
+    <div class="imp"><b>E daí?</b>Portanto, há um próximo passo concreto, com nome e data, esperando apenas o aceite de vocês.</div>
   </div>
   <div class="foot"><span>75 LAB</span><span>24</span></div>
 </section>
