@@ -205,6 +205,15 @@ ul.logos img{
 }
 @media(max-width:860px){ul.logos{gap:16px}ul.logos img{height:24px;max-width:88px}}
 
+/* marcador de campo que outra pessoa preenche, sem a moldura cheia da reserva */
+.reserva-linha{
+  border:1px dashed currentColor;padding:9px 14px;margin-top:clamp(12px,2vh,20px);
+  font-family:'SM',monospace;font-size:clamp(9.5px,1.02vw,11.5px);letter-spacing:.13em;
+  text-transform:uppercase;line-height:1.75;
+}
+.reserva-linha b{color:var(--lime);font-weight:400}
+.paper .reserva-linha b{color:var(--teal-ink)}
+
 /* ---------- lâmina reservada ---------- */
 .reserva{
   border:1px dashed currentColor;display:flex;align-items:center;justify-content:center;
@@ -772,6 +781,8 @@ ul.logos img{
       <div class="col"><span class="num"><span class="slot">XX</span></span><span class="k">parceiros homologados</span></div>
       <div class="col"><span class="num"><span class="slot">XX</span></span><span class="k">campanhas simultâneas sustentadas no pico</span></div>
     </div>
+    <div class="reserva-linha"><b>&#9654; OS OITO NÚMEROS SÃO DO CAIQUE &#9664;</b> — ele pluga na
+    revisão dele. Número que a casa não mede de verdade não entra: nesse caso a lâmina sai inteira.</div>
     <div class="kicker">Esta é a régua pela qual vocês podem nos cobrar já no primeiro trimestre —
     e o último número é o que responde ao pico do calendário de 2027.</div>
   </div>
