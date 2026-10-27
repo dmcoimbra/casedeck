@@ -327,14 +327,36 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
   <div class="foot"><span>75 LAB</span><span>06</span></div>
 </section>
 
-<!-- 07 — CAP 04 -->
+<!-- 07 — CAP 04.1 · posicionamento -->
 <section class="slide paper">
   <span class="badge fixo">Capítulo 04 · fixo</span>
   <div class="wrap">
-    <div class="eyebrow">Quem é a 75 LAB</div>
-    <h1 class="sm">Construída para operação continuada,<br>não para campanha avulsa.</h1>
-    <p class="lead">O que fazemos todo dia é o que esta concorrência está comprando:
-    volume, frequência e prazo — com produção e execução <span class="slot">&lt;próprias / sob nossa gestão&gt;</span>.</p>
+    <div class="eyebrow">Aceleradora de trade marketing</div>
+    <h1 class="sm">Quatro pontas<br>na mesma casa.</h1>
+    <p class="lead">Não entregamos campanha avulsa. Montamos estruturas e projetos
+    personalizados para a demanda de cada cliente.</p>
+    <div class="g g4">
+      <div class="col"><span class="k">Estratégia</span><p>onde a campanha nasce</p></div>
+      <div class="col"><span class="k">Design</span><p>como ela fica de pé</p></div>
+      <div class="col"><span class="k">Produção</span><p>com rede de parceiros homologados</p></div>
+      <div class="col"><span class="k">Tecnologia</span><p>operação complexa mais eficiente, com gestão mais clara</p></div>
+    </div>
+    <div class="imp"><b>E daí?</b>Portanto, vocês não gerenciam quatro fornecedores para entregar uma campanha.</div>
+    <div class="nota"><b>Nota interna</b>A quarta ponta é o que nos separa de agência de trade comum. Onde o escopo do cliente junta criação, produção, logística e gestão num contrato só, esta lâmina é o encaixe direto — não deixar genérica.</div>
+  </div>
+  <div class="foot"><span>75 LAB</span><span>07</span></div>
+</section>
+
+<!-- 08 — CAP 04.2 · a ficha -->
+<section class="slide paper">
+  <span class="badge fixo">Capítulo 04 · fixo</span>
+  <div class="wrap">
+    <div class="eyebrow">Quem puxa a casa</div>
+    <h1 class="sm">Os dois lados da mesa,<br>dentro de casa.</h1>
+    <div class="g g2">
+      <div class="col"><span class="num">20</span><span class="k">anos · Daniel · trade marketing</span><p>quem vende para o varejo</p></div>
+      <div class="col"><span class="num">15</span><span class="k">anos · Caique · varejo</span><p>quem operou dentro dele</p></div>
+    </div>
     <div class="g g4">
       <div class="col"><span class="num"><span class="slot">&lt;n&gt;</span></span><span class="k">anos de mercado</span></div>
       <div class="col"><span class="num"><span class="slot">&lt;n&gt;</span></span><span class="k">pessoas no time próprio</span></div>
@@ -342,9 +364,9 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       <div class="col"><span class="num"><span class="slot">&lt;n&gt;</span></span><span class="k">peças entregues em 12 meses</span></div>
     </div>
     <div class="imp"><b>E daí?</b>Portanto, o volume desta conta não exige que a gente se reinvente para atender.</div>
-    <div class="nota"><b>Nota interna</b>Esta grade é o bloco 2 do RFI da Arcor. Deck e planilha têm que trazer exatamente os mesmos números — divergência entre os dois é o que faz o comprador desconfiar de todo o resto.</div>
+    <div class="nota"><b>Nota interna</b>Nunca somar em "35 anos de experiência": soma de currículo soa inflada e convida à pergunta errada. A grade de baixo é o bloco 2 do RFI da Arcor — manter idêntica à planilha entregue.</div>
   </div>
-  <div class="foot"><span>75 LAB</span><span>07</span></div>
+  <div class="foot"><span>75 LAB</span><span>08</span></div>
 </section>
 
 <!-- 08 — CAP 05 -->
@@ -724,6 +746,9 @@ table.tight td,table.tight th{padding-top:6px;padding-bottom:6px}
       cur=0;
 
   slides.forEach(function(s,i){
+    // o deck ganha e perde lâminas; numerar na mão sempre acaba errado
+    var pg=s.querySelector('.foot span:last-child');
+    if(pg){var n=String(i+1);pg.textContent=(n.length<2?'0':'')+n;}
     var b=document.createElement('button');
     b.type='button';
     b.setAttribute('aria-label','Ir para a lâmina '+(i+1)+' de '+slides.length);
