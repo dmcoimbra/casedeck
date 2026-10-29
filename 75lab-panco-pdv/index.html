@@ -180,10 +180,6 @@ h2{font-size:54px;line-height:1.02;font-weight:900;letter-spacing:-.028em;max-wi
 .branch b{display:block;font-size:16px;font-weight:900;letter-spacing:-.016em;line-height:1.14;
   margin-bottom:5px}
 .branch span{display:block;font-size:13px;line-height:1.36;color:var(--ink-2)}
-.mapnote{flex:none;margin-top:26px;border-top:1.5px solid var(--rule);padding-top:13px;
-  display:flex;gap:28px;align-items:flex-start}
-.mapnote p{flex:1;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
-.mapnote p b{font-weight:900;color:var(--ink)}
 
 /* ============================ LÂMINA 3 · a dor ============================ */
 .visits{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;align-items:start}
@@ -217,7 +213,7 @@ h2{font-size:54px;line-height:1.02;font-weight:900;letter-spacing:-.028em;max-wi
 .acol h3{font-size:26px;font-weight:900;letter-spacing:-.024em;line-height:1.08;margin-bottom:9px}
 .acol > p{font-size:15.5px;line-height:1.45;color:var(--ink-2);margin-bottom:12px}
 .acol .ptags{display:flex;gap:5px;margin-bottom:14px}
-.acol .shot{flex:none;height:200px;margin-top:auto;display:flex;align-items:center;justify-content:center}
+.acol .shot{flex:none;height:168px;margin-top:auto;display:flex;align-items:center;justify-content:center}
 .acol .shot img{max-height:100%;max-width:100%;width:auto;object-fit:contain}
 /* filho direto de propósito: sem isso esta regra pegava também o SVG da lupa,
    que mora dentro de .zi, e a lupa saía do tamanho do QR */
@@ -306,7 +302,7 @@ h2{font-size:54px;line-height:1.02;font-weight:900;letter-spacing:-.028em;max-wi
 .pcol > .sub{font-size:14px;line-height:1.38;color:var(--ink-2);margin-bottom:13px;min-height:20px}
 .pshots{display:flex;gap:16px;justify-content:center;align-items:flex-end;margin-bottom:14px}
 .pshots figure{cursor:zoom-in;min-width:0}
-.pshots img{height:194px;width:auto;object-fit:contain;border-radius:4px;display:block}
+.pshots img{height:162px;width:auto;object-fit:contain;border-radius:4px;display:block}
 .ptags{display:flex;gap:5px;margin-bottom:10px}
 .pcol ul{list-style:none;display:flex;flex-direction:column;gap:7px}
 .pcol li{font-size:14.5px;line-height:1.38;color:var(--ink-2);padding-left:18px;position:relative}
@@ -477,11 +473,6 @@ h2{font-size:54px;line-height:1.02;font-weight:900;letter-spacing:-.028em;max-wi
           <p class="ref">Lâmina 10</p>
         </div>
       </div>
-      <div class="mapnote anim" style="--d:10">
-        <p><b>As quatro faces da dor são numeradas de 01 a 04</b>, e o número reaparece em cada peça do deck, dizendo qual delas aquela peça resolve</p>
-        <p><b>Toda peça amplia em tela cheia.</b> Onde houver uma lupa no canto, dá para clicar e ver a arte inteira, inclusive durante a conversa</p>
-        <p><b>A arte muda de uma peça para outra de propósito.</b> Nenhuma saiu de briefing nem de escopo de marketing da Panco: é comunicação de marcação, para mostrar estrutura e leitura. Com briefing, a linguagem fica uma só</p>
-      </div>
     </div>
     <div class="foot">
       <p class="soWhat"><em>O que isso muda</em><span>Nos últimos dois passos a conversa deixa de ser sobre apresentação e passa a ser sobre o que a Panco e a 75LAB fazem juntas</span></p>
@@ -535,6 +526,7 @@ h2{font-size:54px;line-height:1.02;font-weight:900;letter-spacing:-.028em;max-wi
       <div class="part anim">02 · A resposta</div>
       <h2 class="anim" style="--d:1">A 75LAB organiza as categorias em três frentes</h2>
       <p class="lede anim" style="--d:2">A mesma lógica visual, aplicada em três lugares diferentes da operação</p>
+      <p class="dorleg anim" style="--d:2.5"><span><i class="dn">01</i>ler a marca de longe</span><span><i class="dn">02</i>separar as categorias</span><span><i class="dn">03</i>destacar o produto</span><span><i class="dn">04</i>ter peça na gôndola</span></p>
     </div>
     <div class="body">
       <div class="ans">
@@ -659,6 +651,7 @@ h2{font-size:54px;line-height:1.02;font-weight:900;letter-spacing:-.028em;max-wi
     <div class="head wide">
       <div class="part anim">03 · Frente 02 · o caso máximo</div>
       <h2 class="anim" style="--d:1">A Estação Café da Manhã leva esse movimento ao máximo</h2>
+      <p class="dorleg anim" style="--d:1.5"><span><i class="dn">01</i>ler a marca de longe</span><span><i class="dn">02</i>separar as categorias</span><span><i class="dn">03</i>destacar o produto</span><span><i class="dn">04</i>ter peça na gôndola</span></p>
     </div>
     <div class="body">
       <div class="showcase">
@@ -729,6 +722,7 @@ h2{font-size:54px;line-height:1.02;font-weight:900;letter-spacing:-.028em;max-wi
       <div class="part anim">04 · A escolha</div>
       <h2 class="anim" style="--d:1">Dentro da mesma verba, dá para concentrar numa loja ou aparecer em muitas</h2>
       <p class="lede full anim" style="--d:2">O time já resolveu um desafio assim: para criar área de sobremesa, a saída foi envelopar a ponta que a loja já tem</p>
+      <p class="dorleg anim" style="--d:2.5"><span><i class="dn">01</i>ler a marca de longe</span><span><i class="dn">02</i>separar as categorias</span><span><i class="dn">03</i>destacar o produto</span><span><i class="dn">04</i>ter peça na gôndola</span></p>
     </div>
     <div class="body top">
       <div class="pick">
