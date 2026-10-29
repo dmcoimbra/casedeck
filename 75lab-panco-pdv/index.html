@@ -98,6 +98,7 @@ h2{font-size:54px;line-height:1.02;font-weight:900;letter-spacing:-.028em;max-wi
 /* ---------- corpo ---------- */
 .body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;
   padding:26px 0 8px}
+.body.top{justify-content:flex-start;padding-top:34px}
 
 /* ---------- rodapé: a implicação + assinatura ---------- */
 .foot{flex:none;border-top:1.5px solid var(--rule);padding-top:14px;
@@ -236,8 +237,11 @@ h2{font-size:54px;line-height:1.02;font-weight:900;letter-spacing:-.028em;max-wi
 .dims li b{font-weight:800;color:var(--ink)}
 
 /* ============================ LÂMINA 7 ============================ */
-.path{display:flex;gap:0;align-items:stretch;flex:1;min-height:0}
-.step{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 22px 0 0;position:relative}
+/* flex:none de propósito: com flex:1 as divisórias verticais esticavam até o pé da
+   lâmina e o vazio embaixo parecia erro. Assim elas têm a altura do conteúdo e o
+   corpo centraliza a faixa inteira. */
+.path{display:flex;gap:0;align-items:stretch;flex:none;min-height:0}
+.step{flex:1;display:flex;flex-direction:column;padding:0 22px 0 0;position:relative}
 .step + .step{padding-left:22px;border-left:1.5px solid var(--rule)}
 .step .mk{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:800;
   letter-spacing:.04em;padding:5px 11px;border-radius:999px;margin-bottom:14px;align-self:flex-start}
@@ -592,7 +596,7 @@ h2{font-size:54px;line-height:1.02;font-weight:900;letter-spacing:-.028em;max-wi
       <h2 class="anim" style="--d:1">Uma loja valida o que muitas vão repetir</h2>
       <p class="lede anim" style="--d:2">As etapas correm a partir da aprovação. Prazo e volume entram junto com o escopo fechado, não antes dele.</p>
     </div>
-    <div class="body">
+    <div class="body top">
       <div class="path">
         <div class="step anim" style="--d:3">
           <span class="ord">Já feito</span>
