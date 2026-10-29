@@ -130,7 +130,10 @@ h2{font-size:54px;line-height:1.02;font-weight:900;letter-spacing:-.028em;max-wi
 .slide.red > .rail{z-index:1}
 
 /* ============================ LÂMINA 1 ============================ */
-.cover .head{margin:auto 0;display:grid;grid-template-columns:1fr 388px;gap:56px;align-items:center}
+/* A coluna da esquerda tem de caber "precisa trabalhar pela marca" numa linha só.
+   Abaixo de ~970px "marca" cai sozinha e a capa abre com uma viúva. */
+.cover .head{margin:auto 0;display:grid;grid-template-columns:minmax(0,1fr) 352px;
+  gap:56px;align-items:center}
 .cover .body{display:none}
 .cover h1{max-width:none}
 .cover .lede{max-width:52ch}
