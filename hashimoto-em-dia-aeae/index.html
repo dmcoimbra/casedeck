@@ -181,13 +181,31 @@ h2.tela-titulo{display:flex;align-items:center;gap:var(--he-3)}
 h2.tela-titulo::before{content:'';width:5px;height:26px;border-radius:3px;background:var(--acento);flex:none}
 
 /* ---------- acolhimento ---------- */
-.acolhe{background:var(--he-herb);border-radius:var(--he-r-hero);padding:26px 24px;
-  display:flex;flex-direction:column;gap:var(--he-3)}
-.acolhe-eyebrow{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--he-brand)}
-.acolhe h2{font-family:var(--he-font-editorial);font-weight:400;font-size:clamp(30px,8vw,38px);
-  line-height:1.12;color:var(--he-brand);letter-spacing:-.01em;text-wrap:balance}
-.acolhe p{font-size:14px;color:var(--he-muted)}
+/* ---------- AGORA: a entrada ----------
+   Sem cartão, sem moldura: o texto pousa direto no fundo da tela. O cartão era
+   o recipiente padrão de tudo, e por isso nada parecia mais importante que
+   nada. Aqui a hierarquia é tipográfica — tamanho, peso e cor — e não uma
+   caixa a mais. */
+.agora{padding:var(--he-5) var(--he-2) var(--he-4);
+  display:flex;flex-direction:column;gap:var(--he-2)}
+.agora-data{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--he-muted)}
+.agora-frase{font-family:var(--he-font-editorial);font-weight:400;
+  font-size:clamp(29px,7.4vw,37px);line-height:1.1;color:var(--he-brand);
+  letter-spacing:-.015em;text-wrap:balance;margin:0}
+.agora-apoio{font-size:15px;line-height:1.5;color:var(--he-muted);max-width:34em}
+.agora-acao{align-self:flex-start;margin-top:var(--he-2);min-height:48px;
+  padding:0 var(--he-5);border-radius:var(--he-r-pill);
+  background:var(--he-brand);color:#FFFFFF;border:1px solid var(--he-brand);
+  font:600 15px/1 var(--he-font-ui);cursor:pointer;
+  display:inline-flex;align-items:center;gap:var(--he-2)}
+.agora-acao .ico{width:19px;height:19px;color:currentColor}
+.agora-acao:focus-visible{outline:3px solid var(--he-brand);outline-offset:3px}
+@media (prefers-reduced-motion:no-preference){
+  .agora-acao{transition:filter .15s,transform .12s}
+  .agora-acao:active{transform:scale(.98)}
+  .agora-acao:hover{filter:brightness(1.12)}
+}
 
 /* ---------- cards ---------- */
 .card{background:var(--he-paper);border:1px solid var(--he-border);border-radius:var(--he-r-card);
@@ -234,20 +252,87 @@ h2.tela-titulo{font-size:25px;font-weight:600;line-height:1.25;letter-spacing:-.
 .faixa-leg{display:flex;justify-content:space-between;font-size:12px;color:var(--he-muted);
   font-variant-numeric:tabular-nums}
 
-/* ---------- janela do remédio ---------- */
-.janela{position:relative;height:58px;border-radius:var(--he-r-button);overflow:hidden;
-  background:var(--he-detail)}
-.janela-b{position:absolute;top:0;bottom:21px;display:flex;align-items:center;justify-content:center;
-  font-size:11px;color:var(--he-muted);text-align:center;padding:0 var(--he-1);line-height:1.2;
-  border-right:1px solid var(--he-paper);overflow:hidden}
-.janela-b.jejum{background:var(--he-herb);color:var(--he-brand);font-weight:600}
-.janela-eixo{position:absolute;left:0;right:0;bottom:0;height:21px;border-top:1px solid var(--he-paper);
-  font-size:11px;color:var(--he-muted);font-variant-numeric:tabular-nums}
-.janela-eixo span{position:absolute;top:3px;transform:translateX(-50%);padding-inline:3px}
-.janela-agora{position:absolute;top:0;bottom:21px;width:3px;background:var(--he-chart);
-  transform:translateX(-1.5px);z-index:2}
-.janela-agora::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:9px;height:9px;border-radius:50%;background:var(--he-chart)}
+/* ---------- A JANELA ----------
+   Era uma tabela de três colunas com 11px de altura de texto, dentro de um
+   cartão igual aos outros sete. É o conteúdo mais próprio deste produto — a
+   absorção da levotiroxina — e agora ocupa o lugar que merece: uma linha do
+   tempo com marcador vivo, onde a faixa do jejum é cheia e as outras não. */
+.janela-viva{background:var(--he-paper);border:1px solid var(--he-border);
+  border-radius:var(--he-r-card);padding:var(--he-5);
+  display:flex;flex-direction:column;gap:var(--he-4)}
+.jv-topo{display:flex;align-items:baseline;justify-content:space-between;gap:var(--he-3)}
+.jv-rotulo{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--he-muted);margin:0}
+.jv-hora{display:inline-flex;align-items:center;gap:var(--he-2);
+  font-size:12.5px;color:var(--he-muted);white-space:nowrap;flex:none}
+.jv-hora input{width:auto;min-height:40px;padding:5px 9px;font-size:14px;
+  font-variant-numeric:tabular-nums}
+.jv-estado{font-family:var(--he-font-editorial);font-size:19px;line-height:1.35;
+  color:var(--he-ink);margin:0;text-wrap:pretty}
+
+.janela{position:relative;height:84px;border-radius:12px;overflow:hidden;
+  background:var(--he-sage)}
+/* coluna, nao linha: o rotulo tem duas linhas (o nome e a hora de liberar),
+   e num flex em linha o <br> entre itens simplesmente nao quebra nada. */
+.janela-b{position:absolute;top:0;bottom:26px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:1px;
+  font-size:12.5px;color:var(--he-muted);text-align:center;
+  padding:0 var(--he-2);line-height:1.25;border-right:1px solid var(--he-paper);
+  overflow:hidden}
+.janela-b b{font-weight:600;color:var(--he-brand);font-variant-numeric:tabular-nums}
+/* O terceiro segmento ocupa 20% da barra — 64px a 320 CSS px — e com os
+   ajustes do critério 1.4.12 aplicados nenhum rótulo cabe ali sem ser cortado.
+   Encurtar não resolveu: "Cálcio" já pedia 67px. A correção é outra — o cálcio
+   não é uma faixa com fim, é uma fronteira ("a partir de"). O bloco virou só
+   tinta e o nome foi para o eixo, onde tem a largura inteira para existir. */
+.janela-b:last-of-type{background:var(--he-detail)}
+.janela-b.jejum b{color:#FFFFFF}
+.janela-b.jejum{background:var(--he-brand);color:#FFFFFF;font-weight:600;border-right-color:var(--he-brand)}
+.janela-eixo{position:absolute;left:0;right:0;bottom:0;height:26px;
+  border-top:1px solid var(--he-paper);font-size:11.5px;color:var(--he-muted);
+  font-variant-numeric:tabular-nums}
+.janela-eixo span{position:absolute;top:6px;transform:translateX(-50%);padding-inline:4px}
+.janela-agora{position:absolute;top:0;bottom:26px;width:2px;background:var(--he-coral);
+  transform:translateX(-1px);z-index:2}
+.janela-agora::after{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  width:11px;height:11px;border-radius:50%;background:var(--he-coral);
+  box-shadow:0 0 0 3px var(--he-paper)}
+
+/* ---------- PULSO: o dia numa faixa só ----------
+   Água, movimento e rotina eram três cartões do mesmo tamanho do remédio.
+   São o estado do dia, não três assuntos: viraram uma faixa de colunas. */
+/* Em duas colunas os oito copos quebravam numa grade de blocos azuis que
+   competia com a janela do remedio. Em fluxo de linhas cada acao tem a largura
+   que precisa, e o peso visual vem do tratamento: fundo em vez de borda,
+   padding menor. Elas continuam sendo acoes do dia, nao assuntos. */
+.pulso{display:flex;flex-direction:column;gap:var(--he-2)}
+.pulso-col{background:var(--he-sage);border:0;
+  border-radius:var(--he-r-card);padding:var(--he-4) var(--he-5);
+  display:flex;flex-direction:column;gap:var(--he-3)}
+.pulso-col[hidden]{display:none}
+.pulso-topo{display:flex;align-items:baseline;justify-content:space-between;gap:var(--he-2)}
+.pulso-rotulo{font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--he-muted);margin:0}
+/* Era Newsreader a 21px. "4 de 8" nao e um numero de display: e uma razao,
+   e vinha com um link "mudar meta" colado dentro do mesmo span. Agora o valor
+   e tipografia de interface e o link desce para a base da coluna. */
+.pulso-num{font-size:14.5px;font-weight:600;color:var(--he-brand);
+  font-variant-numeric:tabular-nums}
+/* Tudo a esquerda: o valor e o "mudar" moravam na borda direita, que e onde o
+   botao flutuante do chat fica parado. Link embaixo de botao flutuante e alvo
+   que a pessoa tenta tocar e nao alcanca. */
+.pulso-topo{flex-direction:column;align-items:flex-start;gap:2px}
+.pulso-num .link{font-size:12px;font-weight:400;margin-left:var(--he-2)}
+.pulso-apoio{font-size:13px;color:var(--he-muted);line-height:1.45}
+
+/* ---------- EVOLUÇÃO e ADIANTE ----------
+   Discretos de propósito: são consulta, não ação do momento. */
+.evolucao,.adiante{background:var(--he-paper);border:1px solid var(--he-border);
+  border-radius:var(--he-r-card);padding:var(--he-5);
+  display:flex;flex-direction:column;gap:var(--he-3)}
+.ev-topo{display:flex;align-items:baseline;justify-content:space-between;gap:var(--he-3)}
+.ev-rotulo{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--he-muted);margin:0}
 
 /* ---------- lista de rotina ---------- */
 .rot{display:flex;flex-direction:column}
@@ -274,10 +359,10 @@ h2.tela-titulo{font-size:25px;font-weight:600;line-height:1.25;letter-spacing:-.
   font-size:19px;cursor:pointer;border-radius:var(--he-r-button)}
 
 /* ---------- água e stepper ---------- */
-.copos{display:flex;gap:var(--he-2);flex-wrap:wrap}
-.copo{width:32px;height:42px;border:2px solid var(--he-border-control);border-radius:4px 4px 10px 10px;
+.copos{display:flex;gap:7px;flex-wrap:wrap}
+.copo{width:26px;height:33px;border:2px solid var(--he-border-control);border-radius:4px 4px 10px 10px;
   background:var(--he-paper);position:relative;overflow:hidden;cursor:pointer;padding:0;flex:none}
-.copo-agua{position:absolute;left:0;right:0;bottom:0;height:0;background:var(--he-azul)}
+.copo-agua{position:absolute;left:0;right:0;bottom:0;height:0;background:var(--he-azul-claro);border-top:2px solid var(--he-azul)}
 @media (prefers-reduced-motion:no-preference){.copo-agua{transition:height .25s ease-out}}
 .copo.cheio{border-color:var(--he-azul)}
 .copo.cheio .copo-agua{height:100%}
@@ -567,7 +652,7 @@ summary .s-txt{flex:1;min-width:0;display:flex;align-items:center;gap:var(--he-2
 .compra{display:flex;align-items:center;gap:var(--he-3);min-height:48px;
   border-bottom:1px solid var(--he-border)}
 .compra:last-child{border-bottom:0}
-.compra input{width:22px;height:22px;flex:none;accent-color:var(--he-chart)}
+.compra input{width:24px;height:24px;flex:none;accent-color:var(--he-chart)}
 .compra label{flex:1;min-width:0;font-size:15px;line-height:1.4;cursor:pointer;
   padding:var(--he-3) 0}
 .compra input:checked+label{color:var(--he-muted);text-decoration:line-through}
@@ -613,23 +698,28 @@ summary .s-txt{flex:1;min-width:0;display:flex;align-items:center;gap:var(--he-2
 
 <!-- ================= HOJE ================= -->
 <section class="tela" id="tela-hoje">
-  <div class="acolhe">
-    <span class="acolhe-eyebrow" id="acolhe-data">Hoje</span>
-    <h2>Como você está hoje?</h2>
-    <p>Seu cuidado, dia após dia.</p>
-    <button class="btn larga" id="ir-registrar">Registrar meu dia</button>
-  </div>
 
-  <button class="sugestao" id="sugestao" hidden></button>
+  <!-- AGORA — a entrada deixou de perguntar e passou a ler a situação. O motor
+       de sugestão já decidia qual é o próximo passo; antes isso aparecia como
+       um botão pequeno embaixo de um herói que só perguntava "como você está
+       hoje?". Agora é a primeira coisa da tela, em tamanho de display. -->
+  <header class="agora" id="agora">
+    <p class="agora-data" id="acolhe-data">Hoje</p>
+    <h2 class="agora-frase" id="agora-frase">Bom te ver</h2>
+    <p class="agora-apoio" id="agora-apoio"></p>
+    <button class="agora-acao" id="sugestao" hidden></button>
+  </header>
 
-  <div class="card">
-    <div class="card-topo">
-      <h3 class="titulo">Seu remédio</h3>
-      <label class="meta" for="dose-hora" style="display:flex;align-items:center;gap:8px">Tomo às
-        <input type="time" id="dose-hora" value="06:30" style="width:auto;min-height:40px;padding:6px 10px;font-size:14px"></label>
+  <!-- A JANELA — o conteúdo clínico mais próprio do produto, que estava numa
+       tabela de três colunas em 11px. Virou a linha do tempo que ela é. -->
+  <div class="janela-viva">
+    <div class="jv-topo">
+      <h3 class="jv-rotulo">Levotiroxina</h3>
+      <label class="jv-hora" for="dose-hora">tomo às
+        <input type="time" id="dose-hora" value="06:30"></label>
     </div>
-    <p class="sub" id="janela-estado">Carregando…</p>
     <div class="janela" id="janela" role="img" aria-label="Linha do tempo da absorção da levotiroxina"></div>
+    <p class="jv-estado" id="janela-estado">Carregando…</p>
     <div class="linha-btn">
       <button class="btn" id="btn-tomei">Tomei agora</button>
       <button class="btn ghost" id="btn-desfazer" hidden>Desfazer</button>
@@ -638,55 +728,56 @@ summary .s-txt{flex:1;min-width:0;display:flex;align-items:center;gap:var(--he-2
     <div class="porque" id="pq-remedio" hidden></div>
   </div>
 
-  <div class="grade-t" id="blocos"></div>
-
-  <div class="card" id="painel-rotina" hidden>
-    <div class="card-topo">
-      <h3 class="titulo">Sua rotina de hoje</h3>
-      <span class="meta" id="rotina-contador"></span>
+  <!-- PULSO — água, movimento e rotina eram três cartões de peso igual ao do
+       remédio. Viraram uma faixa só: é o estado do dia, não três assuntos. -->
+  <div class="pulso">
+    <div class="pulso-col" id="painel-agua">
+      <div class="pulso-topo">
+        <h3 class="pulso-rotulo">Água</h3>
+        <span class="pulso-num num" id="agua-cont"></span>
+      </div>
+      <div class="copos" id="copos" role="group" aria-label="Copos de água do dia"></div>
+      <button class="link link-porque" data-pq="agua">Por que contar copos</button>
+      <div class="porque" id="pq-agua" hidden></div>
     </div>
-    <div class="rot" id="rotina"></div>
-    <p class="sub" id="rotina-vazia" hidden>Escolha em Registros o que você quer acompanhar todo dia.</p>
-  </div>
 
-  <div class="card" id="painel-agua" hidden>
-    <div class="card-topo">
-      <h3 class="titulo">Água</h3>
-      <span class="meta num" id="agua-cont"></span>
-    </div>
-    <div class="copos" id="copos" role="group" aria-label="Copos de água do dia"></div>
-    <button class="link link-porque" data-pq="agua">Por que contar copos</button>
-    <div class="porque" id="pq-agua" hidden></div>
-  </div>
-
-  <div class="card" id="painel-movimento" hidden>
-    <div class="card-topo">
-      <h3 class="titulo">Movimento</h3>
-      <span class="meta" id="mov-meta"></span>
-    </div>
-    <div style="display:flex;align-items:center;gap:var(--he-4);flex-wrap:wrap">
+    <div class="pulso-col" id="painel-movimento">
+      <div class="pulso-topo">
+        <h3 class="pulso-rotulo">Movimento</h3>
+        <span class="pulso-num" id="mov-meta"></span>
+      </div>
       <div class="stepper" role="group" aria-label="Minutos de movimento">
         <button type="button" id="mov-menos" aria-label="Menos cinco minutos">–</button>
         <span id="mov-valor">0 min</span>
         <button type="button" id="mov-mais" aria-label="Mais cinco minutos">+</button>
       </div>
-      <p class="sub" style="flex:1;min-width:160px">Caminhada conta. Faxina conta. Subir escada conta.</p>
+      <p class="pulso-apoio">Caminhada conta. Faxina conta. Subir escada conta.</p>
+      <button class="link link-porque" data-pq="movimento">Por que movimento e não exercício</button>
+      <div class="porque" id="pq-movimento" hidden></div>
     </div>
-    <button class="link link-porque" data-pq="movimento">Por que movimento e não exercício</button>
-    <div class="porque" id="pq-movimento" hidden></div>
+
+    <div class="pulso-col larga" id="painel-rotina">
+      <div class="pulso-topo">
+        <h3 class="pulso-rotulo">Sua rotina de hoje</h3>
+        <span class="pulso-num" id="rotina-contador"></span>
+      </div>
+      <div class="rot" id="rotina"></div>
+      <p class="pulso-apoio" id="rotina-vazia" hidden>Escolha em Registros o que você quer acompanhar todo dia.</p>
+    </div>
   </div>
 
-  <div class="card">
-    <div class="card-topo">
-      <h3 class="titulo">Seus exames</h3>
+  <!-- EVOLUÇÃO — ela tem exames guardados e a tela não dizia nada com eles. -->
+  <div class="evolucao">
+    <div class="ev-topo">
+      <h3 class="ev-rotulo">Seus exames</h3>
       <button class="link" data-ir="exames">Ver histórico</button>
     </div>
     <div id="resumo-exame"></div>
   </div>
 
-  <div class="card">
-    <div class="card-topo">
-      <h3 class="titulo">Próxima consulta</h3>
+  <div class="adiante">
+    <div class="ev-topo">
+      <h3 class="ev-rotulo">Próxima consulta</h3>
       <button class="link" data-ir="consultas">Ver consultas</button>
     </div>
     <div id="resumo-consulta"></div>
@@ -1829,36 +1920,16 @@ var ICO={
 };
 function ico(n,c){return '<svg class="ico'+(c?' '+c:'')+'" viewBox="0 0 24 24" aria-hidden="true">'+ICO[n]+'</svg>';}
 
-var BLOCOS=[
- {id:'rotina',nome:'Rotina',ic:'check'},
- {id:'agua',nome:'Água',ic:'gota'},
- {id:'movimento',nome:'Movimento',ic:'passos'},
- {id:'registro',nome:'Meu dia',ic:'lapis'}
-];
-function renderBlocos(){
-  var d=dia(hojeISO());
-  var lista=(E.rotina||[]), feitos=lista.filter(function(h){return d.feitos.indexOf(h.id)>=0;}).length;
-  var dados={
-    rotina:{v:lista.length?feitos+' de '+lista.length:'—',r:lista.length?'hábitos de hoje':'nenhum escolhido',
-            p:lista.length?feitos/lista.length:0},
-    agua:{v:d.agua+' de '+metaAgua(),r:'copos',p:Math.min(1,d.agua/metaAgua())},
-    movimento:{v:d.movimento+' min',r:'meta '+metaMov()+' min',p:Math.min(1,d.movimento/metaMov())},
-    registro:{v:temRegistro(d)?'feito':'abrir',r:temRegistro(d)?'como você está hoje':'disposição e sintomas',
-              p:temRegistro(d)?1:0}
-  };
-  $('#blocos').innerHTML=BLOCOS.map(function(b){
-    var x=dados[b.id];
-    return '<button type="button" class="bloco-t'+(x.p>=1?' pronto':'')+'" data-bloco="'+b.id+'">'
-      +ico(b.ic,'ico-g')
-      +'<span><span class="bloco-t-v">'+esc(x.v)+'</span><br><span class="bloco-t-r">'+esc(x.r)+'</span></span>'
-      +'<span class="bloco-t-barra"><i style="width:'+Math.round(x.p*100)+'%"></i></span></button>';
-  }).join('');
-}
+/* Era um acordeão: quatro azulejos no topo, e tocar num deles abria UM painel
+   e fechava os outros dois. Custava dois toques para marcar um copo de água —
+   um para abrir o painel, outro para o copo. O que a usuária pediu foi
+   "dar o check nas atividades", e isso tem que ser um toque.
+   Os três painéis agora ficam sempre abertos, lado a lado, e esta função só
+   leva o foco até o certo quando a sugestão aponta para um deles. */
 function abrirPainel(id){
-  ['rotina','agua','movimento'].forEach(function(k){
-    var el=$('#painel-'+k); if(el) el.hidden = (k!==id);
-  });
-  if(id){var p=$('#painel-'+id); if(p) setTimeout(function(){p.scrollIntoView({block:'nearest'});},40);}
+  if(!id) return;
+  var p=$('#painel-'+id);
+  if(p) setTimeout(function(){p.scrollIntoView({block:'nearest',behavior:'smooth'});},40);
 }
 
 /* ---- o que o app propõe agora, sem ela pedir ---- */
@@ -1923,28 +1994,54 @@ function renderSugestao(){
   if(!g&&h>=19&&!temRegistro(d))
     g={ic:'lapis',t:'Como foi o seu dia?',d:'Um toque na disposição já conta.',a:'registro'};
 
-  if(!g){el.hidden=true;el.dataset.acao='';return;}
-  el.hidden=false;el.dataset.acao=g.a||'';
-  el.classList.toggle('sem-acao',!g.a);
-  el.innerHTML=ico(g.ic)+'<span class="sugestao-txt"><span class="sugestao-t">'+esc(g.t)+'</span>'
-    +'<span class="sugestao-d">'+esc(g.d)+'</span></span>'
-    +(g.a?'<span class="sugestao-seta"></span>':'');
+  /* A sugestão deixou de ser um aviso abaixo do herói e passou a SER a entrada.
+     Quando o motor não tem nada a dizer, a tela ainda precisa abrir dizendo
+     alguma coisa verdadeira — e o que ela tem de verdadeiro é o próprio uso
+     dela, não um cumprimento. */
+  var frase=$('#agora-frase'), apoio=$('#agora-apoio');
+  if(!g){
+    el.hidden=true; el.dataset.acao='';
+    var n=diasOrd().filter(function(k){return temRegistro(E.dias[k]);}).length;
+    if(n>=2){ frase.textContent='Seu dia está em ordem';
+              apoio.textContent=n+' dias registrados até aqui. Nada pendente agora.'; }
+    else    { frase.textContent='Bom te ver';
+              apoio.textContent='Toque em Registros para anotar como você está hoje.'; }
+    return;
+  }
+  frase.textContent=g.t;
+  apoio.textContent=g.d;
+  el.hidden=!g.a;
+  el.dataset.acao=g.a||'';
+  if(g.a) el.innerHTML=ico(g.ic)+'<span>'+esc(ACAO_ROTULO[g.a]||'Abrir')+'</span>';
 }
+/* O que o botão da entrada promete fazer, em verbo. "Abrir" não diz nada; a
+   pessoa precisa saber o que acontece antes de tocar. */
+var ACAO_ROTULO={remedio:'Registrar que tomei', consulta:'Preparar a consulta',
+  comer:'Ver o cardápio', agua:'Contar um copo', exames:'Lançar um exame',
+  registro:'Registrar meu dia'};
 
 function renderJanela(){
   var d=dia(hojeISO()),hora=E.dose.hora||'06:30';
   $('#dose-hora').value=hora;
-  var TOT=300,bl=[{i:0,f:60,t:'Só água',c:'jejum'},{i:60,f:240,t:'Comida e café'},{i:240,f:300,t:'Cálcio'}];
+  var ag=new Date(),mn=ag.getHours()*60+ag.getMinutes();
+  var hp=(d.remedio||hora).split(':'),md=+hp[0]*60+ +hp[1],dec=mn-md;
+  function soma(a){var t=(md+a)%1440;return ('0'+Math.floor(t/60)).slice(-2)+':'+('0'+(t%60)).slice(-2);}
+
+  var TOT=300,bl=[{i:0,f:60,t:'Só água',c:'jejum'},
+                  {i:60,f:240,t:'Comida e café<br><b>'+soma(60)+'</b>'},
+                  {i:240,f:300,t:''}];
   var h='';
   bl.forEach(function(b){h+='<div class="janela-b'+(b.c?' '+b.c:'')+'" style="left:'+(b.i/TOT*100)
     +'%;width:'+((b.f-b.i)/TOT*100)+'%">'+b.t+'</div>';});
-  h+='<div class="janela-eixo"><span style="left:4px;transform:none">dose</span>'
-    +'<span style="left:20%">1h</span><span style="left:80%">4h</span></div>';
-  var ag=new Date(),mn=ag.getHours()*60+ag.getMinutes();
-  var hp=(d.remedio||hora).split(':'),md=+hp[0]*60+ +hp[1],dec=mn-md;
+  /* O eixo dizia "dose, 1h, 4h". A pessoa não converte isso de cabeça às seis
+     da manhã: agora mostra a hora do relógio dela. */
+  /* Duas marcas, nao tres: a de 1h cai a 20% da barra e encostava na da dose
+     em tela de 390px. A hora de liberar a comida ja aparece dentro do proprio
+     segmento, que e onde a pessoa procura. */
+  h+='<div class="janela-eixo"><span style="left:4px;transform:none">'+soma(0)+'</span>'
+    +'<span style="right:4px;left:auto;transform:none">cálcio e ferro '+soma(240)+'</span></div>';
   if(d.remedio&&dec>=0&&dec<=TOT)h+='<div class="janela-agora" style="left:'+(dec/TOT*100)+'%"></div>';
   $('#janela').innerHTML=h;
-  function soma(a){var t=(md+a)%1440;return ('0'+Math.floor(t/60)).slice(-2)+':'+('0'+(t%60)).slice(-2);}
   var txt;
   if(!d.remedio){txt=mn<md?'Ainda não deu o seu horário.':'Ainda não registrado hoje.';
     $('#btn-tomei').hidden=false;$('#btn-desfazer').hidden=true;}
@@ -1987,15 +2084,28 @@ function renderResumoExame(){
   if(!E.exames.length){$('#resumo-exame').innerHTML=
     '<p class="vazio">Adicione seu primeiro exame para começar seu histórico.</p>';return;}
   var ord=E.exames.slice().sort(function(a,b){return a.data<b.data?1:-1;});
-  var u=ord[0],m=porId(u.marcador)||{nome:u.marcador,un:''};
+  /* Mostrava o exame mais RECENTE. Numa coleta com oito marcadores isso vira
+     sorteio: ela abria o app e via a vitamina D porque veio por ultimo na
+     lista. O TSH e o marcador que guia a dose, e e dele que ela tem serie.
+     Entre um valor solto e uma tendencia, a tendencia e o que informa. */
+  var u=ord.filter(function(x){return x.marcador==='tsh';})[0] || ord[0];
+  var m=porId(u.marcador)||{nome:u.marcador,un:''};
   var fora=u.min!=null&&u.max!=null&&(u.valor<u.min||u.valor>u.max);
+  function u_ts(){return new Date(u.data+'T12:00').getTime();}
   var serie=E.exames.filter(function(x){return x.marcador===u.marcador;})
     .sort(function(a,b){return a.data<b.data?-1:1;})
     .map(function(x){return {x:new Date(x.data+'T12:00').getTime(),y:x.valor,iso:x.data};});
   $('#resumo-exame').innerHTML='<div class="card-topo"><span class="valor num">'+nf(u.valor)
     +'<span class="valor-un">'+esc(m.un||'')+' · '+esc(m.nome)+'</span></span>'
     +'<span class="pill'+(fora?' atencao':'')+'">'+(u.min==null?'registrado':fora?'fora da faixa':'dentro da faixa')+'</span></div>'
-    +'<p class="origem">Última coleta · '+dataLonga(u.data)+' · informado por você</p>'
+    +(function(){
+        if(serie.length<2) return '<p class="origem">Última coleta · '+dataLonga(u.data)+' · informado por você</p>';
+        var pri=serie[0];
+        var meses=Math.round((u_ts()-pri.x)/864e5/30);
+        var quando=meses>=12?Math.round(meses/12)+(meses>=18?' anos':' ano'):meses+' meses';
+        return '<p class="origem"><b>'+nf(pri.y)+'</b> há '+quando+' · '+nf(u.valor)
+             +' na última coleta, '+dataLonga(u.data)+'</p>';
+      })()
     +(serie.length>1?grafico(serie,{min:u.min,max:u.max,alt:'Histórico de '+m.nome}):'');
 }
 function renderResumoConsulta(){
@@ -2136,7 +2246,7 @@ function renderPerguntas(){
   l.innerHTML=E.perguntas.map(function(p){
     return '<div style="display:flex;align-items:flex-start;gap:var(--he-3);padding:var(--he-3) 0;border-bottom:1px solid var(--he-border)">'
       +'<input type="checkbox" data-perg="'+p.id+'"'+(p.feita?' checked':'')
-      +' style="width:22px;height:22px;min-height:22px;flex:none;margin-top:3px;accent-color:#567D40">'
+      +' style="width:24px;height:24px;min-height:24px;flex:none;margin-top:3px;accent-color:#567D40">'
       +'<span style="flex:1;min-width:0">'
         +'<span style="display:block;font-size:15px'+(p.feita?';color:#59664F;text-decoration:line-through':'')+'">'+esc(p.texto)+'</span>'
         +(origemPergunta(p)==='sugerida'
@@ -2320,7 +2430,7 @@ function mostrarAchados(r){
     +achados.map(function(a){
       var m=porId(a.marcador),fora=a.min!=null&&a.max!=null&&(a.valor<a.min||a.valor>a.max);
       return '<label style="display:flex;align-items:center;gap:var(--he-3);padding:var(--he-3) 0;border-bottom:1px solid var(--he-border)">'
-        +'<input type="checkbox" checked data-ach="'+a.k+'" style="width:22px;height:22px;min-height:22px;flex:none;accent-color:#567D40">'
+        +'<input type="checkbox" checked data-ach="'+a.k+'" style="width:24px;height:24px;min-height:24px;flex:none;accent-color:#567D40">'
         +'<span style="flex:1;min-width:0;font-size:15px">'+esc(m.nome)
         +(a.min!=null?' <span class="origem">ref '+nf(a.min)+'–'+nf(a.max)+'</span>':'')+'</span>'
         +'<span class="num" style="font-size:16px;font-weight:600'+(fora?';color:#7A5212':'')+'">'
@@ -2832,7 +2942,7 @@ function irPara(n){
   $$('nav.abas button').forEach(function(b){
     if(b.dataset.tela===n)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
   $('#main').scrollTop=0;
-  if(n==='hoje'){renderBlocos();renderSugestao();}
+  if(n==='hoje'){renderSugestao();}
   if(n==='exames'){renderSeletorExame();renderSerie();}
   if(n==='registros'){renderHistorico();renderSemana();}
   if(n==='comer'){renderComer();}
@@ -2841,22 +2951,18 @@ function irPara(n){
 /* ================= eventos ================= */
 $$('nav.abas button').forEach(function(b){b.addEventListener('click',function(){irPara(b.dataset.tela);});});
 $$('[data-ir]').forEach(function(b){b.addEventListener('click',function(){irPara(b.dataset.ir);});});
-$('#blocos').addEventListener('click',function(e){
-  var b=e.target.closest('[data-bloco]');if(!b)return;
-  if(b.dataset.bloco==='registro'){irPara('registros');return;}
-  var ja=!$('#painel-'+b.dataset.bloco).hidden;
-  abrirPainel(ja?null:b.dataset.bloco);});
 $('#sugestao').addEventListener('click',function(){
   var a=$('#sugestao').dataset.acao;
   if(!a)return;
   if(a==='remedio'){abrirPainel(null);$('#btn-tomei').click();}
   else if(a==='agua'){abrirPainel('agua');}
-  else if(a==='registro'){irPara('registros');}
+  else if(a==='registro'){irPara('registros');
+    /* vinha do botão "Registrar meu dia" do herói antigo, que deixou de
+       existir: levar até a disposição evita cair no topo de uma aba longa. */
+    setTimeout(function(){var e=$('#disposicao');if(e)e.scrollIntoView({block:'center'});},60);}
   else if(a==='comer'){irPara('comer');}
   else if(a==='exames'){irPara('exames');}
   else if(a==='consulta'){irPara('consultas');}});
-$('#ir-registrar').addEventListener('click',function(){irPara('registros');
-  setTimeout(function(){var e=$('#disposicao');if(e)e.scrollIntoView({block:'center'});},60);});
 $('#perfil').addEventListener('click',function(){irPara('consultas');
   setTimeout(function(){var e=$('#sync-estado');if(e)e.scrollIntoView({block:'center'});},60);});
 
@@ -2881,29 +2987,29 @@ document.addEventListener('click',function(e){
 $('#dose-hora').addEventListener('change',function(e){E.dose.hora=e.target.value||'06:30';salvar();renderJanela();});
 $('#btn-tomei').addEventListener('click',function(){
   var n=new Date();dia(hojeISO()).remedio=('0'+n.getHours()).slice(-2)+':'+('0'+n.getMinutes()).slice(-2);
-  salvar();renderJanela();renderSemana();renderBlocos();renderSugestao();toast('Registrado. Só água pela próxima hora.');});
+  salvar();renderJanela();renderSemana();renderSugestao();toast('Registrado. Só água pela próxima hora.');});
 $('#btn-desfazer').addEventListener('click',function(){
   dia(hojeISO()).remedio=null;salvar();renderJanela();renderSemana();});
 $('#rotina').addEventListener('click',function(e){
   var t=e.target.closest('[data-hab]');
   if(t){var d=dia(hojeISO()),i=d.feitos.indexOf(t.dataset.hab);
     if(i>=0)d.feitos.splice(i,1);else d.feitos.push(t.dataset.hab);
-    salvar();renderRotina();renderBlocos();return;}
+    salvar();renderRotina();return;}
   var x=e.target.closest('[data-delhab]');
   if(x){E.rotina=(E.rotina||[]).filter(function(h){return h.id!==x.dataset.delhab;});
     salvar();renderRotina();renderCatalogo();toast('Saiu da sua rotina.');}});
 $('#copos').addEventListener('click',function(e){
   var b=e.target.closest('[data-copo]');if(!b)return;
   var d=dia(hojeISO()),i=+b.dataset.copo;d.agua=(i+1===d.agua)?i:i+1;
-  salvar();renderAgua();renderBlocos();renderSugestao();});
+  salvar();renderAgua();renderSugestao();});
 $('#agua-cont').addEventListener('click',function(e){
   if(!e.target.closest('#meta-agua'))return;
   var op=[6,8,10,12],i=op.indexOf(metaAgua());E.metas.agua=op[(i+1)%op.length];
-  var d=dia(hojeISO());d.agua=Math.min(d.agua,E.metas.agua);salvar();renderAgua();renderBlocos();renderSugestao();});
+  var d=dia(hojeISO());d.agua=Math.min(d.agua,E.metas.agua);salvar();renderAgua();renderSugestao();});
 $('#mov-mais').addEventListener('click',function(){var d=dia(hojeISO());
-  d.movimento=Math.min(600,d.movimento+5);salvar();renderMovimento();renderBlocos();});
+  d.movimento=Math.min(600,d.movimento+5);salvar();renderMovimento();});
 $('#mov-menos').addEventListener('click',function(){var d=dia(hojeISO());
-  d.movimento=Math.max(0,d.movimento-5);salvar();renderMovimento();renderBlocos();});
+  d.movimento=Math.max(0,d.movimento-5);salvar();renderMovimento();});
 $('#mov-meta').addEventListener('click',function(e){
   if(!e.target.closest('#meta-mov'))return;
   var op=[20,30,45,60],i=op.indexOf(metaMov());E.metas.movimento=op[(i+1)%op.length];
@@ -2912,12 +3018,12 @@ $('#mov-meta').addEventListener('click',function(e){
 $('#disposicao').addEventListener('click',function(e){
   var b=e.target.closest('[data-disp]');if(!b)return;
   var d=dia(hojeISO());d.disposicao=(d.disposicao===b.dataset.disp)?null:b.dataset.disp;
-  salvar();renderDisposicao();renderBlocos();renderSugestao();});
+  salvar();renderDisposicao();renderSugestao();});
 $('#lista-sintomas').addEventListener('click',function(e){
   var b=e.target.closest('[data-sint]');if(!b)return;
   var d=dia(hojeISO()),n=+b.dataset.n;
   d.sintomas[b.dataset.sint]=(d.sintomas[b.dataset.sint]===n)?0:n;
-  salvar();renderSintomas();renderBlocos();});
+  salvar();renderSintomas();});
 $('#btn-salvar-dia').addEventListener('click',function(){
   dia(hojeISO()).nota=$('#nota-dia').value;salvar();
   renderSemana();renderHistorico();toast('Registro salvo.');});
@@ -3013,7 +3119,7 @@ function renderTudo(){
   renderDisposicao();renderSintomas();renderSemana();renderHistorico();renderCatalogo();
   renderSeletorExame();renderSerie();renderGuia();
   renderConsulta();renderPerguntas();renderSugeridas();
-  renderBlocos();renderSugestao();
+  renderSugestao();
   if(comerPronto)renderComer();
 }
 var ag=new Date();
