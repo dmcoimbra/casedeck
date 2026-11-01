@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B0A10">
+  <meta name="description" content="Área do comprador na demonstração WANTU, com estados do pedido, prévia protegida e contestação objetiva contra o briefing.">
+  <title>WANTU · meus pedidos</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/fontes/fontes.css">
+  <link rel="stylesheet" href="assets/tokens.css">
+  <link rel="stylesheet" href="assets/base.css">
+  <link rel="stylesheet" href="assets/ui.css">
+  <link rel="stylesheet" href="assets/blocos.css">
+  <link rel="stylesheet" href="assets/telas.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- O portão vive no HTML, visível por padrão, e o script o remove quando a
+       pessoa já entrou. Assim, se o script não rodar, o conteúdo não aparece. -->
+  <div class="portao" id="portao">
+    <section class="portao__cartao" role="dialog" aria-modal="true" aria-labelledby="portao-titulo">
+      <p class="marca" aria-hidden="true">WANT<b>U</b><i>.</i></p>
+      <p class="portao__selo">18+</p>
+      <h2 id="portao-titulo">Um espaço só para pessoas adultas</h2>
+      <p class="sub">A WANTU é um conceito de marketplace privado, onde creators adultos participam por vontade própria. Esta demonstração não tem conteúdo íntimo e não movimenta dinheiro.</p>
+      <div class="aviso aviso--atencao"><span class="aviso__marca" aria-hidden="true">!</span>
+        <p><strong>Esta confirmação não é verificação de idade.</strong> A operação real exige aferição por fornecedor especializado, porque a lei brasileira vigente não aceita autodeclaração como controle único.</p></div>
+      <button class="btn btn--primario btn--largo" id="portao-entrar" type="button">Sou adulto e quero ver a demonstração</button>
+      <p class="caption">Ao entrar você confirma que é maior de 18 anos e que quer ver uma demonstração de produto adulto.</p>
+    </section>
+  </div>
+
+  <div class="barra-papel" data-barra-papel>
+    <span class="selo-demo">Demo</span>
+    <span class="barra-papel__nota">Ambiente de demonstração, sem pagamento e sem dado real</span>
+  </div>
+
+  <header class="topo">
+    <div class="wrap topo__barra">
+      <a class="marca" href="index.html" aria-label="WANTU, início">WANT<b>U</b><i>.</i></a>
+      <nav class="topo__links" aria-label="Principal">
+        <a href="explorar.html" data-tela="explorar">Explorar</a>
+        <a href="pedidos.html" data-tela="pedidos">Meus pedidos</a>
+        <a href="studio.html" data-tela="studio">Creator Studio</a>
+        <a href="moderacao.html" data-tela="moderacao">Moderação</a>
+        <a href="documentos.html" data-tela="documentos">Transparência</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="wrap">
+      <div class="cabeca-tela">
+        <div class="pilha-3">
+          <p class="kicker">Área do comprador · demonstração</p>
+          <h1>Suas <i class="destaque">propostas</i></h1>
+          <p class="sub">Acompanhe decisões, prévias e entregas. Confirmar uma entrega marca o pedido como elegível para liquidação, e não transfere dinheiro: isso depende do evento financeiro.</p>
+        </div>
+        <a class="btn btn--primario" href="explorar.html">Nova proposta</a>
+      </div>
+
+      <div class="card-pedido__numeros" id="resumo"></div>
+
+      <div class="pilha-5" id="lista" style="margin-top:var(--respiro-s)"></div>
+
+      <div class="secao">
+        <div class="aviso"><span class="aviso__marca" aria-hidden="true">✳</span>
+          <p><strong>Nada aqui é real.</strong> A simulação vive só nesta aba e some quando você a fecha. Nenhum valor é processado e nenhuma imagem existe.</p></div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-fundo" id="modal-previa" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="previa-titulo">
+      <button class="modal__fechar" type="button" aria-label="Fechar a prévia">×</button>
+      <div class="pilha-5">
+        <p class="modal__topo">Prévia protegida</p>
+        <h2 id="previa-titulo">Prévia</h2>
+        <div class="previa">
+          <span class="previa__marca" aria-hidden="true">WANTU</span>
+          <span class="previa__dagua" id="previa-dagua" aria-hidden="true">demonstração</span>
+          <span class="previa__rotulo">Prévia ilustrativa, nenhuma imagem real</span>
+        </div>
+        <div class="aviso"><span class="aviso__marca" aria-hidden="true">✳</span>
+          <p>Na operação real, o que aparece aqui é um derivado com resolução reduzida e marca d água por comprador. O arquivo original fica em armazenamento privado e é liberado conforme o acordo. Nenhum sistema impede captura de tela, e prometer isso seria mentira.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-fundo" id="modal-contestacao" hidden>
+    <section class="modal modal--largo" role="dialog" aria-modal="true" aria-labelledby="ct-titulo">
+      <button class="modal__fechar" type="button" aria-label="Fechar a contestação">×</button>
+      <div class="pilha-5">
+        <p class="modal__topo">Contestação objetiva</p>
+        <h2 id="ct-titulo">O que foi combinado e o que chegou</h2>
+
+        <div class="card card--plano pilha-2">
+          <p class="caption">Briefing combinado</p>
+          <p id="ct-briefing"></p>
+        </div>
+
+        <div class="pilha-3">
+          <h3>Qual divergência você está apontando</h3>
+          <div class="pilha-2" id="ct-motivos"></div>
+        </div>
+
+        <div class="campo">
+          <label class="campo__rotulo" for="ct-descricao">Descreva a divergência contra o briefing</label>
+          <textarea id="ct-descricao" rows="4" placeholder="Ex.: o briefing pedia fundo escuro e luz lateral, e a entrega veio com fundo claro."></textarea>
+          <span class="campo__ajuda">A análise compara a entrega com o que estava escrito no pedido. Gosto pessoal e avaliação de aparência não são divergência, e não travam o pagamento de quem produziu.</span>
+        </div>
+
+        <div id="ct-saida" class="avisos-briefing" role="status" aria-live="polite"></div>
+        <button class="btn btn--primario btn--largo" type="button" id="ct-enviar">Abrir contestação</button>
+      </div>
+    </section>
+  </div>
+
+  <footer class="rodape">
+    <div class="wrap rodape__fim">
+      <span>© 2026 WANTU · conceito não publicado · 18+</span>
+      <span>Perfis inventados · sem transação real</span>
+    </div>
+  </footer>
+
+  <script src="assets/estado.js"></script>
+  <script src="assets/politica.js"></script>
+  <script src="assets/papel.js"></script>
+  <script src="assets/simulacao.js"></script>
+  <script src="assets/retratos.js"></script>
+  <script src="assets/dados.js"></script>
+  <script src="assets/filtro.js"></script>
+  <script src="assets/compositor.js"></script>
+  <script src="assets/pedidos.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/painel-simulacao.js"></script>
+  <script src="assets/tela-pedidos.js"></script>
+</body>
+</html>

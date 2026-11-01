@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B0A10">
+  <meta name="description" content="WANTU, conceito de marketplace de propostas de conteúdo personalizado entre pessoas adultas verificadas. Demonstração sem pagamento e sem conteúdo íntimo.">
+  <title>WANTU · a proposta é sua, a decisão é de quem cria</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/fontes/fontes.css">
+  <link rel="stylesheet" href="assets/tokens.css">
+  <link rel="stylesheet" href="assets/base.css">
+  <link rel="stylesheet" href="assets/ui.css">
+  <link rel="stylesheet" href="assets/blocos.css">
+  <link rel="stylesheet" href="assets/landing.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- O portão vive no HTML, visível por padrão, e o script o remove quando a
+       pessoa já entrou. Assim, se o script não rodar, o conteúdo não aparece. -->
+  <div class="portao" id="portao">
+    <section class="portao__cartao" role="dialog" aria-modal="true" aria-labelledby="portao-titulo">
+      <p class="marca" aria-hidden="true">WANT<b>U</b><i>.</i></p>
+      <p class="portao__selo">18+</p>
+      <h2 id="portao-titulo">Um espaço só para pessoas adultas</h2>
+      <p class="sub">A WANTU é um conceito de marketplace privado, onde creators adultos participam por vontade própria. Esta demonstração não tem conteúdo íntimo e não movimenta dinheiro.</p>
+      <div class="aviso aviso--atencao"><span class="aviso__marca" aria-hidden="true">!</span>
+        <p><strong>Esta confirmação não é verificação de idade.</strong> A operação real exige aferição por fornecedor especializado, porque a lei brasileira vigente não aceita autodeclaração como controle único.</p></div>
+      <button class="btn btn--primario btn--largo" id="portao-entrar" type="button">Sou adulto e quero ver a demonstração</button>
+      <p class="caption">Ao entrar você confirma que é maior de 18 anos e que quer ver uma demonstração de produto adulto.</p>
+    </section>
+  </div>
+
+  <div class="barra-papel" data-barra-papel>
+    <span class="selo-demo">Demo</span>
+    <span class="barra-papel__nota">Ambiente de demonstração, sem pagamento e sem dado real</span>
+  </div>
+
+  <header class="topo">
+    <div class="wrap topo__barra">
+      <a class="marca" href="index.html" aria-label="WANTU, início">WANT<b>U</b><i>.</i></a>
+      <nav class="topo__links" aria-label="Principal">
+        <a href="explorar.html" data-tela="explorar">Explorar</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#para-creators">Para creators</a>
+        <a href="documentos.html" data-tela="documentos">Transparência</a>
+      </nav>
+      <a class="btn btn--outline btn--pequeno" href="studio.html">Creator Studio</a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- ------------------------------------------------------------- hero -->
+    <section class="hero wrap">
+      <div class="hero__brilho" aria-hidden="true"></div>
+      <div class="pilha-5">
+        <p class="kicker">Marketplace de propostas · 18+</p>
+        <h1>Não espere o conteúdo acontecer, <i class="destaque">faça a sua proposta</i></h1>
+        <p class="sub">Descreva a criação que você quer, combine o valor e o prazo, e espere a decisão. Quem cria aceita, recusa sem justificativa ou sugere outras condições. A proposta é sua, a escolha é de quem produz.</p>
+        <div class="hero__acoes">
+          <a class="btn btn--primario" href="explorar.html">Explorar creators</a>
+          <a class="btn btn--outline" href="#como-funciona">Entender o fluxo</a>
+        </div>
+        <p class="caption">Demonstração com perfis inventados. Nenhum pagamento é processado e nenhuma pessoa é contatada.</p>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <p class="ticker">
+        <b>Quem cria no controle</b><span aria-hidden="true">✳</span>
+        <b>Propostas personalizadas</b><span aria-hidden="true">✳</span>
+        <b>Privacidade por desenho</b><span aria-hidden="true">✳</span>
+        <b>Só pessoas adultas verificadas</b>
+      </p>
+    </div>
+
+    <!-- -------------------------------------------------------- creators -->
+    <section class="secao wrap pilha-6" id="descubra">
+      <div class="pilha-3">
+        <p class="kicker">Descubra e proponha</p>
+        <h2>Quem está aceitando <i class="destaque">propostas agora</i></h2>
+        <p class="sub">Cada perfil mostra as modalidades que a pessoa habilitou, o valor mínimo que ela definiu e, em destaque, o que ela não aceita receber.</p>
+      </div>
+      <div class="grade grade--4" id="vitrine" aria-busy="true">
+        <div class="card-creator"><div class="card-creator__retrato skeleton skeleton--bloco"></div><div class="card-creator__corpo"><div class="skeleton skeleton--titulo"></div><div class="skeleton skeleton--linha"></div></div></div>
+        <div class="card-creator"><div class="card-creator__retrato skeleton skeleton--bloco"></div><div class="card-creator__corpo"><div class="skeleton skeleton--titulo"></div><div class="skeleton skeleton--linha"></div></div></div>
+        <div class="card-creator"><div class="card-creator__retrato skeleton skeleton--bloco"></div><div class="card-creator__corpo"><div class="skeleton skeleton--titulo"></div><div class="skeleton skeleton--linha"></div></div></div>
+        <div class="card-creator"><div class="card-creator__retrato skeleton skeleton--bloco"></div><div class="card-creator__corpo"><div class="skeleton skeleton--titulo"></div><div class="skeleton skeleton--linha"></div></div></div>
+      </div>
+      <a class="btn btn--outline" href="explorar.html">Ver o catálogo inteiro</a>
+    </section>
+
+    <!-- --------------------------------------------------- como funciona -->
+    <section class="secao wrap pilha-6" id="como-funciona">
+      <div class="pilha-3">
+        <p class="kicker">Simples de entender</p>
+        <h2>Uma proposta, <i class="destaque">quatro etapas</i></h2>
+        <p class="sub">Sem insistência e sem intermediário invasivo. A autonomia de quem cria faz parte do funcionamento, não é um aviso no rodapé.</p>
+      </div>
+      <div class="grade grade--4">
+        <article class="card passo">
+          <span class="passo__n">01</span>
+          <span class="passo__marca" aria-hidden="true">◎</span>
+          <h3>Encontre quem cria</h3>
+          <p>Só aparecem pessoas adultas verificadas que escolheram participar e receber propostas.</p>
+        </article>
+        <article class="card passo">
+          <span class="passo__n">02</span>
+          <span class="passo__marca" aria-hidden="true">↗</span>
+          <h3>Faça a sua proposta</h3>
+          <p>Escolha uma modalidade habilitada, descreva a ideia e proponha um valor acima do mínimo de quem cria.</p>
+        </article>
+        <article class="card passo">
+          <span class="passo__n">03</span>
+          <span class="passo__marca" aria-hidden="true">✳</span>
+          <h3>Espere a decisão</h3>
+          <p>Aceitar, recusar sem justificativa ou sugerir outras condições. Silêncio nunca vale como aceite.</p>
+        </article>
+        <article class="card passo">
+          <span class="passo__n">04</span>
+          <span class="passo__marca" aria-hidden="true">◈</span>
+          <h3>Receba com proteção</h3>
+          <p>Entrega privada, prévia derivada e regras escritas para acesso, contestação e repasse.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------ consentimento -->
+    <section class="secao wrap" id="consentimento">
+      <div class="faixa-consentimento">
+        <div class="pilha-4">
+          <p class="kicker">Consentimento é o produto</p>
+          <h2>Ninguém entra aqui <i class="destaque">porque alguém pediu</i></h2>
+          <p class="sub">Não existe perfil criado por terceiros, não se procura pessoas em redes sociais para pedir intimidade, não se aceita pedido sobre quem não aderiu, e não se produz conteúdo manipulado com a identidade de ninguém.</p>
+        </div>
+        <ul class="lista-checada">
+          <li>Quem cria começa o cadastro por vontade própria</li>
+          <li>Recusar é direito, sem justificativa e sem efeito na reputação</li>
+          <li>Pausar e bloquear valem na hora, com um clique</li>
+          <li>Briefing com dado de terceiro é barrado antes de chegar a quem cria</li>
+          <li>Prévia é arquivo derivado, nunca o original</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------- para creators -->
+    <section class="secao wrap pilha-6" id="para-creators">
+      <div class="grade grade--2">
+        <div class="pilha-4">
+          <p class="kicker">Para quem cria</p>
+          <h2>A sua imagem, <i class="destaque">as suas regras</i></h2>
+          <p class="sub">Você define as modalidades que aceita, o valor mínimo de cada uma, o prazo, o limite de pedidos por dia e a lista do que não quer receber. E muda tudo isso quando quiser, valendo para as propostas seguintes.</p>
+          <a class="btn btn--primario" href="studio.html">Ver o Creator Studio</a>
+        </div>
+        <div class="card pilha-4">
+          <h3>O que fica sob o seu controle</h3>
+          <ul class="lista-checada">
+            <li>Disponibilidade, que pausa na hora</li>
+            <li>Catálogo e preço mínimo por modalidade</li>
+            <li>Prazo próprio, que não se compra com urgência paga</li>
+            <li>Bloqueio de comprador, sem precisar explicar</li>
+            <li>Histórico financeiro por estado do pedido</li>
+          </ul>
+          <p class="caption">Valor líquido estimado aparece antes do aceite, com a comissão de 20% já descontada do bruto.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------------- faq -->
+    <section class="secao wrap pilha-6" id="faq">
+      <div class="pilha-3">
+        <p class="kicker">Respostas diretas</p>
+        <h2>Perguntas <i class="destaque">frequentes</i></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Posso pedir conteúdo de qualquer pessoa da internet<span aria-hidden="true">+</span></summary>
+          <p>Não. A proposta só existe para creators adultos verificados que aderiram e habilitaram aquela modalidade. A WANTU não cria perfil de terceiros, não procura ninguém em rede social e barra briefing que mencione pessoa não cadastrada.</p>
+        </details>
+        <details>
+          <summary>Quem cria é obrigado a aceitar<span aria-hidden="true">+</span></summary>
+          <p>Não. Toda proposta pode ser recusada sem justificativa, a recusa não tem efeito na reputação, e insistir depois de uma recusa não é permitido.</p>
+        </details>
+        <details>
+          <summary>Quando o valor é cobrado<span aria-hidden="true">+</span></summary>
+          <p>Na operação real, só depois do aceite e por um parceiro financeiro contratado para esta atividade, com regras escritas de captura, reserva, reembolso e repasse. Esta demonstração simula o fluxo e não movimenta dinheiro nenhum.</p>
+        </details>
+        <details>
+          <summary>E se a entrega não atender ao que foi combinado<span aria-hidden="true">+</span></summary>
+          <p>Existe uma janela de contestação com critério objetivo contra o briefing combinado. A análise não pede que ninguém julgue corpo ou aparência, e recusa arbitrária de uma entrega conforme não trava o pagamento de quem produziu: a janela fecha sozinha.</p>
+        </details>
+        <details>
+          <summary>O que acontece com os meus dados<span aria-hidden="true">+</span></summary>
+          <p>Esta demonstração guarda a simulação só na aba aberta, e some quando você fecha. A operação real exige armazenamento privado, link temporário, trilha de auditoria, política de retenção e os direitos previstos na LGPD, que trata dado de vida sexual como sensível.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------------- cta -->
+    <section class="secao wrap">
+      <div class="card card--destaque pilha-5" style="text-align:center;align-items:center">
+        <p class="kicker">Comece por aqui</p>
+        <h2>Uma ideia sua pode virar <i class="destaque">algo único</i></h2>
+        <p class="sub" style="margin-inline:auto">Percorra o catálogo, monte uma proposta e veja o fluxo inteiro dos dois lados.</p>
+        <a class="btn btn--primario" href="explorar.html">Encontrar um creator</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="wrap">
+      <div class="rodape__grade">
+        <div class="rodape__coluna">
+          <p class="marca" aria-hidden="true">WANT<b>U</b><i>.</i></p>
+          <p>A proposta é sua, a decisão é de quem cria. Experiências digitais privadas, com respeito e autonomia.</p>
+        </div>
+        <div class="rodape__coluna">
+          <strong>Explorar</strong>
+          <a href="explorar.html">Creators</a>
+          <a href="#como-funciona">Como funciona</a>
+          <a href="studio.html">Creator Studio</a>
+        </div>
+        <div class="rodape__coluna">
+          <strong>Transparência</strong>
+          <a href="documentos.html#privacidade">Privacidade e LGPD</a>
+          <a href="documentos.html#conteudo">Política de conteúdo</a>
+          <a href="documentos.html#gates">O que falta para produção</a>
+        </div>
+        <div class="rodape__coluna">
+          <strong>Importante</strong>
+          <span>Protótipo conceitual · 18+</span>
+          <span>Perfis e números inventados</span>
+          <span>Sem transação real</span>
+        </div>
+      </div>
+      <div class="rodape__fim">
+        <span>© 2026 WANTU · conceito não publicado</span>
+        <span>Feito para a liberdade de escolher ✳</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/estado.js"></script>
+  <script src="assets/politica.js"></script>
+  <script src="assets/papel.js"></script>
+  <script src="assets/simulacao.js"></script>
+  <script src="assets/retratos.js"></script>
+  <script src="assets/dados.js"></script>
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      var W = window.WANTU;
+      var A = W.app;
+
+      function vitrine() {
+        var abertos = A.estado().creators.filter(function (c) { return c.disponibilidade === 'aberta'; }).slice(0, 4);
+        var alvo = document.getElementById('vitrine');
+        alvo.removeAttribute('aria-busy');
+        alvo.innerHTML = abertos.map(function (c) {
+          var minimo = Math.min.apply(null, c.categorias.map(function (x) { return x.minimoCentavos; }));
+          return '<a class="card-creator" href="creator.html?id=' + A.escapar(c.publicId) + '">'
+            + '<span class="card-creator__retrato">' + W.retratos.svg(c.retratoSeed)
+            + '<span class="chip chip--lime card-creator__selo">Aderiu</span></span>'
+            + '<span class="card-creator__corpo">'
+            + '<span class="card-creator__nome">' + A.escapar(c.pseudonimo) + '</span>'
+            + '<span class="card-creator__tag">' + A.escapar(c.tagline) + '</span>'
+            + '<span class="card-creator__chips">' + c.categorias.map(function (x) {
+              var g = W.dados.CATEGORIAS.find(function (k) { return k.id === x.id; });
+              return '<span class="chip">' + A.escapar(g.rotulo.split(' ')[0]) + '</span>';
+            }).join('') + '</span>'
+            + '<span class="card-creator__rodape"><span>a partir de <b class="card-creator__valor">'
+            + A.dinheiro(minimo) + '</b></span><span>responde em ' + c.respostaMediaHoras + 'h</span></span>'
+            + '</span></a>';
+        }).join('');
+      }
+
+      A.iniciar('landing');
+      vitrine();
+      window.aoAbrirPortao = vitrine;
+    })();
+  </script>
+</body>
+</html>

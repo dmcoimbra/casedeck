@@ -1,0 +1,114 @@
+/* WANTU · landing
+   Estilos exclusivos da página inicial: hero, ticker, passos, faixa de
+   consentimento, FAQ e rodapé. Depende de tokens.css, base.css e blocos.css */
+
+/* -------------------------------------------------------- hero da landing */
+
+/* `clip` em vez de `hidden`: nao cria contexto de rolagem e nao ancora
+   position: sticky. O brilho decorativo e mais largo que a viewport no
+   telefone, e hoje quem o segura e a raiz. Confiar na raiz e fragil: basta um
+   elemento futuro herdar o mesmo transbordo para a pagina rolar de lado. */
+.hero { position: relative; overflow: clip; padding-block: var(--respiro-g) var(--respiro-m); }
+
+.hero__brilho {
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: min(900px, 120%);
+  aspect-ratio: 1.2;
+  background: radial-gradient(ellipse at center, rgba(118, 66, 155, 0.22), transparent 64%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero h1 { max-width: 15ch; }
+.hero__acoes { display: flex; gap: var(--e-3); flex-wrap: wrap; }
+
+.ticker {
+  display: flex;
+  gap: var(--e-5);
+  flex-wrap: wrap;
+  align-items: center;
+  padding-block: var(--e-5);
+  border-block: 1px solid var(--stroke);
+  font-size: var(--t-caption);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--smoke);
+}
+
+.ticker b { color: var(--lavender); font-weight: 700; }
+
+.passo { display: flex; flex-direction: column; gap: var(--e-3); }
+.passo__n { font-family: var(--fonte-display); font-size: 0.875rem; color: var(--lavender); font-weight: 800; letter-spacing: 0.1em; }
+.passo__marca { font-size: 1.5rem; color: var(--lime); line-height: 1; }
+.passo p { color: var(--smoke); font-size: 0.9375rem; }
+
+.faixa-consentimento {
+  display: grid;
+  gap: var(--e-6);
+  padding: var(--respiro-s) var(--e-5);
+  border-radius: var(--r-card);
+  border: 1px solid rgba(186, 156, 255, 0.24);
+  background: linear-gradient(150deg, rgba(186, 156, 255, 0.11), rgba(241, 154, 203, 0.05) 52%, transparent);
+}
+
+@media (min-width: 900px) {
+  .faixa-consentimento { grid-template-columns: 1.35fr 1fr; align-items: center; padding-inline: var(--respiro-s); }
+}
+
+.faixa-consentimento h2 { max-width: 18ch; }
+.lista-checada { display: flex; flex-direction: column; gap: var(--e-3); }
+.lista-checada li { display: flex; gap: var(--e-3); color: var(--smoke); font-size: 0.9375rem; }
+.lista-checada li::before { content: '✓'; color: var(--lime); font-weight: 800; flex: 0 0 auto; }
+
+.faq details {
+  border-bottom: 1px solid var(--stroke);
+}
+
+.faq summary {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--e-4);
+  align-items: center;
+  min-height: var(--alvo);
+  padding-block: var(--e-4);
+  cursor: pointer;
+  font-family: var(--fonte-display);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  letter-spacing: -0.015em;
+  list-style: none;
+}
+
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary span { color: var(--lavender); font-size: 1.25rem; flex: 0 0 auto; }
+.faq details[open] summary span { transform: rotate(45deg); }
+.faq summary span { transition: transform var(--mv-rapido) var(--mv-curva); display: inline-block; }
+.faq p { padding-bottom: var(--e-5); color: var(--smoke); max-width: 70ch; }
+
+.rodape { border-top: 1px solid var(--stroke); padding-block: var(--respiro-s) var(--e-6); }
+.rodape__grade { display: grid; gap: var(--e-6); grid-template-columns: 1fr; }
+
+@media (min-width: 760px) {
+  .rodape__grade { grid-template-columns: 1.6fr 1fr 1fr 1.2fr; }
+}
+
+.rodape__coluna { display: flex; flex-direction: column; gap: var(--e-2); font-size: 0.875rem; color: var(--smoke); }
+.rodape__coluna strong { color: var(--cloud); font-size: var(--t-caption); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: var(--e-1); }
+.rodape__coluna a { min-height: var(--alvo); display: inline-flex; align-items: center; }
+.rodape__coluna a:hover { color: var(--cloud); }
+
+.rodape__fim {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--e-4);
+  flex-wrap: wrap;
+  padding-top: var(--e-6);
+  margin-top: var(--e-6);
+  border-top: 1px solid var(--stroke);
+  font-size: var(--t-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--smoke);
+}

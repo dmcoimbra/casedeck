@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B0A10">
+  <meta name="description" content="Painel do creator na demonstração WANTU: disponibilidade, catálogo, valores mínimos, limites, bloqueios, fila de decisão e financeiro.">
+  <title>WANTU · Creator Studio</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/fontes/fontes.css">
+  <link rel="stylesheet" href="assets/tokens.css">
+  <link rel="stylesheet" href="assets/base.css">
+  <link rel="stylesheet" href="assets/ui.css">
+  <link rel="stylesheet" href="assets/blocos.css">
+  <link rel="stylesheet" href="assets/telas.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- O portão vive no HTML, visível por padrão, e o script o remove quando a
+       pessoa já entrou. Assim, se o script não rodar, o conteúdo não aparece. -->
+  <div class="portao" id="portao">
+    <section class="portao__cartao" role="dialog" aria-modal="true" aria-labelledby="portao-titulo">
+      <p class="marca" aria-hidden="true">WANT<b>U</b><i>.</i></p>
+      <p class="portao__selo">18+</p>
+      <h2 id="portao-titulo">Um espaço só para pessoas adultas</h2>
+      <p class="sub">A WANTU é um conceito de marketplace privado, onde creators adultos participam por vontade própria. Esta demonstração não tem conteúdo íntimo e não movimenta dinheiro.</p>
+      <div class="aviso aviso--atencao"><span class="aviso__marca" aria-hidden="true">!</span>
+        <p><strong>Esta confirmação não é verificação de idade.</strong> A operação real exige aferição por fornecedor especializado, porque a lei brasileira vigente não aceita autodeclaração como controle único.</p></div>
+      <button class="btn btn--primario btn--largo" id="portao-entrar" type="button">Sou adulto e quero ver a demonstração</button>
+      <p class="caption">Ao entrar você confirma que é maior de 18 anos e que quer ver uma demonstração de produto adulto.</p>
+    </section>
+  </div>
+
+  <div class="barra-papel" data-barra-papel>
+    <span class="selo-demo">Demo</span>
+    <span class="barra-papel__nota">Ambiente de demonstração, sem pagamento e sem dado real</span>
+  </div>
+
+  <header class="topo">
+    <div class="wrap topo__barra">
+      <a class="marca" href="index.html" aria-label="WANTU, início">WANT<b>U</b><i>.</i></a>
+      <nav class="topo__links" aria-label="Principal">
+        <a href="explorar.html" data-tela="explorar">Explorar</a>
+        <a href="pedidos.html" data-tela="pedidos">Meus pedidos</a>
+        <a href="studio.html" data-tela="studio">Creator Studio</a>
+        <a href="moderacao.html" data-tela="moderacao">Moderação</a>
+        <a href="documentos.html" data-tela="documentos">Transparência</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="wrap">
+      <div class="cabeca-tela">
+        <div class="pilha-3">
+          <p class="kicker">Creator Studio · demonstração</p>
+          <h1>Você no <i class="destaque">controle</i></h1>
+          <p class="sub">Modalidades, valores, prazos, limites e bloqueios são seus e mudam quando você quiser. Recusar é um direito, dispensa justificativa e não afeta a sua reputação.</p>
+        </div>
+      </div>
+
+      <div class="grade grade--2" style="align-items:start">
+        <section class="pilha-5">
+          <h2>Preferências</h2>
+
+          <div class="card pilha-4">
+            <label class="toggle" for="disponivel">
+              <span class="pilha-1"><strong>Receber propostas</strong>
+              <small class="campo__ajuda" id="nota-disponivel"></small></span>
+              <input type="checkbox" id="disponivel" role="switch" checked>
+            </label>
+            <hr class="divisor">
+            <div class="campo">
+              <label class="campo__rotulo" for="limite">Limite de propostas por dia</label>
+              <input id="limite" type="number" min="0" max="20" value="3">
+              <span class="campo__ajuda">Zero significa que ninguém consegue propor hoje.</span>
+            </div>
+          </div>
+
+          <div class="pilha-3">
+            <h3>Catálogo e valores mínimos</h3>
+            <div class="pilha-2" id="catalogo-editor"></div>
+            <p class="caption">A âncora da plataforma é referência comercial, e o mínimo é seu. Alterações valem para as próximas propostas, nunca para uma já aceita.</p>
+          </div>
+
+          <div class="campo">
+            <label class="campo__rotulo" for="nao-aceito">O que você não aceita receber</label>
+            <textarea id="nao-aceito" rows="5" placeholder="Um limite por linha"></textarea>
+            <span class="campo__ajuda">Esta lista aparece em destaque no seu perfil público, antes do botão de proposta.</span>
+          </div>
+          <button class="btn btn--primario" type="button" id="salvar-limites">Salvar os meus limites</button>
+
+          <div class="pilha-3">
+            <h3>Bloqueios</h3>
+            <div class="pilha-2" id="bloqueios"></div>
+          </div>
+        </section>
+
+        <section class="pilha-6">
+          <div class="pilha-3">
+            <h2>Propostas esperando você</h2>
+            <div id="nota-retidos"></div>
+            <div class="pilha-4" id="fila"></div>
+          </div>
+
+          <div class="pilha-3">
+            <h2>Em produção</h2>
+            <div class="pilha-4" id="producao"></div>
+          </div>
+
+          <div class="pilha-3">
+            <h2>Financeiro</h2>
+            <div class="card-pedido__numeros" id="saldos"></div>
+            <p class="caption">Valores líquidos estimados, com a comissão de 20% já descontada. Na operação real, taxas do parceiro financeiro, reserva e tributos entram antes do repasse, e o contrato discrimina cada linha.</p>
+          </div>
+        </section>
+      </div>
+
+      <div class="secao">
+        <div class="aviso"><span class="aviso__marca" aria-hidden="true">✳</span>
+          <p><strong>Painel ilustrativo.</strong> Para um creator real, nada disso existe antes de verificação de idade e identidade, conta de recebimento e aceite contratual.</p></div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-fundo" id="modal-contraproposta" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="cp-titulo">
+      <button class="modal__fechar" type="button" aria-label="Fechar a contraproposta">×</button>
+      <div class="pilha-5">
+        <p class="modal__topo">Outras condições</p>
+        <h2 id="cp-titulo">Sugerir outras condições</h2>
+        <p class="caption">Proposta original: <strong id="cp-original"></strong></p>
+
+        <div class="campo">
+          <label class="campo__rotulo" for="cp-valor">Valor que você propõe, em reais</label>
+          <input id="cp-valor" type="number" step="10" min="0">
+        </div>
+        <div class="campo">
+          <label class="campo__rotulo" for="cp-prazo">Prazo que você propõe, em dias</label>
+          <input id="cp-prazo" type="number" min="1" max="90">
+        </div>
+        <div class="campo">
+          <label class="campo__rotulo" for="cp-nota">Uma linha explicando, se quiser <span class="campo__opcional">opcional</span></label>
+          <textarea id="cp-nota" rows="2" placeholder="Ex.: consigo entregar com mais cuidado em dez dias."></textarea>
+        </div>
+
+        <div class="aviso"><span class="aviso__marca" aria-hidden="true">✳</span>
+          <p>A contraproposta só vale se quem propôs aceitar. Silêncio nunca vale como aceite, e o limite é de três rodadas por negociação.</p></div>
+
+        <div id="cp-saida" class="avisos-briefing" role="status" aria-live="polite"></div>
+        <button class="btn btn--primario btn--largo" type="button" id="cp-enviar">Enviar as novas condições</button>
+      </div>
+    </section>
+  </div>
+
+  <footer class="rodape">
+    <div class="wrap rodape__fim">
+      <span>© 2026 WANTU · conceito não publicado · 18+</span>
+      <span>Perfis inventados · sem transação real</span>
+    </div>
+  </footer>
+
+  <script src="assets/estado.js"></script>
+  <script src="assets/politica.js"></script>
+  <script src="assets/papel.js"></script>
+  <script src="assets/simulacao.js"></script>
+  <script src="assets/retratos.js"></script>
+  <script src="assets/dados.js"></script>
+  <script src="assets/filtro.js"></script>
+  <script src="assets/compositor.js"></script>
+  <script src="assets/studio.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/painel-simulacao.js"></script>
+  <script src="assets/tela-studio.js"></script>
+</body>
+</html>
