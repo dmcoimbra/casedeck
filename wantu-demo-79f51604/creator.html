@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B0A10">
+  <meta name="description" content="Perfil público de um creator da demonstração, com as modalidades habilitadas, os valores mínimos e o que a pessoa não aceita receber.">
+  <title>WANTU · perfil do creator</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/fontes/fontes.css">
+  <link rel="stylesheet" href="assets/tokens.css">
+  <link rel="stylesheet" href="assets/base.css">
+  <link rel="stylesheet" href="assets/ui.css">
+  <link rel="stylesheet" href="assets/blocos.css">
+  <link rel="stylesheet" href="assets/telas.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- O portão vive no HTML, visível por padrão, e o script o remove quando a
+       pessoa já entrou. Assim, se o script não rodar, o conteúdo não aparece. -->
+  <div class="portao" id="portao">
+    <section class="portao__cartao" role="dialog" aria-modal="true" aria-labelledby="portao-titulo">
+      <p class="marca" aria-hidden="true">WANT<b>U</b><i>.</i></p>
+      <p class="portao__selo">18+</p>
+      <h2 id="portao-titulo">Um espaço só para pessoas adultas</h2>
+      <p class="sub">A WANTU é um conceito de marketplace privado, onde creators adultos participam por vontade própria. Esta demonstração não tem conteúdo íntimo e não movimenta dinheiro.</p>
+      <div class="aviso aviso--atencao"><span class="aviso__marca" aria-hidden="true">!</span>
+        <p><strong>Esta confirmação não é verificação de idade.</strong> A operação real exige aferição por fornecedor especializado, porque a lei brasileira vigente não aceita autodeclaração como controle único.</p></div>
+      <button class="btn btn--primario btn--largo" id="portao-entrar" type="button">Sou adulto e quero ver a demonstração</button>
+      <p class="caption">Ao entrar você confirma que é maior de 18 anos e que quer ver uma demonstração de produto adulto.</p>
+    </section>
+  </div>
+
+  <div class="barra-papel" data-barra-papel>
+    <span class="selo-demo">Demo</span>
+    <span class="barra-papel__nota">Ambiente de demonstração, sem pagamento e sem dado real</span>
+  </div>
+
+  <header class="topo">
+    <div class="wrap topo__barra">
+      <a class="marca" href="index.html" aria-label="WANTU, início">WANT<b>U</b><i>.</i></a>
+      <nav class="topo__links" aria-label="Principal">
+        <a href="explorar.html" data-tela="explorar">Explorar</a>
+        <a href="pedidos.html" data-tela="pedidos">Meus pedidos</a>
+        <a href="studio.html" data-tela="studio">Creator Studio</a>
+        <a href="moderacao.html" data-tela="moderacao">Moderação</a>
+        <a href="documentos.html" data-tela="documentos">Transparência</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="wrap secao secao--curta">
+      <p><a class="voltar" href="explorar.html">Voltar ao catálogo</a></p>
+
+      <header class="cabeca-perfil">
+        <p class="kicker">Perfil público · aderiu voluntariamente</p>
+        <h1 id="pseudonimo">Creator</h1>
+        <p class="sub" id="tagline"></p>
+        <div class="linha" id="consentimento"></div>
+      </header>
+
+      <div class="perfil">
+        <div class="perfil__coluna-fixa pilha-4">
+          <div class="perfil__retrato" id="retrato"></div>
+          <button class="btn btn--primario btn--largo" type="button" id="abrir-proposta">Fazer uma proposta</button>
+          <div class="caption" id="nota-proposta"></div>
+          <p class="caption" id="resposta"></p>
+        </div>
+
+        <div class="pilha-6">
+          <section class="pilha-3">
+            <h2>Sobre o trabalho</h2>
+            <p class="sub" id="bio"></p>
+            <div class="card-creator__chips" id="estilos"></div>
+          </section>
+
+          <section class="pilha-3">
+            <h2>Modalidades habilitadas</h2>
+            <div class="card card--plano rolagem-x">
+              <table class="tabela">
+                <caption>Valores e prazos definidos por quem cria. A âncora da plataforma é referência comercial, não obrigação.</caption>
+                <thead><tr><th scope="col">Modalidade</th><th scope="col">Mínimo</th><th scope="col">Prazo</th></tr></thead>
+                <tbody id="catalogo"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="limites">
+            <h3>O que esta pessoa não aceita</h3>
+            <ul class="pilha-2" id="limites"></ul>
+            <p class="caption">Esta lista é escrita por quem cria e vale para toda proposta. Insistir depois de uma recusa não é permitido.</p>
+          </section>
+
+          <div class="aviso"><span class="aviso__marca" aria-hidden="true">✳</span>
+            <p><strong>Perfil inventado.</strong> Nenhum dado aqui pertence a uma pessoa real, e o retrato é um padrão abstrato gerado por código.</p></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-fundo" id="modal-proposta" hidden>
+    <section class="modal modal--largo" role="dialog" aria-modal="true" aria-labelledby="c-titulo">
+      <button class="modal__fechar" type="button" aria-label="Fechar a proposta">×</button>
+      <div class="passos-compositor">
+        <div class="pilha-2">
+          <p class="modal__topo">Proposta privada</p>
+          <h2 id="c-titulo">Monte a sua proposta</h2>
+        </div>
+
+        <div class="passo-bloco">
+          <p class="passo-bloco__titulo"><b>01</b> O que você quer pedir</p>
+          <div class="opcoes-modalidade" id="modalidades"></div>
+        </div>
+
+        <div class="passo-bloco">
+          <p class="passo-bloco__titulo"><b>02</b> Quanto você quer oferecer</p>
+          <div class="campo">
+            <label class="sr" for="c-valor">Valor da proposta em reais</label>
+            <div class="moeda">
+              <span class="moeda__prefixo" aria-hidden="true">R$</span>
+              <input id="c-valor" type="text" inputmode="decimal" value="0,00">
+              <span class="moeda__prefixo">BRL</span>
+            </div>
+            <input class="faixa" id="c-faixa" type="range" min="0" max="100" value="0" aria-label="Ajustar o valor da proposta">
+            <span class="campo__ajuda" id="c-minimo"></span>
+            <span class="campo__erro" id="c-valor-erro" hidden></span>
+          </div>
+          <div class="card-pedido__numeros" id="c-economia"></div>
+          <p class="caption">Valor líquido é estimativa. Na operação real, taxas do parceiro financeiro e tributos entram no cálculo antes do repasse.</p>
+        </div>
+
+        <div class="passo-bloco">
+          <p class="passo-bloco__titulo"><b>03</b> Descreva a criação que você quer</p>
+          <div class="campo">
+            <label class="sr" for="c-briefing">Briefing da proposta</label>
+            <textarea id="c-briefing" rows="4" maxlength="900" placeholder="Ex.: retrato editorial com luz lateral dura e fundo escuro, com liberdade na direção."></textarea>
+            <span class="contador" id="c-contador">0 / 900</span>
+            <span class="campo__ajuda">Sem dado de contato, seu ou de qualquer pessoa, e sem pedir conteúdo que retrate alguém que não aderiu. O filtro avisa enquanto você escreve.</span>
+          </div>
+          <div class="avisos-briefing" id="c-briefing-aviso" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="passo-bloco">
+          <p class="passo-bloco__titulo"><b>04</b> Prazo e confirmação</p>
+          <div class="campo">
+            <label class="campo__rotulo" for="c-prazo">Prazo que você propõe, em dias</label>
+            <input id="c-prazo" type="number" min="1" max="90" value="5">
+            <span class="campo__ajuda" id="c-prazo-nota"></span>
+          </div>
+          <div class="aviso"><span class="aviso__marca" aria-hidden="true">✳</span>
+            <p>Você está fazendo uma oferta, não comprando uma resposta. Quem cria pode recusar sem justificativa, e a proposta vale por 72 horas. Nenhum valor é cobrado nesta demonstração.</p></div>
+        </div>
+
+        <div id="c-saida" class="avisos-briefing" role="status" aria-live="polite"></div>
+        <button class="btn btn--primario btn--largo" type="button" id="c-enviar">Enviar proposta</button>
+      </div>
+    </section>
+  </div>
+
+  <footer class="rodape">
+    <div class="wrap rodape__fim">
+      <span>© 2026 WANTU · conceito não publicado · 18+</span>
+      <span>Perfis inventados · sem transação real</span>
+    </div>
+  </footer>
+
+  <script src="assets/estado.js"></script>
+  <script src="assets/politica.js"></script>
+  <script src="assets/papel.js"></script>
+  <script src="assets/simulacao.js"></script>
+  <script src="assets/retratos.js"></script>
+  <script src="assets/dados.js"></script>
+  <script src="assets/filtro.js"></script>
+  <script src="assets/compositor.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/painel-simulacao.js"></script>
+  <script src="assets/tela-creator.js"></script>
+</body>
+</html>

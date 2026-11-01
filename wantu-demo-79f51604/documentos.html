@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B0A10">
+  <meta name="description" content="Termos, privacidade, política de conteúdo e regras de repasse em rascunho, mais a lista aberta do que falta para a WANTU virar produção.">
+  <title>WANTU · transparência e documentos</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/fontes/fontes.css">
+  <link rel="stylesheet" href="assets/tokens.css">
+  <link rel="stylesheet" href="assets/base.css">
+  <link rel="stylesheet" href="assets/ui.css">
+  <link rel="stylesheet" href="assets/blocos.css">
+  <link rel="stylesheet" href="assets/telas.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- O portão vive no HTML, visível por padrão, e o script o remove quando a
+       pessoa já entrou. Assim, se o script não rodar, o conteúdo não aparece. -->
+  <div class="portao" id="portao">
+    <section class="portao__cartao" role="dialog" aria-modal="true" aria-labelledby="portao-titulo">
+      <p class="marca" aria-hidden="true">WANT<b>U</b><i>.</i></p>
+      <p class="portao__selo">18+</p>
+      <h2 id="portao-titulo">Um espaço só para pessoas adultas</h2>
+      <p class="sub">A WANTU é um conceito de marketplace privado, onde creators adultos participam por vontade própria. Esta demonstração não tem conteúdo íntimo e não movimenta dinheiro.</p>
+      <div class="aviso aviso--atencao"><span class="aviso__marca" aria-hidden="true">!</span>
+        <p><strong>Esta confirmação não é verificação de idade.</strong> A operação real exige aferição por fornecedor especializado, porque a lei brasileira vigente não aceita autodeclaração como controle único.</p></div>
+      <button class="btn btn--primario btn--largo" id="portao-entrar" type="button">Sou adulto e quero ver a demonstração</button>
+      <p class="caption">Ao entrar você confirma que é maior de 18 anos e que quer ver uma demonstração de produto adulto.</p>
+    </section>
+  </div>
+
+  <div class="barra-papel" data-barra-papel>
+    <span class="selo-demo">Demo</span>
+    <span class="barra-papel__nota">Ambiente de demonstração, sem pagamento e sem dado real</span>
+  </div>
+
+  <header class="topo">
+    <div class="wrap topo__barra">
+      <a class="marca" href="index.html" aria-label="WANTU, início">WANT<b>U</b><i>.</i></a>
+      <nav class="topo__links" aria-label="Principal">
+        <a href="explorar.html" data-tela="explorar">Explorar</a>
+        <a href="pedidos.html" data-tela="pedidos">Meus pedidos</a>
+        <a href="studio.html" data-tela="studio">Creator Studio</a>
+        <a href="moderacao.html" data-tela="moderacao">Moderação</a>
+        <a href="documentos.html" data-tela="documentos">Transparência</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="wrap">
+      <div class="cabeca-tela">
+        <div class="pilha-3">
+          <p class="kicker">Transparência · documentos</p>
+          <h1>O que está escrito, e <i class="destaque">o que ainda falta</i></h1>
+          <p class="sub">Todo texto desta página é rascunho de demonstração. Nada aqui é parecer jurídico, nenhuma cláusula foi revisada por advogado, e nenhum fornecedor aprovou este modelo de negócio.</p>
+        </div>
+      </div>
+
+      <div class="aviso aviso--atencao"><span class="aviso__marca" aria-hidden="true">!</span>
+        <p><strong>Placeholder, não documento.</strong> Os blocos abaixo descrevem a intenção do produto, para a demonstração ter o que mostrar. Um documento real precisa de revisão jurídica, versionamento, data de vigência e aceite registrado.</p></div>
+
+      <div class="pilha-6" style="margin-top:var(--respiro-s)">
+        <section class="card pilha-3" id="termos">
+          <h2>Termos de uso</h2>
+          <p class="sub">Descreve quem pode usar o serviço, o que é uma proposta, como a negociação acontece e o que cada lado assume. Os pontos que o texto real precisa fixar:</p>
+          <ul class="lista-checada">
+            <li>Só pessoas adultas verificadas, nos dois lados</li>
+            <li>Proposta é oferta, não compra de resposta, e a recusa dispensa justificativa</li>
+            <li>Escopo e valor congelam no aceite, e contraproposta exige aceite expresso</li>
+            <li>Licença de uso pessoal e intransferível, sem cessão automática de direito de imagem</li>
+            <li>Prazo de contestação, critério objetivo e caminho de recurso</li>
+          </ul>
+        </section>
+
+        <section class="card pilha-3" id="privacidade">
+          <h2>Privacidade e LGPD</h2>
+          <p class="sub">A LGPD trata dado de vida sexual como dado pessoal sensível, no artigo 5º, inciso II. Isso muda a base legal, a retenção e o controle de acesso. O texto real precisa cobrir:</p>
+          <ul class="lista-checada">
+            <li>Finalidade e base legal por tipo de dado, com registro de consentimento versionado</li>
+            <li>Minimização: pseudônimo no público, identidade civil segregada do operacional</li>
+            <li>Retenção por finalidade, exclusão auditável e expiração de backup</li>
+            <li>Relatório de impacto, inventário de dados e contrato com cada suboperador</li>
+            <li>Canal de exercício de direitos e processo de resposta a incidente</li>
+          </ul>
+          <p class="caption">Nesta demonstração, a simulação vive só na aba aberta e some quando ela fecha. Nenhum dado sai do seu navegador.</p>
+        </section>
+
+        <section class="card pilha-3" id="conteudo-politica">
+          <h2>Política de conteúdo por categoria</h2>
+          <p class="sub">Uma categoria só existe quando a lei permite, o fornecedor financeiro permite e quem cria habilitou. A lista fica em motor de política no servidor, nunca só na tela.</p>
+          <ul class="lista-checada">
+            <li>Proibido sem exceção: menor de idade, aparência de menor, coerção, chantagem</li>
+            <li>Proibido: conteúdo não consensual, deepfake de pessoa real, câmera oculta</li>
+            <li>Proibido: pedido sobre pessoa que não aderiu, identificada por nome ou rede social</li>
+            <li>Proibido: dado de contato no briefing, de qualquer pessoa, inclusive de quem propõe</li>
+          </ul>
+        </section>
+
+        <section class="card pilha-3" id="repasse">
+          <h2>Repasse, contestação e reembolso</h2>
+          <p class="sub">A divisão de 80 por 20 é hipótese comercial, e o contrato real precisa discriminar valor bruto, taxa da plataforma, taxas de pagamento, tributos, reserva e valor líquido efetivo.</p>
+          <ul class="lista-checada">
+            <li>Nenhum estado financeiro muda sem evento assinado do parceiro, com idempotência</li>
+            <li>Confirmar entrega marca elegibilidade, e não transfere dinheiro</li>
+            <li>A janela de contestação fecha sozinha, para entrega conforme não ficar travada</li>
+            <li>Contestação exige divergência verificável contra o briefing, nunca gosto pessoal</li>
+          </ul>
+        </section>
+
+        <section class="card pilha-3" id="denuncia">
+          <h2>Canal de denúncia</h2>
+          <p class="sub">Denúncia de risco a menor, coerção, chantagem, exposição íntima ou vazamento tem prioridade máxima e resposta emergencial, não progressiva.</p>
+          <ul class="lista-checada">
+            <li>Botão de denúncia acessível sem exposição adicional de quem denuncia</li>
+            <li>Isolamento preventivo proporcional e preservação de evidência pelo prazo legal</li>
+            <li>Plantão humano, com comunicação às autoridades quando obrigatória</li>
+          </ul>
+          <p class="caption">Nesta demonstração não existe canal ativo, porque não existe operação.</p>
+        </section>
+
+        <section class="limites" id="gates">
+          <h2>O que falta para isto virar produção</h2>
+          <p class="sub">A demonstração não encosta em nenhum destes pontos, e nenhum deles é trabalho de interface. Enquanto qualquer um estiver aberto, não há produto, só artefato.</p>
+          <ul class="pilha-2">
+            <li>Parecer jurídico sobre o modelo, o catálogo e os termos</li>
+            <li>PSP ou adquirente que aceite marketplace adulto por escrito, com split e reserva definidos</li>
+            <li>Fornecedor de aferição de idade avaliado para o Brasil, porque autodeclaração não basta</li>
+            <li>KYC do creator, com deduplicação de identidade e correspondência com a conta de recebimento</li>
+            <li>Revisão de LGPD, relatório de impacto e aprovação do encarregado de dados</li>
+            <li>Equipe de moderação treinada, com plantão e medida de saúde ocupacional</li>
+            <li>Plano de resposta a incidente, ensaiado, e política de retenção e exclusão</li>
+            <li>Pentest independente e revisão de segurança por quem não construiu</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="secao">
+        <div class="aviso"><span class="aviso__marca" aria-hidden="true">✳</span>
+          <p><strong>Fontes consultadas na especificação:</strong> Lei 15.211 de 2025, conhecida como ECA Digital, com atenção ao artigo 9º; a Lei 13.709 de 2018, a LGPD; as orientações da ANPD sobre aferição de idade no ambiente digital; e as políticas públicas de negócios restritos dos processadores de pagamento. Conferir a redação vigente na data de cada entrega.</p></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <div class="wrap rodape__fim">
+      <span>© 2026 WANTU · conceito não publicado · 18+</span>
+      <span>Perfis inventados · sem transação real</span>
+    </div>
+  </footer>
+
+  <script src="assets/estado.js"></script>
+  <script src="assets/politica.js"></script>
+  <script src="assets/papel.js"></script>
+  <script src="assets/simulacao.js"></script>
+  <script src="assets/retratos.js"></script>
+  <script src="assets/dados.js"></script>
+  <script src="assets/filtro.js"></script>
+  <script src="assets/compositor.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

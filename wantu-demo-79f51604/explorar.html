@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B0A10">
+  <meta name="description" content="Catálogo de creators adultos verificados que aderiram voluntariamente e habilitaram as modalidades que aceitam receber.">
+  <title>WANTU · explorar creators</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/fontes/fontes.css">
+  <link rel="stylesheet" href="assets/tokens.css">
+  <link rel="stylesheet" href="assets/base.css">
+  <link rel="stylesheet" href="assets/ui.css">
+  <link rel="stylesheet" href="assets/blocos.css">
+  <link rel="stylesheet" href="assets/telas.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- O portão vive no HTML, visível por padrão, e o script o remove quando a
+       pessoa já entrou. Assim, se o script não rodar, o conteúdo não aparece. -->
+  <div class="portao" id="portao">
+    <section class="portao__cartao" role="dialog" aria-modal="true" aria-labelledby="portao-titulo">
+      <p class="marca" aria-hidden="true">WANT<b>U</b><i>.</i></p>
+      <p class="portao__selo">18+</p>
+      <h2 id="portao-titulo">Um espaço só para pessoas adultas</h2>
+      <p class="sub">A WANTU é um conceito de marketplace privado, onde creators adultos participam por vontade própria. Esta demonstração não tem conteúdo íntimo e não movimenta dinheiro.</p>
+      <div class="aviso aviso--atencao"><span class="aviso__marca" aria-hidden="true">!</span>
+        <p><strong>Esta confirmação não é verificação de idade.</strong> A operação real exige aferição por fornecedor especializado, porque a lei brasileira vigente não aceita autodeclaração como controle único.</p></div>
+      <button class="btn btn--primario btn--largo" id="portao-entrar" type="button">Sou adulto e quero ver a demonstração</button>
+      <p class="caption">Ao entrar você confirma que é maior de 18 anos e que quer ver uma demonstração de produto adulto.</p>
+    </section>
+  </div>
+
+  <div class="barra-papel" data-barra-papel>
+    <span class="selo-demo">Demo</span>
+    <span class="barra-papel__nota">Ambiente de demonstração, sem pagamento e sem dado real</span>
+  </div>
+
+  <header class="topo">
+    <div class="wrap topo__barra">
+      <a class="marca" href="index.html" aria-label="WANTU, início">WANT<b>U</b><i>.</i></a>
+      <nav class="topo__links" aria-label="Principal">
+        <a href="explorar.html" data-tela="explorar">Explorar</a>
+        <a href="pedidos.html" data-tela="pedidos">Meus pedidos</a>
+        <a href="studio.html" data-tela="studio">Creator Studio</a>
+        <a href="moderacao.html" data-tela="moderacao">Moderação</a>
+        <a href="documentos.html" data-tela="documentos">Transparência</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="wrap">
+      <div class="cabeca-tela">
+        <div class="pilha-3">
+          <p class="kicker">Catálogo · só quem aderiu</p>
+          <h1>Quem está aceitando <i class="destaque">propostas</i></h1>
+          <p class="sub">Todo perfil aqui começou o cadastro por vontade própria, passou por verificação e habilitou as modalidades que quer receber. Quem pausa some da busca na hora.</p>
+        </div>
+      </div>
+
+      <form class="filtros" id="filtros" role="search" aria-label="Filtrar o catálogo">
+        <div class="campo">
+          <label class="campo__rotulo" for="f-busca">Buscar por estilo ou pseudônimo</label>
+          <input id="f-busca" type="search" placeholder="Ex.: editorial, filme, movimento" autocomplete="off">
+        </div>
+        <div class="campo">
+          <label class="campo__rotulo" for="f-modalidade">Modalidade</label>
+          <select id="f-modalidade"><option value="">Todas as modalidades</option></select>
+        </div>
+        <div class="campo">
+          <label class="campo__rotulo" for="f-preco">Valor mínimo até</label>
+          <select id="f-preco"><option value="">Qualquer valor</option></select>
+        </div>
+        <div class="campo">
+          <label class="campo__rotulo" for="f-prazo">Prazo</label>
+          <select id="f-prazo"><option value="">Qualquer prazo</option></select>
+        </div>
+        <div class="campo">
+          <label class="campo__rotulo" for="f-disponibilidade">Disponibilidade</label>
+          <select id="f-disponibilidade">
+            <option value="aberta">Aceitando agora</option>
+            <option value="">Incluir quem pausou</option>
+          </select>
+        </div>
+        <div class="filtros__acao">
+          <button class="btn btn--texto" type="button" id="f-limpar">Limpar</button>
+        </div>
+      </form>
+
+      <div class="resultado-linha">
+        <strong id="contagem" role="status" aria-live="polite">Carregando o catálogo</strong>
+        <span>A ordem é a do catálogo. Não há ranking de pessoas, nota nem destaque pago.</span>
+      </div>
+
+      <div id="grade" class="grade grade--4" aria-busy="true">
+        <div class="card-creator"><div class="card-creator__retrato skeleton skeleton--bloco"></div><div class="card-creator__corpo"><div class="skeleton skeleton--titulo"></div><div class="skeleton skeleton--linha"></div></div></div>
+        <div class="card-creator"><div class="card-creator__retrato skeleton skeleton--bloco"></div><div class="card-creator__corpo"><div class="skeleton skeleton--titulo"></div><div class="skeleton skeleton--linha"></div></div></div>
+        <div class="card-creator"><div class="card-creator__retrato skeleton skeleton--bloco"></div><div class="card-creator__corpo"><div class="skeleton skeleton--titulo"></div><div class="skeleton skeleton--linha"></div></div></div>
+        <div class="card-creator"><div class="card-creator__retrato skeleton skeleton--bloco"></div><div class="card-creator__corpo"><div class="skeleton skeleton--titulo"></div><div class="skeleton skeleton--linha"></div></div></div>
+      </div>
+
+      <div class="secao">
+        <div class="aviso"><span class="aviso__marca" aria-hidden="true">✳</span>
+          <p><strong>Perfis inventados.</strong> Os retratos são padrões abstratos gerados por código, não são fotos de pessoas, e nenhum dos nomes aqui corresponde a alguém real.</p></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <div class="wrap rodape__fim">
+      <span>© 2026 WANTU · conceito não publicado · 18+</span>
+      <span>Perfis inventados · sem transação real</span>
+    </div>
+  </footer>
+
+  <script src="assets/estado.js"></script>
+  <script src="assets/politica.js"></script>
+  <script src="assets/papel.js"></script>
+  <script src="assets/simulacao.js"></script>
+  <script src="assets/retratos.js"></script>
+  <script src="assets/dados.js"></script>
+  <script src="assets/filtro.js"></script>
+  <script src="assets/compositor.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/painel-simulacao.js"></script>
+  <script src="assets/tela-explorar.js"></script>
+</body>
+</html>

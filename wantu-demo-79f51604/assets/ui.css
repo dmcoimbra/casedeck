@@ -1,0 +1,303 @@
+/* WANTU · componentes de controle
+   Botão, campo, moeda, toggle, faixa, chip e selo de estado: o que a pessoa
+   manipula. Blocos que arranjam conteúdo vivem em blocos.css.
+
+   Cada componente nasce com os estados completos: repouso, hover, foco,
+   ativo, desabilitado com motivo, carregando, erro e vazio. Estado nunca é
+   comunicado só por cor: sempre acompanha rótulo textual.
+   Depende de tokens.css e base.css.                                        */
+
+/* ------------------------------------------------------------------ botão */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-2);
+  min-height: var(--alvo);
+  padding: var(--e-3) var(--e-6);
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-align: center;
+  transition: background-color var(--mv-rapido) var(--mv-curva),
+              border-color var(--mv-rapido) var(--mv-curva),
+              color var(--mv-rapido) var(--mv-curva),
+              transform var(--mv-rapido) var(--mv-curva);
+}
+
+.btn:active { transform: translateY(1px); }
+
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.45;
+  transform: none;
+}
+
+.btn--primario {
+  background: var(--lime);
+  color: var(--on-lime);
+}
+
+.btn--primario:hover:not([disabled]) { background: #e0ff9e; }
+
+.btn--outline {
+  background: transparent;
+  border-color: var(--stroke);
+  color: var(--cloud);
+}
+
+.btn--outline:hover:not([disabled]) {
+  border-color: var(--lavender);
+  color: var(--lavender);
+}
+
+.btn--texto {
+  background: transparent;
+  color: var(--smoke);
+  padding-inline: var(--e-3);
+  min-height: var(--alvo);
+}
+
+.btn--texto:hover:not([disabled]) { color: var(--cloud); }
+
+.btn--perigo {
+  background: transparent;
+  border-color: rgba(255, 138, 138, 0.4);
+  color: var(--erro);
+}
+
+.btn--perigo:hover:not([disabled]) {
+  background: rgba(255, 138, 138, 0.1);
+  border-color: var(--erro);
+}
+
+.btn--largo { width: 100%; }
+
+/* O botão pequeno fica compacto com mouse, e volta aos 44px onde o ponteiro
+   é o dedo, que é exatamente para o que a régua de alvo de toque existe.
+   Encolher o alvo junto com o desenho é o erro clássico aqui. */
+.btn--pequeno {
+  min-height: 38px;
+  padding: var(--e-2) var(--e-4);
+  font-size: 0.8125rem;
+}
+
+@media (pointer: coarse) {
+  .btn--pequeno { min-height: var(--alvo); padding-inline: var(--e-5); }
+}
+
+/* Carregando: o rótulo fica, o giro entra ao lado, e o botão não encolhe */
+.btn[aria-busy="true"] { pointer-events: none; opacity: 0.8; }
+
+.btn[aria-busy="true"]::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: girar 700ms linear infinite;
+}
+
+@keyframes girar { to { transform: rotate(360deg); } }
+
+/* ------------------------------------------------------------------ campo */
+
+.campo { display: flex; flex-direction: column; gap: var(--e-2); }
+
+.campo__rotulo {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--cloud);
+  letter-spacing: -0.005em;
+}
+
+.campo__opcional { font-weight: 400; color: var(--smoke); }
+
+.campo input,
+.campo textarea,
+.campo select {
+  width: 100%;
+  min-height: var(--alvo);
+  padding: var(--e-3) var(--e-4);
+  background: var(--plum-800);
+  border: 1px solid var(--stroke);
+  border-radius: var(--r-campo);
+  color: var(--cloud);
+  transition: border-color var(--mv-rapido) var(--mv-curva);
+}
+
+.campo textarea { min-height: 112px; resize: vertical; line-height: 1.6; }
+
+.campo input::placeholder,
+.campo textarea::placeholder { color: #6f6a7d; }
+
+.campo input:hover:not([disabled]),
+.campo textarea:hover:not([disabled]),
+.campo select:hover:not([disabled]) { border-color: #45404f; }
+
+.campo input[disabled],
+.campo textarea[disabled],
+.campo select[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background: var(--ink-900);
+}
+
+.campo__ajuda { font-size: var(--t-caption); color: var(--smoke); }
+
+/* Erro com texto e ícone, nunca só com a borda vermelha */
+.campo__erro {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-2);
+  font-size: 0.8125rem;
+  color: var(--erro);
+}
+
+.campo__erro::before { content: '!'; font-weight: 800; line-height: 1.4; }
+
+.campo input[aria-invalid="true"],
+.campo textarea[aria-invalid="true"],
+.campo select[aria-invalid="true"] { border-color: var(--erro); }
+
+/* Campo de dinheiro */
+.moeda {
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+  padding-inline: var(--e-4);
+  background: var(--plum-800);
+  border: 1px solid var(--stroke);
+  border-radius: var(--r-campo);
+}
+
+.moeda__prefixo { color: var(--smoke); font-weight: 700; }
+
+.moeda input {
+  border: 0;
+  background: none;
+  padding-inline: 0;
+  font-family: var(--fonte-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.moeda input:focus-visible { outline-offset: 6px; }
+
+/* Toggle */
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-4);
+  min-height: var(--alvo);
+  cursor: pointer;
+}
+
+.toggle input {
+  appearance: none;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 28px;
+  border-radius: var(--r-pill);
+  background: var(--plum-700);
+  border: 1px solid var(--stroke);
+  position: relative;
+  cursor: pointer;
+  transition: background-color var(--mv-rapido) var(--mv-curva);
+}
+
+.toggle input::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--smoke);
+  transition: transform var(--mv-rapido) var(--mv-curva), background-color var(--mv-rapido) var(--mv-curva);
+}
+
+.toggle input:checked { background: var(--lime); border-color: var(--lime); }
+.toggle input:checked::after { transform: translateX(20px); background: var(--on-lime); }
+.toggle input[disabled] { opacity: 0.45; cursor: not-allowed; }
+
+/* Faixa */
+.faixa { appearance: none; width: 100%; height: 28px; background: none; cursor: pointer; }
+
+.faixa::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: var(--r-pill);
+  background: var(--stroke);
+}
+
+.faixa::-webkit-slider-thumb {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -9px;
+  border-radius: 50%;
+  background: var(--lime);
+  border: 3px solid var(--ink-900);
+}
+
+.faixa::-moz-range-track { height: 4px; border-radius: var(--r-pill); background: var(--stroke); }
+.faixa::-moz-range-thumb { width: 22px; height: 22px; border: 3px solid var(--ink-900); border-radius: 50%; background: var(--lime); }
+
+/* ------------------------------------------------------------- chip, selo */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  padding: 6px var(--e-3);
+  border: 1px solid var(--stroke);
+  border-radius: var(--r-pill);
+  font-size: var(--t-caption);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.chip--ativo { border-color: var(--lavender); color: var(--lavender); background: rgba(186, 156, 255, 0.1); }
+.chip--lime { border-color: rgba(209, 255, 128, 0.42); color: var(--lime); background: rgba(209, 255, 128, 0.08); }
+
+.selo-estado {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  padding: 5px var(--e-3);
+  border-radius: var(--r-pill);
+  font-size: var(--t-caption);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid var(--stroke);
+  color: var(--smoke);
+  background: var(--plum-700);
+}
+
+.selo-estado::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: 0 0 auto;
+}
+
+.selo-estado--andamento { color: var(--lavender); border-color: rgba(186, 156, 255, 0.35); }
+.selo-estado--atencao { color: var(--atencao); border-color: rgba(255, 209, 102, 0.35); }
+.selo-estado--ok { color: var(--lime); border-color: rgba(209, 255, 128, 0.35); }
+.selo-estado--erro { color: var(--erro); border-color: rgba(255, 138, 138, 0.35); }
+.selo-estado--neutro { color: var(--smoke); }
