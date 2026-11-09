@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PARELO · Fase 1 · estado da obra</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#20323B; --paper:#FAF7F1; --white:#FFFFFF; --sage:#A9BEB4;
+  --sage-deep:#4D7264; --terracotta:#C96D59; --terracotta-dark:#9B4435;
+  --peach:#F2DCD1; --gold:#D8B77F; --line:#E5DED4; --muted:#5E6C6F; --danger:#9C3F3F;
+  --sans:"DM Sans",system-ui,sans-serif; --serif:"Fraunces",Georgia,serif;
+  --max:760px; --gut:24px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:18px; line-height:1.62;
+  font-weight:400; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 var(--gut)}
+a{color:var(--terracotta-dark); text-decoration:underline; text-underline-offset:2px}
+a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--sage-deep); outline-offset:3px; border-radius:4px}
+
+header{padding:72px 0 0}
+.mark{font-family:var(--sans); font-weight:700; letter-spacing:.14em; font-size:14px; text-transform:lowercase; color:var(--muted)}
+h1{font-family:var(--serif); font-weight:500; font-size:clamp(34px,6.4vw,54px); line-height:1.1; margin:18px 0 10px; letter-spacing:-.015em}
+.sub{color:var(--muted); font-size:17px; margin:0 0 8px}
+.aviso{
+  margin:28px 0 0; padding:14px 18px; background:var(--peach); color:var(--ink);
+  border-radius:14px; font-size:16px; line-height:1.5;
+}
+.aviso b{font-weight:700}
+
+.placar{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:36px 0 0}
+.placar div{background:var(--white); border:1px solid var(--line); border-radius:18px; padding:20px 18px}
+.placar .n{font-family:var(--serif); font-weight:600; font-size:clamp(30px,5.6vw,40px); line-height:1; display:block}
+.placar .r{color:var(--muted); font-size:14px; margin-top:8px; display:block; line-height:1.4}
+
+main{padding:16px 0 96px}
+section{margin:56px 0 0; padding-top:30px; border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+h2{font-family:var(--serif); font-weight:500; font-size:clamp(23px,3.6vw,30px); line-height:1.22; margin:0 0 14px; letter-spacing:-.01em}
+h3{font-family:var(--sans); font-weight:700; font-size:16px; margin:30px 0 8px; letter-spacing:.01em}
+p{margin:0 0 16px}
+.lead{font-size:19px}
+.quiet{color:var(--muted)}
+
+ol.tarefas{list-style:none; padding:0; margin:18px 0 0; counter-reset:t}
+ol.tarefas li{
+  position:relative; padding:16px 0 16px 56px; border-top:1px solid var(--line);
+  counter-increment:t;
+}
+ol.tarefas li::before{
+  content:counter(t,decimal-leading-zero); position:absolute; left:0; top:15px;
+  font-family:var(--serif); font-weight:600; font-size:20px; color:var(--sage-deep);
+  font-variant-numeric:tabular-nums;
+}
+ol.tarefas li b{display:block; font-weight:700; font-size:17px}
+ol.tarefas li span{color:var(--muted); font-size:16px}
+ol.tarefas li.feito::after{
+  content:"fechada"; position:absolute; right:0; top:18px;
+  font-size:12px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--sage-deep); font-weight:700;
+}
+ol.tarefas li.agora::after{
+  content:"em revisão"; position:absolute; right:0; top:18px;
+  font-size:12px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--terracotta-dark); font-weight:700;
+}
+
+.furos{list-style:none; padding:0; margin:18px 0 0}
+.furos li{padding:13px 0 13px 30px; border-top:1px solid var(--line); position:relative; font-size:17px}
+.furos li::before{
+  content:""; position:absolute; left:4px; top:21px; width:9px; height:9px;
+  border-radius:50%; background:var(--sage-deep);
+}
+.principio{
+  margin:26px 0 0; padding:24px 26px; background:var(--white);
+  border:1px solid var(--line); border-left:4px solid var(--terracotta-dark); border-radius:16px;
+}
+.principio p{margin:0; font-family:var(--serif); font-size:19px; line-height:1.48}
+
+table{width:100%; border-collapse:collapse; margin:18px 0 0; font-size:15px}
+caption{text-align:left; color:var(--muted); font-size:14px; padding-bottom:10px}
+th,td{text-align:left; padding:10px 8px; border-bottom:1px solid var(--line)}
+th{font-size:13px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); font-weight:700}
+td.num{font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap}
+.ok{color:var(--sage-deep); font-weight:700}
+.nao{color:var(--danger); font-weight:700}
+.sw{display:inline-block; width:13px; height:13px; border-radius:3px; margin-right:7px; vertical-align:-1px; border:1px solid rgba(32,50,59,.14)}
+
+ul.plain{padding-left:22px; margin:14px 0 0}
+ul.plain li{margin:0 0 9px}
+
+footer{border-top:1px solid var(--line); padding:28px 0 72px; color:var(--muted); font-size:15px}
+
+@media (max-width:640px){
+  :root{--gut:16px}
+  body{font-size:17px}
+  header{padding-top:44px}
+  .placar{grid-template-columns:1fr}
+  ol.tarefas li{padding-left:44px; padding-right:0}
+  ol.tarefas li.feito::after,
+  ol.tarefas li.agora::after{position:static; display:block; margin-top:10px}
+  table{font-size:14px}
+  th,td{padding:9px 4px}
+}
+@media (prefers-reduced-motion:no-preference){
+  a{transition:color 180ms ease}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="mark">parelo</div>
+  <h1>Fase 1, estado da obra</h1>
+  <p class="sub">Relatório de execução · 9 de novembro de 2026</p>
+  <p class="sub quiet">Fatia vertical vendável · 21 tarefas · branch <code>fase-1</code></p>
+
+  <div class="aviso">
+    <b>Não há interface ainda.</b> Nenhuma tela existe, e isso é deliberado: o plano põe o
+    isolamento de dados antes de qualquer pixel. As primeiras telas são as tarefas 10 e 11.
+    Esta página é a identidade do PARELO em uso pela primeira vez, não o produto.
+  </div>
+
+  <div class="placar">
+    <div><span class="n">5 / 21</span><span class="r">tarefas, com 4 fechadas e revisadas e a quinta em revisão</span></div>
+    <div><span class="n">945</span><span class="r">testes passando em 12 arquivos, zero falha</span></div>
+    <div><span class="n">0</span><span class="r">telas construídas, por ordem do plano</span></div>
+  </div>
+</header>
+
+<main>
+
+<section>
+  <h2>Por que cinco tarefas e nenhuma tela</h2>
+  <p class="lead">
+    O PARELO vai guardar reflexões privadas de pessoas sobre intimidade. A garantia de privacidade
+    do produto mora em políticas do banco de dados, não no código da aplicação.
+  </p>
+  <p>
+    A tarefa 3 existia para provar uma coisa só: que a conta A não alcança o diário da conta B.
+    Antes dela passar, nada se constrói em cima. Ela passou, e no caminho encontrou cinco falhas
+    que a revisão de política nunca pegaria. Construir telas primeiro teria significado descobrir
+    isso com onze telas apoiadas no erro.
+  </p>
+</section>
+
+<section>
+  <h2>O que existe</h2>
+  <ol class="tarefas">
+    <li class="feito"><b>Monorepo e papéis do banco</b><span>PostgreSQL 17 local, três papéis sem poder de furar as políticas, e um papel de teste que só existe fora do caminho de produção</span></li>
+    <li class="feito"><b>Esquema e cliente transacional</b><span>20 tabelas, nenhuma com campo de gênero, orientação ou estado civil; identidade da requisição morre com a transação</span></li>
+    <li class="feito"><b>Portão de isolamento</b><span>140 casos de teste de privacidade, seis rodadas de mutação provando que a bateria falha quando deve</span></li>
+    <li class="feito"><b>Esquemas do acervo</b><span>Validação dos seis tipos de registro; 338 de 338 mutantes mortos</span></li>
+    <li class="agora"><b>Recorte por capítulo e as 50 fontes</b><span>Bibliografia extraída e reconstruída byte a byte contra o original</span></li>
+  </ol>
+  <p class="quiet" style="margin-top:22px">
+    O acervo tem 348 registros a extrair: 14 missões, 15 trilhas com 105 aulas, 24 cenários,
+    140 cartas e 50 fontes. As tarefas 6 a 9 terminam esse pipeline.
+  </p>
+</section>
+
+<section>
+  <h2>O que o portão encontrou</h2>
+  <p>
+    Cinco falhas, todas da mesma família, todas em tabelas cuja política de acesso estava correta.
+    Cada uma foi reproduzida no banco antes de ser aceita como real, e recusada no banco depois
+    de corrigida.
+  </p>
+  <ul class="furos">
+    <li>Uma conta se promovia a administradora</li>
+    <li>Uma pessoa se concedia o produto sem pagar, e declarava o próprio pagamento</li>
+    <li>Uma pessoa esticava a validade da própria sessão indefinidamente</li>
+    <li>O titular apagava e refabricava a própria evidência de consentimento</li>
+    <li>Uma pessoa redirecionava o link de acesso de outra para si</li>
+  </ul>
+  <div class="principio">
+    <p>
+      A política responde <em>de quem é esta linha</em>. O privilégio responde
+      <em>se este fato é da pessoa ou do servidor</em>. Só a primeira pergunta tinha sido
+      desenhada.
+    </p>
+  </div>
+  <p style="margin-top:24px" class="quiet">
+    As cinco estão fechadas e provadas por teste. O detalhe técnico fica fora desta página, que
+    está num repositório público.
+  </p>
+</section>
+
+<section>
+  <h2>A paleta, medida</h2>
+  <p>
+    O brandbook avisava que o terracota podia não passar em contraste. Passou a ser número
+    em vez de suspeita. Alvo: 4,5 para texto, 3,0 para elemento de interface.
+  </p>
+  <table>
+    <caption>Razão de contraste WCAG 2.1, calculada</caption>
+    <thead><tr><th>Par</th><th class="num">Razão</th><th>Texto</th></tr></thead>
+    <tbody>
+      <tr><td><span class="sw" style="background:#20323B"></span>ink sobre paper</td><td class="num">12,42</td><td class="ok">passa</td></tr>
+      <tr><td><span class="sw" style="background:#5E6C6F"></span>muted sobre paper</td><td class="num">5,10</td><td class="ok">passa</td></tr>
+      <tr><td><span class="sw" style="background:#9B4435"></span>terracotta_dark sobre paper</td><td class="num">6,00</td><td class="ok">passa</td></tr>
+      <tr><td><span class="sw" style="background:#4D7264"></span>sage_deep sobre paper</td><td class="num">5,03</td><td class="ok">passa</td></tr>
+      <tr><td><span class="sw" style="background:#C96D59"></span>terracotta sobre paper</td><td class="num">3,38</td><td class="nao">reprova</td></tr>
+      <tr><td><span class="sw" style="background:#FFFFFF"></span>branco sobre terracotta</td><td class="num">3,61</td><td class="nao">reprova</td></tr>
+      <tr><td><span class="sw" style="background:#5E6C6F"></span>muted sobre peach</td><td class="num">4,14</td><td class="nao">reprova</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:18px">
+    Consequência: o botão principal nasce em <b>terracotta_dark</b>, e o terracota puro fica para
+    detalhe de marca e elemento de interface, nunca texto. Em superfície peach, o corpo é
+    <b>ink</b> e não muted. Esta página segue essas três regras.
+  </p>
+</section>
+
+<section>
+  <h2>O que vem</h2>
+  <ul class="plain">
+    <li><b>Tarefas 6 a 9</b> terminam o acervo: missões e trilhas, cenários e cartas, os oito portões de validação, e a semeadura. Tudo entra como rascunho, e nada publica sozinho.</li>
+    <li><b>Tarefa 10</b> é o sistema de design a partir dos tokens, com os estados completos de cada componente.</li>
+    <li><b>Tarefa 11</b> é a primeira tela: a landing. É daí em diante que faz sentido você olhar e opinar.</li>
+    <li><b>Tarefas 12 a 21</b> são o resto da fatia: amostra grátis, conta, pagamento em sandbox, a jornada de 14 dias, diário, privacidade, e as duas demonstrações de ponta a ponta.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>O que depende de você</h2>
+  <p>Nada disso bloqueia o desenvolvimento. Tudo isso bloqueia colocar no ar.</p>
+  <ul class="plain">
+    <li><b>Provedor de pagamento e credenciais.</b> Hoje roda num driver falso que exercita o mesmo caminho de verificação.</li>
+    <li><b>Revisor científico, revisor clínico e advogado, nomeados.</b> Nenhuma aula pode ser publicada sem revisão humana, e o conteúdo todo está em rascunho por isso.</li>
+    <li><b>Busca no INPI, domínio e handles.</b> O nome PARELO não teve busca de colidência. Nenhuma peça afirma titularidade.</li>
+    <li><b>Cofre de chaves.</b> A chave que cifra o diário mora em variável de ambiente. Perder a chave perde os diários.</li>
+    <li><b>CNPJ e regras fiscais</b> do produto.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>O que ainda é hipótese</h2>
+  <p>
+    Marcado como hipótese no spec, não como decisão: o preço de R$ 67, o bump de R$ 27, o upsell
+    de R$ 97, a assinatura de R$ 29,90, a taxa de 9,9% mais R$ 2,49, e a contribuição de
+    R$ 58,71 por comprador. Nenhum desses números foi validado, e o próprio blueprint diz isso.
+  </p>
+  <p>
+    Também hipótese: que a trilha de conversas difíceis seja a certa para abrir, e que liberar
+    um dia por vez seja melhor que liberar tudo depois do primeiro.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <div>Relatório gerado a partir do repositório, não escrito à mão. Fonte em <code>docs/status/</code>.</div>
+  <div style="margin-top:6px">Conteúdo educacional sem validação clínica. Não é terapia.</div>
+</footer>
+</div>
+</body>
+</html>
