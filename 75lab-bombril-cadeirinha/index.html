@@ -1,0 +1,215 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<style>:root{color-scheme:light}body{background:#ececec}</style>
+<title>Móvel Cadeirinha Bombril</title>
+<meta name="description" content="Apresentação interna V2 da 75 LAB: móvel cadeirinha Bombril, versão nicho, animações e executivo.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/75lab-lime.png">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/deck.css?v=v2">
+<link rel="stylesheet" href="assets/bombril.css?v=v2">
+<link rel="stylesheet" href="assets/v2.css?v=v2">
+<!-- ícones: traço reto, cantos vivos, como no site -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pincel" viewBox="0 0 48 48"><path d="M30 6l12 12-20 20H10V26zM25 11l12 12M10 38l-4 4"/></symbol>
+  <symbol id="i-fabrica" viewBox="0 0 48 48"><path d="M6 42V20l10 6v-6l10 6v-6l10 6V8h6v34zM13 35h5M23 35h5M33 35h5"/></symbol>
+  <symbol id="i-caminhao" viewBox="0 0 48 48"><path d="M4 11h24v21H4zM28 18h9l7 8v6H28z"/><circle cx="12" cy="36" r="4"/><circle cx="36" cy="36" r="4"/></symbol>
+  <symbol id="i-rede" viewBox="0 0 48 48"><rect x="19" y="19" width="10" height="10"/><rect x="5" y="5" width="8" height="8"/><rect x="35" y="5" width="8" height="8"/><rect x="5" y="35" width="8" height="8"/><rect x="35" y="35" width="8" height="8"/><path d="M13 13l6 6M35 13l-6 6M13 35l6-6M35 35l-6-6"/></symbol>
+  <symbol id="i-relogio" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M24 13v11l8 5"/></symbol>
+  <symbol id="i-escudo" viewBox="0 0 48 48"><path d="M24 4l16 6v12c0 10-7 18-16 22C15 40 8 32 8 22V10z"/><path d="M17 24l5 5 9-10"/></symbol>
+  <symbol id="i-olho" viewBox="0 0 48 48"><path d="M4 24s7-13 20-13 20 13 20 13-7 13-20 13S4 24 4 24z"/><circle cx="24" cy="24" r="6"/></symbol>
+  <symbol id="i-cadeado" viewBox="0 0 48 48"><rect x="10" y="22" width="28" height="20"/><path d="M16 22v-6a8 8 0 0 1 16 0v6M24 30v5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 48 48"><path d="M9 25l9 9 21-21"/></symbol>
+  <symbol id="i-x" viewBox="0 0 48 48"><path d="M12 12l24 24M36 12L12 36"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 64 64"><rect x="8" y="8" width="18" height="18"/><rect x="38" y="8" width="18" height="18"/><rect x="8" y="38" width="18" height="18"/><path d="M14 14h6v6h-6zM44 14h6v6h-6zM14 44h6v6h-6zM38 38h6v6h-6zM50 50h6M50 38v6M38 50h6M44 44h6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 48 48"><path d="M24 44s14-13 14-24a14 14 0 0 0-28 0c0 11 14 24 14 24z"/><circle cx="24" cy="20" r="5"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 48 48"><path d="M6 15h36v25H6zM17 15l3-6h8l3 6"/><circle cx="24" cy="27" r="7"/></symbol>
+  <symbol id="i-calendario" viewBox="0 0 48 48"><path d="M6 10h36v32H6zM6 19h36M16 5v9M32 5v9M13 27h5M22 27h5M31 27h5M13 34h5M22 34h5"/></symbol>
+  <symbol id="i-grafico" viewBox="0 0 48 48"><path d="M7 7v34h35M13 33l9-10 6 6 12-14"/></symbol>
+  <symbol id="i-alvo" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="2"/></symbol>
+  <symbol id="i-pessoas" viewBox="0 0 48 48"><circle cx="17" cy="16" r="6"/><circle cx="33" cy="18" r="5"/><path d="M5 40c0-8 5-13 12-13s12 5 12 13M29 28c7 0 13 4 13 12"/></symbol>
+  <symbol id="i-raio" viewBox="0 0 48 48"><path d="M27 4L10 27h12l-3 17 19-25H26z"/></symbol>
+  <symbol id="i-loja" viewBox="0 0 48 48"><path d="M6 18l4-10h28l4 10zM8 18v24h32V18M20 42V30h8v12"/></symbol>
+  <symbol id="i-caixa" viewBox="0 0 48 48"><path d="M6 14l18-8 18 8v20l-18 8-18-8zM6 14l18 8 18-8M24 22v20"/></symbol>
+  <symbol id="i-arquivo" viewBox="0 0 48 48"><path d="M11 4h18l9 9v31H11zM28 4v10h10M17 25h14M17 32h14"/></symbol>
+  <symbol id="i-alerta" viewBox="0 0 48 48"><path d="M24 6l20 36H4zM24 19v11M24 35v2"/></symbol>
+  <symbol id="i-moeda" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M29 17h-7a4 4 0 0 0 0 8h4a4 4 0 0 1 0 8h-8M24 13v4M24 33v3"/></symbol>
+  <symbol id="i-cubo" viewBox="0 0 48 48"><path d="M24 4l18 10v20L24 44 6 34V14zM6 14l18 10 18-10M24 24v20"/></symbol>
+  <symbol id="i-sinal" viewBox="0 0 48 48"><circle cx="24" cy="30" r="3"/><path d="M16 22a11 11 0 0 1 16 0M10 16a19 19 0 0 1 28 0M24 33v10"/></symbol>
+  <symbol id="i-lupa" viewBox="0 0 48 48"><circle cx="20" cy="20" r="13"/><path d="M30 30l13 13"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 48 48"><path d="M6 6h18l18 18-18 18L6 24z"/><circle cx="15" cy="15" r="3"/></symbol>
+  <symbol id="i-pasta" viewBox="0 0 48 48"><path d="M5 10h14l4 5h20v25H5z"/></symbol>
+  <symbol id="i-versao" viewBox="0 0 48 48"><circle cx="12" cy="10" r="5"/><circle cx="12" cy="38" r="5"/><circle cx="36" cy="18" r="5"/><path d="M12 15v18M36 23c0 9-12 6-21 13"/></symbol>
+  <symbol id="i-nota" viewBox="0 0 48 48"><path d="M10 4h28v40l-5-4-5 4-4-4-5 4-4-4-5 4zM17 16h14M17 24h14M17 32h8"/></symbol>
+  <symbol id="i-seta" viewBox="0 0 48 48"><path d="M7 24h32M29 14l10 10-10 10"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 48 48"><path d="M6 8h36v24H20l-9 8v-8H6z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 48 48"><path d="M5 10h38v28H5zM5 10l19 16 19-16"/></symbol>
+  <symbol id="i-fone" viewBox="0 0 48 48"><path d="M10 6h8l4 10-5 4c2 5 6 9 11 11l4-5 10 4v8c0 2-2 4-4 4C20 42 6 28 6 10c0-2 2-4 4-4z"/></symbol>
+  <symbol id="i-clique" viewBox="0 0 48 48"><path d="M19 26V9a4 4 0 0 1 8 0v13l9 2c3 .7 5 3.6 4.4 6.6L39 39c-.5 3-3 5-6 5H24c-2 0-3.8-1-5-2.6L11 31c-1.4-2 0-4.8 2.4-4.8 1 0 2 .4 2.7 1.2L19 30"/><path d="M8 12l4 2M10 4l3 4M18 1v4"/></symbol>
+  <symbol id="i-funil" viewBox="0 0 48 48"><path d="M5 7h38L28 25v15l-8 4V25z"/></symbol>
+</svg>
+
+<div id="wrap"><div id="stage" class="t-foto capa">
+
+  <!-- ===================================================== 01 · capa -->
+  <section id="capa" class="tela s-capa ativa" data-tema="foto" data-titulo="Capa" data-cap="">
+    <div class="foto sangra" role="img" aria-label="Móvel Cadeirinha Bombril"></div>
+    <div class="veu sangra"></div>
+    <div class="texto">
+      <span class="eyebrow anima"><b>(V2 · interno)</b> Grupo Bombril · Assaí</span>
+      <h1 class="anima d1">Do Móvel<br>Família à<br><span>cadeirinha</span></h1>
+      <p class="lead anima d2">A mesma peça CORE, no formato que o Assaí pede · para o time entender, produzir e cotar</p>
+      <div class="acoes anima d3">
+        <button class="botao cheio seta" data-ir="cap-desafio" data-cursor="Ir">Começar</button>
+        <button class="botao seta" data-ir="executivo" data-cursor="Ver">Ir para o executivo</button>
+        <a class="botao so-tela" href="https://drive.google.com/drive/folders/15PPiTm4_U7QsNuapkEKkhe_zbO7lJXIo" target="_blank" rel="noopener" data-cursor="Abrir">Baixar executivo ↗</a>
+      </div>
+    </div>
+    <span class="rot sangra anima d4">75 LAB · Uso interno · Nov/26</span>
+    <div class="marquee sangra"><div><span>Um móvel, muitas campanhas</span><span>Cadeirinha</span><span>Cadeirinha + nicho</span><span>Bombril</span><span>Mon Bijou</span><span>Limpol</span><span>Sapólio</span><span>Kalipto</span><span>Um móvel, muitas campanhas</span><span>Cadeirinha</span><span>Cadeirinha + nicho</span><span>Bombril</span><span>Mon Bijou</span><span>Limpol</span><span>Sapólio</span><span>Kalipto</span><span>Um móvel, muitas campanhas</span><span>Cadeirinha</span><span>Cadeirinha + nicho</span><span>Bombril</span><span>Mon Bijou</span><span>Limpol</span><span>Sapólio</span><span>Kalipto</span></div></div>
+  </section>
+<section id="cap-desafio" class="tela s-cap" data-tema="escuro" data-titulo="Capítulo 01 · O desafio" data-cap="(01) O desafio" data-capitulo="01">
+    <span class="num-cap sangra">01</span>
+    <div class="texto"><span class="eyebrow anima"><b>Capítulo 01</b> de 04</span><h2 class="anima d1">O desafio</h2><p class="lead anima d2">Transformar o nosso Móvel Família no formato cadeirinha, sem perder a peça CORE.</p></div>
+    <ol class="dentro anima d3"><li><i>01</i>O pedido do Assaí</li><li><i>02</i>Antes e depois</li><li><i>03</i>O que ficou e o que mudou</li></ol><div class="trilha-cap anima d4" data-atual="01"><span data-c="01">01<b>O desafio</b></span><span data-c="02">02<b>A cadeirinha</b></span><span data-c="03">03<b>Em movimento</b></span><span data-c="04">04<b>Pronto para cotar</b></span></div></section>
+<section id="pedido" class="tela v2-split n" data-tema="claro" data-titulo="O pedido do Assaí" data-cap="(01) O desafio">
+  <div class="caixa"><div class="v2-grid2">
+    <div><span class="eyebrow anima">O pedido</span>
+      <h2 class="anima">Ponta de gôndola em <span class="onda t-teal">formato cadeirinha.</span></h2>
+      <p class="lead anima d1">Encosto alto e um assento projetado com dois braços, dentro de 2,20 m de frente, 2,75 m de altura e 1,10 m de profundidade.</p>
+      <ul class="v2-lista anima d2">
+        <li><b>Mesma família</b>A essência do Móvel Família: testeira arredondada, faixa por marca, cremalheira, prateleiras e cesto a granel.</li>
+        <li><b>Mais exposição na frente</b>Os braços viram vitrine: frente impressa, prateleira na lateral e bandeja no topo.</li>
+        <li><b>Modular</b>É um móvel só: sai o PS da comunicação e o kit nicho engancha nas cremalheiras dianteiras, dos dois lados do quadro. As abas do perfil U continuam no móvel.</li>
+      </ul></div>
+    <div class="v2-medidas anima dir d1"><figure class="amplia" data-amplia="assets/v2/exec-03.webp" data-legenda="Conjunto geral com cotas (folha 03 do executivo)" data-cursor="Ampliar"><img src="assets/v2/exec-03.webp" alt="Conjunto geral com cotas (folha 03 do executivo)" loading="lazy"></figure><p class="v2-leg">Cotas gerais da cadeirinha (mm). O braço tem 1.000 de altura e o corpo, 600 de profundidade.</p></div>
+  </div></div></section>
+<section id="antes-depois" class="tela v2-split n" data-tema="escuro" data-titulo="Antes e depois" data-cap="(01) O desafio">
+  <div class="caixa"><h2 class="anima">O mesmo móvel, <span class="t-lime">noutro formato.</span></h2>
+    <div class="v2-trio anima d1">
+      <div><figure class="amplia" data-amplia="assets/core/v-marcas-r1.webp" data-legenda="Móvel Família · Marcas" data-cursor="Ampliar"><img src="assets/core/v-marcas-r1.webp" alt="Móvel Família · Marcas" loading="lazy"></figure><p><b>Antes</b> · Móvel Família (Marcas), apresentado em 06/11</p></div>
+      <div><figure class="amplia" data-amplia="assets/v2/cad-r1.webp" data-legenda="Cadeirinha abastecida" data-cursor="Ampliar"><img src="assets/v2/cad-r1.webp" alt="Cadeirinha abastecida" loading="lazy"></figure><p><b>Depois</b> · Cadeirinha</p></div>
+      <div><figure class="amplia" data-amplia="assets/v2/nic-r1.webp" data-legenda="Cadeirinha + kit nicho" data-cursor="Ampliar"><img src="assets/v2/nic-r1.webp" alt="Cadeirinha + kit nicho" loading="lazy"></figure><p><b>Depois</b> · Cadeirinha + kit nicho</p></div>
+    </div></div></section>
+<section id="ficou-mudou" class="tela v2-split n" data-tema="claro" data-titulo="O que ficou e o que mudou" data-cap="(01) O desafio">
+  <div class="caixa"><h2 class="anima">O que <span class="onda t-teal">ficou</span> e o que mudou.</h2>
+    <div class="v2-grid2 anima d1">
+      <div class="v2-card"><h3>Ficou (peças do Móvel Família)</h3><ul>
+        <li>Testeirão arredondado com o slogan e o logo em relevo</li><li>Faixa "A marca das 1001 utilidades" com a ponta de cada marca</li>
+        <li>Colunas-cremalheira com furação contínua</li><li>Prateleiras, régua de preço e protetor de arame</li>
+        <li>Cesto a granel, base arredondada e protetor de tubo</li><li>Mesma cor, mesmos encaixes, mesmo ferramental</li></ul></div>
+      <div class="v2-card escuro"><h3>Mudou (formato cadeirinha)</h3><ul>
+        <li>Corpo com 600 mm de profundidade</li><li>Dois braços de 1.000 mm com frente em PS calandrado R222, no mesmo centro da base</li>
+        <li>Bandeja no topo do braço com guarda-corpo de arame</li><li>Quadro cambiável 410 x 1040 que sai pela lateral</li>
+        <li>Centro com 4 prateleiras sobre o cesto, vãos iguais</li><li>Produtos em tamanho real e verificador de encaixe zerado</li></ul></div>
+    </div></div></section>
+<section id="cap-cadeirinha" class="tela s-cap" data-tema="escuro" data-titulo="Capítulo 02 · A cadeirinha" data-cap="(02) A cadeirinha" data-capitulo="02">
+    <span class="num-cap sangra">02</span>
+    <div class="texto"><span class="eyebrow anima"><b>Capítulo 02</b> de 04</span><h2 class="anima d1">A cadeirinha</h2><p class="lead anima d2">Duas versões da mesma base: sem e com o kit nicho, vazias e abastecidas.</p></div>
+    <ol class="dentro anima d3"><li><i>01</i>As versões</li><li><i>02</i>Peça por peça</li><li><i>03</i>Abastecimento por marca</li></ol><div class="trilha-cap anima d4" data-atual="02"><span data-c="01">01<b>O desafio</b></span><span data-c="02">02<b>A cadeirinha</b></span><span data-c="03">03<b>Em movimento</b></span><span data-c="04">04<b>Pronto para cotar</b></span></div></section>
+<section id="versoes" class="tela s-core n" data-tema="escuro" data-titulo="As versões" data-cap="(02) A cadeirinha">
+    <div class="caixa"><div class="gr-core">
+      <div class="txt-core"><span class="eyebrow anima">Peça CORE · Móvel Cadeirinha</span>
+        <h2 class="anima">Uma base, <span class="t-lime">duas versões.</span></h2>
+        <p class="lead anima d1">Mostre vazio e abastecido, com e sem o nicho.</p>
+        <div class="abas-b vers anima d2"><button data-aba="0" class="on" data-cursor="Ver"><i>01</i><b>Cadeirinha abastecida</b></button><button data-aba="1" class="" data-cursor="Ver"><i>02</i><b>Cadeirinha vazia</b></button><button data-aba="2" class="" data-cursor="Ver"><i>03</i><b>Cadeirinha + nicho</b></button><button data-aba="3" class="" data-cursor="Ver"><i>04</i><b>Nicho vazio</b></button><button data-aba="4" class="" data-cursor="Ver"><i>05</i><b>Vista de trás · abastecida</b></button><button data-aba="5" class="" data-cursor="Ver"><i>06</i><b>Nicho · outro lado</b></button></div>
+        <dl class="ficha-core anima d3"><dt>Medida</dt><dd>2.200 × 1.090 × 2.750 mm</dd><dt>Peças</dt><dd>171 peças (42 códigos) + kit nicho com 48</dd><dt>Abastece</dt><dd>879 produtos · 915 com o nicho</dd></dl>
+      </div>
+      <div class="paineis foto-core anima dir d1"><div data-painel="0" class="on"><figure class="amplia" data-amplia="assets/v2/cad-r1.webp" data-legenda="Cadeirinha abastecida" data-cursor="Ampliar"><img src="assets/v2/cad-r1.webp" alt="Cadeirinha abastecida" loading="lazy"></figure><p>Mon Bijou e Limpol nas laterais, esponjas Bombril no centro e lã de aço no cesto.</p></div><div data-painel="1" class=""><figure class="amplia" data-amplia="assets/v2/cad-vazio-r1.webp" data-legenda="Cadeirinha vazia" data-cursor="Ampliar"><img src="assets/v2/cad-vazio-r1.webp" alt="Cadeirinha vazia" loading="lazy"></figure><p>A estrutura pronta: comunicação no lugar, prateleiras e cesto vazios.</p></div><div data-painel="2" class=""><figure class="amplia" data-amplia="assets/v2/nic-r1.webp" data-legenda="Cadeirinha + nicho" data-cursor="Ampliar"><img src="assets/v2/nic-r1.webp" alt="Cadeirinha + nicho" loading="lazy"></figure><p>O kit nicho entra no lugar do PS e engancha nas duas cremalheiras dianteiras, sem tocar na bandeja nem nos produtos do braço.</p></div><div data-painel="3" class=""><figure class="amplia" data-amplia="assets/v2/nic-vazio-r1.webp" data-legenda="Nicho vazio" data-cursor="Ampliar"><img src="assets/v2/nic-vazio-r1.webp" alt="Nicho vazio" loading="lazy"></figure><p>O nicho travado nas colunas dianteiras por 4 engates, com duas prateleiras e topo de logo. Sai sem ferramenta.</p></div><div data-painel="4" class=""><figure class="amplia" data-amplia="assets/v2/cad-r2.webp" data-legenda="Vista de trás · abastecida" data-cursor="Ampliar"><img src="assets/v2/cad-r2.webp" alt="Vista de trás · abastecida" loading="lazy"></figure><p>O lado Limpol, com a faixa e o quadro da marca.</p></div><div data-painel="5" class=""><figure class="amplia" data-amplia="assets/v2/nic-r2.webp" data-legenda="Nicho · outro lado" data-cursor="Ampliar"><img src="assets/v2/nic-r2.webp" alt="Nicho · outro lado" loading="lazy"></figure><p>O nicho Kalipto ao lado do Limpol.</p></div></div>
+    </div></div></section>
+<section id="pecas" class="tela s-cex n" data-tema="claro" data-titulo="Peça por peça" data-cap="(02) A cadeirinha">
+    <div class="caixa"><h2 class="anima">97 componentes, <span class="onda t-teal">nenhuma solda na loja.</span></h2>
+      <div class="gr-cex"><figure class="mont-cex anima d1 amplia" data-amplia="assets/v2/cad-vazio-r1-crop.webp" data-legenda="Cadeirinha montada" data-cursor="Ampliar"><img src="assets/v2/cad-vazio-r1-crop.webp" alt="Cadeirinha montada"><figcaption>Montada</figcaption></figure>
+      <div class="foto-cex anima d1 amplia" data-amplia="assets/v2/explodida-crop.webp" data-legenda="Cadeirinha explodida" data-cursor="Ampliar"><img src="assets/v2/explodida-crop.webp" alt="Cadeirinha explodida, com as peças numeradas"><span class="pin13" data-p="0" style="left:68.0%;top:11.0%">1</span><span class="pin13" data-p="1" style="left:36.0%;top:13.0%">2</span><span class="pin13" data-p="2" style="left:55.0%;top:27.0%">3</span><span class="pin13" data-p="3" style="left:23.0%;top:54.0%">4</span><span class="pin13" data-p="4" style="left:31.0%;top:39.0%">5</span><span class="pin13" data-p="5" style="left:52.0%;top:52.0%">6</span><span class="pin13" data-p="6" style="left:74.0%;top:52.0%">7</span><span class="pin13" data-p="7" style="left:28.0%;top:87.0%">8</span><span class="pin13" data-p="8" style="left:88.0%;top:57.0%">9</span><span class="pin13" data-p="9" style="left:66.0%;top:82.0%">10</span><span class="pin13" data-p="10" style="left:45.0%;top:85.0%">11</span><span class="pin13" data-p="11" style="left:52.0%;top:95.0%">12</span></div>
+      <div class="lado-13 anima dir d1"><div class="lista-13"><button data-aba="0" class="on" data-cursor="Ver"><i>1</i><b>Logo em relevo</b></button><button data-aba="1" class="" data-cursor="Ver"><i>2</i><b>Testeirão</b></button><button data-aba="2" class="" data-cursor="Ver"><i>3</i><b>Faixa por marca</b></button><button data-aba="3" class="" data-cursor="Ver"><i>4</i><b>Quadro cambiável</b></button><button data-aba="4" class="" data-cursor="Ver"><i>5</i><b>Colunas e cremalheiras</b></button><button data-aba="5" class="" data-cursor="Ver"><i>6</i><b>Prateleiras do centro</b></button><button data-aba="6" class="" data-cursor="Ver"><i>7</i><b>Prateleiras das baias</b></button><button data-aba="7" class="" data-cursor="Ver"><i>8</i><b>Braço com frente calandrada</b></button><button data-aba="8" class="" data-cursor="Ver"><i>9</i><b>Bandeja e guarda-corpo</b></button><button data-aba="9" class="" data-cursor="Ver"><i>10</i><b>Cesto a granel</b></button><button data-aba="10" class="" data-cursor="Ver"><i>11</i><b>Base arredondada</b></button><button data-aba="11" class="" data-cursor="Ver"><i>12</i><b>Protetor da base</b></button></div><span class="cta so-tela">Clique em cada peça</span><div class="paineis"><div data-painel="0" class="on"><p>Oval Bombril em acrílico leitoso com LED, no cabeçote.</p></div><div data-painel="1" class=""><p>Mesmo testeirão do Móvel Família, PS 2 mm impresso direto.</p></div><div data-painel="2" class=""><p>Mon Bijou e Limpol nas pontas e "1001 utilidades" no meio. PS 1 mm em 3 trechos.</p></div><div data-painel="3" class=""><p>PS 1 mm em perfil U: sai pela lateral e troca a campanha.</p></div><div data-painel="4" class=""><p>Furação contínua passo 25: todas as prateleiras encaixam sem ferramenta.</p></div><div data-painel="5" class=""><p>4 prateleiras sobre o cesto, vãos iguais de 211 mm.</p></div><div data-painel="6" class=""><p>2 por lado, vãos de 316 mm para Mon Bijou e Limpol.</p></div><div data-painel="7" class=""><p>PS 2 mm em R222, no mesmo centro do canto da base. Frente impressa.</p></div><div data-painel="8" class=""><p>Bandeja no topo do braço com arame de 5 mm a 70 mm de altura.</p></div><div data-painel="9" class=""><p>Aramado que sai inteiro pela frente para repor.</p></div><div data-painel="10" class=""><p>Contorno R228 na frente, pés niveladores.</p></div><div data-painel="11" class=""><p>Tubo de 48 mm que segura carrinho e enceradeira.</p></div></div></div></div>
+    </div></section>
+<section id="abastecimento" class="tela v2-split n" data-tema="claro" data-titulo="Abastecimento por marca" data-cap="(02) A cadeirinha">
+  <div class="caixa"><h2 class="anima">Cada marca <span class="onda t-teal">no seu lugar.</span></h2>
+    <div class="v2-nums anima d1">
+      <div><b>143</b><span>Mon Bijou 900 ml</span><i>lado esquerdo: baias, lateral do braço e bandeja</i></div>
+      <div><b>126</b><span>Limpol Perfumes 500 ml</span><i>lado direito: baias, lateral do braço e bandeja</i></div>
+      <div><b>196</b><span>Esponjas Bombril</span><i>centro: 4 prateleiras</i></div>
+      <div><b>414</b><span>Lã de aço Bombril</span><i>cesto a granel cheio</i></div>
+      <div class="lime"><b>+36</b><span>Sapólio e Kalipto</span><i>kit nicho: 2 prateleiras por nicho</i></div>
+    </div>
+    <p class="v2-leg anima d2">Produtos em tamanho real (Mon Bijou 89 x 240 x 65 mm, Limpol 105 x 245 x 60, esponja 115 x 180 x 46, lã de aço 150 x 145 x 70, Sapólio Ø60 x 195, Kalipto Ø65 x 205). Verificador automático: zero produto atravessando a estrutura e zero produto fora do piso.</p>
+  </div></section>
+<section id="cap-movimento" class="tela s-cap" data-tema="escuro" data-titulo="Capítulo 03 · Em movimento" data-cap="(03) Em movimento" data-capitulo="03">
+    <span class="num-cap sangra">03</span>
+    <div class="texto"><span class="eyebrow anima"><b>Capítulo 03</b> de 04</span><h2 class="anima d1">Em movimento</h2><p class="lead anima d2">Um móvel, muitas campanhas: a transformação, o produto entrando e o nicho sendo aplicado.</p></div>
+    <ol class="dentro anima d3"><li><i>01</i>Da Família à cadeirinha</li><li><i>02</i>Produto entra e sai</li><li><i>03</i>Nicho sendo aplicado</li></ol><div class="trilha-cap anima d4" data-atual="03"><span data-c="01">01<b>O desafio</b></span><span data-c="02">02<b>A cadeirinha</b></span><span data-c="03">03<b>Em movimento</b></span><span data-c="04">04<b>Pronto para cotar</b></span></div></section>
+<section id="movimento" class="tela s-can n" data-tema="escuro" data-titulo="Um móvel, muitas campanhas" data-cap="(03) Em movimento">
+    <div class="caixa"><div class="gr-can">
+      <div class="lado-can"><h2 class="anima">Um móvel, <span class="t-lime">muitas campanhas.</span></h2>
+        <div class="abas-b lista-cen anima d1"><button data-aba="0" class="on" data-cursor="Ver"><i>01</i><b>Da Família à cadeirinha</b></button><button data-aba="1" class="" data-cursor="Ver"><i>02</i><b>Produto entra e sai</b></button><button data-aba="2" class="" data-cursor="Ver"><i>03</i><b>Nicho sendo aplicado</b></button></div><div class="paineis txt-can anima d2"><div data-painel="0" class="on"><p>O Móvel Família vira cadeirinha e recebe o kit nicho. Peças do topo, colunas, prateleiras e cesto continuam as mesmas.</p><a href="https://drive.google.com/drive/folders/148vDnX1gurL7UEFQUKbn-K1SYNmcTnku" target="_blank" rel="noopener" data-cursor="Abrir">Baixar o GIF ↗</a></div><div data-painel="1" class=""><p>A cadeirinha vazia recebe o abastecimento real de cada marca e esvazia de novo.</p><a href="https://drive.google.com/drive/folders/148vDnX1gurL7UEFQUKbn-K1SYNmcTnku" target="_blank" rel="noopener" data-cursor="Abrir">Baixar o GIF ↗</a></div><div data-painel="2" class=""><p>O PS da comunicação sai pela lateral, as abas do perfil U ficam, e o nicho engancha nas cremalheiras aparentes, por cima dos produtos da bandeja. Para voltar, é o caminho inverso.</p><a href="https://drive.google.com/drive/folders/148vDnX1gurL7UEFQUKbn-K1SYNmcTnku" target="_blank" rel="noopener" data-cursor="Abrir">Baixar o GIF ↗</a></div></div>
+        <a class="todo-gif anima d3" href="https://drive.google.com/drive/folders/148vDnX1gurL7UEFQUKbn-K1SYNmcTnku" target="_blank" rel="noopener" data-cursor="Abrir">GIF completo, com as três animações ↗</a></div>
+      <div class="paineis palco-can anima dir d1"><div data-p2="0" class="on"><img src="assets/v2/cadeirinha-transformacao.webp" alt="Animação: Da Família à cadeirinha" loading="lazy"></div><div data-p2="1" class=""><img src="assets/v2/cadeirinha-produto.webp" alt="Animação: Produto entra e sai" loading="lazy"></div><div data-p2="2" class=""><img src="assets/v2/cadeirinha-nicho.webp" alt="Animação: Nicho sendo aplicado" loading="lazy"></div></div>
+    </div></div></section>
+<section id="numeros" class="tela v2-split n" data-tema="escuro" data-titulo="Em números" data-cap="(03) Em movimento">
+  <div class="caixa"><h2 class="anima">A cadeirinha <span class="t-lime">em números.</span></h2>
+    <div class="v2-nums escuro anima d1">
+      <div><b>2</b><span>versões</span><i>cadeirinha e cadeirinha + nicho</i></div>
+      <div><b>42</b><span>códigos de peça</span><i>171 peças por móvel · + 9 códigos no kit nicho</i></div>
+      <div><b>10</b><span>prateleiras</span><i>4 no centro, 4 nas baias, 2 nos braços</i></div>
+      <div><b>0</b><span>solda na loja</span><i>tudo encaixa ou parafusa</i></div>
+      <div><b>3</b><span>impressos que trocam</span><i>quadro, faixa e régua de preço</i></div>
+      <div><b>915</b><span>produtos</span><i>com o kit nicho</i></div>
+    </div></div></section>
+<section id="cap-cotar" class="tela s-cap" data-tema="escuro" data-titulo="Capítulo 04 · Pronto para cotar" data-cap="(04) Pronto para cotar" data-capitulo="04">
+    <span class="num-cap sangra">04</span>
+    <div class="texto"><span class="eyebrow anima"><b>Capítulo 04</b> de 04</span><h2 class="anima d1">Pronto para cotar</h2><p class="lead anima d2">O executivo completo, otimizado para custo, sem mudar nada do que foi aprovado.</p></div>
+    <ol class="dentro anima d3"><li><i>01</i>Eficiência de custo</li><li><i>02</i>O executivo</li></ol><div class="trilha-cap anima d4" data-atual="04"><span data-c="01">01<b>O desafio</b></span><span data-c="02">02<b>A cadeirinha</b></span><span data-c="03">03<b>Em movimento</b></span><span data-c="04">04<b>Pronto para cotar</b></span></div></section>
+<section id="eficiencia" class="tela v2-split n" data-tema="claro" data-titulo="Eficiência de custo" data-cap="(04) Pronto para cotar">
+  <div class="caixa"><div class="v2-grid2">
+    <div><span class="eyebrow anima">Eficiência de custo</span>
+      <h2 class="anima">Mais barato, <span class="onda t-teal">com o mesmo visual.</span></h2>
+      <div class="v2-nums anima d1"><div><b>−24%</b><span>aço nas chapas</span><i>109 kg contra 143 kg na espessura de mercado</i></div>
+        <div><b>85%</b><span>aproveitamento</span><i>chapa #20 em 3.000 x 1.250, lote de 20</i></div>
+        <div><b>77%</b><span>aproveitamento</span><i>PS 2 mm em 2.000 x 1.000</i></div></div></div>
+    <ul class="v2-lista anima dir d1">
+      <li><b>Espessura certa no lugar certo</b>#20 (0,90) nas bandejas e fechamentos com nervura; #18 só na base e na bandeja do braço.</li>
+      <li><b>Pintura só onde aparece</b>Fundos e traseira do braço em chapa galvanizada sem pintura.</li>
+      <li><b>Impressão UV direta</b>Testeirão, faixa, braços e quadros impressos direto no PS, sem adesivo nem laminação.</li>
+      <li><b>Peças do Móvel Família</b>Cremalheira, prateleiras, cesto, testeirão, base e protetor usam o mesmo ferramental.</li>
+      <li><b>Kit plano</b>Tudo desmonta: menos volume no frete e montagem sem solda.</li>
+    </ul></div>
+    <p class="v2-leg anima d2">Estimativa de material sobre as chapas planificadas. O fornecedor confirma no orçamento; carga por prateleira a validar em protótipo.</p>
+  </div></section>
+<section id="executivo" class="tela v2-split n" data-tema="escuro" data-titulo="O executivo" data-cap="(04) Pronto para cotar">
+  <div class="caixa"><div class="v2-exec-top"><div><span class="eyebrow anima">Executivo R02 · 16 folhas A3</span>
+      <h2 class="anima">Tudo o que o fornecedor <span class="t-lime">precisa para cotar.</span></h2>
+      <p class="lead anima d1">Medidas, encaixes, substratos sugeridos, troca da comunicação, kit nicho, otimização e plano de corte, num PDF só.</p></div>
+      <a class="botao cheio seta v2-baixar anima d2" href="https://drive.google.com/drive/folders/15PPiTm4_U7QsNuapkEKkhe_zbO7lJXIo" target="_blank" rel="noopener" data-cursor="Abrir">Baixar o executivo completo (PDF) ↗</a></div>
+    <div class="v2-folhas anima d2"><figure class="amplia" data-amplia="assets/v2/exec-01.webp" data-legenda="Folha 01" data-cursor="Ampliar"><img src="assets/v2/exec-01.webp" alt="Folha 01 do executivo" loading="lazy"><figcaption>01</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-02.webp" data-legenda="Folha 02" data-cursor="Ampliar"><img src="assets/v2/exec-02.webp" alt="Folha 02 do executivo" loading="lazy"><figcaption>02</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-03.webp" data-legenda="Folha 03" data-cursor="Ampliar"><img src="assets/v2/exec-03.webp" alt="Folha 03 do executivo" loading="lazy"><figcaption>03</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-04.webp" data-legenda="Folha 04" data-cursor="Ampliar"><img src="assets/v2/exec-04.webp" alt="Folha 04 do executivo" loading="lazy"><figcaption>04</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-05.webp" data-legenda="Folha 05" data-cursor="Ampliar"><img src="assets/v2/exec-05.webp" alt="Folha 05 do executivo" loading="lazy"><figcaption>05</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-06.webp" data-legenda="Folha 06" data-cursor="Ampliar"><img src="assets/v2/exec-06.webp" alt="Folha 06 do executivo" loading="lazy"><figcaption>06</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-07.webp" data-legenda="Folha 07" data-cursor="Ampliar"><img src="assets/v2/exec-07.webp" alt="Folha 07 do executivo" loading="lazy"><figcaption>07</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-08.webp" data-legenda="Folha 08" data-cursor="Ampliar"><img src="assets/v2/exec-08.webp" alt="Folha 08 do executivo" loading="lazy"><figcaption>08</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-09.webp" data-legenda="Folha 09" data-cursor="Ampliar"><img src="assets/v2/exec-09.webp" alt="Folha 09 do executivo" loading="lazy"><figcaption>09</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-10.webp" data-legenda="Folha 10" data-cursor="Ampliar"><img src="assets/v2/exec-10.webp" alt="Folha 10 do executivo" loading="lazy"><figcaption>10</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-11.webp" data-legenda="Folha 11" data-cursor="Ampliar"><img src="assets/v2/exec-11.webp" alt="Folha 11 do executivo" loading="lazy"><figcaption>11</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-12.webp" data-legenda="Folha 12" data-cursor="Ampliar"><img src="assets/v2/exec-12.webp" alt="Folha 12 do executivo" loading="lazy"><figcaption>12</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-13.webp" data-legenda="Folha 13" data-cursor="Ampliar"><img src="assets/v2/exec-13.webp" alt="Folha 13 do executivo" loading="lazy"><figcaption>13</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-14.webp" data-legenda="Folha 14" data-cursor="Ampliar"><img src="assets/v2/exec-14.webp" alt="Folha 14 do executivo" loading="lazy"><figcaption>14</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-15.webp" data-legenda="Folha 15" data-cursor="Ampliar"><img src="assets/v2/exec-15.webp" alt="Folha 15 do executivo" loading="lazy"><figcaption>15</figcaption></figure><figure class="amplia" data-amplia="assets/v2/exec-16.webp" data-legenda="Folha 16" data-cursor="Ampliar"><img src="assets/v2/exec-16.webp" alt="Folha 16 do executivo" loading="lazy"><figcaption>16</figcaption></figure></div>
+  </div></section>
+<section id="fim" class="tela s-capa" data-tema="foto" data-titulo="Próximos passos" data-cap="">
+    <div class="foto sangra" role="img" aria-label="Móvel Cadeirinha"></div><div class="veu sangra"></div>
+    <div class="texto"><span class="eyebrow anima"><b>(Próximos passos)</b> time interno</span>
+      <h1 class="anima d1">Cotar,<br>prototipar,<br><span>aprovar</span></h1>
+      <p class="lead anima d2">1. Fornecedores cotam com o executivo R02 · 2. Protótipo valida carga e encaixes · 3. Artes finais em PSD e AR do móvel vazio</p>
+      <div class="acoes anima d3"><a class="botao cheio" href="https://drive.google.com/drive/folders/15PPiTm4_U7QsNuapkEKkhe_zbO7lJXIo" target="_blank" rel="noopener" data-cursor="Abrir">Baixar executivo ↗</a><button class="botao" data-ir="capa" data-cursor="Voltar">Voltar ao início</button></div></div>
+  </section>
+  <header id="topo">
+    <div class="marcas">
+      <img class="alp" src="assets/marcas/logo-bombril.webp" alt="Bombril">
+      <span class="x">×</span>
+      <img class="lab m-escuro" src="assets/75lab-lime.png" alt="75 LAB"><img class="lab m-claro" src="assets/75lab-black.png" alt="75 LAB">
+    </div>
+    <div class="dir"><span class="cap" id="capTxt"></span><a id="btnPdf" href="https://drive.google.com/drive/folders/15PPiTm4_U7QsNuapkEKkhe_zbO7lJXIo" target="_blank" rel="noopener" data-cursor="Abrir" aria-label="Baixar o executivo em PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg>PDF</a><button id="btnSumario" data-sumario data-cursor="Abrir"><span><i></i><i></i><i></i></span>Sumário</button></div>
+  </header>
+  <footer id="rodape">
+    <span class="assin">75 LAB · Móvel Cadeirinha · V2 interna</span>
+    <div class="nav"><button id="ant" aria-label="Tela anterior" data-cursor="Voltar">←</button><span id="cont">01 / 29</span><button id="prox" aria-label="Próxima tela" data-cursor="Seguir">→</button></div>
+  </footer>
+  <div id="prog"><i></i></div>
+  <div id="wipe" class="wipeDuo"><img src="assets/75lab-black.png" alt="75 LAB"><i>×</i><img class="b" src="assets/marcas/logo-bombril.webp" alt="Bombril"></div>
+  <nav id="sumario" aria-label="Sumário"><button class="botao mini fechar" data-cursor="Fechar">Fechar ✕</button><h2>Sumário · <span>Móvel Cadeirinha · V2</span></h2><ol id="sumLista"></ol></nav>
+  <div class="grao"></div>
+</div></div>
+
+<div id="caixa" role="dialog" aria-label="Imagem ampliada"><button class="fechar" data-cursor="Fechar">Fechar ✕</button><img id="cxImg" alt=""><p id="cxTxt"></p></div>
+<div id="cursor"></div><div id="anel"><span id="anelTxt"></span></div>
+<div id="gire"><img src="assets/75lab-lime.png" alt="75 LAB"><div class="tel"></div><h3>Gire o celular</h3><p>A apresentação foi desenhada na horizontal. Deitado, o celular mostra a tela inteira.</p><button class="botao mini" id="verAssim">Ver assim mesmo</button></div>
+
+<script src="assets/deck.js?v=v2"></script>
+
+</body></html>
