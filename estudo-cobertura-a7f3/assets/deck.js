@@ -704,8 +704,10 @@ const IA_SISTEMA = [
 
 /* ------------------------------------------------------------------ Gemini */
 async function iaGeminiPerguntar(pergunta, chave, consultas){
+  // A chave vai no CABEÇALHO, não em ?key=. Query string entra no histórico do
+  // navegador, vaza em Referer e aparece em log de proxy; cabeçalho, não.
   const url = 'https://generativelanguage.googleapis.com/v1beta/models/'+IA_GEMINI+
-              ':generateContent?key='+encodeURIComponent(chave);
+              ':generateContent';
   const contents = [{role:'user', parts:[{text: pergunta}]}];
   const corpo = () => ({
     system_instruction: {parts:[{text: IA_SISTEMA + '\n\n' + iaEsquema()}]},
@@ -715,11 +717,13 @@ async function iaGeminiPerguntar(pergunta, chave, consultas){
     generationConfig: {temperature: 0.2, maxOutputTokens: 2048}
   });
   for (let volta=0; volta<5; volta++){
-    const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'},
-                               body: JSON.stringify(corpo())});
+    const r = await fetch(url, {method:'POST',
+      headers:{'Content-Type':'application/json', 'x-goog-api-key': chave},
+      body: JSON.stringify(corpo())});
     if (!r.ok){
       const t = await r.text();
-      throw new Error(r.status===400 ? 'o Gemini recusou a chamada: '+t.slice(0,160)
+      throw new Error(r.status===400 ? ('o Gemini recusou a chamada — se a chave foi colada '+
+          'cortada, copie de novo: '+t.slice(0,140))
         : r.status===403 ? 'chave recusada pelo Gemini'
         : r.status===429 ? 'limite de uso do Gemini atingido'
         : 'o Gemini respondeu '+r.status+': '+t.slice(0,160));
