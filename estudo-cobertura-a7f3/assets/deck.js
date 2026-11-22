@@ -156,7 +156,7 @@ function agrupar(idx,dim){
 /* ================================================================= FILTROS */
 const PAINEIS={mapa:['regiao','uf','canal','bandeira','tipo'],
                int:['regiao','uf','canal','rede','bandeira','clu'],
-               ws:['regiao','uf','cidade','clu','cls','vaga']};
+               ws:['regiao','uf','cidade','bandeira','canal']};
 const estado={};
 function preencher(p){
   PAINEIS[p].forEach(k=>{
@@ -259,6 +259,9 @@ function desenharMapa(idx){
   const mun=[...por.values()];
   const el=$('[data-k="mapa-mun"]'); if(el) el.textContent=fmt(mun.length);
   const mx=Math.max(...mun.map(m=>m.tot),1);
+  // o exportador de PowerPoint redesenha estes mesmos pontos em SVG
+  window.__MAPA_PONTOS__ = mun.map(m=>Object.assign({}, m,
+    {r: 3.5+Math.sqrt(m.tot/mx)*16}));
   mun.sort((a,b)=>b.tot-a.tot).forEach(m=>{
     const temKC=m.kc+m.sh>0, temKV=m.kv+m.sh>0;
     const cor = temKC&&temKV ? '#1E7FB4' : (temKC ? '#0046C8' : '#00B388');
@@ -389,6 +392,7 @@ function wsDesenhar(){
         'Stores with the same tax ID in both bases. The frequency alongside adds up both operations.')
     : T('Essas lojas já recebem visita semanal da '+quem+'. O endereço, o roteiro e o promotor já existem.',
         'These stores already receive a weekly visit from '+quem+'. The address, route and promoter already exist.'));
+  wsListar(linhas);
   // tabela
   if(!linhas.length){
     alvo.innerHTML='<p class="peq" style="padding:22px">'+T('Nenhuma loja neste recorte.','No stores in this cut.')+'</p>';
@@ -429,6 +433,59 @@ function wsDesenhar(){
   if(proximo) alvo.querySelectorAll('[data-ws-desce]').forEach(tr=>
     tr.addEventListener('click',()=>{ wsCaminho.push(tr.dataset.wsDesce); wsDesenhar(); }));
 }
+/* A lista das lojas do recorte, na própria tela. O Excel continua existindo,
+   mas ninguém deveria precisar baixar arquivo para ver o que o filtro trouxe.
+   Teto de linhas desenhadas: 6 mil <tr> travam a passagem de slide. Quem
+   precisa de tudo usa a busca ou o Excel — e a tela diz isso, não esconde. */
+const WS_TETO=300;
+let wsUltimas=[];
+function wsListar(linhas){
+  wsUltimas=linhas;
+  const cx=document.getElementById('ws-lista-corpo'); if(!cx) return;
+  const busca=(document.getElementById('ws-lista-busca')||{}).value||'';
+  const q=busca.trim().toLowerCase();
+  const col=wsQuemAtende();
+  const txt=i=>((D.nome[i]||D.nomekc[i]||'')+' '+(D.cnpj[i]||'')+' '+
+    (C.cidade[i]>=0?DIC.cidade[C.cidade[i]]:'')+' '+
+    (C.bandeira[i]>=0?DIC.bandeira[C.bandeira[i]]:'')).toLowerCase();
+  const achadas=q?linhas.filter(i=>txt(i).indexOf(q)>=0):linhas;
+  const n=document.getElementById('ws-lista-n');
+  if(n) n.textContent=q
+    ? fmt(achadas.length)+' / '+fmt(linhas.length)
+    : fmt(linhas.length);
+  if(!achadas.length){
+    cx.innerHTML='<p class="ws-lista-vazio">'+(q
+      ? T('Nenhuma loja com esse termo no recorte.','No store matches that term in this cut.')
+      : T('Nenhuma loja neste recorte.','No stores in this cut.'))+'</p>';
+    return;
+  }
+  const ord=achadas.slice().sort((a,b)=>
+    (col?C[col][b]-C[col][a]:(C.fkc[b]+C.fkv[b])-(C.fkc[a]+C.fkv[a])));
+  const most=ord.slice(0,WS_TETO);
+  const dv=(k,i)=>{const v=C[k][i];return v>=0?DIC[k][v]:'—';};
+  cx.innerHTML='<table class="tab"><thead><tr>'+
+    ['CNPJ',T('Loja','Store'),T('Bandeira','Banner'),T('Cidade','City'),'UF',
+     T('Canal','Channel'),T('Freq./sem.','Freq./wk')].map(x=>'<th>'+x+'</th>').join('')+
+    '</tr></thead><tbody>'+most.map(i=>
+      '<tr><td>'+(D.cnpj[i]||'—')+'</td><td>'+esc(D.nome[i]||D.nomekc[i]||'—')+
+      '</td><td>'+esc(dv('bandeira',i))+'</td><td>'+esc(dv('cidade',i))+'</td><td>'+dv('uf',i)+
+      '</td><td>'+esc(dv('canal',i))+'</td><td>'+
+      (col?fmt(C[col][i]):fmt(C.fkc[i]+C.fkv[i]))+'</td></tr>').join('')+
+    '</tbody></table>'+
+    (ord.length>WS_TETO
+      ? '<p class="ws-lista-corte">'+T(
+          'Mostrando as '+fmt(WS_TETO)+' de maior frequência, de '+fmt(ord.length)+
+          '. Use a busca para estreitar, ou baixe o Excel com todas.',
+          'Showing the top '+fmt(WS_TETO)+' by frequency, of '+fmt(ord.length)+
+          '. Use the search to narrow, or download the Excel with all of them.')+'</p>'
+      : '');
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+(function(){
+  const b=document.getElementById('ws-lista-busca');
+  if(b) b.addEventListener('input',()=>wsListar(wsUltimas));
+})();
+
 function wsExportar(soNivel){
   const linhas=wsLinhas();
   const f=Object.assign({}, estado.ws||{});
@@ -472,9 +529,21 @@ $$('#ws-perspectiva button').forEach(b=>b.addEventListener('click',()=>{
 ['ws-exp-csv','ws-exp-nivel'].forEach((id,k)=>{
   const b=document.getElementById(id); if(!b) return;
   b.addEventListener('click',()=>{
-    const n=wsExportar(k===1), antes=b.innerHTML;
-    b.textContent=fmt(n)+' '+T('lojas','stores');
-    setTimeout(()=>{b.innerHTML=antes;},1700);
+    const antes=b.innerHTML;
+    let n=0, falhou=null;
+    try{ n=wsExportar(k===1); }catch(e){ falhou=e.message||String(e); }
+    // O navegador pode barrar o download sem avisar a página. Dizer o que
+    // saiu é melhor do que o botão parecer morto.
+    b.textContent = falhou ? T('falhou','failed')
+                           : fmt(n)+' '+T('lojas','stores');
+    const nota=document.querySelector('[data-k="ws-exp-nota"]');
+    if(nota) nota.textContent = falhou
+      ? T('Não foi possível gerar o arquivo: '+falhou,'Could not build the file: '+falhou)
+      : T('Arquivo gerado com '+fmt(n)+' lojas. Se nada abriu, o navegador bloqueou o '+
+          'download — libere em downloads automáticos e clique de novo.',
+          'File built with '+fmt(n)+' stores. If nothing opened, the browser blocked the '+
+          'download — allow automatic downloads and click again.');
+    setTimeout(()=>{b.innerHTML=antes;},1900);
   });
 });
 
@@ -1082,4 +1151,34 @@ const h=parseInt(location.hash.slice(1),10);
 const n0=isNaN(h)?0:Math.max(0,Math.min(total-1,h-1));
 telas.forEach(t=>t.classList.remove('ativa'));
 atual=n0===0?1:0; aplicar(n0);
+})();
+
+
+/* ------------------------------------------- baixar a apresentação em PPTX */
+(function(){
+  const b = document.getElementById('baixar-pptx');
+  if(!b) return;
+  const nota = document.getElementById('pptx-nota');
+  const original = nota ? nota.textContent : '';
+  b.addEventListener('click', async ()=>{
+    if(b.disabled) return;
+    const rot = b.textContent;
+    b.disabled = true;
+    try{
+      // O mapa só existe depois de aberto uma vez; sem isso a lâmina sai vazia.
+      if(typeof garantirMapa === 'function') garantirMapa();
+      const n = await window.__GERAR_PPTX__((i,t)=>{
+        b.textContent = T('Montando lâmina ','Building slide ')+i+'/'+t;
+      });
+      b.textContent = T('Pronto · ','Done · ')+n+T(' lâminas',' slides');
+      if(nota) nota.textContent = T(
+        'Arquivo gerado com '+n+' lâminas. Se nada abriu, o navegador bloqueou o download.',
+        'File built with '+n+' slides. If nothing opened, the browser blocked the download.');
+    }catch(e){
+      b.textContent = T('Falhou','Failed');
+      if(nota) nota.textContent = T('Não foi possível gerar: ','Could not build: ')+(e.message||e);
+    }
+    setTimeout(()=>{ b.disabled=false; b.textContent=rot;
+      if(nota) nota.textContent = original; }, 4200);
+  });
 })();
