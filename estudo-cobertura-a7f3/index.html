@@ -52,7 +52,8 @@
 <script>
 (function(){
   'use strict';
-  var SAL = "1mF2R9dYXyAhynTpyh9W5A==", ITER = 250000;
+  var SAL = "AoYQuIa693X5cN0O9eIeIQ==", ITER = 250000;
+  var SCRIPTS = ["xlsx.js", "leaflet.js", "malha.js", "dados.js", "deck.js"];
   var b64 = function(s){ var r = atob(s), a = new Uint8Array(r.length);
     for (var i = 0; i < r.length; i++) a[i] = r.charCodeAt(i); return a; };
   var erro = document.getElementById('erroPorta');
@@ -94,13 +95,19 @@
       document.getElementById('porta').remove();
       document.title = 'Relatório';
       document.body.insertAdjacentHTML('afterbegin', pct.corpo);
-      var sd = document.createElement('script'); sd.textContent = pct.dados;
-      document.body.appendChild(sd);
-      for (var i = 0; i < 2; i++) {
-        await new Promise(function(ok){
-          var s = document.createElement('script');
-          s.src = i === 0 ? 'assets/leaflet.js' : 'assets/deck.js';
-          s.onload = ok; s.onerror = ok; document.body.appendChild(s);
+      for (var i = 0; i < SCRIPTS.length; i++) {
+        if (SCRIPTS[i] === 'dados.js') {
+          var sd = document.createElement('script');
+          sd.textContent = pct.dados;
+          document.body.appendChild(sd);
+          continue;
+        }
+        await new Promise(function(ok, falha){
+          var el = document.createElement('script');
+          el.src = 'assets/' + SCRIPTS[i];
+          el.onload = ok;
+          el.onerror = function(){ falha(new Error('não carregou ' + SCRIPTS[i])); };
+          document.body.appendChild(el);
         });
       }
       document.body.addEventListener('click', function(ev){

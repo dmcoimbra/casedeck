@@ -197,14 +197,50 @@ $$('[data-limpar]').forEach(b=>b.addEventListener('click',()=>{
 }));
 
 /* ==================================================================== MAPA */
-let mapa=null, camada=null;
+let mapa=null, camada=null, ruas=null;
 function garantirMapa(){
-  if(mapa||typeof L==='undefined') { if(mapa) setTimeout(()=>mapa.invalidateSize(),60); return; }
-  mapa=L.map('mapaBR',{scrollWheelZoom:true,attributionControl:true}).setView([-15.3,-52.5],4);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    maxZoom:18, attribution:'© OpenStreetMap'}).addTo(mapa);
-  camada=L.layerGroup().addTo(mapa);
-  setTimeout(()=>mapa.invalidateSize(),80);
+  if(mapa || typeof L==='undefined'){ if(mapa) setTimeout(()=>mapa.invalidateSize(),60); return; }
+  mapa = L.map('mapaBR',{scrollWheelZoom:true, attributionControl:true,
+                         minZoom:3, maxZoom:12, zoomSnap:.5});
+  mapa.setView([-15.3,-52.5], 4.2);
+  mapa.attributionControl.setPrefix('');
+  // Contorno dos estados, servido do próprio material. Sem requisição externa.
+  if (window.MALHA_UF){
+    L.geoJSON(window.MALHA_UF, {
+      style: {color:'#C3CAD6', weight:1, fillColor:'#EEF1F5', fillOpacity:1},
+      onEachFeature: function(f, lay){
+        lay.bindTooltip(f.properties.uf, {sticky:true, direction:'top', opacity:.95});
+        lay.on('mouseover', function(){ lay.setStyle({fillColor:'#E3EAFB'}); });
+        lay.on('mouseout',  function(){ lay.setStyle({fillColor:'#EEF1F5'}); });
+      }
+    }).addTo(mapa);
+    mapa.attributionControl.addAttribution('Malha de UF: IBGE');
+  }
+  camada = L.layerGroup().addTo(mapa);
+  // Ruas como camada opcional, num provedor que permite uso publicado.
+  const ctrl = L.control({position:'topright'});
+  ctrl.onAdd = function(){
+    const d = L.DomUtil.create('div','mapa-botoes');
+    d.innerHTML = '<button type="button" id="mapa-ruas">'+T('Ver ruas','Street map')+'</button>'+
+                  '<button type="button" id="mapa-centrar">'+T('Centralizar','Recentre')+'</button>';
+    L.DomEvent.disableClickPropagation(d);
+    return d;
+  };
+  ctrl.addTo(mapa);
+  setTimeout(function(){
+    const br = document.getElementById('mapa-ruas');
+    if (br) br.addEventListener('click', function(){
+      if (ruas){ mapa.removeLayer(ruas); ruas=null; br.textContent=T('Ver ruas','Street map'); return; }
+      ruas = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+        {maxZoom:19, opacity:.85, subdomains:'abcd',
+         attribution:'&copy; OpenStreetMap, &copy; CARTO'});
+      ruas.addTo(mapa); ruas.bringToBack();
+      br.textContent = T('Ocultar ruas','Hide streets');
+    });
+    const bc = document.getElementById('mapa-centrar');
+    if (bc) bc.addEventListener('click', function(){ mapa.setView([-15.3,-52.5], 4.2); });
+  }, 60);
+  setTimeout(()=>mapa.invalidateSize(), 80);
   aplicarFiltro('mapa');
 }
 function desenharMapa(idx){
@@ -226,136 +262,18 @@ function desenharMapa(idx){
   mun.sort((a,b)=>b.tot-a.tot).forEach(m=>{
     const temKC=m.kc+m.sh>0, temKV=m.kv+m.sh>0;
     const cor = temKC&&temKV ? '#1E7FB4' : (temKC ? '#0046C8' : '#00B388');
-    const r = 4+Math.sqrt(m.tot/mx)*17;
-    L.circleMarker([m.lat,m.lon],{radius:r,color:cor,weight:1.4,opacity:.9,
-      fillColor:cor,fillOpacity:.42})
-     .bindPopup(`<div class="pop"><b>${m.cidade}</b> <span class="l">${m.uf}</span>
-       <table>
-         <tr><td class="l">${T('Lojas','Stores')}</td><td><b>${fmt(m.tot)}</b></td></tr>
-         <tr><td class="l">${T('Só KC','KC only')}</td><td>${fmt(m.kc)}</td></tr>
-         <tr><td class="l">${T('Compartilhadas','Shared')}</td><td>${fmt(m.sh)}</td></tr>
-         <tr><td class="l">${T('Só KV','KV only')}</td><td>${fmt(m.kv)}</td></tr>
-         <tr><td class="l">${T('Visitas/semana','Visits/week')}</td><td>KC ${fmt(m.fkc)} · KV ${fmt(m.fkv)}</td></tr>
-       </table></div>`)
+    const r = 3.5+Math.sqrt(m.tot/mx)*16;
+    L.circleMarker([m.lat,m.lon],{radius:r,color:cor,weight:1.3,opacity:.95,
+      fillColor:cor,fillOpacity:.45})
+     .bindPopup('<div class="pop"><b>'+m.cidade+'</b> <span class="l">'+m.uf+'</span><table>'+
+       '<tr><td class="l">'+T('Lojas','Stores')+'</td><td><b>'+fmt(m.tot)+'</b></td></tr>'+
+       '<tr><td class="l">'+T('Só KC','KC only')+'</td><td>'+fmt(m.kc)+'</td></tr>'+
+       '<tr><td class="l">'+T('Compartilhadas','Shared')+'</td><td>'+fmt(m.sh)+'</td></tr>'+
+       '<tr><td class="l">'+T('Só KV','KV only')+'</td><td>'+fmt(m.kv)+'</td></tr>'+
+       '<tr><td class="l">'+T('Visitas/semana','Visits/week')+'</td><td>KC '+fmt(m.fkc)+
+       ' · KV '+fmt(m.fkv)+'</td></tr></table></div>')
      .addTo(camada);
   });
-}
-
-
-/* ============================================================== VENN DINÂMICO
-   A geometria é recalculada no navegador a cada filtro: a área de cada círculo é
-   proporcional ao número de lojas e a distância entre centros sai por bisseção,
-   para que a área de interseção seja exatamente a quantidade de compartilhadas.
-   O desenho mede, não ilustra. */
-function vennGeo(a,b,ab,w){
-  const ra=Math.sqrt(a/Math.PI), rb=Math.sqrt(b/Math.PI);
-  // recorte com só uma das operações: um círculo centrado, sem lente
-  if(!a||!b){
-    const r=Math.sqrt((a||b)/Math.PI), MARG=150, k=(w-2*MARG)/(2*r);
-    const R=r*k, cx=w/2, cy=R+48;
-    return {RA:a?R:0, RB:b?R:0, cxa:cx, cxb:cx, cy:cy, unico:true};
-  }
-  const cl=x=>Math.max(-1,Math.min(1,x));
-  const inter=d=>{
-    if(d>=ra+rb) return 0;
-    if(d<=Math.abs(ra-rb)) return Math.PI*Math.pow(Math.min(ra,rb),2);
-    const c1=ra*ra*Math.acos(cl((d*d+ra*ra-rb*rb)/(2*d*ra)));
-    const c2=rb*rb*Math.acos(cl((d*d+rb*rb-ra*ra)/(2*d*rb)));
-    const c3=.5*Math.sqrt(Math.max(0,(-d+ra+rb)*(d+ra-rb)*(d-ra+rb)*(d+ra+rb)));
-    return c1+c2-c3;
-  };
-  let lo=Math.abs(ra-rb), hi=ra+rb;
-  for(let i=0;i<100;i++){const m=(lo+hi)/2; if(inter(m)>ab) lo=m; else hi=m;}
-  const d=(lo+hi)/2, MARG=150;
-  const k=(ra+rb+d)?(w-2*MARG)/(ra+rb+d):1;
-  return {RA:ra*k, RB:rb*k, cxa:MARG+ra*k, cxb:MARG+ra*k+d*k, cy:Math.max(ra,rb)*k+48};
-}
-let vennEstado=null, vennAnim=null;
-const MOLDE='<div class="venn"><svg role="img">'
-  +'<line class="guia" stroke="#0046C8" stroke-width="1.2" stroke-dasharray="3 3" opacity="0"/>'
-  +'<circle class="cir a" fill="#0046C8" fill-opacity=".82"/>'
-  +'<circle class="cir b" fill="#00B388" fill-opacity=".58" style="mix-blend-mode:multiply"/>'
-  +'<g class="ent"><text class="vnum nKC"></text><text class="vrot rKC"></text>'
-  +'<text class="vnum nSH" fill="#fff" text-anchor="middle"></text>'
-  +'<text class="vrot rSH" fill="#fff" text-anchor="middle" opacity=".95"></text>'
-  +'<text class="vnum nKV" fill="#04543F" text-anchor="middle"></text>'
-  +'<text class="vrot rKV" fill="#04543F" text-anchor="middle" opacity=".95"></text>'
-  +'<text class="vrot tKC" fill="#0046C8" text-anchor="middle" font-size="12"></text>'
-  +'<text class="vrot tKV" fill="#00765C" text-anchor="middle" font-size="12"></text>'
-  +'</g></svg></div>';
-function desenharVenn(idx,cnt){
-  const cx=document.getElementById('venn-caixa'); if(!cx) return;
-  const a=cnt.sh+cnt.kc, b=cnt.sh+cnt.kv, ab=cnt.sh, W=760;
-  const set=(k,v)=>{const e=document.querySelector('[data-k="'+k+'"]'); if(e) e.textContent=v;};
-  set('int-kc',fmt(a)); set('int-kv',fmt(b)); set('int-tot',fmt(cnt.tot));
-  set('int-kc-pct',a?pct(100*ab/a)+' '+T('já compartilhadas','already shared'):'—');
-  set('int-kv-pct',b?pct(100*ab/b)+' '+T('já compartilhadas','already shared'):'—');
-  set('int-l-kc',fmt(cnt.kc)); set('int-l-sh',fmt(ab)); set('int-l-kv',fmt(cnt.kv));
-  const pil=document.getElementById('int-pil');
-  if(pil&&cnt.tot){const ws=[cnt.kc,ab,cnt.kv];
-    [...pil.children].forEach((sp,j)=>sp.style.setProperty('--w',(100*ws[j]/cnt.tot).toFixed(2)+'%'));}
-  if(!cnt.tot){
-    cx.innerHTML='<div class="venn-vazio">'+T('Nenhuma loja neste recorte.','No stores in this cut.')+'</div>';
-    vennEstado=null; return;
-  }
-  const g=vennGeo(a,b,ab,W);
-  // o SVG servido na página é estático; na primeira pintura ele é trocado pelo
-  // molde que tem as classes que o motor atualiza (.nKC, .nSH, .nKV...)
-  if(!cx.querySelector('.nKC')) cx.innerHTML=MOLDE;
-  const svg=cx.querySelector('svg');
-  const de=vennEstado||{RA:g.RA,RB:g.RB,cxa:g.cxa,cxb:g.cxb,a:a,b:b,ab:ab};
-  const t0=performance.now(), dur=reduz?0:620;
-  if(vennAnim) cancelAnimationFrame(vennAnim);
-  const lerp=(x,y,p)=>x+(y-x)*p, q=sel=>svg.querySelector(sel);
-  function pinta(p){
-    const e=1-Math.pow(1-p,3);
-    const RA=lerp(de.RA,g.RA,e), RB=lerp(de.RB,g.RB,e);
-    const cxa=lerp(de.cxa,g.cxa,e), cxb=lerp(de.cxb,g.cxb,e);
-    const D=cxb-cxa, cy=Math.max(RA,RB)+48;
-    svg.setAttribute('viewBox','0 0 '+W+' '+(Math.max(RA,RB)*2+96));
-    const ca=q('.cir.a'), cb=q('.cir.b');
-    ca.setAttribute('cx',cxa); ca.setAttribute('cy',cy); ca.setAttribute('r',RA);
-    cb.setAttribute('cx',cxb); cb.setAttribute('cy',cy); cb.setAttribute('r',RB);
-    const so = !a || !b;                       // só uma operação no recorte
-    const xrad = (D&&!so) ? cxa+(D*D-RB*RB+RA*RA)/(2*D) : cxa;
-    const larg = xrad-(cxa-RA), fora = !so && larg<96;
-    const cKC = so ? cxa : ((cxa-RA)+xrad)/2;
-    const cSH = so ? cxa : (xrad+(cxa+RA))/2;
-    const cKV = so ? cxb : ((cxa+RA)+(cxb+RB))/2;
-    const vA=Math.round(lerp(de.a,a,e)), vB=Math.round(lerp(de.b,b,e)), vAB=Math.round(lerp(de.ab,ab,e));
-    const fs=v=>Math.max(18,Math.min(44,13+String(v).length*1.5+(RA+RB)*0.08));
-    const xKC=fora?cxa-RA-22:cKC, anc=fora?'end':'middle', corKC=fora?'#0046C8':'#fff';
-    const gl=q('.guia');
-    gl.setAttribute('x1',cxa-RA-16); gl.setAttribute('y1',cy);
-    gl.setAttribute('x2',cKC+larg*0.18); gl.setAttribute('y2',cy);
-    gl.setAttribute('opacity',(fora&&!so)?'.7':'0');
-    const put=(sel,x,y,txt,extra)=>{const el=q(sel);
-      el.setAttribute('x',x); el.setAttribute('y',y);
-      if(txt!==undefined) el.textContent=txt;
-      if(extra) Object.keys(extra).forEach(k=>el.setAttribute(k,extra[k]));};
-    const mostra=(sel,sim)=>{const e=q(sel); if(sim) e.removeAttribute('opacity'); else e.setAttribute('opacity','0');};
-    const temKC=!!a, temKV=!!b, temSH=!!ab;
-    // com uma operação só, o número dela vai para dentro do próprio círculo
-    put('.nKC', so?cxa:xKC, cy-2, fmt(so?vA:(vA-vAB)),
-        {'font-size':fs(so?vA:(vA-vAB)), fill: so?'#fff':corKC, 'text-anchor': so?'middle':anc});
-    put('.rKC', so?cxa:xKC, cy+20, T('só KC','KC only'),
-        {fill: so?'#fff':corKC, 'text-anchor': so?'middle':anc, opacity:'.92'});
-    put('.nSH',cSH,cy-2,fmt(vAB),{'font-size':fs(vAB)});
-    put('.rSH',cSH,cy+20,T('compartilhadas','shared'));
-    put('.nKV', so?cxb:cKV, cy-2, fmt(so?vB:(vB-vAB)),
-        {'font-size':fs(so?vB:(vB-vAB)), fill: so?'#04543F':'#04543F'});
-    put('.rKV', so?cxb:cKV, cy+20, T('só KV','KV only'));
-    put('.tKC',cxa,cy-Math.max(RA,22)-14,'KC · '+fmt(vA));
-    put('.tKV',cxb,cy+Math.max(RB,22)+24,'KV · '+fmt(vB));
-    mostra('.cir.a',temKC); mostra('.cir.b',temKV);
-    mostra('.nKC',temKC); mostra('.rKC',temKC);
-    mostra('.nSH',temSH&&!so); mostra('.rSH',temSH&&!so);
-    mostra('.nKV',temKV); mostra('.rKV',temKV);
-    mostra('.tKC',temKC); mostra('.tKV',temKV);
-    if(p<1) vennAnim=requestAnimationFrame(t=>pinta(Math.min(1,(t-t0)/dur)));
-    else vennEstado={RA:g.RA,RB:g.RB,cxa:g.cxa,cxb:g.cxb,a:a,b:b,ab:ab};
-  }
-  pinta(dur?0:1);
 }
 
 /* -------------------------------------------------- exportar a seleção em CSV */
@@ -851,7 +769,7 @@ function iaRender(r, pergunta){
 }
 
 /* ========================================================= MOTOR ANALÍTICO */
-let ultima=null, contexto={}, backend=null;
+let ultima=null, contexto={};
 const ESTADO=$('#ia-estado');
 function dizEstado(){
   if(!ESTADO) return;
@@ -882,12 +800,8 @@ function dizEstado(){
     iaGuardar(v); if (campo) campo.value = ''; dizEstado();
   });
 })();
-(function(){
-  const c=new AbortController(), t=setTimeout(()=>c.abort(),900);
-  fetch('http://127.0.0.1:8777/saude',{signal:c.signal}).then(r=>r.ok?r.json():null)
-    .then(j=>{clearTimeout(t); if(j&&j.ok) backend='http://127.0.0.1:8777';})
-    .catch(()=>{}).finally(dizEstado);
-})();
+dizEstado();
+
 const SIN={'sp':'SP','sao paulo':'SP','são paulo':'SP','rio':'RJ','rio de janeiro':'RJ','minas':'MG',
  'minas gerais':'MG','bahia':'BA','parana':'PR','paraná':'PR','farmacia':'FARMA','farmácia':'FARMA',
  'farmacias':'FARMA','farmácias':'FARMA','pharmacy':'FARMA','drogaria':'FARMA','drogarias':'FARMA',
@@ -909,19 +823,37 @@ const FALTA=[['Duração da visita da KC, por loja','KC visit duration, per stor
  ['Visitas efetivamente realizadas','Visits actually performed']];
 
 function interpretar(p){
-  const q=' '+p.toLowerCase().replace(/[“”"']/g,' ')+' ';
+  // pontuação vira espaço: sem isso 'DROGASIL?' não casa com ' drogasil '
+  const q=' '+p.toLowerCase().replace(/[“”"'`´]/g,' ').replace(/[?!.,;:()\[\]]/g,' ')
+    .replace(/\s+/g,' ')+' ';
   const r={filtros:{},dim:null,metrica:'ganho_kc',topn:null,sem:null};
   for(const [re,t] of SEMDADO) if(re.test(p)){r.sem=t;break;}
-  for(const [k,vals] of Object.entries(DIC)){
-    for(const v of vals){ if(v.length>=3 && q.includes(' '+v.toLowerCase()+' ')) r.filtros[k]=v; }
+  // Valores do dicionário primeiro, do mais longo para o mais curto: assim
+  // 'MART MINAS' é reconhecido antes de qualquer pedaço dele.
+  const reconhecidos=[];
+  const DIMS_FILTRO=['uf','regiao','cidade','canal','rede','bandeira','clu','cls','proj','vaga','tipo'];
+  for(const k of DIMS_FILTRO){
+    const vals=DIC[k]||[];
+    const ord=vals.slice().sort((a,b)=>b.length-a.length);
+    for(const v of ord){
+      if(v.length<3) continue;
+      if(q.includes(' '+v.toLowerCase()+' ')){ r.filtros[k]=v; reconhecidos.push(v.toLowerCase()); break; }
+    }
   }
+  // Sinônimo só vale se não estiver dentro de um nome já reconhecido.
   for(const [t,v] of Object.entries(SIN)){
+    const soCidade = r.filtros.cidade && r.filtros.cidade.toLowerCase()===t;
+    if(!soCidade && reconhecidos.some(n=>n.indexOf(t)>=0)) continue;
     if(q.includes(' '+t+' ')||q.includes(' '+t+'?')||q.includes(' '+t+'.')){
-      if(DIC.uf.includes(v)) r.filtros.uf=v;
-      else if(DIC.canal.includes(v)) r.filtros.canal=v;
-      else if(DIC.regiao.includes(v)) r.filtros.regiao=v;
-      else if(DIC.vaga.includes(v)) r.filtros.vaga=v;
-      else if(DIC.cls.includes(v)) r.filtros.cls=v;
+      if(DIC.uf.includes(v)&&!r.filtros.uf){
+        r.filtros.uf=v;
+        // "em São Paulo" é o estado; a cidade homônima sai do recorte
+        if(r.filtros.cidade&&r.filtros.cidade.toLowerCase()===t) delete r.filtros.cidade;
+      }
+      else if(DIC.canal.includes(v)&&!r.filtros.canal) r.filtros.canal=v;
+      else if(DIC.regiao.includes(v)&&!r.filtros.regiao) r.filtros.regiao=v;
+      else if(DIC.vaga.includes(v)&&!r.filtros.vaga) r.filtros.vaga=v;
+      else if(DIC.cls.includes(v)&&!r.filtros.cls) r.filtros.cls=v;
     }
   }
   const DIMS=[[/\b(bandeira|bandeiras|banner)/,'bandeira'],[/\b(rede|redes|network|cliente)/,'rede'],
@@ -935,11 +867,27 @@ function interpretar(p){
   if(/\b(frequen|frequên|visita|visits|frequency)/.test(q)) r.metrica='frequencia';
   if(/\b(kv (passa|pode)|ganho da kv|kv gain|para a kv)/.test(q)) r.metrica='ganho_kv';
   if(/\b(falta|faltam|precisa|missing|needed)/.test(q)) r.metrica='faltantes';
+  // "quantas lojas de X temos" é contagem, não ganho de cobertura
+  const pedeCobertura=/\b(passa a cobrir|ganha|ganho|novas|alcan|white ?space|expand)\b/.test(q);
+  if(/\b(quant[ao]s?|how many|total de|numero de|número de)\b/.test(q) && !pedeCobertura)
+    r.metrica='contagem';
+  // "quais as dez bandeiras com mais lojas" é ranking de contagem, não de ganho
+  if(r.dim && !pedeCobertura && r.metrica==='ganho_kc' &&
+     /\b(quais|maiores|ranking|top|com mais|principais|which|largest)\b/.test(q))
+    r.metrica='contagem';
   const m=q.match(/\b(dez|10|cinco|5|vinte|20|tres|três|3|quinze|15)\b/);
   if(m) r.topn={dez:10,'10':10,cinco:5,'5':5,vinte:20,'20':20,tres:3,'três':3,'3':3,quinze:15,'15':15}[m[1]];
-  const curta=/^\s*(e|and)\b/i.test(p)||p.trim().length<40;
-  if(curta&&Object.keys(r.filtros).length<2) r.filtros=Object.assign({},contexto.filtros||{},r.filtros);
-  if(!r.dim&&contexto.dim&&curta) r.dim=contexto.dim;
+  // Herdar o recorte anterior só quando a frase é mesmo um complemento: começa
+  // com "e"/"and", ou é curtíssima e não traz nenhum filtro próprio. Antes,
+  // qualquer pergunta com menos de 40 letras puxava o filtro da anterior.
+  const complemento = /^\s*(e|and)\s/i.test(p) ||
+    (p.trim().length < 26 && Object.keys(r.filtros).length === 0);
+  if(complemento){
+    r.filtros=Object.assign({},contexto.filtros||{},r.filtros);
+    if(!r.dim&&contexto.dim) r.dim=contexto.dim;
+    // "e no alimentar?" continua sendo a mesma pergunta, noutro recorte
+    if(contexto.metrica && r.metrica==='ganho_kc') r.metrica=contexto.metrica;
+  }
   return r;
 }
 function responder(p){
@@ -1008,6 +956,29 @@ function responder(p){
     o.tab={cols:[ROT[dim][lang==='en'?1:0],T('Universo','Universe'),T('Compart.','Shared'),T('% compart.','% shared'),T('Só KC','KC only'),T('Só KV','KV only')],
       linhas:g.map(x=>[x.k,fmt(x.tot),fmt(x.sh),pct(100*x.sh/x.tot),fmt(x.kc),fmt(x.kv)])};
     o.interp=T('Sobreposição alta significa que as duas equipes vão ao mesmo endereço.','High overlap means both teams go to the same address.');
+    return o;
+  }
+  if(r.metrica==='contagem'){
+    o.classe='comprovado';
+    o.direta=T(
+      `São ${fmt(tot)} lojas no total: ${fmt(ckc)} na KC e ${fmt(ckv)} na KV.`,
+      `There are ${fmt(tot)} stores in total: ${fmt(ckc)} at KC and ${fmt(ckv)} at KV.`);
+    o.evid=T(
+      `No corte ${ctx}: ${fmt(sh)} lojas recebem as duas operações, ${fmt(xkc)} só a KC e ${fmt(xkv)} só a KV. `+
+      `Juntas somam ${fmt(fkc+fkv)} visitas por semana — ${fmt(fkc)} da KC e ${fmt(fkv)} da KV.`,
+      `In the ${ctx} cut: ${fmt(sh)} stores receive both operations, ${fmt(xkc)} only KC and ${fmt(xkv)} only KV. `+
+      `Together they add up to ${fmt(fkc+fkv)} visits a week — ${fmt(fkc)} from KC and ${fmt(fkv)} from KV.`);
+    if(r.dim){
+      const g=agrupar(idx,r.dim).sort((a,b)=>b.tot-a.tot).slice(0,r.topn||12);
+      o.tab={cols:[ROT[r.dim][lang==='en'?1:0],T('Total','Total'),T('Na KC','At KC'),
+                   T('Na KV','At KV'),T('Compart.','Shared')],
+        linhas:g.map(x=>[x.k,fmt(x.tot),fmt(x.sh+x.kc),fmt(x.sh+x.kv),fmt(x.sh)])};
+    }
+    o.interp = sh
+      ? T(`${fmt(sh)} dessas lojas já são atendidas pelas duas: o mesmo CNPJ está nas duas bases.`,
+          `${fmt(sh)} of these stores are already served by both: the same tax ID is in both bases.`)
+      : T('Nenhuma dessas lojas é atendida pelas duas operações hoje.',
+          'None of these stores is served by both operations today.');
     return o;
   }
   const kvg=r.metrica==='ganho_kv';
@@ -1087,13 +1058,13 @@ async function perguntar(p){
             'The answer below was computed without the model, by the deterministic engine.')+
           '</p></div>';
         const o=responder(p);
-        contexto={filtros:o.r?o.r.filtros:{},dim:o.r?o.r.dim:null};
+        contexto={filtros:o.r?o.r.filtros:{},dim:o.r?o.r.dim:null,metrica:o.r?o.r.metrica:null};
         const antes=s.innerHTML; render(o); s.innerHTML=antes+s.innerHTML;
         return;
       }
     }
     const o=responder(p);
-    contexto={filtros:o.r?o.r.filtros:{},dim:o.r?o.r.dim:null};
+    contexto={filtros:o.r?o.r.filtros:{},dim:o.r?o.r.dim:null,metrica:o.r?o.r.metrica:null};
     render(o);
   } finally { pr.hidden=true; }
 }
