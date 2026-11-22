@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acesso restrito</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="assets/fontes.css">
+<link rel="stylesheet" href="assets/leaflet.css">
+<link rel="stylesheet" href="assets/estilo.css">
+<style>
+#porta{position:fixed;inset:0;display:grid;place-items:center;background:#fff;z-index:200;padding:24px}
+#porta .cx{width:100%;max-width:368px}
+#porta .marca{height:5px;border-radius:3px;background:linear-gradient(90deg,#0046C8,#1E7FB4,#00B388);
+  width:84px;margin-bottom:26px}
+#porta h1{font-family:'Source Serif 4',Georgia,serif;font-size:27px;font-weight:600;margin:0 0 7px;
+  letter-spacing:-.011em;color:#111}
+#porta p.sub{font-size:14px;line-height:1.5;color:#5A6070;margin:0 0 26px}
+#porta label{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:#7A8192;margin:0 0 6px}
+#porta input{width:100%;font-family:'Inter',system-ui,sans-serif;font-size:15px;padding:11px 13px;
+  border:1px solid #C3CAD6;border-radius:3px;margin-bottom:15px;color:#111;background:#fff}
+#porta input:focus{outline:2px solid #0046C8;outline-offset:1px;border-color:#0046C8}
+#porta button{width:100%;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;padding:12px;border:1px solid #0046C8;border-radius:3px;background:#0046C8;
+  color:#fff;cursor:pointer}
+#porta button:hover{background:#003BA8;border-color:#003BA8}
+#porta button[disabled]{opacity:.55;cursor:default}
+#porta .erro{font-size:13px;color:#B4560A;margin-top:13px;min-height:19px;line-height:1.4}
+#porta .rodape{font-family:'IBM Plex Mono',monospace;font-size:9.5px;line-height:1.6;color:#9AA1AF;
+  margin-top:30px;border-top:1px solid #DDE2EA;padding-top:14px}
+</style>
+</head>
+<body>
+<div id="porta">
+  <form class="cx" id="formPorta" autocomplete="off">
+    <div class="marca"></div>
+    <h1>Acesso restrito</h1>
+    <p class="sub">Este material é confidencial. Informe as credenciais recebidas para abrir o relatório.</p>
+    <label for="u">Usuário</label>
+    <input id="u" name="u" type="text" autocapitalize="characters" autocomplete="off" spellcheck="false" required>
+    <label for="p">Senha</label>
+    <input id="p" name="p" type="password" autocomplete="off" required>
+    <button type="submit" id="btnEntrar">Entrar</button>
+    <p class="erro" id="erroPorta" role="status"></p>
+    <p class="rodape">O conteúdo deste endereço está cifrado. Sem as credenciais corretas, os arquivos
+      servidos aqui não podem ser lidos.</p>
+  </form>
+</div>
+<script>
+(function(){
+  'use strict';
+  var SAL = "1mF2R9dYXyAhynTpyh9W5A==", ITER = 250000;
+  var b64 = function(s){ var r = atob(s), a = new Uint8Array(r.length);
+    for (var i = 0; i < r.length; i++) a[i] = r.charCodeAt(i); return a; };
+  var erro = document.getElementById('erroPorta');
+  var botao = document.getElementById('btnEntrar');
+  window.__CHAVE__ = null;
+
+  async function derivar(usuario, senha){
+    var base = await crypto.subtle.importKey('raw',
+      new TextEncoder().encode(usuario.trim().toUpperCase() + '\u001f' + senha),
+      'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey(
+      {name:'PBKDF2', salt:b64(SAL), iterations:ITER, hash:'SHA-256'},
+      base, {name:'AES-GCM', length:256}, false, ['decrypt']);
+  }
+  async function abrir(chave, url){
+    var r = await fetch(url);
+    if (!r.ok) throw new Error('arquivo ausente');
+    var buf = new Uint8Array(await r.arrayBuffer());
+    return crypto.subtle.decrypt({name:'AES-GCM', iv:buf.slice(0,12)}, chave, buf.slice(12));
+  }
+  window.__BAIXAR__ = async function(nomeArquivo){
+    var idx = await (await fetch('arquivos/indice.json')).json();
+    var alvo = idx[nomeArquivo];
+    if (!alvo) return;
+    var bruto = await abrir(window.__CHAVE__, 'arquivos/' + alvo);
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([bruto]));
+    a.download = nomeArquivo; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 4000);
+  };
+  document.getElementById('formPorta').addEventListener('submit', async function(e){
+    e.preventDefault();
+    erro.textContent = ''; botao.disabled = true; botao.textContent = 'Abrindo…';
+    try {
+      var chave = await derivar(document.getElementById('u').value, document.getElementById('p').value);
+      var bruto = await abrir(chave, 'conteudo.bin');
+      var pct = JSON.parse(new TextDecoder().decode(bruto));
+      window.__CHAVE__ = chave;
+      document.getElementById('porta').remove();
+      document.title = 'Relatório';
+      document.body.insertAdjacentHTML('afterbegin', pct.corpo);
+      var sd = document.createElement('script'); sd.textContent = pct.dados;
+      document.body.appendChild(sd);
+      for (var i = 0; i < 2; i++) {
+        await new Promise(function(ok){
+          var s = document.createElement('script');
+          s.src = i === 0 ? 'assets/leaflet.js' : 'assets/deck.js';
+          s.onload = ok; s.onerror = ok; document.body.appendChild(s);
+        });
+      }
+      document.body.addEventListener('click', function(ev){
+        var a = ev.target.closest('a[download]');
+        if (!a) return;
+        ev.preventDefault();
+        window.__BAIXAR__(a.getAttribute('href').replace(/^arquivos\//, ''));
+      });
+    } catch (err) {
+      botao.disabled = false; botao.textContent = 'Entrar';
+      erro.textContent = 'Usuário ou senha incorretos.';
+    }
+  });
+})();
+</script>
+</body>
+</html>
