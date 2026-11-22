@@ -823,13 +823,13 @@ const FALTA=[['Duração da visita da KC, por loja','KC visit duration, per stor
  ['Visitas efetivamente realizadas','Visits actually performed']];
 
 function interpretar(p){
-  // pontuação vira espaço: sem isso 'DROGASIL?' não casa com ' drogasil '
+  // pontuação vira espaço: sem isso 'NOME?' não casa com ' nome '
   const q=' '+p.toLowerCase().replace(/[“”"'`´]/g,' ').replace(/[?!.,;:()\[\]]/g,' ')
     .replace(/\s+/g,' ')+' ';
   const r={filtros:{},dim:null,metrica:'ganho_kc',topn:null,sem:null};
   for(const [re,t] of SEMDADO) if(re.test(p)){r.sem=t;break;}
   // Valores do dicionário primeiro, do mais longo para o mais curto: assim
-  // 'MART MINAS' é reconhecido antes de qualquer pedaço dele.
+  // um nome composto é reconhecido antes de qualquer pedaço dele.
   const reconhecidos=[];
   const DIMS_FILTRO=['uf','regiao','cidade','canal','rede','bandeira','clu','cls','proj','vaga','tipo'];
   for(const k of DIMS_FILTRO){

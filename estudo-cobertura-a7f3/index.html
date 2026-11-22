@@ -52,7 +52,7 @@
 <script>
 (function(){
   'use strict';
-  var SAL = "AoYQuIa693X5cN0O9eIeIQ==", ITER = 250000;
+  var SAL = "7AutULTcN1AZ2VQr8MIylw==", ITER = 250000;
   var SCRIPTS = ["xlsx.js", "leaflet.js", "malha.js", "dados.js", "deck.js"];
   var b64 = function(s){ var r = atob(s), a = new Uint8Array(r.length);
     for (var i = 0; i < r.length; i++) a[i] = r.charCodeAt(i); return a; };
@@ -74,9 +74,10 @@
     var buf = new Uint8Array(await r.arrayBuffer());
     return crypto.subtle.decrypt({name:'AES-GCM', iv:buf.slice(0,12)}, chave, buf.slice(12));
   }
+  window.__IDX__ = null;
   window.__BAIXAR__ = async function(nomeArquivo){
-    var idx = await (await fetch('arquivos/indice.json')).json();
-    var alvo = idx[nomeArquivo];
+    if (!window.__IDX__) return;
+    var alvo = window.__IDX__[nomeArquivo];
     if (!alvo) return;
     var bruto = await abrir(window.__CHAVE__, 'arquivos/' + alvo);
     var a = document.createElement('a');
@@ -91,6 +92,7 @@
       var chave = await derivar(document.getElementById('u').value, document.getElementById('p').value);
       var bruto = await abrir(chave, 'conteudo.bin');
       var pct = JSON.parse(new TextDecoder().decode(bruto));
+      window.__IDX__ = pct.arq || {};
       window.__CHAVE__ = chave;
       document.getElementById('porta').remove();
       document.title = 'Relatório';
