@@ -100,20 +100,14 @@
   $$('[data-sumario]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();abrirSum();}));
   $('.fechar',sum).addEventListener('click',e=>{e.stopPropagation();fecharSum();});
 
-  /* teclado, clique e toque */
+  /* teclado e toque: passar tela so pelas setas, pelo rodape e pelo sumario */
   addEventListener('keydown',e=>{
     if(caixa.classList.contains('aberta')){if(e.key==='Escape')fecharCaixa();return;}
     if(sum.classList.contains('aberto')){if(e.key==='Escape')fecharSum();return;}
-    if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();ir(atual+1);}
-    else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();ir(atual-1);}
+    if(['ArrowRight','PageDown'].includes(e.key)){e.preventDefault();ir(atual+1);}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();ir(atual-1);}
     else if(e.key==='Home')ir(0);else if(e.key==='End')ir(total-1);
     else if(e.key==='m'||e.key==='M')sum.classList.contains('aberto')?fecharSum():abrirSum();
-  });
-  const INTERATIVO='.rola,a,button,input,.amplia,[data-cursor],#gantt,#sumario,.ct,model-viewer,.celular,.janela,.tela-s,.janela-c,.dentro li,.trilha-cap span';
-  $('#wrap').addEventListener('click',e=>{
-    if(e.target.closest(INTERATIVO))return;
-    if(sum.classList.contains('aberto'))return;
-    ir(e.clientX>innerWidth/2?atual+1:atual-1);
   });
   let x0=null,y0=null;
   addEventListener('touchstart',e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
